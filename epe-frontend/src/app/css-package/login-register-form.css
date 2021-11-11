@@ -1,4 +1,5 @@
 .container {
+    max-height: 90vh;
     max-width: 700px;
     width: 100%;
     background: #FFFFFF;
@@ -36,6 +37,11 @@ form {
 
 form .user-details .input-box {
     margin-bottom: 15px;
+}
+
+.user-details {
+    max-height: 45vh;
+    overflow-y: scroll;
 }
 
 .one-column {

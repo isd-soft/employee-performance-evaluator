@@ -1,3 +1,4 @@
+import { TestComponent } from './test/test.component';
 import { LoginComponent } from './login/login-template/login.component';
 import { RegisterComponent } from './register/register-template/register.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'test',
+    component: TestComponent
   },
   {
     path: '',
