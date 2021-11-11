@@ -1,4 +1,3 @@
-import { HomeComponent } from './home/home-template/home.component';
 import { LoginComponent } from './login/login-template/login.component';
 import { RegisterComponent } from './register/register-template/register.component';
 import { NgModule } from '@angular/core';
@@ -15,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent
+    redirectTo: '/login',
+    pathMatch: 'full'
   }
 ];
 

@@ -29,6 +29,11 @@
     margin: 20px 0 12px 0;
 }
 
+form {
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #555555;
+}
+
 form .user-details .input-box {
     margin-bottom: 15px;
 }
@@ -47,7 +52,8 @@ form .user-details .input-box {
     margin-bottom: 5px;
 }
 
-.user-details .input-box input
+.user-details .input-box input,
+.user-details .input-box select
  {
     height: 45px;
     width: 100%;
@@ -72,7 +78,7 @@ form .user-details .input-box {
 
 form .button {
     height: 45px;
-    margin: 45px 0;
+    margin: 25px;
 }
 
 form button {
@@ -104,6 +110,21 @@ form button:disabled:hover {
 
 .form-response-image {
     height: 20px;
+}
+
+.reroute {
+    margin: 25px;
+    height: 45px;
+    padding: 0 25px 0 25px;
+    text-align: center;
+}
+
+.reroute-link,
+.reroute-link:visited
+ {
+    width: 100%;
+    color: #4D6B53;
+    text-decoration: none;
 }
 
 @media (max-width: 584px) {

@@ -6,6 +6,29 @@
         <div class="user-details">
             <div class="input-box two-columns">
                 <span class="details">
+                    Full Name
+                </span>
+                <input [value]="newUser.firstname + ' ' + newUser.lastname" disabled>
+            </div>
+            <div class="input-box two-columns">
+                <span class="details">
+                    Email
+                </span>
+                <input 
+                    required
+                    [email]="true"
+                    type="email"
+                    name="email"
+                    #email="ngModel"
+                    id="email"
+                    placeholder="Enter your email" 
+                    [(ngModel)]="newUser.email">
+                <div *ngIf="email.touched && !email.valid" class="input-box-error">
+                    Email is required and must be a valid one !
+                </div>
+            </div>
+            <div class="input-box two-columns">
+                <span class="details">
                     First name
                 </span>
                 <input
@@ -42,19 +65,17 @@
             </div>
             <div class="input-box two-columns">
                 <span class="details">
-                    Email
+                    BirthDate
                 </span>
-                <input 
+                <input
                     required
-                    [email]="true"
-                    type="email"
-                    name="email"
-                    #email="ngModel"
-                    id="email"
-                    placeholder="Enter your email" 
-                    [(ngModel)]="newUser.email">
-                <div *ngIf="email.touched && !email.valid" class="input-box-error">
-                    Email is required and must be a valid one !
+                    type="date"
+                    name="birthDate" 
+                    #birthDate="ngModel"
+                    id="birthDate"
+                    [(ngModel)]="newUser.birthDate">
+                <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
+                    Please pick a valid date !
                 </div>
             </div>
             <div class="input-box two-columns">
@@ -72,6 +93,39 @@
                     [(ngModel)]="newUser.phone">
                 <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
                     Phone number is required and must match pattern 123-456-789 !
+                </div>
+            </div>
+            <div class="input-box two-columns">
+                <span class="details">
+                    Job
+                </span>
+                <select
+                    required 
+                    name="job" 
+                    #job="ngModel"
+                    id="job"
+                    [(ngModel)]="newUser.job">
+                    <option *ngFor="let job of jobs">
+                        {{ job.name }}
+                    </option>
+                </select>
+                <div *ngIf="job.touched && !job.valid" class="input-box-error">
+                    Please pick your job !
+                </div>
+            </div>
+            <div class="input-box two-columns">
+                <span class="details">
+                    Employment Date
+                </span>
+                <input
+                    required
+                    type="date"
+                    name="employmentDate" 
+                    #employmentDate="ngModel"
+                    id="employmentDate"
+                    [(ngModel)]="newUser.employmentDate">
+                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
+                    Please pick a valid date !
                 </div>
             </div>
             <div class="input-box two-columns">
@@ -115,5 +169,8 @@
             <button type="submit" [disabled]="loginForm.form.invalid" (click)="registerUser()"> Submit </button>
         </div>
     </form>
+    <div class="reroute">
+        <a class="reroute-link" routerLink="/login"> Already have an account? </a>
+    </div>
 </div>
 
