@@ -7,19 +7,22 @@ import { LoginComponent } from './login/login-template/login.component';
 import { RegisterComponent } from './register/register-template/register.component';
 
 import { AuthGuard } from './guards/auth-guard/auth.guard';
+import { HomeGuard } from './guards/home/home.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [HomeGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [HomeGuard]
   },
   {
     path: 'logout',
     component: LogoutComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
   },
   {
     path: 'test',

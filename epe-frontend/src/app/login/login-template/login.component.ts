@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { JwtService } from './../../decoder/decoder-service/jwt.service';
 import { JwtUser } from './../../decoder/decoder-model/jwt-user.interface';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   show?: any
 
   constructor(private loginService: LoginService,
-              private jwtService: JwtService) { 
+              private jwtService: JwtService,
+              private router: Router) { 
     this.createNewEmptyUser()
     this.jwtService.getJwtUser()
   }
@@ -37,13 +39,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if(localStorage.getItem('JWT_TOKEN')) {
       this.loggedUser = this.jwtService.getJwtUser()
-      console.log(this.loggedUser)
     }
   }
 
   ngOnDestroy() {
     this.loggedUser = undefined
-    console.log(this.loggedUser)
   }
 
   createNewEmptyUser() {
@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.response = data as UserLoginResponse
         if(this.response.token) {
           this.jwtService.storeJWT(this.response.token)
+          this.router.navigate(['/test'])
         }
        }, error => { 
         console.log(error) 
