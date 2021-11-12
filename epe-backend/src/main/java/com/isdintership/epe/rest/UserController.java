@@ -30,7 +30,7 @@ public class    UserController {
     }
 
     @PostMapping("admin/users")
-    @RolesAllowed(ROLE_ADMIN)
+    @RolesAllowed(ROLE_USER)
     public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
         return new ResponseEntity<>(userService.createUser(request), HttpStatus.OK);
     }
