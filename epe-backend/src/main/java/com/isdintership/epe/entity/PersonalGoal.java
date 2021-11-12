@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "personal_goal")
 public class PersonalGoal extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 

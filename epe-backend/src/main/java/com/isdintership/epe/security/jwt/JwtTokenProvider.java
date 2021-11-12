@@ -32,6 +32,7 @@ public class JwtTokenProvider {
     @Value("${jwt.token.expired}")
     private long validityInMilliseconds;
 
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Bean
@@ -88,8 +89,8 @@ public class JwtTokenProvider {
 
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+//            System.out.println(e.getMessage());
+//            e.printStackTrace();
             throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
     }

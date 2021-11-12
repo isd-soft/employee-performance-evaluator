@@ -3,7 +3,6 @@ package com.isdintership.epe.rest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.SuccessResponse;
 import com.isdintership.epe.dto.UserView;
-import com.isdintership.epe.entity.RoleEnum;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_USER;
 @RestController
 @RequestMapping(value = "/api/")
 @RequiredArgsConstructor
-public class UserController {
+public class    UserController {
 
     private final UserService userService;
 
