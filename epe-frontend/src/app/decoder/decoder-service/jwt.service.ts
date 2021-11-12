@@ -22,9 +22,11 @@ export class JwtService {
     try{
       let decodedToken: any = jwt_decode(token)
       
-      if(decodedToken.exp && decodedToken.Email && decodedToken.Role) {
+      if(decodedToken.exp && decodedToken.Email && decodedToken.Role && decodedToken.GivenName && decodedToken.Surname) {
         jwtUser = {
           expDate: decodedToken.exp,
+          firstname: decodedToken.GivenName,
+          lastname: decodedToken.Surname,
           email: decodedToken.Email,
           role: decodedToken.Role
         }

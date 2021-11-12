@@ -1,5 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError as observableThrowError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { RegisterRequest } from '../register-models/register-request.interface';
 import { Job } from '../register-models/job';
 
 @Injectable({
@@ -7,23 +10,26 @@ import { Job } from '../register-models/job';
 })
 export class RegisterService {
 
-  url: string = 'http://localhost:8100/clients'
+  url: string = 'api-server/api/auth/'
 
   jobList: Job[] = [
     {
-      name: 'Developer'
-    },
-    {
-      name: 'Tester'
-    },
-    {
-      name: 'Manager'
+      name: 'developer'
     }
   ]
 
   constructor(private http: HttpClient) { }
 
-  getJobs() {
-    return this.jobList;
+  register(newUser: RegisterRequest) {
+    return this.http.post(this.url + 'register', newUser)
+      .pipe(catchError(this.errorHandler))
+  }
+
+  errorHandler(error: HttpErrorResponse){
+    return observableThrowError(error.message || "Server Error");
+  }
+
+  getJobs(): Job[] {
+    return this.jobList
   }
 }

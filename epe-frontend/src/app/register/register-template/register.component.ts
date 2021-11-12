@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Job } from '../register-models/job';
 import { NewUser } from '../register-models/new-user.interface';
 import { RegisterService } from '../register-service/register.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class RegisterComponent implements OnInit {
   newRegister?: RegisterRequest
   jobs?: Job[]
 
-  constructor(private registerService: RegisterService) {
+  constructor(private registerService: RegisterService,
+              private router: Router,
+    ) {
     this.createNewEmptyUser()
    }
 
@@ -63,14 +66,21 @@ export class RegisterComponent implements OnInit {
       employmentDate: user.employmentDate,
       phoneNumber: user.phone,
       job: user.job,
-      bio: '',
+      bio: 'null',
     }
   }
 
   registerUser() {
     if(this.newUser) {
+      console.log(this.newUser)
       this.fillRegisterRequestBody(this.newUser)
-      console.log(this.newRegister)
+      if(this.newRegister) {
+        console.log(this.newRegister)
+        this.registerService.register(this.newRegister).subscribe(data => {
+          this.router.navigate(['/login'])
+        }, error => { 
+          console.log(error) })
+      }
     }
   }
 

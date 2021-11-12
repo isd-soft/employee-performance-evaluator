@@ -9,7 +9,7 @@ import { UserLoginRequest } from '../login-models/user-login-request.interface';
 })
 export class LoginService {
 
-  url: string = 'api-server/api/v1/auth/'
+  url: string = 'api-server/api/auth/'
 
   constructor(private http: HttpClient) { }
 

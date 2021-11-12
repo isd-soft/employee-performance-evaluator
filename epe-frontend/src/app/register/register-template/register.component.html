@@ -84,15 +84,15 @@
                 </span>
                 <input 
                     required
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                    pattern="[0-9]{9}"
                     type="tel" 
                     name="phone"
                     #phone="ngModel"
                     id="phone"
-                    placeholder="123-456-789"
+                    placeholder="123456789"
                     [(ngModel)]="newUser.phone">
                 <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
-                    Phone number is required and must match pattern 123-456-789 !
+                    Phone number is required and must match pattern 123456789 !
                 </div>
             </div>
             <div class="input-box two-columns">

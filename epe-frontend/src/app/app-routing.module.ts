@@ -1,3 +1,5 @@
+import { DashboardGuard } from './dashboard/dashboard-guard/dashboard.guard';
+import { DashboardComponent } from './dashboard/dashboard-template/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -28,6 +30,11 @@ const routes: Routes = [
     path: 'test',
     component: TestComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [DashboardGuard]
   },
   {
     path: '',
