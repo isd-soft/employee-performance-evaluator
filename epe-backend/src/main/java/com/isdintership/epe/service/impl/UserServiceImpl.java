@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
                 new UserNotFoundException("User with email " + email + "was not found")
         );
 
-        String token = jwtTokenProvider.createToken(email, user.getRole());
+        String token = jwtTokenProvider.createToken(user);
 
         UserView response = UserView.fromUser(user);
         response.setToken(token);
