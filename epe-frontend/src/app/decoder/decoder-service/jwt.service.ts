@@ -7,26 +7,29 @@ import jwt_decode from 'jwt-decode';
 })
 export class JwtService {
 
-  jwtUser?: JwtUser
-
-  decodeJwt(): any {
+  getJwtUser(): any {
     
-    // test token
-    let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY3MDQ1NTEsImV4cCI6MTY2ODI0MDU1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjoiUk9MRV9VU0VSIn0.0xmOdqQDiFfawN0lcwaiwRBjn0XudOAFdURHA9vFgKc'
+    // create empty JwtUser
+    let jwtUser: JwtUser
 
-    let decodedToken: any
+    // test token
+    let token: any
+    
+    if(localStorage.getItem('JWT_TOKEN')) {
+      token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY3MDQ1NTEsImV4cCI6MTY2ODI0MDU1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjoiUk9MRV9VU0VSIn0.0xmOdqQDiFfawN0lcwaiwRBjn0XudOAFdURHA9vFgKc'
+    }
 
     try{
-      decodedToken = jwt_decode(token)
+      let decodedToken: any = jwt_decode(token)
       
       if(decodedToken.exp && decodedToken.Email && decodedToken.Role) {
-        this.jwtUser = {
+        jwtUser = {
           expDate: decodedToken.exp,
           email: decodedToken.Email,
           role: decodedToken.Role
         }
 
-        return this.jwtUser
+        return jwtUser
       }
 
       return null;
@@ -49,6 +52,4 @@ export class JwtService {
   validateJWT(): boolean {
     return true;
   }
-
-  
 }

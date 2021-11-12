@@ -31,17 +31,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private loginService: LoginService,
               private jwtService: JwtService) { 
     this.createNewEmptyUser()
+    this.jwtService.getJwtUser()
   }
 
   ngOnInit() {
     if(localStorage.getItem('JWT_TOKEN')) {
-      this.loggedUser = this.jwtService.decodeJwt()
+      this.loggedUser = this.jwtService.getJwtUser()
       console.log(this.loggedUser)
     }
   }
 
   ngOnDestroy() {
     this.loggedUser = undefined
+    console.log(this.loggedUser)
   }
 
   createNewEmptyUser() {
