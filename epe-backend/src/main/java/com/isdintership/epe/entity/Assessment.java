@@ -114,4 +114,23 @@ public class Assessment extends BaseEntity {
         this.departmentGoals = departmentGoals;
         this.feedbacks = feedbacks;
     }
+
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                "user=" + user +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", job=" + job +
+                ", overallScore=" + overallScore +
+                ", status=" + status +
+                ", isTemplate=" + isTemplate +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", evaluationGroups=" + evaluationGroups +
+                ", personalGoals=" + personalGoals +
+                ", departmentGoals=" + departmentGoals +
+                ", feedbacks=" + feedbacks +
+                '}';
+    }
 }

@@ -8,7 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface AssessmentRepository extends JpaRepository<Assessment, String> {
+
     Optional<Assessment> findById(String id);
+
     Optional<Assessment> removeAssessmentById(String id);
 
 }
