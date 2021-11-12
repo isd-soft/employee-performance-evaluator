@@ -1,9 +1,6 @@
 package com.isdintership.epe.service;
 
-import com.isdintership.epe.dto.LoginRequest;
-import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SuccessResponse;
-import com.isdintership.epe.dto.UserView;
+import com.isdintership.epe.dto.*;
 
 import java.util.List;
 
@@ -22,6 +19,10 @@ public interface UserService {
 
     SuccessResponse deleteUser(String id);
 
+    PasswordView changePassword(PasswordView passwordView, String id);
+
     //    UserView findByEmail(String email);
+
+    RoleView changeGroup(RoleView roleView, String id);
 
 }

@@ -2,6 +2,7 @@ package com.isdintership.epe.rest;
 
 import com.isdintership.epe.dto.ErrorResponse;
 import com.isdintership.epe.entity.exception.JobNotFoundException;
+import com.isdintership.epe.entity.exception.RoleNotFoundException;
 import com.isdintership.epe.entity.exception.UserExistsException;
 import com.isdintership.epe.entity.exception.UserNotFoundException;
 import com.isdintership.epe.security.jwt.JwtAuthenticationException;
@@ -35,6 +36,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(JwtAuthenticationException.class)
     public ResponseEntity<ErrorResponse> handleJwtAuthenticationException(JwtAuthenticationException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRoleNotFoundException(RoleNotFoundException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

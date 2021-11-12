@@ -1,14 +1,12 @@
 package com.isdintership.epe.service.impl;
 
-import com.isdintership.epe.dto.LoginRequest;
-import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SuccessResponse;
-import com.isdintership.epe.dto.UserView;
+import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.Job;
 import com.isdintership.epe.entity.Role;
 import com.isdintership.epe.entity.RoleEnum;
 import com.isdintership.epe.entity.User;
 import com.isdintership.epe.entity.exception.JobNotFoundException;
+import com.isdintership.epe.entity.exception.RoleNotFoundException;
 import com.isdintership.epe.entity.exception.UserExistsException;
 import com.isdintership.epe.entity.exception.UserNotFoundException;
 import com.isdintership.epe.repository.JobRepository;
@@ -73,15 +71,6 @@ public class UserServiceImpl implements UserService {
         return new SuccessResponse("Registration successful");
 
     }
-
-//    @Override
-//    @Transactional
-//    public UserView findByEmail(String email) {
-//        User user = userRepository.findByEmail(email).orElseThrow(() ->
-//                new UserNotFoundException("User with email " + email + "was not found"));
-//
-//        return UserView.fromUser(user);
-//    }
 
     @Override
     @Transactional
@@ -187,5 +176,30 @@ public class UserServiceImpl implements UserService {
         return new SuccessResponse("User with id " + id + " was deleted");
     }
 
+    @Override
+    @Transactional
+    public PasswordView changePassword(PasswordView passwordView, String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + "was not found"));
 
+
+        user.setPassword(passwordEncoder.encode(passwordView.getPassword()));
+
+        return passwordView;
+    }
+
+    @Override
+    @Transactional
+    public RoleView changeGroup(RoleView roleView, String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " was not found"));
+
+
+        Role role = roleRepository.findById(roleView.getId()).orElseThrow(() ->
+                new RoleNotFoundException("Role with id " + roleView.getId() + " was not found"));
+
+        user.setRole(role);
+
+        return roleView;
+    }
 }
