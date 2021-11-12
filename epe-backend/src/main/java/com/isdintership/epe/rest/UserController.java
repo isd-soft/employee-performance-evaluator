@@ -3,14 +3,13 @@ package com.isdintership.epe.rest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.SuccessResponse;
 import com.isdintership.epe.dto.UserView;
-import com.isdintership.epe.entity.RoleEnum;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-    import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 

@@ -5,4 +5,6 @@ import com.isdintership.epe.dto.SuccessResponse;
 
 public interface AssessmentService {
     SuccessResponse createAssessment(AssessmentTemplateDto assessmentTemplateDto);
+
+    SuccessResponse deleteAssessment(String id);
 }
