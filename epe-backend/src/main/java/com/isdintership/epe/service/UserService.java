@@ -2,6 +2,7 @@ package com.isdintership.epe.service;
 
 import com.isdintership.epe.dto.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -25,4 +26,5 @@ public interface UserService {
 
     RoleView changeGroup(RoleView roleView, String id);
 
+    ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException;
 }

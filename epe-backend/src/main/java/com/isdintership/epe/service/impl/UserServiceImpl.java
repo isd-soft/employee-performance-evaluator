@@ -1,14 +1,12 @@
 package com.isdintership.epe.service.impl;
 
 import com.isdintership.epe.dto.*;
-import com.isdintership.epe.entity.Job;
-import com.isdintership.epe.entity.Role;
-import com.isdintership.epe.entity.RoleEnum;
-import com.isdintership.epe.entity.User;
+import com.isdintership.epe.entity.*;
 import com.isdintership.epe.entity.exception.JobNotFoundException;
 import com.isdintership.epe.entity.exception.RoleNotFoundException;
 import com.isdintership.epe.entity.exception.UserExistsException;
 import com.isdintership.epe.entity.exception.UserNotFoundException;
+import com.isdintership.epe.repository.ImageRepository;
 import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.repository.RoleRepository;
 import com.isdintership.epe.repository.UserRepository;
@@ -22,7 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final ImageRepository imageRepository;
 
     @Override
     @Transactional
@@ -202,4 +203,40 @@ public class UserServiceImpl implements UserService {
 
         return roleView;
     }
+
+    @Override
+    public ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException{
+        //File file = imageEditView.getFile();
+        String imagePath = imageEditView.getImagePath();
+        String encodedImage = "";
+        /*try {
+            encodedImage = encodeImage(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        byte[] data = encodeImage(imagePath);
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with " + id + " was not found"));
+        Image image = new Image();
+        image.setImageBytes(data);
+        image.setUser(user);
+        System.out.println(encodedImage);
+        imageRepository.save(image);
+        return imageEditView;
+    }
+
+    public static byte[] encodeImage(/*File imageFolder*/ String imagePath) throws IOException {
+        //FileInputStream imageStream = new FileInputStream(imageFolder);
+        FileInputStream imageStream = new FileInputStream(imagePath);
+
+        byte[] data = imageStream.readAllBytes();
+
+        String imageString = Base64.getEncoder().encodeToString(data);
+
+        byte[] finalData = imageString.getBytes();
+        imageStream.close();
+
+        return finalData;
+    }
+
 }
