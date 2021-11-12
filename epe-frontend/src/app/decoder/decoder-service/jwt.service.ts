@@ -43,7 +43,6 @@ export class JwtService {
   removeJWT() {
     if(localStorage.getItem('JWT_TOKEN')) {
       localStorage.removeItem('JWT_TOKEN')
-      console.log('yes ..')
     }
   }
 
