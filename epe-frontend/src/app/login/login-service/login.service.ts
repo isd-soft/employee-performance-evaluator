@@ -9,7 +9,7 @@ import { UserLoginRequest } from '../login-models/user-login-request.interface';
 })
 export class LoginService {
 
-  url: string = 'http://localhost:8098/api/v1/auth/'
+  url: string = 'api-server/api/v1/auth/'
 
   constructor(private http: HttpClient) { }
 
