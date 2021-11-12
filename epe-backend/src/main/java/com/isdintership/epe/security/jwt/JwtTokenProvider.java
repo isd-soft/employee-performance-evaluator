@@ -73,8 +73,13 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
-            return bearerToken.substring(7, bearerToken.length());
+        if (bearerToken != null) {
+            if (bearerToken.startsWith("Bearer_")) {
+                return bearerToken.substring(7, bearerToken.length());
+            } else {
+                throw new JwtAuthenticationException("JWT token is expired or invalid");
+            }
+
         }
         return null;
     }
@@ -89,19 +94,7 @@ public class JwtTokenProvider {
 
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
             throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
     }
-
-//    private List<String> getRoleNames(List<Role> userRoles) {
-//        List<String> result = new ArrayList<>();
-//
-//        userRoles.forEach(role -> {
-//            result.add(role.getRole());
-//        });
-//
-//        return result;
-//    }
 }

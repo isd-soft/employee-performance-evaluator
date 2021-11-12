@@ -20,7 +20,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_USER;
 @RestController
 @RequestMapping(value = "/api/")
 @RequiredArgsConstructor
-public class UserController {
+public class    UserController {
 
     private final UserService userService;
 

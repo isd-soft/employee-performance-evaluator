@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import jwt_decode from 'jwt-decode';
+import { JwtService } from './../../decoder/decoder-service/jwt.service';
+import { JwtUser } from './../../decoder/decoder-model/jwt-user.interface';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from './../login-service/login.service';
 import { UserLoginRequest } from '../login-models/user-login-request.interface';
 import { UserLoginResponse } from '../login-models/user-login-response.interface';
@@ -9,16 +10,38 @@ import { UserLoginResponse } from '../login-models/user-login-response.interface
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
 
+  // get 
+  loggedUser?: JwtUser
+
+  // util, show warning, error images
   imgPath = '../../../assets/login-images/'
+  
+  // request and response models
   user?: UserLoginRequest
   response?: UserLoginResponse
+  
+  // error message in case login failed
   errorMsg?: any
+
+  // test, working with jwt
   show?: any
 
-  constructor(private loginService: LoginService) { 
+  constructor(private loginService: LoginService,
+              private jwtService: JwtService) { 
     this.createNewEmptyUser()
+  }
+
+  ngOnInit() {
+    if(localStorage.getItem('JWT_TOKEN')) {
+      this.loggedUser = this.jwtService.decodeJwt()
+      console.log(this.loggedUser)
+    }
+  }
+
+  ngOnDestroy() {
+    this.loggedUser = undefined
   }
 
   createNewEmptyUser() {
@@ -39,21 +62,11 @@ export class LoginComponent {
       this.loginService.login(this.user).subscribe(data => {
         this.response = data as UserLoginResponse
         if(this.response.token) {
-          this.show = this.getDecodedAccessToken(this.response.token)
-          console.log(this.show)
+          this.jwtService.storeJWT(this.response.token)
         }
        }, error => { 
         console.log(error) 
         this.errorMsg = error })
-    }
-  }
-
-  getDecodedAccessToken(token: string): any {
-    try{
-        return jwt_decode(token);
-    }
-    catch(Error){
-        return null;
     }
   }
 }

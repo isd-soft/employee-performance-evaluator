@@ -50,7 +50,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -59,7 +59,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -68,7 +68,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -77,7 +77,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)

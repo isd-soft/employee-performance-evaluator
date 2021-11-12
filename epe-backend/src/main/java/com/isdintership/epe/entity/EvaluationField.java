@@ -14,12 +14,21 @@ public class EvaluationField extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evaluation_group_id")
     private EvaluationGroup evaluationGroup;
 
-    @Column(name = "value", nullable = false)
-    private Integer value;
+    @Column(name = "first_score")
+    private Integer firstScore;
+
+    @Column(name = "second_score")
+    private Integer secondScore;
+
+    @Column(name = "overall_score")
+    private Integer overallScore;
+
+    @Column(name = "comment")
+    private String comment;
 
     @Override
     public boolean equals(Object o) {
@@ -34,9 +43,14 @@ public class EvaluationField extends BaseEntity {
     public EvaluationField() {
     }
 
-    public EvaluationField(String title, EvaluationGroup evaluationGroup, Integer value) {
+    public EvaluationField(String title, EvaluationGroup evaluationGroup,
+                           Integer firstScore, Integer secondScore,
+                           Integer overallScore, String comment) {
         this.title = title;
         this.evaluationGroup = evaluationGroup;
-        this.value = value;
+        this.firstScore = firstScore;
+        this.secondScore = secondScore;
+        this.overallScore = overallScore;
+        this.comment = comment;
     }
 }
