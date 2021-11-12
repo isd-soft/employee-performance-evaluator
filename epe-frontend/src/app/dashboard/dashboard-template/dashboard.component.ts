@@ -1,3 +1,5 @@
+import { JwtService } from 'src/app/decoder/decoder-service/jwt.service';
+import { JwtUser } from 'src/app/decoder/decoder-model/jwt-user.interface';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {
-    console.log('dashboard')
+  loggedUser?: JwtUser
+
+  constructor(private jwtService: JwtService) {
+    this.loggedUser = this.jwtService.getJwtUser()
    }
 
   ngOnInit(): void {
