@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 
 @Setter
@@ -40,11 +41,11 @@ public class Assessment extends BaseEntity {
 
     @Column(name = "start_date")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private Date endDate;
+    private LocalDate endDate;
 
     @OneToMany(
             mappedBy = "assessment",
@@ -96,7 +97,7 @@ public class Assessment extends BaseEntity {
     }
 
     public Assessment(User user, String title, String description, Job job, Float overallScore,
-                      AssessmentStatuses status, Boolean isTemplate, Date startDate, Date endDate,
+                      AssessmentStatuses status, Boolean isTemplate, LocalDate startDate, LocalDate endDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {
         this.user = user;

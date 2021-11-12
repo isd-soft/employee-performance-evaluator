@@ -1,6 +1,7 @@
 package com.isdintership.epe.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "job")
+@NoArgsConstructor
 public class Job {
 
     @Id
@@ -17,5 +19,10 @@ public class Job {
 
     @Column(name = "job_title", nullable = false)
     private String jobTitle;
+
+    public Job(String jobPosition) {
+        this.jobTitle = jobPosition;
+    }
+
 
 }

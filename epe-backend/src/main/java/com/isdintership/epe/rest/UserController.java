@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
+    import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("admin/users")
-    @RolesAllowed(ROLE_ADMIN)
+    @RolesAllowed(ROLE_USER)
     public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
         return new ResponseEntity<>(userService.createUser(request), HttpStatus.OK);
     }
