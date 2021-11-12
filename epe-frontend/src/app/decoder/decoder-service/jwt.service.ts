@@ -30,7 +30,7 @@ export class JwtService {
           email: decodedToken.Email,
           role: decodedToken.Role
         }
-
+        
         return jwtUser
       }
 

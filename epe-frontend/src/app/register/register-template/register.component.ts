@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log('register')
     this.jobs = this.registerService.getJobs()
     console.log(this.jobs)
   }

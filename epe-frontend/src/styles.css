@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url(//db.onlinewebfonts.com/c/3e63b6446f49a4bee8722b329ee7a8ba?family=Trocchi);
 
 * {
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Trocchi', serif;
 }
 
 body {

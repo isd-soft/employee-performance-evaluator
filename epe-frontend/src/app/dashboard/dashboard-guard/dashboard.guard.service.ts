@@ -6,27 +6,30 @@ import { JwtService } from 'src/app/decoder/decoder-service/jwt.service';
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService implements OnInit, OnDestroy {
+export class DashboardGuardService implements OnInit, OnDestroy {
 
-  loggedUser?: JwtUser
+  dashboardUser?: JwtUser
 
-  constructor(private jwtService: JwtService, private router: Router) { }
+  constructor(private jwtService: JwtService, private router: Router) {
+    this.dashboardUser = this.jwtService.getJwtUser()
+   }
 
   ngOnInit(): void {
-    this.loggedUser = this.jwtService.getJwtUser()
+    
   }
 
   ngOnDestroy(): void {
-    this.loggedUser = undefined
+    console.log('whoopsie')
+    this.dashboardUser = undefined
   }
 
   isLoggedIn(): boolean {
-    
-    if(this.loggedUser) {
+
+    if(this.dashboardUser) {
       return true
     }
     else {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/register'])
       return false
     }
   } 

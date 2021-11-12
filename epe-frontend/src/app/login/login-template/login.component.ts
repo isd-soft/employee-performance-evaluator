@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('login')
     if(localStorage.getItem('JWT_TOKEN')) {
       this.loggedUser = this.jwtService.getJwtUser()
     }

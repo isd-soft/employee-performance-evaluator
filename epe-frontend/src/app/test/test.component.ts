@@ -14,6 +14,7 @@ export class TestComponent implements OnInit {
   constructor(private jwtService: JwtService) { }
 
   ngOnInit(): void {
+    console.log('test')
     this.loggedUser = this.jwtService.getJwtUser()
     console.log(this.loggedUser)
 

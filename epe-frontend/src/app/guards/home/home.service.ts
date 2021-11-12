@@ -21,7 +21,7 @@ export class HomeService {
       return true
     }
     else {
-      this.router.navigate(['/test'])
+      this.router.navigate(['/dashboard'])
       return false
     }
   } 

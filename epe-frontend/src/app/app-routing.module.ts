@@ -1,4 +1,3 @@
-import { DashboardGuard } from './dashboard/dashboard-guard/dashboard.guard';
 import { DashboardComponent } from './dashboard/dashboard-template/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +9,7 @@ import { RegisterComponent } from './register/register-template/register.compone
 
 import { AuthGuard } from './guards/auth-guard/auth.guard';
 import { HomeGuard } from './guards/home/home.guard';
+import { DashboardGuard } from './dashboard/dashboard-guard/dashboard.guard';
 
 const routes: Routes = [
   {
@@ -27,14 +27,14 @@ const routes: Routes = [
     component: LogoutComponent
   },
   {
-    path: 'test',
-    component: TestComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [DashboardGuard]
+  },
+  {
+    path: 'test',
+    component: TestComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',

@@ -13,6 +13,7 @@ export class LogoutComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    console.log('logout')
     this.jwtService.removeJWT()
     this.router.navigate([''])
   }
