@@ -2,12 +2,14 @@ package com.isdintership.epe.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
 @Setter
 @Getter
 @Entity
+@Transactional
 @Table(name = "role")
 public class Role {
 

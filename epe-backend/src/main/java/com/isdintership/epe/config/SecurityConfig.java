@@ -48,9 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(AUTHENTICATION_ENDPOINT).permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(ADMIN_ENDPOINT).hasRole("SYSADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .addFilterAfter(exceptionHandlerFilter, ChannelProcessingFilter.class)
+//                .addFilterAfter(exceptionHandlerFilter, ChannelProcessingFilter.class)
                 .apply(new JwtConfigurer(jwtTokenProvider));
     }
 }

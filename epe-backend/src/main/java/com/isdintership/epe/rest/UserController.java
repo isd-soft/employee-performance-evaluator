@@ -20,7 +20,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_USER;
 @RestController
 @RequestMapping(value = "/api/")
 @RequiredArgsConstructor
-public class    UserController {
+public class UserController {
 
     private final UserService userService;
 
@@ -32,7 +32,7 @@ public class    UserController {
     @PostMapping("admin/users")
     @RolesAllowed(ROLE_ADMIN)
     public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
-        return new ResponseEntity<>(userService.createUser(request), HttpStatus.OK);
+        return new ResponseEntity<>(userService.createUser(request), HttpStatus.CREATED);
     }
 
     @GetMapping("users/{id}")

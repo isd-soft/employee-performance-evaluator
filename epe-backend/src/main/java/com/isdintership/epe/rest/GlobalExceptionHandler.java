@@ -4,7 +4,7 @@ import com.isdintership.epe.dto.ErrorResponse;
 import com.isdintership.epe.entity.exception.JobNotFoundException;
 import com.isdintership.epe.entity.exception.UserExistsException;
 import com.isdintership.epe.entity.exception.UserNotFoundException;
-import com.isdintership.epe.security.jwt.JwtAuthenticationException;
+import com.isdintership.epe.entity.exception.UsersNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -32,9 +32,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-
-    @ExceptionHandler(JwtAuthenticationException.class)
-    public ResponseEntity<ErrorResponse> handleJwtAuthenticationException(JwtAuthenticationException e, HttpServletRequest request) {
+    @ExceptionHandler(UsersNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleJobNotFoundException(UsersNotFoundException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

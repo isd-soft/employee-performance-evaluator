@@ -102,6 +102,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserView createUser(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail.isPresent()) {

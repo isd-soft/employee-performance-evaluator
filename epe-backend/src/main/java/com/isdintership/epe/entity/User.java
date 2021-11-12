@@ -3,6 +3,7 @@ package com.isdintership.epe.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -66,8 +67,9 @@ public class User extends BaseEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @Column(name = "team_leader_id")
-    private String teamLeaderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team teamId;
 
     @Column(name = "buddy_id")
     private String buddyId;
@@ -88,7 +90,7 @@ public class User extends BaseEntity {
 
     public User(String email, String firstname, String lastname, LocalDate birthDate,
                 LocalDate employmentDate, String phoneNumber, Job job, String bio,
-                Image photo, String password, Role role, String teamLeaderId,
+                Image photo, String password, Role role, Team teamId,
                 String buddyId) {
         this.email = email;
         this.firstname = firstname;
@@ -101,7 +103,7 @@ public class User extends BaseEntity {
         this.photo = photo;
         this.password = password;
         this.role = role;
-        this.teamLeaderId = teamLeaderId;
+        this.teamId = teamId;
         this.buddyId = buddyId;
     }
 
@@ -119,9 +121,9 @@ public class User extends BaseEntity {
                 ", photo=" + photo +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", teamLeaderId=" + teamLeaderId +
+                ", teamId=" + teamId +
                 ", buddyId=" + buddyId +
-//                ", roles=" + roles +
+                ", role=" + role +
                 '}';
     }
 }
