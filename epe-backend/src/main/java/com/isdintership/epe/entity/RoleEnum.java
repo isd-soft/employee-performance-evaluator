@@ -7,5 +7,7 @@ public enum RoleEnum {
     @FieldNameConstants.Include
     ROLE_ADMIN,
     @FieldNameConstants.Include
-    ROLE_USER
+    ROLE_USER,
+    @FieldNameConstants.Include
+    ROLE_SYSADMIN
 }
