@@ -1,176 +1,177 @@
-<div class="container">
-    <div class="title">
-        Create a new account
-    </div>
-    <form *ngIf="newUser" #loginForm="ngForm">
-        <div class="user-details">
-            <div class="input-box two-columns">
-                <span class="details">
-                    Full Name
-                </span>
-                <input [value]="newUser.firstname + ' ' + newUser.lastname" disabled>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Email
-                </span>
-                <input 
-                    required
-                    [email]="true"
-                    type="email"
-                    name="email"
-                    #email="ngModel"
-                    id="email"
-                    placeholder="Enter your email" 
-                    [(ngModel)]="newUser.email">
-                <div *ngIf="email.touched && !email.valid" class="input-box-error">
-                    Email is required and must be a valid one !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    First name
-                </span>
-                <input
-                    required
-                    minlength="3"
-                    maxlength="20"
-                    type="text"
-                    name="firstname"
-                    #firstname="ngModel" 
-                    id="firstname"
-                    placeholder="Enter your name" 
-                    [(ngModel)]="newUser.firstname">
-                <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
-                    Firstname is required and must be between 3 and 20 letters long !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Last name
-                </span>
-                <input
-                    required 
-                    minlength="3"
-                    maxlength="20"
-                    type="text" 
-                    name="lastname" 
-                    #lastname="ngModel"
-                    id="lastname"
-                    placeholder="Enter your last name"
-                    [(ngModel)]="newUser.lastname">
-                <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
-                    Lastname is required and must be between 3 and 20 letters long !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    BirthDate
-                </span>
-                <input
-                    required
-                    type="date"
-                    name="birthDate" 
-                    #birthDate="ngModel"
-                    id="birthDate"
-                    [(ngModel)]="newUser.birthDate">
-                <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
-                    Please pick a valid date !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Phone number
-                </span>
-                <input 
-                    required
-                    pattern="[0-9]{9}"
-                    type="tel" 
-                    name="phone"
-                    #phone="ngModel"
-                    id="phone"
-                    placeholder="123456789"
-                    [(ngModel)]="newUser.phone">
-                <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
-                    Phone number is required and must match pattern 123456789 !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Job
-                </span>
-                <select
-                    required 
-                    name="job" 
-                    #job="ngModel"
-                    id="job"
-                    [(ngModel)]="newUser.job">
-                    <option *ngFor="let job of jobs">
-                        {{ job.name }}
-                    </option>
-                </select>
-                <div *ngIf="job.touched && !job.valid" class="input-box-error">
-                    Please pick your job !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Employment Date
-                </span>
-                <input
-                    required
-                    type="date"
-                    name="employmentDate" 
-                    #employmentDate="ngModel"
-                    id="employmentDate"
-                    [(ngModel)]="newUser.employmentDate">
-                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
-                    Please pick a valid date !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Password
-                </span>
-                <input 
-                    required
-                    minlength="3"
-                    maxlength="20"   
-                    type="password" 
-                    name="password" 
-                    #password="ngModel"
-                    id="password"
-                    placeholder="Enter your password" 
-                    [(ngModel)]="newUser.password">
-                <div *ngIf="password.touched && !password.valid" class="input-box-error">
-                    Password must be between 3 and 20 characters long !
-                </div>
-            </div>
-            <div class="input-box two-columns">
-                <span class="details">
-                    Confirm password
-                </span>
-                <input
-                    required
-                    minlength="3"
-                    maxlength="20"   
-                    type="password" 
-                    name="confirm_pasword" 
-                    #confirm_pasword="ngModel"
-                    id="confirm_pasword"
-                    placeholder="Confirm your password" 
-                    [(ngModel)]="newUser.confirm_pasword">
-                <div *ngIf="confirm_pasword.touched && !confirm_pasword.valid" class="input-box-error">
-                    Password must be between 3 and 20 characters long !
-                </div>
-            </div>
+<div class="frame">
+    <div class="container">
+        <div class="title">
+            Create a new account
         </div>
-        <div class="button">
-            <button type="submit" [disabled]="loginForm.form.invalid" (click)="registerUser()"> Submit </button>
+        <form *ngIf="newUser" #loginForm="ngForm">
+            <div class="user-details">
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Full Name
+                    </span>
+                    <input [value]="newUser.firstname + ' ' + newUser.lastname" disabled>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Email
+                    </span>
+                    <input 
+                        required
+                        [email]="true"
+                        type="email"
+                        name="email"
+                        #email="ngModel"
+                        id="email"
+                        placeholder="Enter your email" 
+                        [(ngModel)]="newUser.email">
+                    <div *ngIf="email.touched && !email.valid" class="input-box-error">
+                        Email is required and must be a valid one !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        First name
+                    </span>
+                    <input
+                        required
+                        minlength="3"
+                        maxlength="20"
+                        type="text"
+                        name="firstname"
+                        #firstname="ngModel" 
+                        id="firstname"
+                        placeholder="Enter your name" 
+                        [(ngModel)]="newUser.firstname">
+                    <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
+                        Firstname is required and must be between 3 and 20 letters long !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Last name
+                    </span>
+                    <input
+                        required 
+                        minlength="3"
+                        maxlength="20"
+                        type="text" 
+                        name="lastname" 
+                        #lastname="ngModel"
+                        id="lastname"
+                        placeholder="Enter your last name"
+                        [(ngModel)]="newUser.lastname">
+                    <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
+                        Lastname is required and must be between 3 and 20 letters long !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        BirthDate
+                    </span>
+                    <input
+                        required
+                        type="date"
+                        name="birthDate" 
+                        #birthDate="ngModel"
+                        id="birthDate"
+                        [(ngModel)]="newUser.birthDate">
+                    <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
+                        Please pick a valid date !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Phone number
+                    </span>
+                    <input 
+                        required
+                        pattern="[0-9]{9}"
+                        type="tel" 
+                        name="phone"
+                        #phone="ngModel"
+                        id="phone"
+                        placeholder="123456789"
+                        [(ngModel)]="newUser.phone">
+                    <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
+                        Phone number is required and must match pattern 123456789 !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Job
+                    </span>
+                    <select
+                        required 
+                        name="job" 
+                        #job="ngModel"
+                        id="job"
+                        [(ngModel)]="newUser.job">
+                        <option *ngFor="let job of jobs">
+                            {{ job.name }}
+                        </option>
+                    </select>
+                    <div *ngIf="job.touched && !job.valid" class="input-box-error">
+                        Please pick your job !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Employment Date
+                    </span>
+                    <input
+                        required
+                        type="date"
+                        name="employmentDate" 
+                        #employmentDate="ngModel"
+                        id="employmentDate"
+                        [(ngModel)]="newUser.employmentDate">
+                    <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
+                        Please pick a valid date !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Password
+                    </span>
+                    <input 
+                        required
+                        minlength="3"
+                        maxlength="20"   
+                        type="password" 
+                        name="password" 
+                        #password="ngModel"
+                        id="password"
+                        placeholder="Enter your password" 
+                        [(ngModel)]="newUser.password">
+                    <div *ngIf="password.touched && !password.valid" class="input-box-error">
+                        Password must be between 3 and 20 characters long !
+                    </div>
+                </div>
+                <div class="input-box two-columns">
+                    <span class="details">
+                        Confirm password
+                    </span>
+                    <input
+                        required
+                        minlength="3"
+                        maxlength="20"   
+                        type="password" 
+                        name="confirm_pasword" 
+                        #confirm_pasword="ngModel"
+                        id="confirm_pasword"
+                        placeholder="Confirm your password" 
+                        [(ngModel)]="newUser.confirm_pasword">
+                    <div *ngIf="confirm_pasword.touched && !confirm_pasword.valid" class="input-box-error">
+                        Password must be between 3 and 20 characters long !
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <button type="submit" [disabled]="loginForm.form.invalid" (click)="registerUser()"> Submit </button>
+            </div>
+        </form>
+        <div class="reroute">
+            <a class="reroute-link" routerLink="/login"> Already have an account? </a>
         </div>
-    </form>
-    <div class="reroute">
-        <a class="reroute-link" routerLink="/login"> Already have an account? </a>
     </div>
 </div>
-

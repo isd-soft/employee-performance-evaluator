@@ -4,11 +4,3 @@
     box-sizing: border-box;
     font-family: 'Trocchi', serif;
 }
-
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #AAAAAA, #EEEEEE);
-}
