@@ -2,13 +2,13 @@ package com.isdintership.epe.service;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SuccessResponse;
+import com.isdintership.epe.dto.Response;
 import com.isdintership.epe.dto.UserView;
 
 import java.util.List;
 
 public interface UserService {
-    SuccessResponse register(RegistrationRequest user);
+    Response register(RegistrationRequest user);
 
     UserView login (LoginRequest signInRequest);
 
@@ -20,7 +20,7 @@ public interface UserService {
 
     UserView updateUser(UserView userView, String id);
 
-    SuccessResponse deleteUser(String id);
+    Response deleteUser(String id);
 
     //    UserView findByEmail(String email);
 

@@ -58,9 +58,9 @@ public class User extends BaseEntity {
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
-            mappedBy = "user",
             orphanRemoval = true
     )
+    @JoinColumn(name = "user_id")
     List<Assessment> assessments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -68,8 +68,7 @@ public class User extends BaseEntity {
     private Role role;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    private Team teamId;
+    private Team team;
 
     @Column(name = "buddy_id")
     private String buddyId;
@@ -90,7 +89,7 @@ public class User extends BaseEntity {
 
     public User(String email, String firstname, String lastname, LocalDate birthDate,
                 LocalDate employmentDate, String phoneNumber, Job job, String bio,
-                Image photo, String password, Role role, Team teamId,
+                Image photo, String password, Role role, Team team,
                 String buddyId) {
         this.email = email;
         this.firstname = firstname;
@@ -103,7 +102,7 @@ public class User extends BaseEntity {
         this.photo = photo;
         this.password = password;
         this.role = role;
-        this.teamId = teamId;
+        this.team = team;
         this.buddyId = buddyId;
     }
 
@@ -121,7 +120,7 @@ public class User extends BaseEntity {
                 ", photo=" + photo +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", teamId=" + teamId +
+                ", team=" + team +
                 ", buddyId=" + buddyId +
                 ", role=" + role +
                 '}';

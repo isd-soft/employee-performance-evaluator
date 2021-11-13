@@ -12,7 +12,6 @@ import javax.persistence.*;
 public class DepartmentGoal extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 
     @Column(name = "context", nullable = false)

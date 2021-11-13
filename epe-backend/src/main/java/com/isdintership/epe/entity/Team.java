@@ -18,12 +18,9 @@ public class Team extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private User teamLeader;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "teamId",
-            orphanRemoval = true
-    )
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
     private List<User> members;
 
     public Team() {

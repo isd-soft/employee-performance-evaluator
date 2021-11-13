@@ -2,7 +2,7 @@ package com.isdintership.epe.service.impl;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SuccessResponse;
+import com.isdintership.epe.dto.Response;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.entity.Job;
 import com.isdintership.epe.entity.Role;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public SuccessResponse register(RegistrationRequest request) {
+    public Response register(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail.isPresent()) {
             throw new UserExistsException("User with email " + request.getEmail()
@@ -70,24 +70,15 @@ public class UserServiceImpl implements UserService {
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
 
-        return new SuccessResponse("Registration successful");
+        return new Response("Registration successful");
 
     }
 
-//    @Override
-//    @Transactional
-//    public UserView findByEmail(String email) {
-//        User user = userRepository.findByEmail(email).orElseThrow(() ->
-//                new UserNotFoundException("User with email " + email + "was not found"));
-//
-//        return UserView.fromUser(user);
-//    }
-
     @Override
     @Transactional
-    public UserView login(LoginRequest signInRequest) {
-        String email = signInRequest.getEmail();
-        String password = signInRequest.getPassword();
+    public UserView login(LoginRequest request) {
+        String email = request.getEmail();
+        String password = request.getPassword();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new UserNotFoundException("User with email " + email + "was not found")
@@ -149,7 +140,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserView getUserById(String id) {
 
-        User user = userRepository.getById(id);
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + "was not found"));
 
         return UserView.fromUser(user);
 
@@ -179,13 +171,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public SuccessResponse deleteUser(String id) {
+    public Response deleteUser(String id) {
         userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + " was not found"));
 
         userRepository.removeById(id);
 
-        return new SuccessResponse("User with id " + id + " was deleted");
+        return new Response("User with id " + id + " was deleted");
     }
 
 

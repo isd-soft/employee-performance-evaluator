@@ -1,11 +1,10 @@
 package com.isdintership.epe.service;
 
-import com.isdintership.epe.dto.SuccessResponse;
-
-import java.util.List;
+import com.isdintership.epe.dto.Response;
+import com.isdintership.epe.dto.TeamView;
 
 public interface TeamService {
 
-    SuccessResponse createTeam(String name, String teamLeaderId, List<String> membersId);
+    Response createTeam(TeamView teamView);
 
 }

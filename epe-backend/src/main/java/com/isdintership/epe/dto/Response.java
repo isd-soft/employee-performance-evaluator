@@ -6,7 +6,7 @@ import lombok.Data;
 // Messages to client about successful operation
 @Data
 @AllArgsConstructor
-public class SuccessResponse {
+public class Response {
 
     private String message;
 

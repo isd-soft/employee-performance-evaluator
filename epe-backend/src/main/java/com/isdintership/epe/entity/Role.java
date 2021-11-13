@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Transactional
 @Table(name = "role")
 public class Role {
 

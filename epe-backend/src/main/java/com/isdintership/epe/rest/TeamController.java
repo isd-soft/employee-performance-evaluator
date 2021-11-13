@@ -1,18 +1,17 @@
 package com.isdintership.epe.rest;
 
-import com.isdintership.epe.dto.SuccessResponse;
-import com.isdintership.epe.entity.RoleEnum;
+import com.isdintership.epe.dto.Response;
+import com.isdintership.epe.dto.TeamView;
 import com.isdintership.epe.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_ADMIN;
 import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_SYSADMIN;
@@ -22,17 +21,14 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_SYSADMIN;
 @RequiredArgsConstructor
 public class TeamController {
 
-    private TeamService teamService;
+    private final TeamService teamService;
 
-    @PostMapping(value = "admin/teams")
+    @PostMapping(value = "teams")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    public ResponseEntity<SuccessResponse> createTeam
-            (String name, String teamLeaderId, String[] membersIds) {
-        System.out.println(name);
-        System.out.println(teamLeaderId);
-        System.out.println(membersIds);
+    public ResponseEntity<Response> createTeam (@RequestBody TeamView teamView) {
 
-        return new ResponseEntity<>(teamService.createTeam(name, teamLeaderId, Arrays.asList(membersIds)), HttpStatus.CREATED);
+        return new ResponseEntity<>(teamService.createTeam(teamView), HttpStatus.CREATED);
+
     }
 
 }

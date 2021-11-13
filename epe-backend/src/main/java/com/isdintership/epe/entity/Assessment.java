@@ -16,7 +16,6 @@ import java.util.*;
 public class Assessment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "title", nullable = false)
@@ -32,7 +31,7 @@ public class Assessment extends BaseEntity {
     @Column(name = "overall_score")
     private Float overallScore;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private AssessmentStatuses status;
 
     @Column(name = "is_template")
@@ -47,39 +46,39 @@ public class Assessment extends BaseEntity {
     private Date endDate;
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name = "assessment_id")
     private List<EvaluationGroup> evaluationGroups = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name = "assessment_id")
     private List<PersonalGoal> personalGoals = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name = "assessment_id")
     private List<DepartmentGoal> departmentGoals = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name = "assessment_id")
     private List<Feedback> feedbacks = new ArrayList<>();
 
     @Override

@@ -15,7 +15,6 @@ public class Feedback extends BaseEntity {
     private Long authorId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 
     @Column(name = "context", nullable = false)

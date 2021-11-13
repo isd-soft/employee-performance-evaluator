@@ -1,7 +1,7 @@
 package com.isdintership.epe.rest;
 
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SuccessResponse;
+import com.isdintership.epe.dto.Response;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PostMapping("admin/users")
+    @PostMapping("users")
     @RolesAllowed(ROLE_ADMIN)
     public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
         return new ResponseEntity<>(userService.createUser(request), HttpStatus.CREATED);
@@ -47,9 +47,9 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUser(userView, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("admin/{id}")
+    @DeleteMapping("users/{id}")
     @RolesAllowed(ROLE_ADMIN)
-    public ResponseEntity<SuccessResponse> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<Response> deleteUser(@PathVariable("id") String id) {
         return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
     }
 
