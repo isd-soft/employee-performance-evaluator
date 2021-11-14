@@ -18,11 +18,13 @@ public class UserView {
     private String lastname;
     private LocalDate birthDate;
     private LocalDate employmentDate;
-    private File imageFile;
     private String phoneNumber;
     private String job;
     private String bio;
     private String token;
+
+    private File imageFile;
+    private String imagePath;
 
     public static UserView fromUser(User user) {
         UserView userView = new UserView();

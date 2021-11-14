@@ -131,6 +131,17 @@ public class UserServiceImpl implements UserService {
                 new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
+        Image image = new Image();
+
+        String imagePath = request.getImageFolder();
+        try {
+            image.setImageBytes(encodeImageFromFilePath(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        image.setUser(user);
+        user.setPhoto(image);
+
         log.info("Saving user {}", request.getEmail());
 
         return (UserView.fromUser(userRepository.save(user)));
@@ -171,11 +182,22 @@ public class UserServiceImpl implements UserService {
         user.setEmploymentDate(userView.getEmploymentDate());
         user.setPhoneNumber(userView.getPhoneNumber());
 
+
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + userView.getJob() + " not found"));;
         user.setJob(job);
 
         user.setBio(userView.getBio());
+
+        Image image = new Image();
+
+        try {
+            image.setImageBytes(encodeImageFromFilePath(userView.getImagePath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        image.setUser(user);
+        user.setPhoto(image);
 
         /*Image image = new Image();
         try {
