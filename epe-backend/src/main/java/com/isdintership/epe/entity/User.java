@@ -49,8 +49,11 @@ public class User extends BaseEntity {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
     private Image photo;
+
+    /*@OneToOne(cascade = CascadeType.ALL)
+    private Image image;*/
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -73,8 +76,6 @@ public class User extends BaseEntity {
     @Column(name = "buddy_id")
     private String buddyId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Image image;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_roles",

@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
         //File imageSourceFile = new File("userDefaultImage.png");
 
-        /*Image image = new Image();
+        Image image = new Image();
 
         String imagePath = request.getImageFolder();
         try {
@@ -77,8 +77,8 @@ public class UserServiceImpl implements UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        user.setImage(image);*/
+        image.setUser(user);
+        user.setPhoto(image);
 
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);

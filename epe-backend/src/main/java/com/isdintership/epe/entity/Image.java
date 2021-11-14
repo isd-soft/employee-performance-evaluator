@@ -2,6 +2,7 @@ package com.isdintership.epe.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
@@ -16,11 +17,12 @@ import java.util.Base64;
 public class Image extends BaseEntity {
 
     @Lob
-    @Column(name = "image_bytes", columnDefinition = "bytea")
+    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "image_bytes")
     private byte[] imageBytes;
 
-    @OneToOne(mappedBy = "image", cascade = CascadeType.ALL)
-    @MapsId
+    @OneToOne(mappedBy = "photo", cascade = CascadeType.ALL)
+    //@MapsId
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -46,11 +48,6 @@ public class Image extends BaseEntity {
         this.imageBytes = imageBytes;
         this.user = user;
     }
-
-//    public Image(byte[] imageBytes, String user_id) {
-//        this.imageBytes = imageBytes;
-//        this.user_id = user_id;
-//    }
 
     public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
         FileInputStream imageStream = new FileInputStream(imageFolder);
