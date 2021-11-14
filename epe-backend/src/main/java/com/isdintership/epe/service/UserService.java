@@ -22,6 +22,4 @@ public interface UserService {
 
     SuccessResponse deleteUser(String id);
 
-    //    UserView findByEmail(String email);
-
 }
