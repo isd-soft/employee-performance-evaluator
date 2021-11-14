@@ -21,10 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import static com.isdintership.epe.dto.ImageEditView.encodeImage;
 
 @Service
 @Slf4j
@@ -205,6 +204,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException{
         //File file = imageEditView.getFile();
         String imagePath = imageEditView.getImagePath();
@@ -220,23 +220,11 @@ public class UserServiceImpl implements UserService {
         Image image = new Image();
         image.setImageBytes(data);
         image.setUser(user);
-        System.out.println(encodedImage);
+        //image.setUser_id(id);
+        System.out.println(Arrays.toString(data));
+        System.out.println(user.getId());
         imageRepository.save(image);
         return imageEditView;
-    }
-
-    public static byte[] encodeImage(/*File imageFolder*/ String imagePath) throws IOException {
-        //FileInputStream imageStream = new FileInputStream(imageFolder);
-        FileInputStream imageStream = new FileInputStream(imagePath);
-
-        byte[] data = imageStream.readAllBytes();
-
-        String imageString = Base64.getEncoder().encodeToString(data);
-
-        byte[] finalData = imageString.getBytes();
-        imageStream.close();
-
-        return finalData;
     }
 
 }

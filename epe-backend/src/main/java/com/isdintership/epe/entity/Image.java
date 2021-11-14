@@ -20,6 +20,11 @@ public class Image extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+//    @OneToOne
+//    @MapsId
+//    @JoinColumn(name = "user_id")
+//    private String user_id;
+
     @Override
     public boolean equals(Object o) {
         return super.equals(o);
@@ -37,4 +42,9 @@ public class Image extends BaseEntity {
         this.imageBytes = imageBytes;
         this.user = user;
     }
+
+//    public Image(byte[] imageBytes, String user_id) {
+//        this.imageBytes = imageBytes;
+//        this.user_id = user_id;
+//    }
 }
