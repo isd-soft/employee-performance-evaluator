@@ -72,11 +72,6 @@ public class User extends BaseEntity {
     @Column(name = "buddy_id")
     private String buddyId;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_roles",
-//            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-//    private List<Role> roles;
 
     @Override
     public boolean equals(Object o) {

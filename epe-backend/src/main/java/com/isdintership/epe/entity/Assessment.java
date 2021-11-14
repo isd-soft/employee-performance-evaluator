@@ -20,7 +20,8 @@ public class Assessment extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
+//    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description", columnDefinition = "text")
@@ -33,8 +34,9 @@ public class Assessment extends BaseEntity {
     @Column(name = "overall_score")
     private Float overallScore;
 
-    @ManyToOne
-    private AssessmentStatuses status;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
 
     @Column(name = "is_template")
     private Boolean isTemplate;
@@ -50,7 +52,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -59,7 +61,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -68,7 +70,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -77,7 +79,7 @@ public class Assessment extends BaseEntity {
     @OneToMany(
             mappedBy = "assessment",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @Fetch(value = FetchMode.SUBSELECT)
@@ -96,14 +98,13 @@ public class Assessment extends BaseEntity {
     public Assessment() {
     }
 
-    public Assessment(User user, String title, String description, Job job, Float overallScore,
-                      AssessmentStatuses status, Boolean isTemplate, LocalDate startDate, LocalDate endDate,
+    public Assessment(User user, String title, String description, Float overallScore,
+                      StatusEnum status, Boolean isTemplate, LocalDate startDate, LocalDate endDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {
         this.user = user;
         this.title = title;
         this.description = description;
-        this.job = job;
         this.overallScore = overallScore;
         this.status = status;
         this.isTemplate = isTemplate;
@@ -113,5 +114,7 @@ public class Assessment extends BaseEntity {
         this.personalGoals = personalGoals;
         this.departmentGoals = departmentGoals;
         this.feedbacks = feedbacks;
+
     }
+
 }
