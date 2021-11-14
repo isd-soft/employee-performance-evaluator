@@ -4,6 +4,8 @@ package com.isdintership.epe.dto;
 import com.isdintership.epe.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+
+import java.io.File;
 import java.time.LocalDate;
 
 @Data
@@ -16,6 +18,7 @@ public class UserView {
     private String lastname;
     private LocalDate birthDate;
     private LocalDate employmentDate;
+    private File imageFile;
     private String phoneNumber;
     private String job;
     private String bio;

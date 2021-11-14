@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
-    private final ImageRepository imageRepository;
+    //private final ImageRepository imageRepository;
 
     @Override
     @Transactional
@@ -64,6 +64,11 @@ public class UserServiceImpl implements UserService {
         Job jobUser = jobRepository.findByJobTitle(request.getJob()).orElseThrow(() ->
                         new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
+
+        Image image = new Image();
+
+        File imageSourceFile = new File("userDefaultImage.png");
+        image.setImageBytes(encodeImage(imageSourceFile));
 
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
@@ -203,28 +208,28 @@ public class UserServiceImpl implements UserService {
         return roleView;
     }
 
-    @Override
-    @Transactional
-    public ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException{
-        //File file = imageEditView.getFile();
-        String imagePath = imageEditView.getImagePath();
-        String encodedImage = "";
-        /*try {
-            encodedImage = encodeImage(imagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        byte[] data = encodeImage(imagePath);
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with " + id + " was not found"));
-        Image image = new Image();
-        image.setImageBytes(data);
-        image.setUser(user);
-        //image.setUser_id(id);
-        System.out.println(Arrays.toString(data));
-        System.out.println(user.getId());
-        imageRepository.save(image);
-        return imageEditView;
-    }
+//    @Override
+//    @Transactional
+//    public ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException{
+//        //File file = imageEditView.getFile();
+//        String imagePath = imageEditView.getImagePath();
+//        String encodedImage = "";
+//        /*try {
+//            encodedImage = encodeImage(imagePath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }*/
+//        byte[] data = encodeImage(imagePath);
+//        User user = userRepository.findById(id).orElseThrow(() ->
+//                new UserNotFoundException("User with " + id + " was not found"));
+//        Image image = new Image();
+//        image.setImageBytes(data);
+//        image.setUser(user);
+//        //image.setUser_id(id);
+//        System.out.println(Arrays.toString(data));
+//        System.out.println(user.getId());
+//        imageRepository.save(image);
+//        return imageEditView;
+//    }
 
 }

@@ -26,5 +26,5 @@ public interface UserService {
 
     RoleView changeGroup(RoleView roleView, String id);
 
-    ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException;
+    //ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException;
 }

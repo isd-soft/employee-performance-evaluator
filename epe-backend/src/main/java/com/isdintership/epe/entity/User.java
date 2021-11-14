@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +73,9 @@ public class User extends BaseEntity {
     @Column(name = "buddy_id")
     private String buddyId;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image image;
+
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_roles",
 //            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
@@ -130,4 +134,5 @@ public class User extends BaseEntity {
 //                ", roles=" + roles +
                 '}';
     }
+
 }
