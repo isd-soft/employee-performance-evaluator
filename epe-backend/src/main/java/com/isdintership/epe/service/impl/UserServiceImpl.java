@@ -23,7 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.*;
 import java.util.*;
 
-import static com.isdintership.epe.dto.ImageEditView.encodeImage;
+import static com.isdintership.epe.entity.Image.encodeImageFromFile;
+import static com.isdintership.epe.entity.Image.encodeImageFromFilePath;
+
 
 @Service
 @Slf4j
@@ -65,10 +67,18 @@ public class UserServiceImpl implements UserService {
                         new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
-        Image image = new Image();
+        //File imageSourceFile = new File("userDefaultImage.png");
 
-        File imageSourceFile = new File("userDefaultImage.png");
-        image.setImageBytes(encodeImage(imageSourceFile));
+        /*Image image = new Image();
+
+        String imagePath = request.getImageFolder();
+        try {
+            image.setImageBytes(encodeImageFromFilePath(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        user.setImage(image);*/
 
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
@@ -166,6 +176,15 @@ public class UserServiceImpl implements UserService {
         user.setJob(job);
 
         user.setBio(userView.getBio());
+
+        /*Image image = new Image();
+        try {
+            image.setImageBytes(encodeImageFromFilePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        user.setImage(image);*/
 
         return userView;
     }

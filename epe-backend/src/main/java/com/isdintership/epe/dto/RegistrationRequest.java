@@ -37,6 +37,8 @@ public class RegistrationRequest {
 
     private File imageFile;
 
+    private String imageFolder;
+
     @NotEmpty(message = "Phone number shouldn't be empty")
     @Pattern(regexp =  "^\\+?(?:[0-9] ?){6,14}[0-9]$")
     private String phoneNumber;
