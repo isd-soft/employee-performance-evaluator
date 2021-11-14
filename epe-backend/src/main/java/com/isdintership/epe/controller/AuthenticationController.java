@@ -1,7 +1,7 @@
-package com.isdintership.epe.rest;
+package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.*;
-import com.isdintership.epe.service.UserService;
+import com.isdintership.epe.dao.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +24,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<SuccessResponse> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
-        userService.register(registrationRequest);
-        return ResponseEntity.ok(new SuccessResponse("User registered successfully"));
+    public ResponseEntity<String> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
+        return ResponseEntity.ok(userService.register(registrationRequest));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.isdintership.epe.entity.exception;
+package com.isdintership.epe.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,5 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AssessmentNotFoundException extends RuntimeException {
     public AssessmentNotFoundException(String message) {
         super(message);
+    }
+    public AssessmentNotFoundException(){
+        super("Assessment with this id was not found");
     }
 }

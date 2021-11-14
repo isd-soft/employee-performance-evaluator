@@ -13,7 +13,7 @@ import java.util.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "assessment")
+@Table(name = "assessments")
 public class Assessment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,7 +21,6 @@ public class Assessment extends BaseEntity {
     private User user;
 
     @Column(name = "title")
-//    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description", columnDefinition = "text")

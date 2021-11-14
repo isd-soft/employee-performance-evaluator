@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "personal_goal")
+@Table(name = "personal_goals")
 public class PersonalGoal extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

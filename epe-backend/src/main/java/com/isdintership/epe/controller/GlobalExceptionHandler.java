@@ -1,10 +1,10 @@
-package com.isdintership.epe.rest;
+package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.ErrorResponse;
-import com.isdintership.epe.entity.exception.AssessmentNotFoundException;
-import com.isdintership.epe.entity.exception.JobNotFoundException;
-import com.isdintership.epe.entity.exception.UserExistsException;
-import com.isdintership.epe.entity.exception.UserNotFoundException;
+import com.isdintership.epe.exception.AssessmentNotFoundException;
+import com.isdintership.epe.exception.JobNotFoundException;
+import com.isdintership.epe.exception.UserExistsException;
+import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.security.jwt.JwtAuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

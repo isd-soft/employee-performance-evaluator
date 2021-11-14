@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 public class AssessmentDto {
+    private String id;
     private String title;
     private String description;
     private String jobPosition;
@@ -24,7 +25,8 @@ public class AssessmentDto {
     private List<DepartmentGoalDto> departmentGoalList;
     private List<FeedbackDto> feedback;
 
-    public AssessmentDto(String title, String description, String jobPosition, Float overallScore, StatusEnum status, Boolean isTemplate, LocalDate startDate, LocalDate finishDate, String userId) {
+    public AssessmentDto(String id, String title, String description, String jobPosition, Float overallScore, StatusEnum status, Boolean isTemplate, LocalDate startDate, LocalDate finishDate, String userId) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.jobPosition = jobPosition;

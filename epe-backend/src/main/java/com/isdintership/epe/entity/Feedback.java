@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "feedback")
+@Table(name = "feedbacks")
 public class Feedback extends BaseEntity {
 
     @Column(name = "author_id", nullable = false)

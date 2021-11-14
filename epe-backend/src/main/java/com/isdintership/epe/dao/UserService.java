@@ -1,14 +1,14 @@
-package com.isdintership.epe.service;
+package com.isdintership.epe.dao;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SuccessResponse;
 import com.isdintership.epe.dto.UserView;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
-    SuccessResponse register(RegistrationRequest user);
+    String register(RegistrationRequest user);
 
     UserView login (LoginRequest signInRequest);
 
@@ -16,10 +16,10 @@ public interface UserService {
 
     List<UserView> getAllUsers();
 
-    UserView getUserById(String id);
+    Optional<UserView> getUserById(String id);
 
     UserView updateUser(UserView userView, String id);
 
-    SuccessResponse deleteUser(String id);
+    String deleteUser(String id);
 
 }
