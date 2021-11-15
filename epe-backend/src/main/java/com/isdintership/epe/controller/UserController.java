@@ -1,6 +1,8 @@
 package com.isdintership.epe.controller;
 
+import com.isdintership.epe.dto.PasswordView;
 import com.isdintership.epe.dto.RegistrationRequest;
+import com.isdintership.epe.dto.RoleView;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.dao.UserService;
 import lombok.RequiredArgsConstructor;
@@ -54,4 +56,17 @@ public class    UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
+    @PatchMapping("users/updatepassword/{id}")
+    @RolesAllowed({ROLE_SYSADMIN,ROLE_USER})
+    public ResponseEntity<PasswordView> changePassword(@RequestBody PasswordView passwordView,
+                                                       @PathVariable(name = "id") String id) {
+        return new ResponseEntity<>(userService.changePassword(passwordView,id),HttpStatus.OK);
+    }
+
+    @PatchMapping("users/updategroup/{id}")
+    @RolesAllowed(ROLE_SYSADMIN)
+    public ResponseEntity<RoleView> changeGroup(@RequestBody RoleView roleView,
+                                                @PathVariable(name = "id") String id) {
+        return new ResponseEntity<>(userService.changeGroup(roleView,id),HttpStatus.OK);
+    }
 }

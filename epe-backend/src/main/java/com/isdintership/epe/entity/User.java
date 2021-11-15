@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,8 +49,11 @@ public class User extends BaseEntity {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
     private Image photo;
+
+    /*@OneToOne(cascade = CascadeType.ALL)
+    private Image image;*/
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -124,4 +128,5 @@ public class User extends BaseEntity {
 //                ", roles=" + roles +
                 '}';
     }
+
 }
