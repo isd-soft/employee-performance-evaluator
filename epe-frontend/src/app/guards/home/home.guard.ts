@@ -1,4 +1,4 @@
-import { HomeService } from './home.service';
+import { HomeGuardService } from './home-guard.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class HomeGuard implements CanActivate {
 
-  constructor(private home: HomeService) { }
+  constructor(private guard: HomeGuardService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.home.isLoggedIn()
+    return this.guard.isLoggedIn();
   }
   
 }

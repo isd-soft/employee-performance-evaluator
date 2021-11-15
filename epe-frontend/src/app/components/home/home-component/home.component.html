@@ -1,0 +1,119 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<div class="login-area">
+    <div class="bg-image">
+        <div class="login-signup">
+            <div class="container">
+                <div class="tab-content">
+                    <div *ngIf="hasAccount; else noAccount">
+                        <div id="login" class="tab-pane fade in active">
+                            <div class="login-inner">
+                                <div class="title">
+                                    <h1>Welcome <span>back!</span></h1>
+                                </div>
+                                <div *ngIf="loginUser" class="login-form">
+                                    <form>
+                                        <div class="form-details">
+                                            <label class="user">
+                                                <input 
+                                                    required
+                                                    [email]="true"
+                                                    type="email"
+                                                    name="email"
+                                                    #email="ngModel"
+                                                    id="email"
+                                                    placeholder="Enter your email" 
+                                                    [(ngModel)]="loginUser.email">
+                                                <div *ngIf="email.touched && !email.valid" class="input-box-error">
+                                                    Please enter a valid email !
+                                                </div>
+                                            </label>
+                                            <label class="pass">
+                                                <input 
+                                                    required
+                                                    minlength="3"
+                                                    maxlength="20"   
+                                                    type="password" 
+                                                    name="password" 
+                                                    #password="ngModel"
+                                                    id="password"
+                                                    placeholder="Enter your password" 
+                                                    [(ngModel)]="loginUser.password">
+                                                <div *ngIf="password.touched && !password.valid" class="input-box-error">
+                                                    Please enter your password !
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="form-btn" (click)="login()">Login</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error-message">
+
+                        </div>
+                        <div class="switch-page">
+                            <span (click)="requestRegisterPage()">
+                                Create new account
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noAccount>
+    <div id="login" class="tab-pane fade in active">
+        <div class="login-inner">
+            <div class="title">
+                <h1>Create new account</h1>
+            </div>
+            <div class="login-form">
+                <form>
+                    <div class="form-details">
+                        <label class="user">
+                            <input type="text" name="email" placeholder="Email" id="username">
+                        </label>
+                        <label class="pass">
+                            <input type="password" name="passsword" placeholder="Password" id="password">
+                        </label>
+                    </div>
+                    <button type="submit" class="form-btn" onsubmit="login()">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="register" class="tab-pane">
+        <div class="login-inner">
+             <div class="title">
+                 <h1>Hello <span>friend !</span></h1>
+             </div>
+             <div class="login-form">
+                 <form>
+                     <div class="form-details">
+                         <label class="user">
+                             <input type="text" name="username" placeholder="Full Name" id="username">
+                         </label>
+                         <label class="mail">
+                             <input type="email" name="mail" placeholder="Email Address" id="mail">
+                         </label>
+                         <label class="pass">
+                             <input type="password" name="passsword" placeholder="Password" id="password">
+                         </label>
+                         <label class="pass">
+                             <input type="password" name="passsword" placeholder="Confirm Password" id="password">
+                         </label>
+                     </div>
+                     <button type="submit" class="form-btn" onsubmit="">Sent</button>
+                 </form>
+             </div>
+         </div>
+     </div> -->
+</ng-template>
+    

@@ -8,13 +8,13 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "feedback")
+@Table(name = "feedbacks")
 public class Feedback extends BaseEntity {
 
     @Column(name = "author_id", nullable = false)
     private Long authorId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 
