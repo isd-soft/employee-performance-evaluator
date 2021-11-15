@@ -1,6 +1,7 @@
 package com.isdintership.epe.security.jwt;
 
 import com.isdintership.epe.entity.Role;
+import com.isdintership.epe.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -46,10 +47,12 @@ public class JwtTokenProvider {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
-    public String createToken(String email, Role role) {
+    public String createToken(User user) {
 
-        Claims claims = Jwts.claims().setSubject(email);
-        claims.put("role", role.getRole());
+        Claims claims = Jwts.claims().setSubject(user.getEmail());
+        claims.put("firstname", user.getFirstname());
+        claims.put("lastname", user.getLastname());
+        claims.put("role", user.getRole().getRole());
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);

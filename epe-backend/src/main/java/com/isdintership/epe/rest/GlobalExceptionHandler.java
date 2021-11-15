@@ -3,6 +3,11 @@ package com.isdintership.epe.rest;
 import com.isdintership.epe.dto.ErrorResponse;
 import com.isdintership.epe.entity.exception.*;
 import org.springframework.http.HttpStatus;
+import com.isdintership.epe.entity.exception.AssessmentNotFoundException;
+import com.isdintership.epe.entity.exception.JobNotFoundException;
+import com.isdintership.epe.entity.exception.UserExistsException;
+import com.isdintership.epe.entity.exception.UserNotFoundException;
+import com.isdintership.epe.security.jwt.JwtAuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -54,6 +59,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+    @ExceptionHandler(AssessmentNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAssessmentNotFoundException(AssessmentNotFoundException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
     }
 
     @ExceptionHandler(Exception.class)
