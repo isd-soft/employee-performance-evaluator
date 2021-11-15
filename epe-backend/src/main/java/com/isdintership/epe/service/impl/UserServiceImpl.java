@@ -153,6 +153,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
+        if (userView.getBuddyId() != null) {
+            userRepository.findById(userView.getBuddyId()).orElseThrow(() ->
+                new UserNotFoundException("Buddy with id " + userView.getBuddyId() + " was not found"));
+
+            user.setBuddyId(userView.getBuddyId());
+        }
+
         user.setEmail(userView.getEmail());
         user.setFirstname(userView.getFirstname());
         user.setLastname(userView.getLastname());

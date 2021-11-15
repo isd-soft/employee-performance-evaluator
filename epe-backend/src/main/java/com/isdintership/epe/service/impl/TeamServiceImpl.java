@@ -54,8 +54,6 @@ public class TeamServiceImpl implements TeamService {
         team.setTeamLeader(teamLeader);
         team.setMembers(members);
 
-        System.out.println(team.getMembers());
-
         teamRepository.save(team);
 
         return new Response("Team " + teamView.getName() + " was created successfully");
