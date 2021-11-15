@@ -1,17 +1,11 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.ErrorResponse;
-<<<<<<< HEAD:epe-backend/src/main/java/com/isdintership/epe/controller/GlobalExceptionHandler.java
 import com.isdintership.epe.exception.AssessmentNotFoundException;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
-=======
-import com.isdintership.epe.entity.exception.JobNotFoundException;
 import com.isdintership.epe.exception.RoleNotFoundException;
-import com.isdintership.epe.entity.exception.UserExistsException;
-import com.isdintership.epe.entity.exception.UserNotFoundException;
->>>>>>> addingImages:epe-backend/src/main/java/com/isdintership/epe/rest/GlobalExceptionHandler.java
 import com.isdintership.epe.security.jwt.JwtAuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -47,13 +41,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-<<<<<<< HEAD:epe-backend/src/main/java/com/isdintership/epe/controller/GlobalExceptionHandler.java
     @ExceptionHandler(AssessmentNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAssessmentNotFoundException(AssessmentNotFoundException e, HttpServletRequest request) {
-=======
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
     @ExceptionHandler(RoleNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleRoleNotFoundException(RoleNotFoundException e, HttpServletRequest request) {
->>>>>>> addingImages:epe-backend/src/main/java/com/isdintership/epe/rest/GlobalExceptionHandler.java
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

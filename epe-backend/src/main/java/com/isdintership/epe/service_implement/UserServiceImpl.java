@@ -14,6 +14,7 @@ import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.RoleNotFoundException;
 
+import com.isdintership.epe.repository.ImageRepository;
 import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.repository.RoleRepository;
 import com.isdintership.epe.repository.UserRepository;
@@ -31,6 +32,7 @@ import java.io.*;
 import java.util.*;
 
 import static com.isdintership.epe.entity.Image.encodeImageFromFile;
+import static com.isdintership.epe.entity.Image.encodeImageFromFilePath;
 
 
 @Service
@@ -44,7 +46,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
-    //private final ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
     @Override
     @Transactional
@@ -192,25 +194,21 @@ public class UserServiceImpl implements UserService {
         user.setJob(job);
         user.setBio(userView.getBio());
 
-        Image image = new Image();
+        if (userView.getImagePath() != null) {
+            Image image = new Image();
 
-        try {
-            image.setImageBytes(encodeImageFromFile(userView.getImageFile()));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            imageRepository.deleteById(user.getPhoto().getId());
+
+            try {
+                //image.setImageBytes(encodeImageFromFile(userView.getImageFile()));
+                image.setImageBytes(encodeImageFromFilePath(userView.getImagePath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            image.setUser(user);
+            user.setPhoto(image);
         }
-        image.setUser(user);
-        user.setPhoto(image);
-
-        /*Image image = new Image();
-        try {
-            image.setImageBytes(encodeImageFromFilePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        user.setImage(image);*/
-
         return userView;
     }
 

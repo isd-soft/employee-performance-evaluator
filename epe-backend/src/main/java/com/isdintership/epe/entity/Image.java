@@ -21,7 +21,10 @@ public class Image extends BaseEntity {
     @Column(name = "image_bytes")
     private byte[] imageBytes;
 
-    @OneToOne(/*mappedBy = "photo",*/ cascade = CascadeType.ALL)
+    @OneToOne(/*mappedBy = "photo",*/ cascade = {
+            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH
+    })
     //@MapsId
     @JoinColumn(name = "user_id")
     private User user;
