@@ -63,11 +63,11 @@ public class    UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
-    @GetMapping("/subordinates/{id}")
-    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
-    public ResponseEntity<List<SubordinatesDto>> getSubordinates(@PathVariable(name = "id") String id) {
-        return ResponseEntity.ok(userService.getSubordinates(id));
-    }
+//    @GetMapping("/subordinates/{id}")
+//    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+//    @CrossOrigin(origins = origin)
+//    public ResponseEntity<List<SubordinatesDto>> getSubordinates(@PathVariable(name = "id") String id) {
+//        return ResponseEntity.ok(userService.getSubordinates(id));
+//    }
 
 }

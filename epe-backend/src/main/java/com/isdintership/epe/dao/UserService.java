@@ -23,5 +23,5 @@ public interface UserService {
 
     String deleteUser(String id);
 
-    List<SubordinatesDto> getSubordinates(String id);
+//    List<SubordinatesDto> getSubordinates(String id);
 }

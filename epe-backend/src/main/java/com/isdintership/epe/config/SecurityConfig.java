@@ -3,7 +3,6 @@ package com.isdintership.epe.config;
 import com.isdintership.epe.security.ExceptionHandlerFilter;
 import com.isdintership.epe.security.jwt.JwtConfigurer;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

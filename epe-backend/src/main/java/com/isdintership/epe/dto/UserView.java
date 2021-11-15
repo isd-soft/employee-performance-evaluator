@@ -24,6 +24,7 @@ public class UserView {
     private String phoneNumber;
     private String job;
     private String bio;
+    private String buddyId;
     private String token;
 
     public static UserView fromUser(User user) {
@@ -36,6 +37,7 @@ public class UserView {
         userView.setEmploymentDate(user.getEmploymentDate());
         userView.setPhoneNumber(user.getPhoneNumber());
         userView.setJob(user.getJob().getJobTitle());
+        userView.setBuddyId(user.getBuddyId());
 
         return userView;
     }

@@ -146,6 +146,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
+        if (userView.getBuddyId() != null) {
+            userRepository.findById(userView.getBuddyId()).orElseThrow(() ->
+                new UserNotFoundException("Buddy with id " + id + " was not found"));
+            user.setBuddyId(userView.getBuddyId());
+        }
+
         user.setEmail(userView.getEmail());
         user.setFirstname(userView.getFirstname());
         user.setLastname(userView.getLastname());
@@ -171,7 +177,7 @@ public class UserServiceImpl implements UserService {
         return ("User with id " + id + " was deleted");
     }
 
-    @Override
+   /* @Override
     @Transactional
     public List<SubordinatesDto> getSubordinates(String id) {
         List<User> users = userRepository.findByTeamLeaderIdOrBuddyId(id, id);
@@ -186,5 +192,5 @@ public class UserServiceImpl implements UserService {
         });
 
         return subordinatesDto;
-    }
+    }*/
 }
