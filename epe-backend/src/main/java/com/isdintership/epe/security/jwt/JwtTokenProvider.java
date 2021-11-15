@@ -77,7 +77,7 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null) {
-            if (bearerToken.startsWith("Bearer_")) {
+            if (bearerToken.startsWith("Bearer ")) {
                 return bearerToken.substring(7, bearerToken.length());
             } else {
                 throw new JwtAuthenticationException("JWT token is expired or invalid");
