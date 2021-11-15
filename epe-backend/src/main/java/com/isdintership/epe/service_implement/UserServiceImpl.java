@@ -2,14 +2,13 @@ package com.isdintership.epe.service_implement;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
+import com.isdintership.epe.dto.SubordinatesDto;
 import com.isdintership.epe.dto.UserView;
-import com.isdintership.epe.entity.Job;
-import com.isdintership.epe.entity.Role;
-import com.isdintership.epe.entity.RoleEnum;
-import com.isdintership.epe.entity.User;
+import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
+import com.isdintership.epe.repository.AssessmentRepository;
 import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.repository.RoleRepository;
 import com.isdintership.epe.repository.UserRepository;
@@ -23,9 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -34,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final JobRepository jobRepository;
+    private final AssessmentRepository assessmentRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -171,5 +169,22 @@ public class UserServiceImpl implements UserService {
         userRepository.removeById(id);
 
         return ("User with id " + id + " was deleted");
+    }
+
+    @Override
+    @Transactional
+    public List<SubordinatesDto> getSubordinates(String id) {
+        List<User> users = userRepository.findByTeamLeaderIdOrBuddyId(id, id);
+        if (users.isEmpty())
+                throw new UserExistsException("You have no subordinates");
+
+        List<SubordinatesDto> subordinatesDto = new ArrayList<>();
+
+        users.forEach(user -> {
+            subordinatesDto.add(SubordinatesDto.fromUserTo(user,
+                    assessmentRepository.findByUserId(user.getId())));
+        });
+
+        return subordinatesDto;
     }
 }

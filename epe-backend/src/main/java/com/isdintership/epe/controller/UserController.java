@@ -1,6 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.RegistrationRequest;
+import com.isdintership.epe.dto.SubordinatesDto;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.dao.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.isdintership.epe.entity.RoleEnum.Fields.*;
@@ -52,6 +54,12 @@ public class    UserController {
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
     public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
         return ResponseEntity.ok(userService.deleteUser(id));
+    }
+
+    @GetMapping("/subordinates/{id}")
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    public ResponseEntity<List<SubordinatesDto>> getSubordinates(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(userService.getSubordinates(id));
     }
 
 }

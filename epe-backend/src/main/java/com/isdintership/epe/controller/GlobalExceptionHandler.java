@@ -1,10 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.ErrorResponse;
-import com.isdintership.epe.exception.AssessmentNotFoundException;
-import com.isdintership.epe.exception.JobNotFoundException;
-import com.isdintership.epe.exception.UserExistsException;
-import com.isdintership.epe.exception.UserNotFoundException;
+import com.isdintership.epe.exception.*;
 import com.isdintership.epe.security.jwt.JwtAuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -42,6 +39,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AssessmentNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAssessmentNotFoundException(AssessmentNotFoundException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(SubordinatesNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleSubordinatesNotFoundException(SubordinatesNotFoundException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

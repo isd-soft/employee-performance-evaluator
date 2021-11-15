@@ -2,6 +2,7 @@ package com.isdintership.epe.dao;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
+import com.isdintership.epe.dto.SubordinatesDto;
 import com.isdintership.epe.dto.UserView;
 
 import java.util.List;
@@ -22,4 +23,5 @@ public interface UserService {
 
     String deleteUser(String id);
 
+    List<SubordinatesDto> getSubordinates(String id);
 }
