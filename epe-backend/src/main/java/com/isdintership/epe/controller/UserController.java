@@ -24,27 +24,33 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 public class    UserController {
 
     private final UserService userService;
+    private final String origin = "http://localhost:4200";
+
 
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<List<UserView>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
         return ResponseEntity.ok(userService.createUser(request));
     }
 
     @GetMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<Optional<UserView>> getUserById(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PutMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<UserView> updateUser(@Valid @RequestBody UserView userView,
                                                @PathVariable(name = "id") String id) {
         return ResponseEntity.ok(userService.updateUser(userView, id));
@@ -52,12 +58,14 @@ public class    UserController {
 
     @DeleteMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
     @GetMapping("/subordinates/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<List<SubordinatesDto>> getSubordinates(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(userService.getSubordinates(id));
     }
