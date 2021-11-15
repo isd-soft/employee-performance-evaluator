@@ -130,11 +130,12 @@ public class UserServiceImpl implements UserService {
                 new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
+        File imageSourceFile = new File("epe-backend//userDefaultImage.png");
         Image image = new Image();
 
-        String imagePath = request.getImageFolder();
+        //String imagePath = request.getImageFolder();
         try {
-            image.setImageBytes(encodeImageFromFilePath(imagePath));
+            image.setImageBytes(encodeImageFromFile(imageSourceFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -191,7 +192,7 @@ public class UserServiceImpl implements UserService {
         Image image = new Image();
 
         try {
-            image.setImageBytes(encodeImageFromFilePath(userView.getImagePath()));
+            image.setImageBytes(encodeImageFromFile(userView.getImageFile()));
         } catch (IOException e) {
             e.printStackTrace();
         }
