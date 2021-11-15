@@ -49,8 +49,8 @@ export class HomeComponent {
           this.router.navigate(['/dashboard']);
         }
        }, error => {
-         let response = error as BadResponse;
-        this.errorMessage = response.title; })
+         console.log(error)
+        this.errorMessage = "Bad credentials !" })
     }
   }
 

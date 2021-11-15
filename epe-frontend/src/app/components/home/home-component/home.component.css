@@ -184,7 +184,6 @@ ul {
 }
 
 .form-btn::before {
-    content: "";
     font-family: FontAwesome;
     position: absolute;
     right: 17px;

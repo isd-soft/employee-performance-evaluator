@@ -54,7 +54,9 @@
                             </div>
                         </div>
                         <div class="error-message">
-
+                            <span *ngIf="errorMessage">
+                                {{errorMessage}}
+                            </span>
                         </div>
                         <div class="switch-page">
                             <span (click)="requestRegisterPage()">
