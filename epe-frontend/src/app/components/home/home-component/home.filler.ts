@@ -53,4 +53,14 @@ export class HomeFiller{
 
         return newUser;
     }
+
+    createLoginUserFromRegisterUser(user: RegisterRequest): LoginRequest {
+        
+        let loginUser: LoginRequest = {
+            email: user.email,
+            password: user.password
+        }   
+
+        return loginUser;
+    }
 }
