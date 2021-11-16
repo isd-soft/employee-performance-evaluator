@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home-component/home.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
+import { TeamsComponent } from './components/teams/team-component/teams.component';
 
 import { HomeGuard } from './guards/home/home.guard';
 import { DashboardGuard } from './guards/dashboard/dashboard.guard';
@@ -26,8 +27,13 @@ const routes: Routes = [
     canActivate: [DashboardGuard]
   },
   {
+    path: 'teams',
+    component: TeamsComponent,
+    canActivate: [DashboardGuard]
+  },
+  {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   }
 ];

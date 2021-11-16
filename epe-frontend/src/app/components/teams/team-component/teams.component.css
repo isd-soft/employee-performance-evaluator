@@ -567,7 +567,9 @@ header {
 }
 /*Main CSS*/
 
-
+table {
+  width: 100%;
+}
 
 
 

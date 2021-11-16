@@ -64,11 +64,11 @@ export class HomeComponent {
       if(this.newUser.password == this.newUser.confirmPassword) {
         let registerUser: RegisterRequest = this.filler.createRegisterUserFromNewUser(this.newUser);
         this.homeService.register(registerUser).subscribe(data => {
-          this.hasAccount = true;
-          this.errorMessage = undefined;
-          this.newUser = this.filler.createEmptyNewUser();
-          this.router.navigate(['/home']);
          }, error => {
+            if(error.status == 200) {
+              this.loginUser = this.filler.createLoginUserFromRegisterUser(registerUser)
+              this.login();
+            }
             this.errorMessage = error.error.title;})
       } else {
         this.errorMessage = 'The passwords do not match !';

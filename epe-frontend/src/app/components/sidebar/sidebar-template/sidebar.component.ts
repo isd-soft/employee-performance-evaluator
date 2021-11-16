@@ -10,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent {
 
   jwtUser?: JwtUser;
-  isUser?: boolean;
-  isAdmin?: boolean;
+  isUser?: boolean = false;
+  isAdmin?: boolean = false;
 
   constructor(private jwtService: JwtService) {
     
