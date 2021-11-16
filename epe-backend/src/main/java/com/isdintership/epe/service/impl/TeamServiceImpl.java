@@ -33,27 +33,29 @@ class TeamServiceImpl implements TeamService {
                 throw new TeamExistException("Team with " + teamView.getName() + " already exists");
         }
 
-        User teamLeader = userRepository.findById(teamView.getTeamLeaderId()).orElseThrow(
-                () -> new UserNotFoundException("User with id " + teamView.getTeamLeaderId() + "was not found"));
-
-
-        List<String> membersIds = teamView.getMembersIds();
-        if (membersIds.isEmpty()) {
-            throw new UserNotFoundException("No ids provided for team members");
-        }
-
-        List<User> members = new ArrayList<>();
-        for (String id : membersIds) {
-            User user = userRepository.findById(id).orElseThrow(
-                    () -> new UserNotFoundException("User with id " + id + "was not found"));
-            members.add(user);
-        }
-
         Team team = new Team();
-        team.setName(teamView.getName());
-        team.setTeamLeader(teamLeader);
-        team.setMembers(members);
 
+        if (teamView.getTeamLeaderId() != null) {
+            User teamLeader = userRepository.findById(teamView.getTeamLeaderId()).orElseThrow(
+                    () -> new UserNotFoundException("User with id " + teamView.getTeamLeaderId() + "was not found"));
+            team.setTeamLeader(teamLeader);
+        }
+
+        if (teamView.getMembersIds() != null) {
+
+            List<String> membersIds = teamView.getMembersIds();
+            List<User> members = new ArrayList<>();
+
+            for (String memberId : membersIds) {
+                User user = userRepository.findById(memberId).orElseThrow(
+                        () -> new UserNotFoundException("User with id " + memberId + "was not found"));
+                members.add(user);
+            }
+
+            team.setMembers(members);
+        }
+
+        team.setName(teamView.getName());
         teamRepository.save(team);
 
         return "Team " + teamView.getName() + " was created successfully";
@@ -91,23 +93,28 @@ class TeamServiceImpl implements TeamService {
                 new TeamNotFoundException("Team with id " + id + " was not found"));
 
         team.setName(teamView.getName());
-        User teamLeader = userRepository.findById(teamView.getTeamLeaderId()).orElseThrow(() ->
-                new UserNotFoundException("Team leader with id " + id + " was not found"));
-        team.setTeamLeader(teamLeader);
 
-        List<String> membersIds = teamView.getMembersIds();
-        if (membersIds.isEmpty()) {
-            throw new UserNotFoundException("No ids provided for team members");
+        if (teamView.getTeamLeaderId() != null) {
+            User teamLeader = userRepository.findById(teamView.getTeamLeaderId()).orElseThrow(() ->
+                    new UserNotFoundException("Team leader with id " + id + " was not found"));
+            team.setTeamLeader(teamLeader);
         }
 
-        List<User> members = new ArrayList<>();
-        for (String memberId : membersIds) {
-            User user = userRepository.findById(memberId).orElseThrow(
-                    () -> new UserNotFoundException("User with id " + memberId + "was not found"));
-            members.add(user);
+        if (teamView.getMembersIds() != null) {
+
+            List<String> membersIds = teamView.getMembersIds();
+            List<User> members = new ArrayList<>();
+
+            for (String memberId : membersIds) {
+                User user = userRepository.findById(memberId).orElseThrow(
+                        () -> new UserNotFoundException("User with id " + memberId + " was not found"));
+                members.add(user);
+            }
+
+            team.setMembers(members);
         }
 
-        team.setMembers(members);
+
 
         return TeamDto.fromTeam(team);
 
