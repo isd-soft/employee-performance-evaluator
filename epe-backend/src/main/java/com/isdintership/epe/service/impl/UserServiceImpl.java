@@ -3,6 +3,7 @@ package com.isdintership.epe.service.impl;
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.UserView;
+import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -174,6 +176,14 @@ class UserServiceImpl implements UserService {
         userRepository.removeById(id);
 
         return ("User with id " + id + " was deleted");
+    }
+
+    @Override
+    @Transactional
+    public List<JobsDto> getJobTitles() {
+        return jobRepository.findAll().stream()
+                .map(JobsDto::fromJob)
+                .collect(Collectors.toList());
     }
 
    /* @Override
