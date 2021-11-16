@@ -10,6 +10,7 @@ import { LogoutComponent } from './components/logout/logout-component/logout.com
 import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
 import { HomeComponent } from './components/home/home-component/home.component';
+import { TeamsComponent } from './components/teams/team-component/teams.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomeComponent } from './components/home/home-component/home.component';
     LogoutComponent,
     DashboardComponent,
     HomeComponent,
-    SidebarComponent
+    SidebarComponent,
+    TeamsComponent
   ],
   imports: [
     BrowserModule,

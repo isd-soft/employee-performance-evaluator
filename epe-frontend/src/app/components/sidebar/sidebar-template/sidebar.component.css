@@ -8,6 +8,10 @@
     text-align: center;
 }
 
+/* .navi {
+    background-color: #000000;
+} */
+
 .navi a {
     border-bottom: 1px solid #0d172e;
     border-top: 1px solid #0d172e;
@@ -26,7 +30,7 @@
 }
 
 .navi .active a {
-    background: #122143;
+    background: #000000;
     border-left: 5px solid #5584ff;
     padding-left: 15px;
 }
