@@ -14,12 +14,6 @@ export class HomeService {
 
   url: string = 'api-server/api/auth/';
 
-  jobList: JobItem[] = [
-    {
-      name: 'Java Developer'
-    }
-  ]
-
   constructor(private http: HttpClient) { }
 
   login(user: LoginRequest) {

@@ -184,7 +184,7 @@
                                 placeholder="Enter your job"
                                 [(ngModel)]="newUser.job">
                                 <option *ngFor="let job of jobList">
-                                    {{ job.name }}
+                                    {{ job.jobTitle }}
                                 </option>
                             </select>
                             <div *ngIf="job.touched && !job.valid" class="input-box-error">
