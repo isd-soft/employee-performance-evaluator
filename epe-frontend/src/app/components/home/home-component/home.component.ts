@@ -53,11 +53,7 @@ export class HomeComponent {
           this.router.navigate(['/dashboard']);
         }
        }, error => {
-        if(error == 500) {
-          this.errorMessage = 'Email or password is incorrect !'; }
-        else {
-          this.errorMessage = 'Something went wrong, please try again in a few minutes ...';
-        } })
+        this.errorMessage = error.error.title;})
     }
   }
 
@@ -65,17 +61,13 @@ export class HomeComponent {
     if(this.newUser)
       if(this.newUser.password == this.newUser.confirmPassword) {
         let registerUser: RegisterRequest = this.filler.createRegisterUserFromNewUser(this.newUser);
-        this.homeService.register(registerUser).subscribe(data => {}, error => {
-          if(error == 200) {
-            this.hasAccount = true;
-            this.errorMessage = undefined;
-            this.newUser = this.filler.createEmptyNewUser();
-            this.router.navigate([''])
-          } else if(error == 400) {
-            this.errorMessage = 'An user with such email already exists !'; }
-          else {
-            this.errorMessage = 'Something went wrong, please try again in a few minutes ...';
-          } })
+        this.homeService.register(registerUser).subscribe(data => {
+          this.hasAccount = true;
+          this.errorMessage = undefined;
+          this.newUser = this.filler.createEmptyNewUser();
+          this.router.navigate(['/home']);
+         }, error => {
+            this.errorMessage = error.error.title;})
       } else {
         this.errorMessage = 'The passwords do not match !';
       }

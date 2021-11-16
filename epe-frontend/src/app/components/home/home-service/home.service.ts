@@ -37,6 +37,6 @@ export class HomeService {
   }
 
   errorHandler(error: HttpErrorResponse){
-    return observableThrowError(error.status);
+    return observableThrowError(error);
   }
 }

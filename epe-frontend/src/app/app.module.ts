@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home-component/home.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
+import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
