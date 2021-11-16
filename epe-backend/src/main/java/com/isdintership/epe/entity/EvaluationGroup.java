@@ -16,7 +16,6 @@ import java.util.List;
 public class EvaluationGroup extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 
     @Column(name = "title", nullable = false)
@@ -25,14 +24,14 @@ public class EvaluationGroup extends BaseEntity {
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
-            mappedBy = "evaluationGroup",
             orphanRemoval = true
     )
+    @JoinColumn(name = "evaluation_group_id")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<EvaluationField> evaluationFields = new ArrayList<>();
 
     @Column(name = "overall_score")
-    private Integer overallScore;
+    private Float overallScore;
 
     @Override
     public boolean equals(Object o) {

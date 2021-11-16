@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class EvaluationGroupDto {
     private String id;
-    private Integer overallScore;
+    private Float overallScore;
     private String title;
     private String assessmentId;
     private List<EvaluationFieldDto> evaluationFieldDtos;

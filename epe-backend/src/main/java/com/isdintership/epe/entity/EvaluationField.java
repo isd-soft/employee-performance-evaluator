@@ -15,7 +15,6 @@ public class EvaluationField extends BaseEntity {
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "evaluation_group_id")
     private EvaluationGroup evaluationGroup;
 
     @Column(name = "first_score")
