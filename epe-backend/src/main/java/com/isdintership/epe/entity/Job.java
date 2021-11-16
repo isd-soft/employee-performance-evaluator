@@ -11,11 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "jobs")
 @NoArgsConstructor
-public class Job {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Job extends BaseEntity{
 
     @Column(name = "job_title", nullable = false)
     private String jobTitle;

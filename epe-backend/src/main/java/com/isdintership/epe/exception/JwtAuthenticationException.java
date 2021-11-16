@@ -1,4 +1,4 @@
-package com.isdintership.epe.security.jwt;
+package com.isdintership.epe.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
