@@ -14,7 +14,6 @@ import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.AssessmentService;
-import com.isdintership.epe.dao.AssessmentService;
 
 import com.isdintership.epe.util.AssessmentUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
