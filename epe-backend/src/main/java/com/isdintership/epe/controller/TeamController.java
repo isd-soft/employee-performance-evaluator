@@ -1,6 +1,6 @@
 package com.isdintership.epe.controller;
 
-import com.isdintership.epe.dao.TeamService;
+import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
