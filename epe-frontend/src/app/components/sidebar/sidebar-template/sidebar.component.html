@@ -1,0 +1,52 @@
+<div *ngIf="jwtUser" class="navi">
+    <ul>
+        <li class="active">
+            <a>
+                <span class="hidden-xs hidden-sm">
+                    <img style="height: 30px;" src="../../../../assets/user-icon.png">
+                    {{jwtUser.firstname}} {{jwtUser.lastname}}
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="navi">
+    <ul>
+        <li class="active">
+            <a routerLink="/logout">
+                <span class="hidden-xs hidden-sm">
+                    Logout
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul *ngIf="isUser">
+        <li class="active">
+            <a routerLink="/logout">
+                <span class="hidden-xs hidden-sm">
+                    My Profile
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul *ngIf="isAdmin">
+        <li class="active">
+            <a href="/teams">
+                <i class="fa fa-user-friends" aria-hidden="true">
+
+                </i>
+                <span class="hidden-xs hidden-sm">
+                    Teams
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul>
+        <li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+        <li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Workflow</span></a></li>
+        <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Statistics</span></a></li>
+        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calender</span></a></li>
+        <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Users</span></a></li>
+        <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Settings</span></a></li>
+    </ul>
+</div>

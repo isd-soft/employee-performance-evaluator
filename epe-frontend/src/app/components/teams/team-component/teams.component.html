@@ -1,0 +1,43 @@
+
+<body class="home">
+    <div class="container-fluid display-table">
+        <div class="row display-table-row">
+            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+
+                <select>
+                    <option *ngFor="let user of users"> {{user.firstname}} {{user.lastname}}</option>
+                </select>
+                <!-- <table>
+                    <tr>
+                        <th>
+                            Team name
+                        </th>
+                        <th>
+                            Team leader
+                        </th>
+                        <th>
+                            Members
+                        </th>
+                    </tr>
+                    <tr *ngFor="let team of teams" style="border: 1px solid">
+                        <td>
+                            {{team.name}}
+                        </td>
+                        <td>
+                            {{team.teamLeaderId}}
+                        </td>
+                        <td>
+                            <p *ngFor="let member of team.membersIds">
+                                {{member}}
+                            </p>
+                        </td>
+                    </tr>
+                </table> -->
+            </div>
+        </div>
+
+    </div>
+</body>
