@@ -7,49 +7,60 @@ import jwt_decode from 'jwt-decode';
 })
 export class JwtService {
 
-  jwtUser?: JwtUser
-
-  decodeJwt(): any {
+  getJwtUser(): any {
     
-    // test token
-    let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY3MDQ1NTEsImV4cCI6MTY2ODI0MDU1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjoiUk9MRV9VU0VSIn0.0xmOdqQDiFfawN0lcwaiwRBjn0XudOAFdURHA9vFgKc'
+    let jwtUser: JwtUser;
+    let token: any = localStorage.getItem('JWT_TOKEN');
+    
+    if(token) {
+      try{
 
-    let decodedToken: any
+        let decodedToken: any = jwt_decode(token);
 
-    try{
-      decodedToken = jwt_decode(token)
-      
-      if(decodedToken.exp && decodedToken.Email && decodedToken.Role) {
-        this.jwtUser = {
-          expDate: decodedToken.exp,
-          email: decodedToken.Email,
-          role: decodedToken.Role
+        if(this.validateDecodedJwtToken(decodedToken)) {
+          jwtUser = {
+            issDate: decodedToken.iat,
+            expDate: decodedToken.exp,
+            firstname: decodedToken.firstname,
+            lastname: decodedToken.lastname,
+            email: decodedToken.sub,
+            role: decodedToken.role
+          }
+
+          return jwtUser;
         }
-
-        return this.jwtUser
+        else {
+          localStorage.removeItem('JWT_TOKEN');
+        }
       }
+      catch(Error){ }
+    }
 
-      return null;
-    }
-    catch(Error){
-      return null;
-    }
+    return null;
   }
 
   storeJWT(token: string) {
-    localStorage.setItem ('JWT_TOKEN', token)
+
+    localStorage.setItem ('JWT_TOKEN', token);
   }
 
   removeJWT() {
+
     if(localStorage.getItem('JWT_TOKEN')) {
-      localStorage.removeItem('JWT_TOKEN')
-      console.log('yes ..')
+      localStorage.removeItem('JWT_TOKEN');
     }
   }
 
-  validateJWT(): boolean {
-    return true;
-  }
+  validateDecodedJwtToken(decodedToken: any): boolean {  
+      
+    if(decodedToken.sub)
+      if(decodedToken.firstname)
+        if(decodedToken.lastname)
+          if(decodedToken.role)
+            if(decodedToken.iat)
+              if(decodedToken.exp)
+                return true;
 
-  
+    return false;
+  }
 }

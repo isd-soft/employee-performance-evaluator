@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register-template/register.component';
-import { LoginComponent } from './login/login-template/login.component';
-import { TestComponent } from './test/test.component';
-import { HomeComponent } from './home/home-template/home.component';
-import { LogoutComponent } from './logout/logout.component';
+import { LogoutComponent } from './components/logout/logout-component/logout.component';
+import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
+import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
+import { HomeComponent } from './components/home/home-component/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    TestComponent,
+    LogoutComponent,
+    DashboardComponent,
     HomeComponent,
-    LogoutComponent
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,15 @@ import { LogoutComponent } from './logout/logout.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: 'API_URL', useValue: getApiUrl()}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getApiUrl(): string {
+  const baseHref = (document.querySelector('base') || {}).href;
+  return `${baseHref}api`;
+}
