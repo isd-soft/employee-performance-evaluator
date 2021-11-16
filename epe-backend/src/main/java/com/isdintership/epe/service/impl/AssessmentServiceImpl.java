@@ -1,4 +1,4 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
 
 import com.isdintership.epe.entity.Assessment;
@@ -12,7 +12,7 @@ import com.isdintership.epe.entity.StatusEnum;
 import com.isdintership.epe.entity.User;
 import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.UserRepository;
-import com.isdintership.epe.dao.AssessmentService;
+import com.isdintership.epe.service.AssessmentService;
 
 import com.isdintership.epe.util.AssessmentUtil;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class AssessmentServiceImpl implements AssessmentService {
+class AssessmentServiceImpl implements AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;

@@ -1,13 +1,12 @@
 package com.isdintership.epe.security.jwt;
 
-import com.isdintership.epe.entity.Role;
 import com.isdintership.epe.entity.User;
+import com.isdintership.epe.exception.JwtAuthenticationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -77,7 +76,7 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null) {
-            if (bearerToken.startsWith("Bearer_")) {
+            if (bearerToken.startsWith("Bearer ")) {
                 return bearerToken.substring(7, bearerToken.length());
             } else {
                 throw new JwtAuthenticationException("JWT token is expired or invalid");

@@ -1,7 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.AssessmentDto;
-import com.isdintership.epe.dao.AssessmentService;
+import com.isdintership.epe.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,21 +19,25 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 public class AssessmentController {
 
     private final AssessmentService assessmentService;
+    private final String origin = "http://localhost:4200";
 
     @DeleteMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<String> deleteAssessment(@PathVariable("id") String id) {
         return ResponseEntity.ok(assessmentService.deleteAssessment(id));
     }
 
     @PostMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<String> createAssessment(@RequestBody AssessmentDto assessmentDto){
         return ResponseEntity.ok(assessmentService.createAssessment(assessmentDto));
     }
 
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<List<AssessmentDto>> getAssessments(){
         return ResponseEntity.ok(assessmentService.getAllAssessments());
 
@@ -41,6 +45,7 @@ public class AssessmentController {
 
     @GetMapping("/{userId}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentDto> getAssessment(@PathVariable String userId){
         return ResponseEntity.ok(assessmentService.getAssessment(userId));
     }
@@ -48,6 +53,7 @@ public class AssessmentController {
 
     @PutMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<String> updateAssessment(@Valid @RequestBody AssessmentDto assessmentDto) {
         return ResponseEntity.ok(assessmentService.updateAssessment(assessmentDto));
     }

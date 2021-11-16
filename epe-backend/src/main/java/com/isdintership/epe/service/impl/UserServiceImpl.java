@@ -1,12 +1,10 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.UserView;
-import com.isdintership.epe.entity.Job;
-import com.isdintership.epe.entity.Role;
-import com.isdintership.epe.entity.RoleEnum;
-import com.isdintership.epe.entity.User;
+import com.isdintership.epe.dto.*;
+import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
@@ -14,11 +12,12 @@ import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.RoleNotFoundException;
 
+import com.isdintership.epe.repository.AssessmentRepository;
 import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.repository.RoleRepository;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
-import com.isdintership.epe.dao.UserService;
+import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,8 +26,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.io.*;
 
 import static com.isdintership.epe.entity.Image.encodeImageFromFile;
 
@@ -36,10 +36,11 @@ import static com.isdintership.epe.entity.Image.encodeImageFromFile;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final JobRepository jobRepository;
+    private final AssessmentRepository assessmentRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -91,7 +92,7 @@ public class UserServiceImpl implements UserService {
         return "Registration successful";
 
     }
-
+    
     @Override
     @Transactional
     public UserView login(LoginRequest signInRequest) {
@@ -167,10 +168,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Optional<UserView> getUserById(String id) {
+    public UserView getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow( () -> new UserNotFoundException("The user with this id does not exist"));
-        return Optional.ofNullable(UserView.fromUser(user));
+        return UserView.fromUser(user);
     }
 
     @Override
@@ -179,13 +180,18 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
+        if (userView.getBuddyId() != null) {
+            userRepository.findById(userView.getBuddyId()).orElseThrow(() ->
+                new UserNotFoundException("Buddy with id " + id + " was not found"));
+            user.setBuddyId(userView.getBuddyId());
+        }
+
         user.setEmail(userView.getEmail());
         user.setFirstname(userView.getFirstname());
         user.setLastname(userView.getLastname());
         user.setBirthDate(userView.getBirthDate());
         user.setEmploymentDate(userView.getEmploymentDate());
         user.setPhoneNumber(userView.getPhoneNumber());
-
 
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + userView.getJob() + " not found"));;
@@ -223,6 +229,31 @@ public class UserServiceImpl implements UserService {
 
         return ("User with id " + id + " was deleted");
     }
+
+    @Override
+    @Transactional
+    public List<JobsDto> getJobTitles() {
+        return jobRepository.findAll().stream()
+                .map(JobsDto::fromJob)
+                .collect(Collectors.toList());
+    }
+
+   /* @Override
+    @Transactional
+    public List<SubordinatesDto> getSubordinates(String id) {
+        List<User> users = userRepository.findByTeamLeaderIdOrBuddyId(id, id);
+        if (users.isEmpty())
+                throw new UserExistsException("You have no subordinates");
+
+        List<SubordinatesDto> subordinatesDto = new ArrayList<>();
+
+        users.forEach(user -> {
+            subordinatesDto.add(SubordinatesDto.fromUserTo(user,
+                    assessmentRepository.findByUserId(user.getId())));
+        });
+
+        return subordinatesDto;
+    }*/
 
 
     @Override

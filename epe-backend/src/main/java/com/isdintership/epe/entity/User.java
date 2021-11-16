@@ -70,8 +70,8 @@ public class User extends BaseEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @Column(name = "team_leader_id")
-    private String teamLeaderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
 
     @Column(name = "buddy_id")
     private String buddyId;
@@ -92,7 +92,7 @@ public class User extends BaseEntity {
 
     public User(String email, String firstname, String lastname, LocalDate birthDate,
                 LocalDate employmentDate, String phoneNumber, Job job, String bio,
-                Image photo, String password, Role role, String teamLeaderId,
+                Image photo, String password, Role role, Team team,
                 String buddyId) {
         this.email = email;
         this.firstname = firstname;
@@ -105,7 +105,7 @@ public class User extends BaseEntity {
         this.photo = photo;
         this.password = password;
         this.role = role;
-        this.teamLeaderId = teamLeaderId;
+        this.team = team;
         this.buddyId = buddyId;
     }
 
@@ -123,7 +123,7 @@ public class User extends BaseEntity {
                 ", photo=" + photo +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", teamLeaderId=" + teamLeaderId +
+                ", team=" + team +
                 ", buddyId=" + buddyId +
 //                ", roles=" + roles +
                 '}';

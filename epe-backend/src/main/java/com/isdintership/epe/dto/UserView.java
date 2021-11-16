@@ -1,15 +1,20 @@
 package com.isdintership.epe.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.isdintership.epe.entity.Assessment;
 import com.isdintership.epe.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.isdintership.epe.util.AssessmentUtil;
 import lombok.Data;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserView {
 
     private String id;
@@ -21,6 +26,7 @@ public class UserView {
     private String phoneNumber;
     private String job;
     private String bio;
+    private String buddyId;
     private String token;
 
     private File imageFile;
@@ -36,7 +42,7 @@ public class UserView {
         userView.setEmploymentDate(user.getEmploymentDate());
         userView.setPhoneNumber(user.getPhoneNumber());
         userView.setJob(user.getJob().getJobTitle());
-        userView.setBio(user.getBio());
+        userView.setBuddyId(user.getBuddyId());
 
         return userView;
     }
