@@ -21,7 +21,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 @RestController
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
-public class    UserController {
+public class UserController {
 
     private final UserService userService;
     private final String origin = "http://localhost:4200";
@@ -44,7 +44,7 @@ public class    UserController {
     @GetMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<Optional<UserView>> getUserById(@PathVariable(name = "id") String id){
+    public ResponseEntity<UserView> getUserById(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 

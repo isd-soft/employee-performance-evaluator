@@ -17,7 +17,7 @@ public interface UserService {
 
     List<UserView> getAllUsers();
 
-    Optional<UserView> getUserById(String id);
+    UserView getUserById(String id);
 
     UserView updateUser(UserView userView, String id);
 

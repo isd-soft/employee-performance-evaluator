@@ -134,10 +134,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Optional<UserView> getUserById(String id) {
+    public UserView getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow( () -> new UserNotFoundException("The user with this id does not exist"));
-        return Optional.ofNullable(UserView.fromUser(user));
+        return UserView.fromUser(user);
     }
 
     @Override
