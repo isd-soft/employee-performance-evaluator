@@ -1,6 +1,6 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
-import com.isdintership.epe.dao.EmailService;
+import com.isdintership.epe.service.EmailService;
 import com.isdintership.epe.entity.User;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

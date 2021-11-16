@@ -1,8 +1,7 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SubordinatesDto;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
@@ -13,7 +12,7 @@ import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.repository.RoleRepository;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
-import com.isdintership.epe.dao.UserService;
+import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +26,7 @@ import java.util.*;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final JobRepository jobRepository;

@@ -1,6 +1,6 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
-import com.isdintership.epe.dao.JobService;
+import com.isdintership.epe.service.JobService;
 import com.isdintership.epe.dto.JobDto;
 import com.isdintership.epe.entity.Job;
 import com.isdintership.epe.repository.JobRepository;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class JobServiceImpl implements JobService {
+class JobServiceImpl implements JobService {
 
     private final JobRepository jobRepository;
 

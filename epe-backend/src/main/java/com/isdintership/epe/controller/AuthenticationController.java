@@ -1,7 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.*;
-import com.isdintership.epe.dao.UserService;
+import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
