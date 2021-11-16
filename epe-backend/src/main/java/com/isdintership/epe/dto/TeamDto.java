@@ -31,13 +31,19 @@ public class TeamDto {
 
         teamDto.setId(team.getId());
         teamDto.setName(team.getName());
-        teamDto.setTeamLeaderId(team.getTeamLeader().getId());
 
-        List<String> membersIds = new ArrayList<>();
-        for (User user : team.getMembers()) {
-            membersIds.add(user.getId());
+
+        if (team.getTeamLeader() != null) {
+            teamDto.setTeamLeaderId(team.getTeamLeader().getId());
         }
-        teamDto.setMembersIds(membersIds);
+
+        if (team.getMembers() != null) {
+            List<String> membersIds = new ArrayList<>();
+            for (User user : team.getMembers()) {
+                membersIds.add(user.getId());
+            }
+            teamDto.setMembersIds(membersIds);
+        }
 
         return teamDto;
 

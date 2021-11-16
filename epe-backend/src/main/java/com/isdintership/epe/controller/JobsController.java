@@ -1,9 +1,8 @@
 package com.isdintership.epe.controller;
 
 
-import com.isdintership.epe.dao.JobService;
+import com.isdintership.epe.service.JobService;
 import com.isdintership.epe.dto.JobDto;
-import com.isdintership.epe.entity.RoleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

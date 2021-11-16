@@ -22,6 +22,12 @@ li,ul{
     display: table;
 }
 
+.display-center {
+    text-align: center;
+    font-size: 45vh;
+    padding-top: 15vh;
+}
+
 .login-header {
     display: inline-block;
     width: 100%;
