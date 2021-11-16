@@ -8,7 +8,6 @@ import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.exception.RoleNotFoundException;
-import com.isdintership.epe.security.jwt.JwtAuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

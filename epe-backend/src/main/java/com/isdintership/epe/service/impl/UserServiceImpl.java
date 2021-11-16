@@ -12,10 +12,7 @@ import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.RoleNotFoundException;
 
-import com.isdintership.epe.repository.AssessmentRepository;
-import com.isdintership.epe.repository.JobRepository;
-import com.isdintership.epe.repository.RoleRepository;
-import com.isdintership.epe.repository.UserRepository;
+import com.isdintership.epe.repository.*;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -192,24 +189,23 @@ class UserServiceImpl implements UserService {
         user.setBirthDate(userView.getBirthDate());
         user.setEmploymentDate(userView.getEmploymentDate());
         user.setPhoneNumber(userView.getPhoneNumber());
-
-
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + userView.getJob() + " not found"));;
         user.setJob(job);
         user.setBio(userView.getBio());
-
         if (userView.getImagePath() != null) {
             Image image = new Image();
-
-        try {
-            image.setImageBytes(encodeImageFromFile(userView.getImageFile()));
-        } catch (IOException e) {
-            e.printStackTrace();
+            imageRepository.deleteById(user.getPhoto().getId());
+            try {
+                //image.setImageBytes(encodeImageFromFile(userView.getImageFile()));
+                image.setImageBytes(encodeImageFromFilePath(userView.getImagePath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            image.setUser(user);
+            user.setPhoto(image);
         }
-        image.setUser(user);
-        user.setPhoto(image);
-
+        System.out.println(user);
         return userView;
     }
 
@@ -299,4 +295,5 @@ class UserServiceImpl implements UserService {
 //        imageRepository.save(image);
 //        return imageEditView;
 //    }
+
 }
