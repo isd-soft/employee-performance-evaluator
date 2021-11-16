@@ -1,16 +1,14 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
-import com.isdintership.epe.dto.LoginRequest;
-import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.AssignedUserDto;
-import com.isdintership.epe.dto.UserView;
+
+import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.*;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
-import com.isdintership.epe.dao.UserService;
+import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,11 +18,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
@@ -132,10 +131,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Optional<UserView> getUserById(String id) {
+    public UserView getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow( () -> new UserNotFoundException("The user with this id does not exist"));
-        return Optional.ofNullable(UserView.fromUser(user));
+        return UserView.fromUser(user);
     }
 
     @Override
@@ -177,11 +176,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<AssignedUserDto> getAssignedUsers(String id) {
+    public List<JobsDto> getJobTitles() {
+        return jobRepository.findAll().stream()
+                .map(JobsDto::fromJob)
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    @Transcational
+    public List<AssignedUserDto> getAssignedUsers(String id) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + " was not found"));
-
         List<User> assignedUsers = userRepository.findByBuddyId(id);
         Optional<Team> team = teamRepository.findByTeamLeaderId(id);
         if (team.isPresent()) {
@@ -191,9 +196,4 @@ public class UserServiceImpl implements UserService {
         List<AssignedUserDto> assignedUserDto = new ArrayList<>();
         assignedUsers.forEach(user -> {
             assignedUserDto.add(AssignedUserDto.fromUserTo(user,
-                    assessmentRepository.findByUserId(user.getId())));
-        });
-
-        return assignedUserDto;
-    }
 }

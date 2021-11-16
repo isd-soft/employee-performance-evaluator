@@ -1,7 +1,7 @@
-package com.isdintership.epe.service_implement;
+package com.isdintership.epe.service.impl;
 
 
-import com.isdintership.epe.dao.TeamService;
+import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
 import com.isdintership.epe.entity.Team;
 import com.isdintership.epe.entity.User;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class TeamServiceImpl implements TeamService {
+class TeamServiceImpl implements TeamService {
 
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;

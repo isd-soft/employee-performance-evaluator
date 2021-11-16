@@ -2,7 +2,7 @@ package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.UserView;
-import com.isdintership.epe.dao.UserService;
+import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 
@@ -18,7 +17,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 @RestController
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
-public class    UserController {
+public class UserController {
 
     private final UserService userService;
     private final String origin = "http://localhost:4200";
@@ -41,7 +40,7 @@ public class    UserController {
     @GetMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<Optional<UserView>> getUserById(@PathVariable(name = "id") String id){
+    public ResponseEntity<UserView> getUserById(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
