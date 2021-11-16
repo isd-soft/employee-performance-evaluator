@@ -21,11 +21,10 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 @RestController
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
-public class    UserController {
+public class UserController {
 
     private final UserService userService;
     private final String origin = "http://localhost:4200";
-
 
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
