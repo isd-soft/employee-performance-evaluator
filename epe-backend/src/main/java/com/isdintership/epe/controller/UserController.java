@@ -1,5 +1,6 @@
 package com.isdintership.epe.controller;
 
+import com.isdintership.epe.dto.AssignedUserDto;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.service.UserService;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
     public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
         return ResponseEntity.ok(userService.createUser(request));
@@ -59,11 +60,11 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
-//    @GetMapping("/subordinates/{id}")
-//    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-//    @CrossOrigin(origins = origin)
-//    public ResponseEntity<List<SubordinatesDto>> getSubordinates(@PathVariable(name = "id") String id) {
-//        return ResponseEntity.ok(userService.getSubordinates(id));
-//    }
+    @GetMapping("/{id}/assignedUsers")
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
+    public ResponseEntity<List<AssignedUserDto>> getAllAssignedUsers(@PathVariable("id") String id) {
+        return ResponseEntity.ok(userService.getAssignedUsers(id));
+    }
 
 }

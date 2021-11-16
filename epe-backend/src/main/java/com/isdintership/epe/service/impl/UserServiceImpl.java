@@ -58,7 +58,7 @@ class UserServiceImpl implements UserService {
         user.setRole(roleUser);
 
         Job jobUser = jobRepository.findByJobTitle(request.getJob()).orElseThrow(() ->
-                        new JobNotFoundException("Job with name " + request.getJob() + " not found"));
+                new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
         log.info("Saving user {}", request.getEmail());
@@ -67,7 +67,7 @@ class UserServiceImpl implements UserService {
         return "Registration successful";
 
     }
-    
+
     @Override
     @Transactional
     public UserView login(LoginRequest signInRequest) {
@@ -133,7 +133,7 @@ class UserServiceImpl implements UserService {
     @Transactional
     public UserView getUserById(String id) {
         User user = userRepository.findById(id)
-                .orElseThrow( () -> new UserNotFoundException("The user with this id does not exist"));
+                .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
         return UserView.fromUser(user);
     }
 
@@ -145,7 +145,7 @@ class UserServiceImpl implements UserService {
 
         if (userView.getBuddyId() != null) {
             userRepository.findById(userView.getBuddyId()).orElseThrow(() ->
-                new UserNotFoundException("Buddy with id " + id + " was not found"));
+                    new UserNotFoundException("Buddy with id " + id + " was not found"));
             user.setBuddyId(userView.getBuddyId());
         }
 
@@ -157,7 +157,8 @@ class UserServiceImpl implements UserService {
         user.setPhoneNumber(userView.getPhoneNumber());
 
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userView.getJob() + " not found"));;
+                new JobNotFoundException("Job with name " + userView.getJob() + " not found"));
+        ;
         user.setJob(job);
         user.setBio(userView.getBio());
 
@@ -183,17 +184,19 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transcational
+    @Transactional
     public List<AssignedUserDto> getAssignedUsers(String id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
+        userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + " was not found"));
+
         List<User> assignedUsers = userRepository.findByBuddyId(id);
         Optional<Team> team = teamRepository.findByTeamLeaderId(id);
-        if (team.isPresent()) {
-            assignedUsers.addAll(team.get().getMembers());
-        }
+        team.ifPresent(value -> assignedUsers.addAll(value.getMembers()));
 
-        List<AssignedUserDto> assignedUserDto = new ArrayList<>();
-        assignedUsers.forEach(user -> {
-            assignedUserDto.add(AssignedUserDto.fromUserTo(user,
+        List<AssignedUserDto> assignedUsersDtos = new ArrayList<>();
+        assignedUsers.forEach(user -> assignedUsersDtos.add(AssignedUserDto.fromUser(user)));
+
+        return assignedUsersDtos;
+    }
+
 }

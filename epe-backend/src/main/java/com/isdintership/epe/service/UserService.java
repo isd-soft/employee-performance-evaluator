@@ -22,6 +22,5 @@ public interface UserService {
 
     List<JobsDto> getJobTitles();
 
-//    List<SubordinatesDto> getSubordinates(String id);
     List<AssignedUserDto> getAssignedUsers(String id);
 }
