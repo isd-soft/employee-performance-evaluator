@@ -6,16 +6,20 @@ import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home-component/home.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
+import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
+import { HomeComponent } from './components/home/home-component/home.component';
+import { TeamsComponent } from './components/teams/team-component/teams.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    SidebarComponent,
+    TeamsComponent
   ],
   imports: [
     BrowserModule,

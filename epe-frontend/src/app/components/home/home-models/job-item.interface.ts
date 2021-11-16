@@ -1,3 +1,3 @@
 export interface JobItem {
-    name: string
+    jobTitle: string
 }

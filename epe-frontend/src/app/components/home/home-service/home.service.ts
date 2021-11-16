@@ -14,12 +14,6 @@ export class HomeService {
 
   url: string = 'api-server/api/auth/';
 
-  jobList: JobItem[] = [
-    {
-      name: 'Java Developer'
-    }
-  ]
-
   constructor(private http: HttpClient) { }
 
   login(user: LoginRequest) {
@@ -33,10 +27,10 @@ export class HomeService {
   }
 
   getJobList() {
-    return this.jobList;
+    return this.http.get(this.url + 'jobs')
   }
 
   errorHandler(error: HttpErrorResponse){
-    return observableThrowError(error.status);
+    return observableThrowError(error);
   }
 }
