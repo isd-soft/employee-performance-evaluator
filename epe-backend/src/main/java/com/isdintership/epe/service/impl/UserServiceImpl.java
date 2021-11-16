@@ -26,11 +26,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.io.*;
 
 import static com.isdintership.epe.entity.Image.encodeImageFromFile;
+import static com.isdintership.epe.entity.Image.encodeImageFromFilePath;
 
 
 @Service
@@ -40,12 +41,11 @@ class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final JobRepository jobRepository;
-    private final AssessmentRepository assessmentRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
-    //private final ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
     @Override
     @Transactional
@@ -92,7 +92,7 @@ class UserServiceImpl implements UserService {
         return "Registration successful";
 
     }
-    
+
     @Override
     @Transactional
     public UserView login(LoginRequest signInRequest) {
@@ -193,12 +193,14 @@ class UserServiceImpl implements UserService {
         user.setEmploymentDate(userView.getEmploymentDate());
         user.setPhoneNumber(userView.getPhoneNumber());
 
+
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + userView.getJob() + " not found"));;
         user.setJob(job);
         user.setBio(userView.getBio());
 
-        Image image = new Image();
+        if (userView.getImagePath() != null) {
+            Image image = new Image();
 
         try {
             image.setImageBytes(encodeImageFromFile(userView.getImageFile()));
@@ -207,15 +209,6 @@ class UserServiceImpl implements UserService {
         }
         image.setUser(user);
         user.setPhoto(image);
-
-        /*Image image = new Image();
-        try {
-            image.setImageBytes(encodeImageFromFilePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        user.setImage(image);*/
 
         return userView;
     }

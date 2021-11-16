@@ -63,14 +63,14 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
-    @PatchMapping("users/updatepassword/{id}")
+    @PatchMapping("password/{id}")
     @RolesAllowed({ROLE_SYSADMIN,ROLE_USER})
     public ResponseEntity<PasswordView> changePassword(@RequestBody PasswordView passwordView,
                                                        @PathVariable(name = "id") String id) {
         return new ResponseEntity<>(userService.changePassword(passwordView,id),HttpStatus.OK);
     }
 
-    @PatchMapping("users/updategroup/{id}")
+    @PatchMapping("group/{id}")
     @RolesAllowed(ROLE_SYSADMIN)
     public ResponseEntity<RoleView> changeGroup(@RequestBody RoleView roleView,
                                                 @PathVariable(name = "id") String id) {
