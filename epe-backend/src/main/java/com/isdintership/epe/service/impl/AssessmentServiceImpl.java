@@ -5,7 +5,6 @@ import com.isdintership.epe.dao.EvaluationFieldService;
 import com.isdintership.epe.dao.EvaluationGroupService;
 import com.isdintership.epe.dto.EvaluationFieldDto;
 import com.isdintership.epe.dto.EvaluationGroupDto;
-import com.isdintership.epe.dto.SubordinatesDto;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.AssessmentNotFoundException;
 import com.isdintership.epe.exception.JobNotFoundException;

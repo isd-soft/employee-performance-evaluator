@@ -158,7 +158,7 @@ class UserServiceImpl implements UserService {
 
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + userView.getJob() + " not found"));
-        ;
+
         user.setJob(job);
         user.setBio(userView.getBio());
 
