@@ -14,7 +14,7 @@ import javax.validation.Valid;
 public class AuthenticationController {
 
     private final UserService userService;
-    private final String origin = "http://localhost:4200";
+    private final String origin = "http://localhost:59565";
 
     @PostMapping("login")
     @CrossOrigin(origins = origin)
