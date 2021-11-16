@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home-component/home.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
-import { LoginComponent } from './temp/login/login-template/login.component';
-import { RegisterComponent } from './temp/register/register-template/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
 
 import { HomeGuard } from './guards/home/home.guard';
@@ -17,14 +15,6 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate: [HomeGuard]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
   },
   {
     path: 'logout',

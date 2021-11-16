@@ -9,14 +9,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home-component/home.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
-import { LoginComponent } from './temp/login/login-template/login.component';
-import { RegisterComponent } from './temp/register/register-template/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    LoginComponent,
     LogoutComponent,
     DashboardComponent,
     HomeComponent
