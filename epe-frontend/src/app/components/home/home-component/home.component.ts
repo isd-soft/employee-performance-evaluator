@@ -32,7 +32,9 @@ export class HomeComponent {
 
     this.loginUser = this.filler.createEmptyLoginUser();
     this.newUser = this.filler.createEmptyNewUser();
-    this.jobList = this.homeService.getJobList();
+    this.homeService.getJobList().subscribe(data => {
+      this.jobList = data as JobItem[];
+    })
    }
 
    requestRegisterPage() {

@@ -33,7 +33,7 @@ export class HomeService {
   }
 
   getJobList() {
-    return this.jobList;
+    return this.http.get(this.url + 'jobs')
   }
 
   errorHandler(error: HttpErrorResponse){
