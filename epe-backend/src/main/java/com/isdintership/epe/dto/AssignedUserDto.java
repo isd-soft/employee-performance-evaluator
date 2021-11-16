@@ -10,28 +10,28 @@ import java.util.stream.Collectors;
 
 @Data
 
-public class SubordinatesDto {
+public class AssignedUserDto {
     private String id;
     private String email;
     private String firstname;
     private String lastname;
     private List<AssessmentDto> personalGoalList;
 
-    public static SubordinatesDto fromUserTo(User user, List<Assessment> assessments) {
-        SubordinatesDto subordinates = new SubordinatesDto();
+    public static AssignedUserDto fromUserTo(User user, List<Assessment> assessments) {
+        AssignedUserDto assignedUser = new AssignedUserDto();
 
-        subordinates.setId(user.getId());
-        subordinates.setEmail(user.getEmail());
-        subordinates.setFirstname(user.getFirstname());
-        subordinates.setLastname(user.getLastname());
+        assignedUser.setId(user.getId());
+        assignedUser.setEmail(user.getEmail());
+        assignedUser.setFirstname(user.getFirstname());
+        assignedUser.setLastname(user.getLastname());
 
         List<AssessmentDto> collect = assessments.stream()
                 .map(AssessmentUtil::toAssessmentDto)
                 .collect(Collectors.toList());
 
-        subordinates.setPersonalGoalList(collect);
+        assignedUser.setPersonalGoalList(collect);
 
-        return subordinates;
+        return assignedUser;
     }
 
 

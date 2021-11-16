@@ -2,16 +2,13 @@ package com.isdintership.epe.service_implement;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.SubordinatesDto;
+import com.isdintership.epe.dto.AssignedUserDto;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
-import com.isdintership.epe.repository.AssessmentRepository;
-import com.isdintership.epe.repository.JobRepository;
-import com.isdintership.epe.repository.RoleRepository;
-import com.isdintership.epe.repository.UserRepository;
+import com.isdintership.epe.repository.*;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
 import com.isdintership.epe.dao.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +27,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
     private final JobRepository jobRepository;
     private final AssessmentRepository assessmentRepository;
     private final RoleRepository roleRepository;
@@ -177,20 +175,25 @@ public class UserServiceImpl implements UserService {
         return ("User with id " + id + " was deleted");
     }
 
-   /* @Override
+    @Override
     @Transactional
-    public List<SubordinatesDto> getSubordinates(String id) {
-        List<User> users = userRepository.findByTeamLeaderIdOrBuddyId(id, id);
-        if (users.isEmpty())
-                throw new UserExistsException("You have no subordinates");
+    public List<AssignedUserDto> getAssignedUsers(String id) {
 
-        List<SubordinatesDto> subordinatesDto = new ArrayList<>();
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " was not found"));
 
-        users.forEach(user -> {
-            subordinatesDto.add(SubordinatesDto.fromUserTo(user,
+        List<User> assignedUsers = userRepository.findByBuddyId(id);
+        Optional<Team> team = teamRepository.findByTeamLeaderId(id);
+        if (team.isPresent()) {
+            assignedUsers.addAll(team.get().getMembers());
+        }
+
+        List<AssignedUserDto> assignedUserDto = new ArrayList<>();
+        assignedUsers.forEach(user -> {
+            assignedUserDto.add(AssignedUserDto.fromUserTo(user,
                     assessmentRepository.findByUserId(user.getId())));
         });
 
-        return subordinatesDto;
-    }*/
+        return assignedUserDto;
+    }
 }
