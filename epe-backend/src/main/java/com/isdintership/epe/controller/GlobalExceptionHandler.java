@@ -3,6 +3,11 @@ package com.isdintership.epe.controller;
 import com.isdintership.epe.dto.ErrorResponse;
 import com.isdintership.epe.exception.*;
 import org.springframework.http.HttpStatus;
+import com.isdintership.epe.exception.AssessmentNotFoundException;
+import com.isdintership.epe.exception.JobNotFoundException;
+import com.isdintership.epe.exception.UserExistsException;
+import com.isdintership.epe.exception.UserNotFoundException;
+import com.isdintership.epe.exception.RoleNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -57,6 +62,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRoleNotFoundException(RoleNotFoundException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
     @ExceptionHandler(SubordinatesNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleSubordinatesNotFoundException(SubordinatesNotFoundException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
@@ -65,6 +76,28 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(TeamNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleTeamNotFoundException(TeamNotFoundException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(InvalidTeamNameException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidTeamNameException(InvalidTeamNameException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(AssessmentTemplateExistsException.class)
+    public ResponseEntity<ErrorResponse> handleAssessmentTemplateExistsException
+            (AssessmentTemplateExistsException e, HttpServletRequest request) {
+
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(AssessmentTemplateNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAssessmentTemplateNotFoundException
+            (AssessmentTemplateNotFoundException e, HttpServletRequest request) {
+
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

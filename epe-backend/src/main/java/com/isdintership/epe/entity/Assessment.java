@@ -17,7 +17,6 @@ import java.util.*;
 public class Assessment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "title")
@@ -49,11 +48,11 @@ public class Assessment extends BaseEntity {
     private LocalDate endDate;
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
+    @JoinColumn(name = "assessment_id")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<EvaluationGroup> evaluationGroups = new ArrayList<>();
 

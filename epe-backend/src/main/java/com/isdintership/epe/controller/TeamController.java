@@ -1,6 +1,6 @@
 package com.isdintership.epe.controller;
 
-import com.isdintership.epe.dao.TeamService;
+import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +20,11 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_SYSADMIN;
 public class TeamController {
 
     private final TeamService teamService;
+    private final String origin = "http://localhost:4200";
 
     @PostMapping(value = "")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<String> createTeam (@RequestBody TeamDto teamView) {
 
         return new ResponseEntity<>(teamService.createTeam(teamView), HttpStatus.CREATED);
@@ -31,18 +33,21 @@ public class TeamController {
 
     @GetMapping(value = "/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<TeamDto> getTeam(@PathVariable(name = "id") String id) {
         return new ResponseEntity<>(teamService.getTeam(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<List<TeamDto>> getAllTeams() {
         return new ResponseEntity<>(teamService.getAllTeams(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<TeamDto> updateTeam(
             @PathVariable(name = "id") String id,
             @RequestBody TeamDto teamDto) {
@@ -52,6 +57,7 @@ public class TeamController {
 
     @DeleteMapping(value = "/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<String> deleteTeam(@PathVariable(name = "id") String id) {
         return new ResponseEntity<>(teamService.deleteTeam(id), HttpStatus.OK);
     }

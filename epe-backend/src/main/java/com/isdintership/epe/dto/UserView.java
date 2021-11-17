@@ -7,6 +7,8 @@ import com.isdintership.epe.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.isdintership.epe.util.AssessmentUtil;
 import lombok.Data;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class UserView {
     private String bio;
     private String buddyId;
     private String token;
+    private String imagePath;
 
     public static UserView fromUser(User user) {
         UserView userView = new UserView();
@@ -38,7 +41,6 @@ public class UserView {
         userView.setPhoneNumber(user.getPhoneNumber());
         userView.setJob(user.getJob().getJobTitle());
         userView.setBuddyId(user.getBuddyId());
-
         return userView;
     }
 }
