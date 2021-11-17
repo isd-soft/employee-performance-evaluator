@@ -25,9 +25,10 @@ public interface UserService {
 
     List<JobsDto> getJobTitles();
 
-//    List<SubordinatesDto> getSubordinates(String id);
     PasswordView changePassword(PasswordView passwordView, String id);
     //    UserView findByEmail(String email);
     RoleView changeGroup(RoleView roleView, String id);
     //ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException;
+
+    List<AssignedUserDto> getAssignedUsers(String id);
 }

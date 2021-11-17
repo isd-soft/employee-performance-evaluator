@@ -1,15 +1,12 @@
 package com.isdintership.epe.service.impl;
 
-import com.isdintership.epe.dto.LoginRequest;
-import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.UserView;
+
 import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
-import com.isdintership.epe.dto.*;
-import com.isdintership.epe.entity.*;
+
 import com.isdintership.epe.exception.RoleNotFoundException;
 
 import com.isdintership.epe.repository.*;
@@ -37,6 +34,7 @@ import static com.isdintership.epe.entity.Image.encodeImageFromFilePath;
 class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
     private final JobRepository jobRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -68,7 +66,7 @@ class UserServiceImpl implements UserService {
         user.setRole(roleUser);
 
         Job jobUser = jobRepository.findByJobTitle(request.getJob()).orElseThrow(() ->
-                        new JobNotFoundException("Job with name " + request.getJob() + " not found"));
+                new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
         File imageSourceFile = new File("epe-backend//userDefaultImage.png");
@@ -167,7 +165,7 @@ class UserServiceImpl implements UserService {
     @Transactional
     public UserView getUserById(String id) {
         User user = userRepository.findById(id)
-                .orElseThrow( () -> new UserNotFoundException("The user with this id does not exist"));
+                .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
         return UserView.fromUser(user);
     }
 
@@ -179,7 +177,7 @@ class UserServiceImpl implements UserService {
 
         if (userView.getBuddyId() != null) {
             userRepository.findById(userView.getBuddyId()).orElseThrow(() ->
-                new UserNotFoundException("Buddy with id " + id + " was not found"));
+                    new UserNotFoundException("Buddy with id " + id + " was not found"));
             user.setBuddyId(userView.getBuddyId());
         }
 
@@ -190,7 +188,8 @@ class UserServiceImpl implements UserService {
         user.setEmploymentDate(userView.getEmploymentDate());
         user.setPhoneNumber(userView.getPhoneNumber());
         Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userView.getJob() + " not found"));;
+                new JobNotFoundException("Job with name " + userView.getJob() + " not found"));
+
         user.setJob(job);
         user.setBio(userView.getBio());
         if (userView.getImagePath() != null) {
@@ -227,22 +226,21 @@ class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
-   /* @Override
+    @Override
     @Transactional
-    public List<SubordinatesDto> getSubordinates(String id) {
-        List<User> users = userRepository.findByTeamLeaderIdOrBuddyId(id, id);
-        if (users.isEmpty())
-                throw new UserExistsException("You have no subordinates");
+    public List<AssignedUserDto> getAssignedUsers(String id) {
+        userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " was not found"));
 
-        List<SubordinatesDto> subordinatesDto = new ArrayList<>();
+        List<User> assignedUsers = userRepository.findByBuddyId(id);
+        Optional<Team> team = teamRepository.findByTeamLeaderId(id);
+        team.ifPresent(value -> assignedUsers.addAll(value.getMembers()));
 
-        users.forEach(user -> {
-            subordinatesDto.add(SubordinatesDto.fromUserTo(user,
-                    assessmentRepository.findByUserId(user.getId())));
-        });
+        List<AssignedUserDto> assignedUsersDtos = new ArrayList<>();
+        assignedUsers.forEach(user -> assignedUsersDtos.add(AssignedUserDto.fromUser(user)));
 
-        return subordinatesDto;
-    }*/
+        return assignedUsersDtos;
+    }
 
 
     @Override
@@ -297,3 +295,5 @@ class UserServiceImpl implements UserService {
 //    }
 
 }
+
+

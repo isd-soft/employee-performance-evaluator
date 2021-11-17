@@ -3,6 +3,7 @@ package com.isdintership.epe.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.File;
@@ -61,9 +62,9 @@ public class User extends BaseEntity {
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
-            mappedBy = "user",
             orphanRemoval = true
     )
+    @JoinColumn(name = "user_id")
     List<Assessment> assessments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
