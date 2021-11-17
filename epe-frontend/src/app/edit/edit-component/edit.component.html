@@ -13,8 +13,8 @@
                 <div class="title">
                     <h1>Update <span>profile!</span></h1>
                 </div>
-                <div class="login-form">
-                    <form>
+                <div *ngIf="updateUser" class="login-form">
+                    <form #updateForm="ngForm">
                         <div class="form-details">
 
                             <label class="form-element">
@@ -29,6 +29,7 @@
                                     type="file"
                                     name="image"
                                     id="image"
+                                    #image="ngModel"
                                     placeholder="Enter your email">
                             </label>
 
@@ -39,6 +40,7 @@
                                     type="email"
                                     name="email"
                                     id="email"
+                                    #email="ngModel"
                                     placeholder="Enter your email">
                                 <div class="input-box-error">
                                     Email is required and must be a valid one !
@@ -54,6 +56,7 @@
                                     type="text"
                                     name="firstname"
                                     id="firstname"
+                                    #firstname="ngModel"
                                     placeholder="Enter your name">
                                 <div class="input-box-error">
                                     Firstname is required and must be between 3 and 20 letters long !
@@ -69,6 +72,7 @@
                                     type="text" 
                                     name="lastname" 
                                     id="lastname"
+                                    #lastname="ngModel"
                                     placeholder="Enter your last name">
                                 <div class="input-box-error">
                                     Lastname is required and must be between 3 and 20 letters long !
@@ -82,6 +86,7 @@
                                     type="date"
                                     name="birthDate" 
                                     id="birthDate"
+                                    #birthDate="birthDate"
                                     placeholder="Enter your birth date">
                                 <div class="input-box-error">
                                     Please pick a valid birth date !
@@ -96,6 +101,7 @@
                                     type="tel" 
                                     name="phone"
                                     id="phone"
+                                    #phone="ngModel"
                                     placeholder="Enter your phone number">
                                 <div class="input-box-error">
                                     Phone number is required !
@@ -108,6 +114,7 @@
                                     title="Please choose your job" 
                                     name="job" 
                                     id="job"
+                                    #job="ngModel"
                                     placeholder="Enter your job">
                                     <option *ngFor="let job of jobList">
                                         {{ job.jobTitle }}
@@ -124,7 +131,8 @@
                                     title="Please insert your employment date"
                                     type="date"
                                     name="employmentDate" 
-                                    id="employmentDate">
+                                    id="employmentDate"
+                                    #employmentDate="ngModel">
                                 <div class="input-box-error">
                                     Please pick a valid employment date !
                                 </div>

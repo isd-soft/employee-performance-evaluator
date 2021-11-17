@@ -18,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
@@ -302,6 +303,31 @@ public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
 
         return finalData;
     }
+
+//    public static MultipartFile decodeImageFromImageBytes(byte[] encodedImage) throws Exception {
+//        byte[] data = Base64.getDecoder().decode(encodedImage);
+//
+//        FileOutputStream fileOutputStream = new FileOutputStream();
+//        fileOutputStream.write(data);
+//
+//        inputStream.close();
+//        fileOutputStream.close();
+//
+//        return new MultiPartFile()
+//    }
+//
+//    public static MultipartFile converter(byte[] data){
+//        String [] charArray = source.split(",");
+//        Base64.Decoder decoder = Base64.getDecoder();
+//        byte[] bytes = new byte[0];
+//        bytes = decoder.decode(charArray[1]);
+//        for (int i=0;i<bytes.length;i++){
+//            if(bytes[i]<0){
+//                bytes[i]+=256;
+//            }
+//        }
+//        return multipartFile(bytes,charArray[0]);
+//    }
 }
 
 
