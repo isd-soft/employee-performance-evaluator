@@ -3,10 +3,10 @@ export interface User{
     firstname: string
     lastname: string
     email: string
-    emailConfirmation : string
     birthDate: Date
     employmentDate: Date
     phoneNumber: string
     job: string
+    bio: string
 
 }

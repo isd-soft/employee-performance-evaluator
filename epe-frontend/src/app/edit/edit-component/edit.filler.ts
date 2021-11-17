@@ -3,41 +3,43 @@ import { Injectable } from "@angular/core";
 import { User } from "../edit-models/user.interface";
 import { UpdateRequest } from "../edit-models/update-request.interface";
 
-@Injectable()
+@Injectable({providedIn : "root"})
 export class EditFiller{
 
 
-    // createRegisterUserFromNewUser(user: User): UpdateRequest {
+    updateUserToEditFromUser(user: User): UpdateRequest {
 
-    //     let datePipe = new DatePipe('en-US');
-    //     let updateUser: UpdateRequest = {
-    //         email: user.email,
-    //         firstname: user.firstname,
-    //         lastname: user.lastname,
-    //         birthDate: datePipe.transform(user.birthDate, 'dd-MM-yyyy') as string,
-    //         employmentDate: datePipe.transform(user.employmentDate, 'dd-MM-yyyy') as string,
-    //         phoneNumber: user.phoneNumber,
-    //         job: user.job,
-    //         bio: user.bio,
-    //         imageFile: user.imageFile
-    //     }
+        let datePipe = new DatePipe('en-US');
+        let updateUser: UpdateRequest = {
+            imageFile: user.imageFile,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            birthDate: datePipe.transform(user.birthDate, 'dd-MM-yyyy') as string,
+            employmentDate: datePipe.transform(user.employmentDate, 'dd-MM-yyyy') as string,
+            phoneNumber: user.phoneNumber,
+            job: user.job,
+            bio: user.bio
+        }
 
-    //     return updateUser;
-    // }
+        return updateUser;
+    }
 
-    // loadUserToEdit(): User {
+    /*loadUserToEdit(): User {
 
-    //     let user: User = {
-    //         email: '',
-    //         firstname: '',
-    //         lastname: '',
-    //         birthDate: new Date(),
-    //         employmentDate: new Date(),
-    //         phoneNumber: '',
-    //         job: '',
-    //     }   
+        let user: User = {
+            imageFile: '',
+            email: '',
+            firstname: '',
+            lastname: '',
+            birthDate: new Date(),
+            employmentDate: new Date(),
+            phoneNumber: '',
+            job: '',
+            bio: ''
+        }   
 
-    //     return user;
-    // }
+        return user;
+    }*/
 
 }
