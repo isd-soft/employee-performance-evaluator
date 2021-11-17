@@ -19,11 +19,8 @@ public class TeamDto {
     @NotNull
     private String name;
 
-    @NotNull
-    private String teamLeaderId;
-
-    @NotNull
-    private List<String> membersIds;
+    private UserView teamLeader;
+    private List<UserView> members;
 
     public static TeamDto fromTeam(Team team) {
 
@@ -32,17 +29,36 @@ public class TeamDto {
         teamDto.setId(team.getId());
         teamDto.setName(team.getName());
 
+        User teamLeader = team.getTeamLeader();
+        List<User> members = team.getMembers();
 
-        if (team.getTeamLeader() != null) {
-            teamDto.setTeamLeaderId(team.getTeamLeader().getId());
+        if (teamLeader != null) {
+            UserView teamLeaderView = new UserView();
+
+            teamLeaderView.setId(teamLeader.getId());
+            teamLeaderView.setFirstname(teamLeader.getFirstname());
+            teamLeaderView.setLastname(teamLeader.getLastname());
+
+            teamDto.setTeamLeader(teamLeaderView);
         }
 
-        if (team.getMembers() != null) {
-            List<String> membersIds = new ArrayList<>();
-            for (User user : team.getMembers()) {
-                membersIds.add(user.getId());
+        if (members != null) {
+
+            List<UserView> membersViews = new ArrayList<>();
+
+            for (User user : members) {
+
+                UserView memberView = new UserView();
+
+                memberView.setId(user.getId());
+                memberView.setFirstname(user.getFirstname());
+                memberView.setLastname(user.getLastname());
+
+                membersViews.add(memberView);
+
             }
-            teamDto.setMembersIds(membersIds);
+
+            teamDto.setMembers(membersViews);
         }
 
         return teamDto;

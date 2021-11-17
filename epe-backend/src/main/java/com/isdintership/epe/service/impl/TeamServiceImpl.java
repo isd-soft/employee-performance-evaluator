@@ -1,6 +1,8 @@
 package com.isdintership.epe.service.impl;
 
 
+import com.isdintership.epe.dto.UserView;
+import com.isdintership.epe.exception.InvalidTeamNameException;
 import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
 import com.isdintership.epe.entity.Team;
@@ -27,38 +29,38 @@ class TeamServiceImpl implements TeamService {
 
     @Override
     @Transactional
-    public String createTeam(TeamDto teamView) {
-        Optional<Team> existingTeam = teamRepository.findByName(teamView.getName());
+    public String createTeam(TeamDto teamDto) {
+        Optional<Team> existingTeam = teamRepository.findByName(teamDto.getName());
         if (existingTeam.isPresent()) {
-                throw new TeamExistException("Team with " + teamView.getName() + " already exists");
+                throw new TeamExistException("Team with " + teamDto.getName() + " already exists");
         }
 
         Team team = new Team();
 
-        if (teamView.getTeamLeaderId() != null) {
-            User teamLeader = userRepository.findById(teamView.getTeamLeaderId()).orElseThrow(
-                    () -> new UserNotFoundException("User with id " + teamView.getTeamLeaderId() + "was not found"));
+        if (teamDto.getTeamLeader() != null) {
+            User teamLeader = userRepository.findById(teamDto.getTeamLeader().getId()).orElseThrow(
+                    () -> new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found"));
             team.setTeamLeader(teamLeader);
         }
 
-        if (teamView.getMembersIds() != null) {
+        if (teamDto.getMembers() != null) {
 
-            List<String> membersIds = teamView.getMembersIds();
+            List<UserView> membersViews = teamDto.getMembers();
             List<User> members = new ArrayList<>();
 
-            for (String memberId : membersIds) {
-                User user = userRepository.findById(memberId).orElseThrow(
-                        () -> new UserNotFoundException("User with id " + memberId + "was not found"));
+            for (UserView memberView : membersViews) {
+                User user = userRepository.findById(memberView.getId()).orElseThrow(
+                        () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
                 members.add(user);
             }
 
             team.setMembers(members);
         }
 
-        team.setName(teamView.getName());
+        team.setName(teamDto.getName());
         teamRepository.save(team);
 
-        return "Team " + teamView.getName() + " was created successfully";
+        return "Team " + teamDto.getName() + " was created successfully";
     }
 
     @Override
@@ -87,34 +89,39 @@ class TeamServiceImpl implements TeamService {
 
     @Override
     @Transactional
-    public TeamDto updateTeam(TeamDto teamView, String id) {
+    public TeamDto updateTeam(TeamDto teamDto, String id) {
 
+        if (teamDto.getName() == null || teamDto.getName().equals("")) {
+            throw new InvalidTeamNameException("Team name cannot be null or empty");
+        }
         Team team = teamRepository.findById(id).orElseThrow(() ->
                 new TeamNotFoundException("Team with id " + id + " was not found"));
 
-        team.setName(teamView.getName());
+        team.setName(teamDto.getName());
 
-        if (teamView.getTeamLeaderId() != null) {
-            User teamLeader = userRepository.findById(teamView.getTeamLeaderId()).orElseThrow(() ->
-                    new UserNotFoundException("Team leader with id " + id + " was not found"));
+        if (teamDto.getTeamLeader() != null) {
+            User teamLeader = userRepository.findById(teamDto.getTeamLeader().getId()).orElseThrow(
+                    () -> new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found"));
             team.setTeamLeader(teamLeader);
+        } else {
+            team.setTeamLeader(null);
         }
 
-        if (teamView.getMembersIds() != null) {
+        if (teamDto.getMembers() != null) {
 
-            List<String> membersIds = teamView.getMembersIds();
+            List<UserView> membersViews = teamDto.getMembers();
             List<User> members = new ArrayList<>();
 
-            for (String memberId : membersIds) {
-                User user = userRepository.findById(memberId).orElseThrow(
-                        () -> new UserNotFoundException("User with id " + memberId + " was not found"));
+            for (UserView memberView : membersViews) {
+                User user = userRepository.findById(memberView.getId()).orElseThrow(
+                        () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
                 members.add(user);
             }
 
             team.setMembers(members);
+        } else {
+            team.setMembers(new ArrayList<>());
         }
-
-
 
         return TeamDto.fromTeam(team);
 
