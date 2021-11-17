@@ -19,6 +19,7 @@ export class JwtService {
 
         if(this.validateDecodedJwtToken(decodedToken)) {
           jwtUser = {
+            id: decodedToken.id,
             issDate: decodedToken.iat,
             expDate: decodedToken.exp,
             firstname: decodedToken.firstname,

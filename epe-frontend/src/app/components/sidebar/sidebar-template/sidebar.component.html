@@ -1,10 +1,18 @@
 <div *ngIf="jwtUser" class="navi">
     <ul>
         <li class="active">
-            <a>
+            <a routerLink="/dashboard"> 
                 <span class="hidden-xs hidden-sm">
                     <img style="height: 35px;" src="../../../../assets/user-icon.png">
                     {{jwtUser.firstname}} {{jwtUser.lastname}}
+                </span>
+            </a>
+        </li>
+        <li class="active">
+            <a routerLink="/edit">
+                <span class="hidden-xs hidden-sm">
+                    <img style="height: 35px;" src="../../../../assets/user-icon.png">
+                    Edit profile
                 </span>
             </a>
         </li>
@@ -32,6 +40,6 @@
         <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Statistics</span></a></li>
         <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calender</span></a></li>
         <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Users</span></a></li>
-        <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Settings</span></a></li>
+        <li><a href=""><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Settings</span></a></li>
     </ul>
 </div>

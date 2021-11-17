@@ -15,7 +15,7 @@ import java.util.List;
 public class AuthenticationController {
 
     private final UserService userService;
-    private final String origin = "http://localhost:64805";
+    private final String origin = "http://localhost:4200";
 
     @PostMapping("login")
     @CrossOrigin(origins = origin)

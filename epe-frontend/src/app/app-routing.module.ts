@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard/dashboard-template/da
 import { HomeGuard } from './guards/home/home.guard';
 import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { EditComponent } from './edit/edit-component/edit.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [DashboardGuard]
+  },
+  {
+    path: "edit",
+    component: EditComponent
   },
   {
     path: '',
