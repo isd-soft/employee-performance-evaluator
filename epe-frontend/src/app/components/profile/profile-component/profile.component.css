@@ -1,5 +1,12 @@
-@import url(//db.onlinewebfonts.com/c/94a2eec4adcebc27646229795f10c68f?family=Foundry+Gridnik);
+@import url('https://fonts.googleapis.com/css2?family=Trocchi&display=swap');
 
+.header-header {
+    padding: 15px;
+    text-align: center;
+    font-family: 'Trocchi', serif;
+    font-weight: bolder;
+    font-size: 25px;
+}
 
 /*Login Signup Page*/
 a:focus,a:hover,a{
@@ -23,8 +30,6 @@ li,ul{
 }
 
 .display-center {
-    font-family: "Foundry Gridnik";
-    font-weight: bolder;
     text-align: center;
     font-size: 45vh;
     padding-top: 15vh;

@@ -2,27 +2,24 @@
     <ul>
         <li class="active">
             <a>
-                <span class="hidden-xs hidden-sm">
-                    <img style="height: 30px;" src="../../../../assets/user-icon.png">
-                    {{jwtUser.firstname}} {{jwtUser.lastname}}
+                <span style="text-align: center;" class="hidden-xs hidden-sm">
+                    <p>
+                        <img style="height: 30px;" src="../../../../assets/user-icon.png">
+                        <span routerLink="/dashboard"> {{jwtUser.firstname}} </span>
+                    </p>
+                    <p routerLink="/logout" style="font-size: 10px;">
+                        &#x3c; Logout &#x3e;
+                    </p>
                 </span>
+                
             </a>
         </li>
     </ul>
 </div>
 <div class="navi">
-    <ul>
-        <li class="active">
-            <a routerLink="/logout">
-                <span class="hidden-xs hidden-sm">
-                    Logout
-                </span>
-            </a>
-        </li>
-    </ul>
     <ul *ngIf="isUser">
         <li class="active">
-            <a routerLink="/logout">
+            <a routerLink="/my-profile">
                 <span class="hidden-xs hidden-sm">
                     My Profile
                 </span>
@@ -30,6 +27,16 @@
         </li>
     </ul>
     <ul *ngIf="isAdmin">
+        <li class="active">
+            <a href="/teams">
+                <i class="fa fa-user-friends" aria-hidden="true">
+
+                </i>
+                <span class="hidden-xs hidden-sm">
+                    Users
+                </span>
+            </a>
+        </li>
         <li class="active">
             <a href="/teams">
                 <i class="fa fa-user-friends" aria-hidden="true">

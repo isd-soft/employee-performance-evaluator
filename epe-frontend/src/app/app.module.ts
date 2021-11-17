@@ -11,6 +11,7 @@ import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
 import { HomeComponent } from './components/home/home-component/home.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
+import { ProfileComponent } from './components/profile/profile-component/profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
     DashboardComponent,
     HomeComponent,
     SidebarComponent,
-    TeamsComponent
+    TeamsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
