@@ -8,6 +8,9 @@ public class EvaluationFieldDto {
     private String id;
     private String title;
     private String comment;
+    private Integer firstScore;
+    private Integer secondScore;
+    private Integer overallScore;
     private String evaluationGroupId;
 
     public static EvaluationFieldDto fromEvaluationField(EvaluationField field){

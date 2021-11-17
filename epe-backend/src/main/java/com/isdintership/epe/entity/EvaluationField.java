@@ -15,7 +15,6 @@ public class EvaluationField extends BaseEntity {
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "evaluation_group_id")
     private EvaluationGroup evaluationGroup;
 
     @Column(name = "first_score")
@@ -52,5 +51,17 @@ public class EvaluationField extends BaseEntity {
         this.secondScore = secondScore;
         this.overallScore = overallScore;
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "EvaluationField{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", firstScore=" + firstScore +
+                ", secondScore=" + secondScore +
+                ", overallScore=" + overallScore +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 }
