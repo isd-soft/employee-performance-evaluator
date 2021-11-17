@@ -10,6 +10,8 @@ import { ProfileComponent } from './components/profile/profile-component/profile
 import { HomeGuard } from './guards/home/home.guard';
 import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
+import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
 
 
 const routes: Routes = [
@@ -30,6 +32,16 @@ const routes: Routes = [
   {
     path: 'teams',
     component: TeamsComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'team-edit',
+    component: TeamEditComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'team-create',
+    component: TeamCreateComponent,
     canActivate: [AdminGuard]
   },
   {

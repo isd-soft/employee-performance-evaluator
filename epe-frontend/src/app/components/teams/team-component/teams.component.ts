@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserView } from './../teams-model/user-view.interface';
 import { TeamView } from './../teams-model/team-view.interface';
 import { TeamsService } from './../teams-service/teams.service';
@@ -12,22 +13,19 @@ import { TeamShow } from '../teams-model/team-show.interface';
 export class TeamsComponent {
 
   teams?: TeamView[];
-  users?: UserView[];
 
-  constructor(private teamService: TeamsService) {
+  constructor(private teamService: TeamsService,
+    private router: Router) {
 
     this.refreshTeams();
-    this.refreshUsers();
    }
-
 
    refreshTeams() {
     this.teamService.getTeams().subscribe(data => {
       this.teams = data as TeamView[] });
    }
 
-   refreshUsers() {
-    this.teamService.getUsers().subscribe(data => {
-      this.users = data as UserView[] });
+   createNewTeam() {
+    this.router.navigate(['/team-create']);
    }
 }

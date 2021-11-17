@@ -12,6 +12,8 @@ import { DashboardComponent } from './components/dashboard/dashboard-template/da
 import { HomeComponent } from './components/home/home-component/home.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { ProfileComponent } from './components/profile/profile-component/profile.component';
+import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
+import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ProfileComponent } from './components/profile/profile-component/profile
     HomeComponent,
     SidebarComponent,
     TeamsComponent,
-    ProfileComponent
+    ProfileComponent,
+    TeamEditComponent,
+    TeamCreateComponent
   ],
   imports: [
     BrowserModule,
