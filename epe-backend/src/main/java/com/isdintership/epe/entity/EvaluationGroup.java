@@ -51,4 +51,14 @@ public class EvaluationGroup extends BaseEntity {
         this.title = title;
         this.evaluationFields = evaluationFields;
     }
+
+    @Override
+    public String toString() {
+        return "EvaluationGroup{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", evaluationFields=" + evaluationFields +
+                ", overallScore=" + overallScore +
+                '}';
+    }
 }

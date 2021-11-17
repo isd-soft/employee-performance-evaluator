@@ -69,10 +69,26 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(AssessmentTemplateExistsException.class)
+    public ResponseEntity<ErrorResponse> handleAssessmentTemplateExistsException
+            (AssessmentTemplateExistsException e, HttpServletRequest request) {
+
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(AssessmentTemplateNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAssessmentTemplateNotFoundException
+            (AssessmentTemplateNotFoundException e, HttpServletRequest request) {
+
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+   /* @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.internalServerError().body(errorResponse);
-    }
+    }*/
 
 }
