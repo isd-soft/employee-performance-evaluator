@@ -1,6 +1,8 @@
+import { ShortUser } from './short-user.interface';
+
 export interface TeamView {
     id: string
     name: string
-    teamLeaderId: string
-    membersIds: string[]
+    teamLeader: ShortUser
+    members: ShortUser[]
 }

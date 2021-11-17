@@ -1,7 +1,7 @@
 import { UserView } from './../teams-model/user-view.interface';
 import { TeamView } from './../teams-model/team-view.interface';
 import { TeamsService } from './../teams-service/teams.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TeamShow } from '../teams-model/team-show.interface';
 
 @Component({
@@ -13,41 +13,21 @@ export class TeamsComponent {
 
   teams?: TeamView[];
   users?: UserView[];
-  teamShow?: TeamShow[] = [];
 
   constructor(private teamService: TeamsService) {
-    
-    this.teamService.getTeams().subscribe(data => {
-      this.teams = data as TeamView[] });
 
-    this.teamService.getUsers().subscribe(data => {
-      this.users = data as UserView[] });
-
-    this.fillTeamShow();
-
-    console.log(this.teamShow)
+    this.refreshTeams();
+    this.refreshUsers();
    }
 
-   fillTeamShow() {
 
-    if(this.teams && this.users)
-    this.teams.forEach((team: TeamView) => {
+   refreshTeams() {
+    this.teamService.getTeams().subscribe(data => {
+      this.teams = data as TeamView[] });
+   }
 
-      let temp_id = team.id;
-      let temp_name = team.name;
-      let teamLeaderId = team.teamLeaderId
-      let temp_teamLeaderName = this.users?.find(x => x.id == teamLeaderId)?.firstname + ' ' + 
-        this.users?.find(x => x.id == teamLeaderId)?.lastname;
-
-      let temp_team: TeamShow = {
-        id: temp_id,
-        name: temp_name,
-        teamLeaderName: temp_teamLeaderName,
-        membersNames: []
-      }
-
-      this.teamShow?.push(temp_team);
-      
-    });
+   refreshUsers() {
+    this.teamService.getUsers().subscribe(data => {
+      this.users = data as UserView[] });
    }
 }

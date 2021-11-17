@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'teams',
     component: TeamsComponent,
-    canActivate: [DashboardGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'my-profile',
