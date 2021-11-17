@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
@@ -11,6 +10,8 @@ import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
 import { HomeComponent } from './components/home/home-component/home.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
+import { UsersView } from './components/usersview/usersview-component/users-view.component';
+import { UserComponent } from './components/user/user-component/user.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,15 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
     DashboardComponent,
     HomeComponent,
     SidebarComponent,
-    TeamsComponent
+    TeamsComponent,
+    UsersView,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

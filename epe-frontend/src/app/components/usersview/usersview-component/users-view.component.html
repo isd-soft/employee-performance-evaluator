@@ -1,0 +1,40 @@
+<body class="home">
+  <div class="container-fluid display-table">
+    <div class="row display-table-row">
+      <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-md-10 col-sm-11 display-table-cell v-align">
+        <div class="mijloc">
+          <table class="styled-table">
+            <thead style="">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Job Position</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="active-row" (click)="$event">
+              <td>Dom</td>
+              <td>6000</td>
+              <td>pee</td>
+              <td>6000</td>
+              <td><button class="btn-group">View</button></td>
+            </tr>
+            <tr class="active-row">
+              <td>Melissa</td>
+              <td>5150</td>
+              <td>Dom</td>
+              <td>6000</td>
+              <td><button class="btn-group">View</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
