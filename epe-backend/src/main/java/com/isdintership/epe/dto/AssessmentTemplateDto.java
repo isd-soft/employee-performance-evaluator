@@ -1,9 +1,11 @@
 package com.isdintership.epe.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.isdintership.epe.entity.Assessment;
 import com.isdintership.epe.entity.StatusEnum;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -31,6 +33,28 @@ public class AssessmentTemplateDto {
         this.status = status;
         this.isTemplate = isTemplate;
         this.evaluationGroupDto = evaluationGroupDto;
+    }
+
+    public static AssessmentTemplateDto fromAssessment(Assessment assessment) {
+
+        AssessmentTemplateDto assessmentTemplateDto = new AssessmentTemplateDto();
+
+        assessmentTemplateDto.setId(assessment.getId());
+        assessmentTemplateDto.setTitle(assessment.getTitle());
+        assessmentTemplateDto.setDescription(assessment.getDescription());
+        assessmentTemplateDto.setJobTitle(assessment.getJob().getJobTitle());
+        assessmentTemplateDto.setStatus(assessment.getStatus());
+        assessmentTemplateDto.setIsTemplate(assessment.getIsTemplate());
+
+        List<EvaluationGroupDto> evaluationGroupDtos = new ArrayList<>();
+        assessment.getEvaluationGroups()
+                  .forEach(evaluationGroup ->
+                      evaluationGroupDtos.add(EvaluationGroupDto.fromEvaluationGroup(evaluationGroup)));
+
+        assessmentTemplateDto.setEvaluationGroupDto(evaluationGroupDtos);
+
+        return assessmentTemplateDto;
+
     }
 
 }

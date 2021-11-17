@@ -52,4 +52,16 @@ public class EvaluationField extends BaseEntity {
         this.overallScore = overallScore;
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "EvaluationField{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", firstScore=" + firstScore +
+                ", secondScore=" + secondScore +
+                ", overallScore=" + overallScore +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }
