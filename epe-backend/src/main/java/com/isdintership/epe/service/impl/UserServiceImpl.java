@@ -70,7 +70,7 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserView login(LoginRequest signInRequest) {
+    public UserDto login(LoginRequest signInRequest) {
         String email = signInRequest.getEmail();
         String password = signInRequest.getPassword();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
@@ -80,14 +80,14 @@ class UserServiceImpl implements UserService {
 
         String token = jwtTokenProvider.createToken(user);
 
-        UserView response = UserView.fromUser(user);
+        UserDto response = UserDto.fromUser(user);
         response.setToken(token);
 
         return response;
     }
 
     @Override
-    public UserView createUser(RegistrationRequest request) {
+    public UserDto createUser(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail.isPresent()) {
             throw new UserExistsException("User with email " + request.getEmail()
@@ -114,55 +114,55 @@ class UserServiceImpl implements UserService {
 
         log.info("Saving user {}", request.getEmail());
 
-        return (UserView.fromUser(userRepository.save(user)));
+        return (UserDto.fromUser(userRepository.save(user)));
     }
 
     @Override
     @Transactional
-    public List<UserView> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
-        List<UserView> userViews = new ArrayList<>();
+        List<UserDto> userDtos = new ArrayList<>();
         for (User user : users) {
-            userViews.add(UserView.fromUser(user));
+            userDtos.add(UserDto.fromUser(user));
         }
 
-        return userViews;
+        return userDtos;
     }
 
     @Override
     @Transactional
-    public UserView getUserById(String id) {
+    public UserDto getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
-        return UserView.fromUser(user);
+        return UserDto.fromUser(user);
     }
 
     @Override
     @Transactional
-    public UserView updateUser(UserView userView, String id) {
+    public UserDto updateUser(UserDto userDto, String id) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
-        if (userView.getBuddyId() != null) {
-            userRepository.findById(userView.getBuddyId()).orElseThrow(() ->
+        if (userDto.getBuddyId() != null) {
+            userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
                     new UserNotFoundException("Buddy with id " + id + " was not found"));
-            user.setBuddyId(userView.getBuddyId());
+            user.setBuddyId(userDto.getBuddyId());
         }
 
-        user.setEmail(userView.getEmail());
-        user.setFirstname(userView.getFirstname());
-        user.setLastname(userView.getLastname());
-        user.setBirthDate(userView.getBirthDate());
-        user.setEmploymentDate(userView.getEmploymentDate());
-        user.setPhoneNumber(userView.getPhoneNumber());
+        user.setEmail(userDto.getEmail());
+        user.setFirstname(userDto.getFirstname());
+        user.setLastname(userDto.getLastname());
+        user.setBirthDate(userDto.getBirthDate());
+        user.setEmploymentDate(userDto.getEmploymentDate());
+        user.setPhoneNumber(userDto.getPhoneNumber());
 
-        Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userView.getJob() + " not found"));
+        Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
+                new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
 
         user.setJob(job);
-        user.setBio(userView.getBio());
+        user.setBio(userDto.getBio());
 
-        return userView;
+        return userDto;
     }
 
     @Override

@@ -14,10 +14,14 @@ public class EvaluationFieldDto {
     private String evaluationGroupId;
 
     public static EvaluationFieldDto fromEvaluationField(EvaluationField field){
+
         EvaluationFieldDto fieldDto = new EvaluationFieldDto();
         fieldDto.setId(field.getId());
         fieldDto.setTitle(field.getTitle());
         fieldDto.setComment(field.getComment());
+        fieldDto.setFirstScore(fieldDto.getFirstScore());
+        fieldDto.setSecondScore(fieldDto.getSecondScore());
+        fieldDto.setOverallScore(fieldDto.getOverallScore());
         fieldDto.setEvaluationGroupId(field.getEvaluationGroup().getId());
 
         return fieldDto;

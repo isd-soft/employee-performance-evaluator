@@ -72,18 +72,27 @@ export class TeamEditComponent {
 
   updateTeam() {
 
-    
     let temp: CreateTeamRequest = {
       name : this.TeamName || '',
       teamLeader: {id: this.TeamLeaderID || '' },
       teamMembers: this.TeamMembersID
     }
 
-    console.log(temp);
-
     this.teamService.updateTeam(this.teamID || '', temp).subscribe(data => {
       this.router.navigate(['/teams']);
     }, error => {
+      this.errorMessage = error.error.title;
+    });
+  }
+
+  deleteTeam() {
+
+    this.teamService.deleteTeam(this.teamID || '').subscribe(data => {
+      this.router.navigate(['/teams']);
+    }, error => {
+      if(error.status == 200) {
+        this.router.navigate(['/teams']);
+       } 
       this.errorMessage = error.error.title;
     });
   }

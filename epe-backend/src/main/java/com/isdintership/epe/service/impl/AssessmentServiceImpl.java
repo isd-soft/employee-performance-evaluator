@@ -1,235 +1,281 @@
 package com.isdintership.epe.service.impl;
-
-
-import com.isdintership.epe.dao.EvaluationFieldService;
-import com.isdintership.epe.dao.EvaluationGroupService;
 import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
-import com.isdintership.epe.exception.AssessmentNotFoundException;
-import com.isdintership.epe.exception.JobNotFoundException;
+import com.isdintership.epe.exception.*;
 import com.isdintership.epe.repository.*;
-import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.AssessmentService;
 
-import com.isdintership.epe.util.AssessmentUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class AssessmentServiceImpl implements AssessmentService, EvaluationGroupService, EvaluationFieldService {
+public class AssessmentServiceImpl implements AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
-    private final EvaluationGroupRepository evaluationGroupRepository;
-    private final EvaluationFieldRepository evaluationFieldRepository;
 
     @Override
     @Transactional
-    public String createAssessment(AssessmentDto assessmentDto) {
-        Assessment assessment = getAssessmentFromDtoAssessment(assessmentDto);
+    public AssessmentDto startAssessment(String userId, AssessmentTemplateDto assessmentTemplateDto) {
+
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new UserNotFoundException("User with id " + userId + " was not found"));
+
+        String assessmentTemplateId = assessmentTemplateDto.getId();
+
+        Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(assessmentTemplateId, true)
+                .orElseThrow(() ->
+                new AssessmentTemplateNotFoundException
+                        ("Assessment template with id " + assessmentTemplateId + " was not found"));
+
+        Optional<Assessment> existingAssessment = assessmentRepository.findByTitleAndUser
+                (assessmentTemplate.getTitle(), user);
+
+        if ((existingAssessment.isPresent()) && (existingAssessment.get().getStatus() != StatusEnum.FINISHED)) {
+            throw new AssessmentExistsException
+                    ("Assessment " + assessmentTemplate.getTitle() + " already assigned to "
+                     + "user " + user.getFirstname() + " " + user.getLastname() + " and is still unfinished");
+        }
+
+        if (user.getJob() != assessmentTemplate.getJob()) {
+            throw new BadCredentialsException
+                    ("Job position " + assessmentTemplate.getJob().getJobTitle() +
+                     " from assessment template doesn't correspond to user job position " +
+                     user.getJob().getJobTitle());
+        }
+
+        Assessment assessment = new Assessment();
+
+        assessment.setUser(user);
+
+        assessment.setTitle(assessmentTemplate.getTitle());
+        assessment.setDescription(assessmentTemplate.getDescription());
+        assessment.setJob(assessmentTemplate.getJob());
         assessment.setStatus(StatusEnum.FIRST_PHASE);
+        assessment.setIsTemplate(false);
+        assessment.setStartDate(LocalDateTime.now());
+
+        List<EvaluationGroup> evaluationGroups = new ArrayList<>();
+
+        for (EvaluationGroup templateGroup  : assessmentTemplate.getEvaluationGroups()) {
+
+            EvaluationGroup group = new EvaluationGroup();
+            group.setAssessment(assessment);
+            group.setTitle(templateGroup.getTitle());
+
+            List<EvaluationField> evaluationFields = new ArrayList<>();
+
+            for (EvaluationField templateField : templateGroup.getEvaluationFields()) {
+
+                EvaluationField field = new EvaluationField();
+
+                field.setEvaluationGroup(group);
+                field.setTitle(templateField.getTitle());
+                field.setComment(templateField.getComment());
+
+                evaluationFields.add(field);
+
+            }
+            group.setEvaluationFields(evaluationFields);
+
+            evaluationGroups.add(group);
+        }
+
+        assessment.setEvaluationGroups(evaluationGroups);
+
         assessmentRepository.save(assessment);
-        return "Assessment created successfully";
+
+        return AssessmentDto.fromAssessment(assessment);
+    }
+
+    @Override
+    @Transactional
+    public AssessmentDto getAssessment(String id) {
+
+        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
+                new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
+
+        return AssessmentDto.fromAssessment(assessment);
+    }
+
+    @Override
+    @Transactional
+    public List<AssessmentDto> getAllAssessmentsByUserId(String id) {
+
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " not found"));
+
+        List<AssessmentDto> assessmentDtos = new ArrayList<>();
+        assessmentRepository.findByUser(user)
+                            .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
+
+        return assessmentDtos;
     }
 
     @Override
     @Transactional
     public List<AssessmentDto> getAllAssessments() {
-        var assessments = assessmentRepository.findAll();
-        return assessments.stream()
-                .map(AssessmentUtil::toAssessmentDto)
-                .collect(Collectors.toList());
+
+        List<AssessmentDto> assessmentDtos = new ArrayList<>();
+        assessmentRepository.findAllByIsTemplate(false)
+                            .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
+
+        return assessmentDtos;
     }
+
+    /*@Override
+    @Transactional
+    public AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto) {
+
+        return null;
+
+    }*/
 
     @Override
     @Transactional
-    public String deleteAssessment(String id) {
-        assessmentRepository.findById(id)
-                .orElseThrow(AssessmentNotFoundException::new);
-        assessmentRepository.removeById(id);
-        return ("Assessment with id " + id + " was deleted");
-    }
+    public AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto) {
 
-    @Override
-    @Transactional
-    public String updateAssessment(AssessmentDto assessmentDto) {
-        String assessmentId = assessmentDto.getId();
-        assessmentRepository.findById(assessmentId)
-                .ifPresentOrElse(
-                        assessment -> assessmentRepository.removeById(assessmentId),
-                        AssessmentNotFoundException::new);
-
-        Assessment newAssessment = getAssessmentFromDtoAssessment(assessmentDto);
-        assessmentRepository.save(newAssessment);
-        return "Assessment successfully changed";
-    }
-
-    private Assessment getAssessmentFromDtoAssessment(AssessmentDto assessmentDto) {
+        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
+                new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
 
         Job job = jobRepository.findByJobTitle(assessmentDto.getJobPosition()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + assessmentDto.getJobPosition() + " was not found"));
+                new JobNotFoundException("Job with id " + assessmentDto.getJobPosition() + " was not found"));
 
-        Assessment assessment = new Assessment();
+        User user = userRepository.findById(assessmentDto.getUserId()).orElseThrow(() ->
+                new UserNotFoundException("User with id " + assessmentDto.getUserId() + " was not found"));
+
+        if (!assessmentDto.getTitle().equals(assessment.getTitle())) {
+
+            Optional<Assessment> existingAssessment =
+                    assessmentRepository.findByTitleAndUser(assessment.getTitle(), user);
+
+            if ((existingAssessment.isPresent()) && (existingAssessment.get().getStatus() != StatusEnum.FINISHED)) {
+                throw new AssessmentExistsException
+                        ("User " + user.getFirstname() + " " + user.getLastname() + " already has unfinished assessment "
+                         + "with title " + assessmentDto.getTitle());
+            }
+        }
 
         assessment.setTitle(assessmentDto.getTitle());
         assessment.setDescription(assessmentDto.getDescription());
         assessment.setJob(job);
-        assessment.setIsTemplate(assessmentDto.getIsTemplate());
-
-        List<EvaluationGroup> evaluationGroups = new ArrayList<>();
-
-        for (EvaluationGroupDto groupDto : assessmentDto.getEvaluationGroupDto()) {
-
-            EvaluationGroup group = new EvaluationGroup();
-            group.setTitle(groupDto.getTitle());
-
-            if (!assessment.getIsTemplate()) {
-                group.setOverallScore(groupDto.getOverallScore());
-            }
-
-            List<EvaluationField> evaluationFields = new ArrayList<>();
-
-            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFieldDtos()) {
-
-                EvaluationField field = new EvaluationField();
-
-                field.setTitle(fieldDto.getTitle());
-                field.setComment(fieldDto.getComment());
-
-                if (!assessment.getIsTemplate()) {
-                    field.setFirstScore(fieldDto.getFirstScore());
-                    field.setSecondScore(fieldDto.getSecondScore());
-                    field.setOverallScore(fieldDto.getOverallScore());
-                }
-
-                evaluationFields.add(field);
-
-            }
-
-            group.setEvaluationFields(evaluationFields);
-
-            evaluationGroups.add(group);
-
-        }
-
-        assessment.setEvaluationGroups(evaluationGroups);
-
-        if (!assessment.getIsTemplate()) {
-
-            User user = userRepository.findById(assessmentDto.getUserId()).orElseThrow(() ->
-                    new UserNotFoundException("User with id " + assessmentDto.getUserId() + " was not found"));
-            assessment.setUser(user);
-
-            assessment.setOverallScore(assessmentDto.getOverallScore());
-
-            List<PersonalGoal> personalGoals = new ArrayList<>();
-            for (PersonalGoalDto personalGoalDto : assessmentDto.getPersonalGoalList()) {
-
-                PersonalGoal personalGoal = new PersonalGoal();
-                personalGoal.setContext(personalGoalDto.getContext());
-
-                personalGoals.add(personalGoal);
-            }
-            assessment.setPersonalGoals(personalGoals);
-
-            List<DepartmentGoal> departmentGoals = new ArrayList<>();
-            for (DepartmentGoalDto departmentGoalDto : assessmentDto.getDepartmentGoalList()) {
-
-                DepartmentGoal departmentGoal = new DepartmentGoal();
-                departmentGoal.setContext(departmentGoal.getContext());
-
-                departmentGoals.add(departmentGoal);
-            }
-            assessment.setDepartmentGoals(departmentGoals);
-
-            List<Feedback> feedbacks = new ArrayList<>();
-            for (FeedbackDto feedbackDto : assessmentDto.getFeedback()) {
-
-                Feedback feedback = new Feedback();
-                feedback.setAuthorId(feedback.getAuthorId());
-                feedback.setContext(feedback.getContext());
-
-                feedbacks.add(feedback);
-            }
-            assessment.setFeedbacks(feedbacks);
-
-        }
-
-        return assessment;
-
-        /*Assessment assessment = new Assessment();
-        assessment.setTitle(assessmentDto.getTitle());
-        assessment.setDescription(assessmentDto.getDescription());
-
-        String jobTitle = assessmentDto.getJobPosition();
-        Job job = jobRepository.findByJobTitle(jobTitle)
-                .orElseThrow(JobNotFoundException::new);
-        assessment.setJob(job);// find job
-
-        System.out.println(assessmentDto.getEvaluationGroupDto());
-
-        assessment.setStatus(StatusEnum.FIRST_PHASE);
         assessment.setOverallScore(assessmentDto.getOverallScore());
+        assessment.setStatus(assessmentDto.getStatus());
         assessment.setIsTemplate(assessmentDto.getIsTemplate());
         assessment.setStartDate(assessmentDto.getStartDate());
-        assessment.setEndDate(assessmentDto.getFinishDate());
-        String userId = assessmentDto.getUserId();
-        User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
+        assessment.setEndDate(assessmentDto.getEndDate());
         assessment.setUser(user);
 
-        return assessment;*/
+        assessment.getEvaluationGroups().clear();
+
+        if (assessmentDto.getEvaluationGroupDtos() != null) {
+            for (EvaluationGroupDto evaluationGroupDto  : assessmentDto.getEvaluationGroupDtos()) {
+
+                EvaluationGroup group = new EvaluationGroup();
+                group.setAssessment(assessment);
+                group.setTitle(evaluationGroupDto.getTitle());
+                group.setOverallScore(evaluationGroupDto.getOverallScore());
+
+                for (EvaluationFieldDto evaluationFieldDto : evaluationGroupDto.getEvaluationFieldDtos()) {
+
+                    EvaluationField field = new EvaluationField();
+
+                    field.setEvaluationGroup(group);
+                    field.setTitle(evaluationFieldDto.getTitle());
+                    field.setComment(evaluationFieldDto.getComment());
+                    field.setFirstScore(evaluationFieldDto.getFirstScore());
+                    field.setSecondScore(evaluationFieldDto.getSecondScore());
+                    field.setOverallScore(evaluationFieldDto.getOverallScore());
+
+                    group.getEvaluationFields().add(field);
+                }
+
+                assessment.getEvaluationGroups().add(group);
+            }
+        }
+
+
+        assessment.getPersonalGoals().clear();
+
+        if (assessmentDto.getPersonalGoalDtos() != null) {
+            for (PersonalGoalDto personalGoalDto : assessmentDto.getPersonalGoalDtos()) {
+
+                PersonalGoal personalGoal = new PersonalGoal();
+
+                personalGoal.setAssessment(assessment);
+                personalGoal.setContext(personalGoalDto.getContext());
+
+                assessment.getPersonalGoals().add(personalGoal);
+
+            }
+        }
+
+        assessment.getDepartmentGoals().clear();
+
+        if (assessmentDto.getDepartmentGoalDtos() != null) {
+            for (DepartmentGoalDto departmentGoalDto : assessmentDto.getDepartmentGoalDtos()) {
+
+                DepartmentGoal departmentGoal = new DepartmentGoal();
+
+                departmentGoal.setAssessment(assessment);
+                departmentGoal.setContext(departmentGoalDto.getContext());
+
+                assessment.getDepartmentGoals().add(departmentGoal);
+
+            }
+        }
+
+        assessment.getFeedbacks().clear();
+
+        if (assessmentDto.getFeedbackDtos() != null) {
+
+            for(FeedbackDto feedbackDto : assessmentDto.getFeedbackDtos()) {
+
+                Feedback feedback = new Feedback();
+
+                feedback.setAssessment(assessment);
+
+                userRepository.findById(feedbackDto.getAuthorId()).orElseThrow(() ->
+                        new UserNotFoundException("Comment author with id " + feedbackDto.getAuthorId() + " was not found"));
+
+                feedback.setAuthorId(feedbackDto.getAuthorId());
+                feedback.setContext(feedbackDto.getContext());
+
+                assessment.getFeedbacks().add(feedback);
+
+            }
+
+        }
+
+
+
+        return AssessmentDto.fromAssessment(assessment);
+
     }
 
     @Override
     @Transactional
-    public AssessmentDto getAssessment(String userId) {
-        var assessment = assessmentRepository.findById(userId)
-                .orElseThrow(() -> new AssessmentNotFoundException("The assessment with this id was not found"));
+    public AssessmentDto deleteAssessment(String id) {
 
-        return AssessmentUtil.toAssessmentDto(assessment);
+        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
+                new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
+
+        assessmentRepository.removeById(id);
+
+        return AssessmentDto.fromAssessment(assessment);
     }
 
-
-    @Override
-    @Transactional
-    public List<EvaluationGroupDto> getEvaluationGroupsByAssessmentId(String id) {
-        var evaluationGroup = evaluationGroupRepository.findEvaluationGroupByAssessmentId(id);
-        if (evaluationGroup.isEmpty())
-            throw new AssessmentNotFoundException("The Evaluation Group with this id was not found");
-
-        List<EvaluationGroupDto> evaluationGroupDtos = new ArrayList<>();
-
-        evaluationGroup.forEach(group -> {
-            evaluationGroupDtos.add(EvaluationGroupDto.fromEvaluationGroup(group));
-        });
-
-        return evaluationGroupDtos;
-    }
-
-    @Override
-    @Transactional
-    public List<EvaluationFieldDto> getEvaluationFieldsByEvaluationGroupId(String id) {
-        var evaluationFields = evaluationFieldRepository.findEvaluationFieldsByEvaluationGroupId(id);
-        if (evaluationFields.isEmpty())
-            throw new AssessmentNotFoundException("The Evaluation Group with this id was not found");
-
-        List<EvaluationFieldDto> evaluationFieldDtos = new ArrayList<>();
-
-        evaluationFields.forEach(field -> {
-            evaluationFieldDtos.add(EvaluationFieldDto.fromEvaluationField(field));
-        });
-
-        return evaluationFieldDtos;
-    }
 }

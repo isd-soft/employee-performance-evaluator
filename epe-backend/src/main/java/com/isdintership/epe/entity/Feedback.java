@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Feedback extends BaseEntity {
 
     @Column(name = "author_id", nullable = false)
-    private Long authorId;
+    private String authorId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assessment_id")
@@ -34,7 +34,7 @@ public class Feedback extends BaseEntity {
     public Feedback() {
     }
 
-    public Feedback(Long authorId, Assessment assessment, String context) {
+    public Feedback(String authorId, Assessment assessment, String context) {
         this.authorId = authorId;
         this.assessment = assessment;
         this.context = context;
