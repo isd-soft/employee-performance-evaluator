@@ -18,7 +18,7 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private ExceptionHandlerFilter exceptionHandlerFilter;
+    private final ExceptionHandlerFilter exceptionHandlerFilter;
 
     private static final String ADMIN_ENDPOINT = "/api/admin/**";
     private static final String AUTHENTICATION_ENDPOINT = "/api/auth/**";
