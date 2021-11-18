@@ -1,0 +1,68 @@
+<div class="container-fluid display-table">
+    <div class="row display-table-row">
+        <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-md-10 col-sm-11 display-table-cell v-align">
+            <div *ngIf="getTeam" class="content-block">
+                <div class="title">
+                    <h1>Edit <span> team ! </span></h1>
+                </div>
+                <div class="new-team-form">
+                    <form #editTeamForm="ngForm">
+                        <div class="form-details">
+                            <label class="form-element">
+                                <span class="form-label">
+                                    Team Name
+                                </span>
+                                <input
+                                    required
+                                    type="text"
+                                    name="teamname"
+                                    #teamname="ngModel" 
+                                    id="teamname"
+                                    [(ngModel)]="TeamName">
+                            </label>
+                            <label class="form-element">
+                                <span class="form-label">
+                                    Team Leader
+                                </span>
+                                <select 
+                                    #selectElem 
+                                    (change)="setTeamLeader(selectElem.value)">
+                                    <option
+                                        disabled 
+                                        selected>
+                                        {{TeamLeaderName}}
+                                    </option>
+                                    <option *ngFor="let user of users" [value]="user.id">
+                                        {{user.firstname}} {{user.lastname}} 
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                        <button 
+                            type="submit" 
+                            [disabled]="editTeamForm.form.invalid" 
+                            class="form-btn"
+                            (click)="updateTeam()">
+                            Save Changes
+                        </button>
+                        <button 
+                        type="submit" 
+                        [disabled]="editTeamForm.form.invalid" 
+                        class="form-btn"
+                        (click)="deleteTeam()">
+                        Delete Team
+                    </button>
+                    </form>
+                </div>
+                <div class="error-message">
+                    <span *ngIf="errorMessage">
+                        {{errorMessage}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

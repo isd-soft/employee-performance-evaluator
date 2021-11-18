@@ -13,7 +13,7 @@ export class AdminGuardService {
   constructor(private jwtService: JwtService,
               private router: Router) {
     
-    this.loggedUser = jwtService.getJwtUser();
+    this.loggedUser = this.jwtService.getJwtUser();
   }
 
   isAdmin(): boolean {

@@ -1,4 +1,81 @@
-/*Main CSS*/
+@import url('https://fonts.googleapis.com/css2?family=Trocchi&display=swap');
+
+.content-block {
+    background: #ffffff none repeat scroll 0 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    display: inline-block;
+    margin: 25px;
+    width: calc(100% - 50px);
+    min-height: calc(100vh - 50px);
+    border-radius: 10px;
+}
+
+.header-header {
+    padding: 15px;
+    text-align: center;
+    font-family: 'Trocchi', serif;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.team-table {
+    width: 100%;
+}
+
+.team-header {
+    background-color: #00000022;
+    font-size: 20px;
+}
+
+.team-row, .team-header {
+    height: 45px;
+    padding: 10px;
+}
+
+.team-row {
+    border-bottom: 1px dotted #DDDDDD;
+}
+
+.team-row:hover {
+    background-color: #00000011;
+}
+
+.team-cell {
+    text-align: center;
+}
+
+.modify-button {
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #00000011;
+    width: calc(100% - 10px);
+}
+
+.four-rows {
+    text-align: center;
+}
+
+.new-member {
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #00000015;
+    width: calc(100% - 100px);
+}
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
 
 
 /*Login Signup Page*/
@@ -567,9 +644,7 @@ header {
 }
 /*Main CSS*/
 
-table {
-  width: 100%;
-}
+
 
 
 

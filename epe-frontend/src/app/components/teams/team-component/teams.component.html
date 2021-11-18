@@ -1,14 +1,58 @@
-
-<body class="home">
-    <div class="container-fluid display-table">
-        <div class="row display-table-row">
-            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-                <app-sidebar></app-sidebar>
-            </div>
-            <div class="col-md-10 col-sm-11 display-table-cell v-align">
-                fewgrth
-            </div>
+<div class="container-fluid display-table">
+    <div class="row display-table-row">
+        <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+            <app-sidebar></app-sidebar>
         </div>
-
+        <div class="col-md-10 col-sm-11 display-table-cell v-align">
+           <div *ngIf="teams" class="content-block">
+               <table class="team-table">
+                   <tr>
+                       <th class="header-header" colspan="4">
+                            <span (click)="refreshTeams()"> Teams </span>
+                       </th>
+                   </tr>
+                   <tr class="team-header">
+                       <th class="team-cell">
+                           Team Name
+                       </th>
+                       <th class="team-cell">
+                           Team Leader
+                       </th>
+                       <th class="team-cell">
+                           Team Members
+                       </th>
+                       <th class="team-cell">
+                           Action
+                       </th>
+                   </tr>
+                   <tr class="team-row" *ngFor="let team of teams">
+                       <td class="team-cell">
+                           {{team.name}}
+                       </td>
+                       <td class="team-cell">
+                           {{team.teamLeader.firstname}} {{team.teamLeader.lastname}}
+                       </td>
+                       <td class="team-cell">
+                           <p *ngFor="let member of team.members">
+                               {{member.firstname}} {{member.lastname}} 
+                           </p>
+                       </td>
+                       <td>
+                           <div *ngIf="team.id">
+                            <button class="modify-button" (click)="editTeam(team.id)">
+                                Modify
+                            </button>
+                           </div>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="four-rows" colspan="4">
+                           <button class="new-member" (click)="createNewTeam()">
+                               New Team
+                           </button>
+                       </td>
+                   </tr>
+               </table>
+           </div>
     </div>
-</body>
+</div>
