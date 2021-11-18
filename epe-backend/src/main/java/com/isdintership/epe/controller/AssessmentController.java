@@ -75,4 +75,6 @@ public class AssessmentController {
     public ResponseEntity<List<EvaluationFieldDto>> getEvaluationFields(@PathVariable String id){
         return ResponseEntity.ok(evaluationFieldService.getEvaluationFieldsByEvaluationGroupId(id));
     }
+
+
 }

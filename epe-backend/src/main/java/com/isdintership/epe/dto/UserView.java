@@ -34,6 +34,7 @@ public class UserView {
         userView.setFirstname(user.getFirstname());
         userView.setLastname(user.getLastname());
         userView.setBirthDate(user.getBirthDate());
+        userView.setBio(user.getBio());
         userView.setEmploymentDate(user.getEmploymentDate());
         userView.setPhoneNumber(user.getPhoneNumber());
         userView.setJob(user.getJob().getJobTitle());

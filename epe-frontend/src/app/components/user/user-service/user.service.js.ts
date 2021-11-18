@@ -2,22 +2,28 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import {User} from "../userview-models/User";
+import {User} from '../user-model/User'
+
 
 @Injectable({
   providedIn: 'root'
 })
+export class UserService {
 
-export class UserviewsServices {
+  url: string = 'api-server/api/users/655445a3-7676-448a-bc81-f10cbc31fbd8';
+  userID?: string;
 
-  url: string = 'api-server/api/users';
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.url = this.url ;
 
-  getUserList() {
-    return this.http.get(this.url);
   }
-  
+
+  getUser() {
+   return this.http.get(this.url);
+  }
+
+
   errorHandler(error: HttpErrorResponse){
     return observableThrowError(error);
   }

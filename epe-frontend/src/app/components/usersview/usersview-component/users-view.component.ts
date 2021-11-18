@@ -8,17 +8,15 @@ import {User} from "../userview-models/User";
   styleUrls: ['./users-view.component.css']
 })
 export class UsersView implements OnInit {
-  users?: User[]
+  users?: User[];
 
   constructor(private userview: UserviewsServices) {
      this.userview.getUserList().subscribe(data => {
-      this.users = data as User[]
-    })
+       this.users = data as User[];
+    });
 
-    console.log(this.users)
   }
 
   ngOnInit(): void {
   }
-
 }

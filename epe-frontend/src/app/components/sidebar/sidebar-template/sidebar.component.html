@@ -19,6 +19,14 @@
                 </span>
             </a>
         </li>
+        <li class="active">
+              <a routerLink="/usersview">
+                  <span class="hidden-xs hidden-sm">
+                     <i class="fa fa-calendar" aria-hidden="true" ></i>
+                    Users
+                  </span>
+              </a>
+          </li>
     </ul>
     <ul *ngIf="isAdmin">
         <li class="active"><a href="/teams"><i class="fa fa-user-friends" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Teams</span></a></li>
@@ -31,7 +39,6 @@
         <li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Workflow</span></a></li>
         <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Statistics</span></a></li>
         <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calender</span></a></li>
-        <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Users</span></a></li>
         <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Settings</span></a></li>
     </ul>
 </div>
