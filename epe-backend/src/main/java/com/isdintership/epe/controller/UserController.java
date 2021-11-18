@@ -3,7 +3,6 @@ package com.isdintership.epe.controller;
 import com.isdintership.epe.dto.PasswordView;
 import com.isdintership.epe.dto.AssignedUserDto;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.RoleView;
 import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,30 +29,30 @@ public class UserController {
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<List<UserView>> getAllUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<UserView> createUser(@Valid @RequestBody RegistrationRequest request) {
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody RegistrationRequest request) {
         return ResponseEntity.ok(userService.createUser(request));
     }
 
     @GetMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<UserView> getUserById(@PathVariable(name = "id") String id){
+    public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") String id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PutMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<UserView> updateUser(@Valid @RequestBody UserView userView,
-                                               @PathVariable(name = "id") String id) {
-        return ResponseEntity.ok(userService.updateUser(userView, id));
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,
+                                              @PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(userService.updateUser(userDto, id));
     }
 
     @DeleteMapping("/{id}")

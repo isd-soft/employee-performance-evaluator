@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtUser } from 'src/app/decoder/decoder-model/jwt-user.interface';
 import { JwtService } from 'src/app/decoder/decoder-service/jwt.service';
@@ -13,7 +13,7 @@ export class DashboardGuardService {
   constructor(private jwtService: JwtService,
               private router: Router) {
     
-    this.loggedUser = jwtService.getJwtUser();
+    this.loggedUser = this.jwtService.getJwtUser();
   }
 
   isLoggedIn(): boolean {

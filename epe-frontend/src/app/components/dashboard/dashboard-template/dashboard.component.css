@@ -1,4 +1,3 @@
-/*Main CSS*/
 
 
 /*Login Signup Page*/
@@ -23,6 +22,7 @@ li,ul{
 }
 
 .display-center {
+    font-weight: bolder;
     text-align: center;
     font-size: 45vh;
     padding-top: 15vh;

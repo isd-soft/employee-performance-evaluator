@@ -8,6 +8,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Setter
@@ -41,11 +42,11 @@ public class Assessment extends BaseEntity {
 
     @Column(name = "start_date")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -97,7 +98,7 @@ public class Assessment extends BaseEntity {
     }
 
     public Assessment(User user, String title, String description, Float overallScore,
-                      StatusEnum status, Boolean isTemplate, LocalDate startDate, LocalDate endDate,
+                      StatusEnum status, Boolean isTemplate, LocalDateTime startDate, LocalDateTime endDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {
         this.user = user;

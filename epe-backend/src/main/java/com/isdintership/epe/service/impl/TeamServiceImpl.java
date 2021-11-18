@@ -1,7 +1,7 @@
 package com.isdintership.epe.service.impl;
 
 
-import com.isdintership.epe.dto.UserView;
+import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.exception.InvalidTeamNameException;
 import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
@@ -45,10 +45,10 @@ class TeamServiceImpl implements TeamService {
 
         if (teamDto.getMembers() != null) {
 
-            List<UserView> membersViews = teamDto.getMembers();
+            List<UserDto> membersViews = teamDto.getMembers();
             List<User> members = new ArrayList<>();
 
-            for (UserView memberView : membersViews) {
+            for (UserDto memberView : membersViews) {
                 User user = userRepository.findById(memberView.getId()).orElseThrow(
                         () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
                 members.add(user);
@@ -97,6 +97,13 @@ class TeamServiceImpl implements TeamService {
         Team team = teamRepository.findById(id).orElseThrow(() ->
                 new TeamNotFoundException("Team with id " + id + " was not found"));
 
+        if (!team.getName().equals(teamDto.getName())) {
+            Optional<Team> existingTeam = teamRepository.findByName(teamDto.getName());
+            if (existingTeam.isPresent()) {
+                throw new TeamExistException("Team with " + teamDto.getName() + " already exists");
+            }
+        }
+        
         team.setName(teamDto.getName());
 
         if (teamDto.getTeamLeader() != null) {
@@ -108,20 +115,18 @@ class TeamServiceImpl implements TeamService {
         }
 
         if (teamDto.getMembers() != null) {
+            teamDto.getMembers().clear();
+            List<UserDto> membersViews = teamDto.getMembers();
 
-            List<UserView> membersViews = teamDto.getMembers();
-            List<User> members = new ArrayList<>();
-
-            for (UserView memberView : membersViews) {
+            for (UserDto memberView : membersViews) {
                 User user = userRepository.findById(memberView.getId()).orElseThrow(
                         () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
-                members.add(user);
+                team.getMembers().add(user);
             }
-
-            team.setMembers(members);
         } else {
-            team.setMembers(new ArrayList<>());
+            teamDto.setMembers(new ArrayList<>());
         }
+
 
         return TeamDto.fromTeam(team);
 

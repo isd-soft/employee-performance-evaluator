@@ -1,14 +1,20 @@
 package com.isdintership.epe.service;
 
 import com.isdintership.epe.dto.AssessmentDto;
+import com.isdintership.epe.dto.AssessmentTemplateDto;
+import com.isdintership.epe.entity.StatusEnum;
 
 import java.util.List;
 
 public interface AssessmentService {
 
-    String deleteAssessment(String id);
-    String updateAssessment(AssessmentDto assessmentDto);
-    String createAssessment(AssessmentDto assessmentDto);
+    AssessmentDto startAssessment(String userId, AssessmentTemplateDto assessmentTemplateIdDto);
+    AssessmentDto getAssessment(String id);
+    List<AssessmentDto> getAllAssessmentsByUserId(String id);
+    List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, String status);
     List<AssessmentDto> getAllAssessments();
-    AssessmentDto getAssessment(String userId);
+//    AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto);
+    AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto);
+    AssessmentDto deleteAssessment(String id);
+
 }

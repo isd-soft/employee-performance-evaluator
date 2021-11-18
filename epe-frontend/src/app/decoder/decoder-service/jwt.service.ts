@@ -19,6 +19,7 @@ export class JwtService {
 
         if(this.validateDecodedJwtToken(decodedToken)) {
           jwtUser = {
+            id: decodedToken.id,
             issDate: decodedToken.iat,
             expDate: decodedToken.exp,
             firstname: decodedToken.firstname,
@@ -52,14 +53,15 @@ export class JwtService {
   }
 
   validateDecodedJwtToken(decodedToken: any): boolean {  
-      
-    if(decodedToken.sub)
-      if(decodedToken.firstname)
-        if(decodedToken.lastname)
-          if(decodedToken.role)
-            if(decodedToken.iat)
-              if(decodedToken.exp)
-                return true;
+    
+    if(decodedToken.id)
+      if(decodedToken.sub)
+        if(decodedToken.firstname)
+          if(decodedToken.lastname)
+            if(decodedToken.role)
+              if(decodedToken.iat)
+                if(decodedToken.exp)
+                  return true;
 
     return false;
   }

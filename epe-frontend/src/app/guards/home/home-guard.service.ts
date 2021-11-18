@@ -13,7 +13,7 @@ export class HomeGuardService {
   constructor(private jwtService: JwtService,
               private router: Router) {
     
-    this.loggedUser = jwtService.getJwtUser();
+    this.loggedUser = this.jwtService.getJwtUser();
   }
 
   isLoggedIn(): boolean {
