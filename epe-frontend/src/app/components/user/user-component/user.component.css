@@ -1,11 +1,9 @@
-.Andrei{
+.aligncenter{
   align-items: center;
   display: flex;
   justify-content: center;
 }
-.test{
-  padding-right: -100px;
-}
+
 
 body{
   margin-top:20px;

@@ -41,7 +41,7 @@
         <ng-container matColumnDef="buttons">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
-            <button mat-button (click)="onView(row)">
+            <button mat-button (click)="onView(row.id)">
               <mat-icon>person</mat-icon>
             </button>
           </mat-cell>

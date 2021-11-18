@@ -1,15 +1,21 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {UserviewsServices} from "../userview-services/users-view.service";
 import {User} from "../userview-models/User";
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from "@angular/material/dialog";
+import {UserComponent} from "../../user/user-component/user.component";
+import {UserService} from "../../user/user-service/user.service.js";
+import {HomeComponent} from "../../home/home-component/home.component";
+import {identity} from "rxjs";
 
 @Component({
   selector: 'app-usersview',
   templateUrl: './users-view.component.html',
   styleUrls: ['./users-view.component.css']
 })
+
 export class UsersView implements AfterViewInit {
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job', 'buttons'];
   // @ts-ignore
@@ -21,7 +27,7 @@ export class UsersView implements AfterViewInit {
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userview: UserviewsServices) {
+  constructor(private userview: UserviewsServices, public dialog: MatDialog) {
 
   }
 
@@ -44,7 +50,7 @@ export class UsersView implements AfterViewInit {
 
   }
 
-  onView(user : User) {
-    console.log(user)
+  onView(user : string) {
+    this.dialog.open( UserComponent, {data: user} );
   }
 }
