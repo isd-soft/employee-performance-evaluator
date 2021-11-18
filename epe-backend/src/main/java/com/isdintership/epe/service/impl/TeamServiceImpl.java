@@ -97,6 +97,13 @@ class TeamServiceImpl implements TeamService {
         Team team = teamRepository.findById(id).orElseThrow(() ->
                 new TeamNotFoundException("Team with id " + id + " was not found"));
 
+        if (!team.getName().equals(teamDto.getName())) {
+            Optional<Team> existingTeam = teamRepository.findByName(teamDto.getName());
+            if (existingTeam.isPresent()) {
+                throw new TeamExistException("Team with " + teamDto.getName() + " already exists");
+            }
+        }
+        
         team.setName(teamDto.getName());
 
         if (teamDto.getTeamLeader() != null) {
