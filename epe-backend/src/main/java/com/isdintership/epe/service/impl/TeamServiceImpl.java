@@ -107,14 +107,19 @@ class TeamServiceImpl implements TeamService {
             team.setTeamLeader(null);
         }
 
-        teamDto.getMembers().clear();
-        List<UserDto> membersViews = teamDto.getMembers();
+        if (teamDto.getMembers() != null) {
+            teamDto.getMembers().clear();
+            List<UserDto> membersViews = teamDto.getMembers();
 
-        for (UserDto memberView : membersViews) {
-            User user = userRepository.findById(memberView.getId()).orElseThrow(
-                    () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
-            team.getMembers().add(user);
+            for (UserDto memberView : membersViews) {
+                User user = userRepository.findById(memberView.getId()).orElseThrow(
+                        () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
+                team.getMembers().add(user);
+            }
+        } else {
+            teamDto.setMembers(new ArrayList<>());
         }
+
 
         return TeamDto.fromTeam(team);
 
