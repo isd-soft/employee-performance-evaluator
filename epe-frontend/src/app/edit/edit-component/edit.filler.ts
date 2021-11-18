@@ -15,7 +15,7 @@ export class EditFiller{
 
         let datePipe = new DatePipe('en-US');
         let updateUser: UpdateRequest = {
-            image :user.imageFile ,
+            image :user.image ,
             email: user.email,
             firstname: user.firstname,
             lastname: user.lastname,
@@ -32,7 +32,7 @@ export class EditFiller{
     createUserToEdit(): UpdateRequest {
 
         let user: UpdateRequest = {
-            image: undefined,
+            image: '',
             email: '',
             firstname: '',
             lastname: '',

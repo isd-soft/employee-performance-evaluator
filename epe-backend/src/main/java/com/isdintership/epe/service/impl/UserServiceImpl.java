@@ -182,12 +182,7 @@ class UserServiceImpl implements UserService {
         user.setJob(job);
         user.setBio(userView.getBio());
 
-        try {
-            user.setImageBytes(encodeImageFromFilePath(userView.getImage()));
-            //user.setImageBytes(encodeImageFromFile(userView.getImageFile()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        user.setImageBytes(encodeImageFromString(userView.getImage()));
 
         System.out.println();
         return userView;
@@ -302,6 +297,11 @@ public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
         byte[] finalData = imageString.getBytes();
         imageStream.close();
 
+        return finalData;
+    }
+
+    public static byte[] encodeImageFromString(String imageBase64Encode) {
+        byte[] finalData = imageBase64Encode.getBytes();
         return finalData;
     }
 

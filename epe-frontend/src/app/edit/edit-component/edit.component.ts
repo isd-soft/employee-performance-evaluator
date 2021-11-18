@@ -33,7 +33,7 @@ export class EditComponent implements OnInit {
   }
 
   //url = "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
-  url = "https://codingshiksha.com/ezoimgfmt/freemediatools.com/img/profile.jpg?ezimgfmt=rs%3Adevice%2Frscb23-1";
+  url = "";
 
   base64Output : string;
 
@@ -65,7 +65,7 @@ export class EditComponent implements OnInit {
     let datePipe = new DatePipe('en-US');
     this.updateUser.birthDate = datePipe.transform(this.updateUser.birthDate, 'dd-MM-yyyy') as string;
     this.updateUser.employmentDate = datePipe.transform(this.updateUser.employmentDate, 'dd-MM-yyyy') as string;
-
+    this.updateUser.image = this.base64Output;
     this.editService.update(this.updateUser).subscribe();
 
 

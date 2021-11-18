@@ -1,5 +1,5 @@
 export interface User{
-    imageFile?: File
+    image: string
     firstname: string
     lastname: string
     email: string

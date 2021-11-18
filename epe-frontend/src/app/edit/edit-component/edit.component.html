@@ -8,7 +8,7 @@
             <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
                 <app-sidebar></app-sidebar>
             </div>
-            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+            <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
 
                 <div class="title">
                     <h1>Update <span>profile!</span></h1>
@@ -30,8 +30,6 @@
                                     name="image"
                                     id="image"
                                     (change)="selectFile($event)"
-                                    #image="ngModel"
-                                    [(ngModel)]="updateUser.image"
                                     placeholder="Enter your email">
                             </label>
 
