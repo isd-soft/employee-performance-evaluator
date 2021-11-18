@@ -1,9 +1,7 @@
 import { CreateTeamRequest } from './../teams-model/create-team-request.interface';
-import { CreateTeamUser } from './../teams-model/create-team-user.interface';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamsService } from '../teams-service/teams.service';
-import { TeamView } from './../teams-model/team-view.interface';
 import { UserService } from '../user-service/user.service';
 import { UserView } from './../teams-model/user-view.interface';
 
@@ -40,13 +38,9 @@ export class TeamCreateComponent {
   createTeam() {
 
     let newTeam: CreateTeamRequest = this.createNewTeamFromInputDetails();
-    
-    console.log(newTeam);
-    
     this.teamService.createTeam(newTeam).subscribe(data => {
     }, error => {
        if(error.status == 201) {
-         console.log('error 201')
         this.router.navigate(['/teams']);
        } 
        this.errorMessage = error.error.title;})
@@ -58,13 +52,10 @@ export class TeamCreateComponent {
       name: this.newTeamName || '',
       teamLeader: {
         id: this.newTeamLeaderId || ''
-      }
+      },
+      teamMembers: []
     }
 
     return tempTeam;
-  }
-
-  log() {
-    console.log(this.newTeamName);
   }
 }

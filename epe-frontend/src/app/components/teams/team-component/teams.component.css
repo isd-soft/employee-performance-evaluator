@@ -32,6 +32,10 @@
     padding: 10px;
 }
 
+.team-row {
+    border-bottom: 1px dotted #DDDDDD;
+}
+
 .team-row:hover {
     background-color: #00000011;
 }

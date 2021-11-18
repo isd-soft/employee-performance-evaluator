@@ -29,7 +29,7 @@ export class TeamsService {
       .pipe(catchError(this.errorHandler));
   }
 
-  updateTeam(id:string, team: TeamView) {
+  updateTeam(id:string, team: CreateTeamRequest) {
     return this.http.put(this.teamUrl + '/' + id, team)
       .pipe(catchError(this.errorHandler));
   }

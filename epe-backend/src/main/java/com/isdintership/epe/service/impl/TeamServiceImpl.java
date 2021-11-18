@@ -103,8 +103,6 @@ class TeamServiceImpl implements TeamService {
             User teamLeader = userRepository.findById(teamDto.getTeamLeader().getId()).orElseThrow(
                     () -> new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found"));
             team.setTeamLeader(teamLeader);
-        } else {
-            team.setTeamLeader(null);
         }
 
         if (teamDto.getMembers() != null) {
@@ -119,8 +117,6 @@ class TeamServiceImpl implements TeamService {
             }
 
             team.setMembers(members);
-        } else {
-            team.setMembers(new ArrayList<>());
         }
 
         return TeamDto.fromTeam(team);
