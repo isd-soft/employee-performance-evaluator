@@ -10,17 +10,22 @@ import {User} from '../user-model/User'
 })
 export class UserService {
 
-  url: string = 'api-server/api/users/655445a3-7676-448a-bc81-f10cbc31fbd8';
+  userURL: string = 'api-server/api/users/c16d935b-2588-4531-9734-3d88d1a96a2c';
+  AssessmentUrl: string = 'api-server/api/users/c16d935b-2588-4531-9734-3d88d1a96a2c/assessments';
   userID?: string;
 
 
   constructor(private http: HttpClient) {
-    this.url = this.url ;
+    this.userURL = this.userURL ;
 
   }
 
   getUser() {
-   return this.http.get(this.url);
+   return this.http.get(this.userURL);
+  }
+
+  getAssessment(){
+    return this.http.get((this.AssessmentUrl));
   }
 
 

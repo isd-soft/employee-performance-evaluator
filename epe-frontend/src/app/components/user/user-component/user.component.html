@@ -36,6 +36,16 @@
             </div>
             <hr width="90%" style="margin-left:auto;">
           </div>
+
+          <div class="row mb-3">
+            <div class="col-sm-3">
+              <p style="text-align: center">Job Title</p>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <p class="Andrei">{{user?.job}}</p>
+            </div>
+            <hr width="90%" style="margin-left:auto;">
+          </div>
 <!--          /*-->
           <div class="row mb-3">
             <div class="col-sm-3">
@@ -66,29 +76,40 @@
             </div>
             <hr width="90%" style="margin-left:auto;">
           </div>
+
+          <div class="row mb-3">
+            <div class="col-sm-3">
+              <p style="text-align: center">Employment date</p>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <p class="Andrei">{{user?.employmentDate}}</p>
+            </div>
+            <hr width="90%" style="margin-left:auto;">
+          </div>
         </div>
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="d-flex align-items-center mb-3" style="text-align: center ; font-size: 20px">Project Status</h5>
+                <h5 class="d-flex align-items-center mb-3" style="text-align: center ; font-size: 20px">Assessment History</h5>
               </div>
-              <div class="row mb-3">
+
+              <div  *ngFor="let assessment of assessments " class="row mb-3">
                 <div class="col-sm-3">
-                  <p style="text-align: center"> Assessment #2</p>
-                  <p style="text-align: center; font-size: 10px ">date 09/09/2020</p>
+                  <p style="text-align: center"> {{assessment?.title}}</p>
+                  <p style="text-align: center;" >Score : {{assessment?.overallScore}}</p>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <p class="Andrei">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut dictum eros. Sed volutpat sagittis dictum. Vestibulum condimentum orci lobortis imperdiet sodales
-                  </p>
+                  <p class="Andrei">{{assessment?.description}}</p>
+                  <p style="text-align: center; font-size: 10px ">{{assessment?.startDate}} - {{assessment?.endDate}}</p>
                 </div>
                 <hr width="90%" style="margin-left:auto;">
               </div>
+
               <div class="row mb-3">
                 <div class="col-sm-3">
                   <p style="text-align: center"> Assessment #1</p>
-                  <p style="text-align: center; font-size: 10px ">date 09/09/2020</p>
+                  <p style="text-align: center;" >Score : {{02}}</p>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   <p class="Andrei">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut dictum eros. Sed volutpat sagittis dictum. Vestibulum condimentum orci lobortis imperdiet sodales</p>
