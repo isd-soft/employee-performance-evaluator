@@ -113,6 +113,17 @@ public class AssessmentTemplateServiceImpl implements AssessmentTemplateService 
                 .orElseThrow(() -> new AssessmentTemplateNotFoundException
                         ("Assessment template with id " + id + " was not found"));
 
+        if (!assessmentTemplateDto.getTitle().equals(assessmentTemplate.getTitle())) {
+
+            Optional<Assessment> existingAssessment =
+                    assessmentRepository.findByTitleAndIsTemplate(assessmentTemplateDto.getTitle(), true);
+            if (existingAssessment.isPresent()) {
+                throw new AssessmentTemplateExistsException
+                        ("Assessment template with name " + assessmentTemplateDto.getTitle() + " already exists");
+            }
+        }
+
+
         Job job = jobRepository.findByJobTitle(assessmentTemplateDto.getJobTitle()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + assessmentTemplateDto.getJobTitle() + " was not found"));
 

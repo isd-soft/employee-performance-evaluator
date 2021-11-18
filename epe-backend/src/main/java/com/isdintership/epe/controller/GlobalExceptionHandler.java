@@ -5,6 +5,7 @@ import com.isdintership.epe.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -52,19 +53,33 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(AssessmentNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleAssessmentNotFoundException(AssessmentNotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleAssessmentNotFoundException
+            (AssessmentNotFoundException e, HttpServletRequest request) {
+
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
     @ExceptionHandler(SubordinatesNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleSubordinatesNotFoundException(SubordinatesNotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleSubordinatesNotFoundException
+            (SubordinatesNotFoundException e, HttpServletRequest request) {
+
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
     @ExceptionHandler(TeamNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleTeamNotFoundException(TeamNotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleTeamNotFoundException
+            (TeamNotFoundException e, HttpServletRequest request) {
+
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(InvalidTeamNameException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidTeamNameException
+            (InvalidTeamNameException e, HttpServletRequest request) {
+
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }
@@ -77,17 +92,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-    @ExceptionHandler(AssessmentTemplateNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleAssessmentTemplateNotFoundException
-            (AssessmentTemplateNotFoundException e, HttpServletRequest request) {
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentialsException
+            (BadCredentialsException e, HttpServletRequest request) {
 
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-   /* @ExceptionHandler(Exception.class)
-    @ExceptionHandler(InvalidTeamNameException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidTeamNameException(InvalidTeamNameException e, HttpServletRequest request) {
+    @ExceptionHandler(AssessmentExistsException.class)
+    public ResponseEntity<ErrorResponse> handleAssessmentExistsException
+            (AssessmentExistsException e, HttpServletRequest request) {
+
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

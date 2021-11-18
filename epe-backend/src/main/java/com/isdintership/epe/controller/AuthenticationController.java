@@ -19,7 +19,7 @@ public class AuthenticationController {
 
     @PostMapping("login")
     @CrossOrigin(origins = origin)
-    public ResponseEntity<UserView> login(@RequestBody LoginRequest requestDto){
+    public ResponseEntity<UserDto> login(@RequestBody LoginRequest requestDto){
         return ResponseEntity.ok(userService.login(requestDto));
     }
 
