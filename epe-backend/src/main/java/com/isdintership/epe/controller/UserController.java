@@ -1,9 +1,6 @@
 package com.isdintership.epe.controller;
 
-import com.isdintership.epe.dto.PasswordView;
-import com.isdintership.epe.dto.AssignedUserDto;
-import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.UserView;
+import com.isdintership.epe.dto.*;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
