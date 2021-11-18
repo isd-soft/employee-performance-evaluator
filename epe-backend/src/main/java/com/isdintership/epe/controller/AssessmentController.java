@@ -2,6 +2,7 @@ package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.AssessmentTemplateDto;
+import com.isdintership.epe.entity.StatusEnum;
 import com.isdintership.epe.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,16 @@ public class AssessmentController {
     @GetMapping("users/{id}/assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
-    public ResponseEntity<List<AssessmentDto>> getAllAssessmentsByUserId(@PathVariable(name = "id") String userId) {
+    public ResponseEntity<List<AssessmentDto>> getAllAssessmentsByUserId
+            (@PathVariable(name = "id") String userId,
+             @RequestParam(name = "status", required = false) String status) {
+
+        if (status != null) {
+
+            return new ResponseEntity<>(assessmentService.getAllAssessmentsByUserIdAndStatus(userId, status),
+                                        HttpStatus.OK);
+
+        }
 
         return new ResponseEntity<>(assessmentService.getAllAssessmentsByUserId(userId), HttpStatus.OK);
 

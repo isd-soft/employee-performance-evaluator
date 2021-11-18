@@ -127,6 +127,32 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     @Override
     @Transactional
+    public List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, String status) {
+
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " not found"));
+
+        List<AssessmentDto> assessmentDtos = new ArrayList<>();
+
+
+        try {
+
+            StatusEnum assessmentStatus = StatusEnum.valueOf(status);
+            assessmentRepository.findByUserAndStatus(user, assessmentStatus)
+                    .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
+
+        } catch (IllegalArgumentException e) {
+
+            throw new AssessmentStatusNotFound("Assessment status " + status + " was not found");
+
+        }
+
+        return assessmentDtos;
+
+    }
+
+    @Override
+    @Transactional
     public List<AssessmentDto> getAllAssessments() {
 
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
