@@ -2,6 +2,7 @@ package com.isdintership.epe.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.isdintership.epe.entity.Team;
 import com.isdintership.epe.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -21,6 +22,11 @@ public class UserDto {
     private String phoneNumber;
     private String job;
     private String bio;
+
+    // added by me !!!
+    private String team;
+    // end added !!!
+
     private String buddyId;
     private String token;
 
@@ -35,6 +41,15 @@ public class UserDto {
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setJob(user.getJob().getJobTitle());
         userDto.setBio(user.getBio());
+
+        // added by me !!!
+        if(user.getTeam() != null) {
+            userDto.setTeam(user.getTeam().getName());
+        } else {
+            userDto.setTeam("");
+        }
+        // end added !!!
+
         userDto.setBuddyId(user.getBuddyId());
 
         return userDto;

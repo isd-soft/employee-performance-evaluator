@@ -2,8 +2,8 @@ import { CreateTeamRequest } from './../teams-model/create-team-request.interfac
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamsService } from '../teams-service/teams.service';
-import { UserService } from '../user-service/user.service';
 import { UserView } from './../teams-model/user-view.interface';
+import { UserService } from '../user-service/user.service';
 
 @Component({
   selector: 'app-team-create',

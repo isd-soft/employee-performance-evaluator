@@ -10,73 +10,43 @@
     border-radius: 10px;
 }
 
-.header-header {
-    padding: 15px;
-    text-align: center;
-    font-family: 'Trocchi', serif;
-    font-weight: bolder;
-    font-size: 25px;
-}
-
-.team-table {
-    width: 100%;
-}
-
-.team-header {
-    background-color: #00000022;
-    font-size: 20px;
-}
-
-.team-row, .team-header {
-    height: 45px;
-    padding: 10px;
-}
-
-.team-row {
-    border-bottom: 1px dotted #DDDDDD;
-}
-
-.team-row:hover {
-    background-color: #00000011;
-}
-
-.team-cell {
+.title {
     text-align: center;
 }
 
-.modify-button {
-    margin: 5px 0 5px 0;
-    border-radius: 10px;
-    padding: 5px;
-    background-color: #00000011;
-    width: calc(100% - 10px);
+.title span {
+    color: #043927;
 }
 
-.four-rows {
+.new-team-form {
     text-align: center;
 }
 
-.new-member {
-    margin-top: 20px;
-    border-radius: 10px;
-    padding: 5px;
-    background-color: #00000015;
-    width: calc(100% - 100px);
+.new-team-form input,
+.new-team-form select
+ {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #00000000 none repeat scroll 0 0;
+    border-color: -moz-use-text-color -moz-use-text-color #D4D9E3;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    font-size: 13px;
+    font-weight: 300;
+    width: 100%;
+    color: #333333;
+    padding: 15px 50px;
+    font-size: 17px;
+    max-width: 550px;
 }
 
-table {
+.new-team-form label {
+    margin-bottom: 30px;
     width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
-
+}
 
 /*Login Signup Page*/
 a:focus,a:hover,a{
@@ -226,7 +196,7 @@ li,ul{
 }
 
 .form-btn {
-    background: #5584ff none repeat scroll 0 0;
+    background: #000000 none repeat scroll 0 0;
     border: medium none;
     border-radius: 100px;
     color: #ffffff;
@@ -235,14 +205,17 @@ li,ul{
     padding: 10px 0;
     position: relative;
     width: 100%;
-    margin: 40px 0;
+    margin-bottom: 10px;
     box-shadow: 0 2px 8px #d2d2d2;
     -moz-box-shadow: 0 2px 8px #d2d2d2;
     -webkit-box-shadow: 0 2px 8px #d2d2d2;
 }
 
+.form-btn:disabled {
+    background: #444444 none repeat scroll 0 0;
+}
+
 .form-btn::before {
-    content: "";
     font-family: FontAwesome;
     position: absolute;
     right: 17px;
@@ -255,6 +228,12 @@ li,ul{
 
 .tab-content .tab-pane {
     padding: 70px 0;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    padding: 15px;
 }
 
 

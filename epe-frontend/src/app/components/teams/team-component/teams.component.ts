@@ -28,7 +28,7 @@ export class TeamsComponent {
    }
 
    editTeam(id: string) {
-     localStorage.setItem("ID", id);
+     localStorage.setItem("TEAM_ID", id);
      this.router.navigate(['/team-edit']);
    }
 }

@@ -56,8 +56,8 @@ export class TeamEditComponent {
   }
 
   getTeamID() {
-    this.teamID = localStorage.getItem("ID") || '';
-    localStorage.removeItem("ID");
+    this.teamID = localStorage.getItem("TEAM_ID") || '';
+    localStorage.removeItem("TEAM_ID");
   }
 
   refreshUsers() {
