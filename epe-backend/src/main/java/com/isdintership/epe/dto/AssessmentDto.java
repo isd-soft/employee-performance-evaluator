@@ -1,12 +1,12 @@
 package com.isdintership.epe.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.isdintership.epe.entity.EvaluationGroup;
+import com.isdintership.epe.entity.Assessment;
 import com.isdintership.epe.entity.StatusEnum;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,37 +20,56 @@ public class AssessmentDto {
     private Float overallScore;
     private StatusEnum status;
     private Boolean isTemplate;
-    private LocalDate startDate;
-    private LocalDate finishDate;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime startDate;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime endDate;
     private String userId;
-    private List<EvaluationGroupDto> evaluationGroupDto ;
 
-    //list of evaluation fields
-    private List<PersonalGoalDto> personalGoalList;
-    private List<DepartmentGoalDto> departmentGoalList;
-    private List<FeedbackDto> feedback;
+    private List<EvaluationGroupDto> evaluationGroupDtos;
+    private List<PersonalGoalDto> personalGoalDtos;
+    private List<DepartmentGoalDto> departmentGoalDtos;
+    private List<FeedbackDto> feedbackDtos;
 
     public AssessmentDto() {
     }
 
-    public AssessmentDto(String id, String title, String description, String jobPosition,
-                         Float overallScore, StatusEnum status, Boolean isTemplate,
-                         LocalDate startDate, LocalDate finishDate, String userId, List<EvaluationGroup> evaluationGroup) {
 
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.jobPosition = jobPosition;
-        this.overallScore = overallScore;
-        this.status = status;
-        this.isTemplate = isTemplate;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
-        this.userId = userId;
+    public static AssessmentDto fromAssessment(Assessment assessment) {
 
-        this.evaluationGroupDto = new ArrayList<>();
-        for(EvaluationGroup group : evaluationGroup) {
-            this.evaluationGroupDto.add(EvaluationGroupDto.fromEvaluationGroup(group));
-        }
+        AssessmentDto assessmentDto = new AssessmentDto();
+
+        assessmentDto.setId(assessment.getId());
+        assessmentDto.setTitle(assessment.getTitle());
+        assessmentDto.setDescription(assessment.getDescription());
+        assessmentDto.setJobPosition(assessment.getJob().getJobTitle());
+        assessmentDto.setOverallScore(assessment.getOverallScore());
+        assessmentDto.setStatus(assessment.getStatus());
+        assessmentDto.setIsTemplate(assessment.getIsTemplate());
+        assessmentDto.setStartDate(assessment.getStartDate());
+        assessmentDto.setEndDate(assessment.getEndDate());
+        assessmentDto.setUserId(assessment.getUser().getId());
+
+        List<EvaluationGroupDto> evaluationGroupDtos = new ArrayList<>();
+        assessment.getEvaluationGroups()
+                  .forEach(group -> evaluationGroupDtos.add(EvaluationGroupDto.fromEvaluationGroup(group)));
+        assessmentDto.setEvaluationGroupDtos(evaluationGroupDtos);
+
+        List<PersonalGoalDto> personalGoalDtos = new ArrayList<>();
+        assessment.getPersonalGoals()
+                .forEach(goal -> personalGoalDtos.add(PersonalGoalDto.fromPersonalGoal(goal)));
+        assessmentDto.setPersonalGoalDtos(personalGoalDtos);
+
+        List<DepartmentGoalDto> departmentGoalDtos = new ArrayList<>();
+        assessment.getDepartmentGoals()
+                .forEach(goal -> departmentGoalDtos.add(DepartmentGoalDto.fromDepartmentGoal(goal)));
+        assessmentDto.setDepartmentGoalDtos(departmentGoalDtos);
+
+        List<FeedbackDto> feedbackDtos = new ArrayList<>();
+        assessment.getFeedbacks()
+                .forEach(feedback -> feedbackDtos.add(FeedbackDto.fromFeedback(feedback)));
+        assessmentDto.setFeedbackDtos(feedbackDtos);
+
+        return assessmentDto;
     }
 }

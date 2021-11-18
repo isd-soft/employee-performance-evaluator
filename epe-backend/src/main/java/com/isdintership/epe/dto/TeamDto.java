@@ -19,8 +19,8 @@ public class TeamDto {
     @NotNull
     private String name;
 
-    private UserView teamLeader;
-    private List<UserView> members;
+    private UserDto teamLeader;
+    private List<UserDto> members;
 
     public static TeamDto fromTeam(Team team) {
 
@@ -33,7 +33,7 @@ public class TeamDto {
         List<User> members = team.getMembers();
 
         if (teamLeader != null) {
-            UserView teamLeaderView = new UserView();
+            UserDto teamLeaderView = new UserDto();
 
             teamLeaderView.setId(teamLeader.getId());
             teamLeaderView.setFirstname(teamLeader.getFirstname());
@@ -44,11 +44,11 @@ public class TeamDto {
 
         if (members != null) {
 
-            List<UserView> membersViews = new ArrayList<>();
+            List<UserDto> membersViews = new ArrayList<>();
 
             for (User user : members) {
 
-                UserView memberView = new UserView();
+                UserDto memberView = new UserDto();
 
                 memberView.setId(user.getId());
                 memberView.setFirstname(user.getFirstname());
