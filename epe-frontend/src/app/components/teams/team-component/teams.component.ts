@@ -1,9 +1,7 @@
 import { Router } from '@angular/router';
-import { UserView } from './../teams-model/user-view.interface';
 import { TeamView } from './../teams-model/team-view.interface';
 import { TeamsService } from './../teams-service/teams.service';
-import { Component, OnInit } from '@angular/core';
-import { TeamShow } from '../teams-model/team-show.interface';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-teams',
@@ -27,5 +25,10 @@ export class TeamsComponent {
 
    createNewTeam() {
     this.router.navigate(['/team-create']);
+   }
+
+   editTeam(id: string) {
+     localStorage.setItem("ID", id);
+     this.router.navigate(['/team-edit']);
    }
 }

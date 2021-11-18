@@ -38,9 +38,11 @@
                            </p>
                        </td>
                        <td>
-                           <button class="modify-button">
-                               Modify
-                           </button>
+                           <div *ngIf="team.id">
+                            <button class="modify-button" (click)="editTeam(team.id)">
+                                Modify
+                            </button>
+                           </div>
                        </td>
                    </tr>
                    <tr>
