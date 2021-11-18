@@ -7,6 +7,7 @@ import {JwtService} from 'src/app/decoder/decoder-service/jwt.service';
 import {EditService} from '../edit-service/edit.service';
 import {Router} from '@angular/router';
 import {DatePipe} from "@angular/common";
+import {Observable, ReplaySubject, Subscriber} from "rxjs";
 
 @Component({
   selector: 'app-edit',
@@ -31,21 +32,10 @@ export class EditComponent implements OnInit {
       this.jobList = data as JobItem[]);
   }
 
-
-  update() {
-    let datePipe = new DatePipe('en-US');
-    this.updateUser.birthDate = datePipe.transform(this.updateUser.birthDate, 'dd-MM-yyyy') as string;
-    this.updateUser.employmentDate = datePipe.transform(this.updateUser.employmentDate, 'dd-MM-yyyy') as string;
-    this.editService.update(this.updateUser).subscribe();
-
-
-  }
-
-  ngOnInit(): void {
-  }
-
   //url = "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
   url = "https://codingshiksha.com/ezoimgfmt/freemediatools.com/img/profile.jpg?ezimgfmt=rs%3Adevice%2Frscb23-1";
+
+  base64Output : string;
 
   selectFile(event) {
     if (event.target.files) {
@@ -54,6 +44,35 @@ export class EditComponent implements OnInit {
       reader.onload = (event : any) => {
         this.url = event.target.result;
       }
+      this.convertFile(event.target.files[0]).subscribe(base64 => {
+        this.base64Output = base64;
+      });
     }
   }
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
+  }
+
+
+
+
+  update() {
+    let datePipe = new DatePipe('en-US');
+    this.updateUser.birthDate = datePipe.transform(this.updateUser.birthDate, 'dd-MM-yyyy') as string;
+    this.updateUser.employmentDate = datePipe.transform(this.updateUser.employmentDate, 'dd-MM-yyyy') as string;
+
+    this.editService.update(this.updateUser).subscribe();
+
+
+  }
+
+  ngOnInit(): void {
+  }
+
+
 }
