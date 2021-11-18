@@ -9,38 +9,44 @@
                 <app-sidebar></app-sidebar>
             </div>
             <div class="col-md-10 col-sm-11 display-table-cell v-align">
-                
+
                 <div class="title">
                     <h1>Update <span>profile!</span></h1>
                 </div>
                 <div class="login-form">
-                    <form>
+                    <form #editForm="ngForm">
                         <div class="form-details">
 
                             <label class="form-element">
-                                <img src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" height="100">
-                            </label> 
+                                <img [src]="url" height="200">
+                            </label>
 
 
                             <label class="form-element input-file">
-                                <input 
+                                <input
                                     required
                                     title="Choose an image"
                                     type="file"
                                     name="image"
                                     id="image"
+                                    (change)="selectFile($event)"
+                                    #image="ngModel"
+                                    [(ngModel)]="updateUser.image"
                                     placeholder="Enter your email">
                             </label>
 
                             <label class="form-element">
-                                <input 
+                                <input
                                     required
                                     title="Please insert your email"
                                     type="email"
                                     name="email"
+                                    [email]="true"
                                     id="email"
-                                    placeholder="Enter your email">
-                                <div class="input-box-error">
+                                    #email="ngModel"
+                                    placeholder="Enter your email"
+                                    [(ngModel)]="updateUser.email">
+                                <div *ngIf="email.touched && !email.valid" class="input-box-error">
                                     Email is required and must be a valid one !
                                 </div>
                             </label>
@@ -54,50 +60,58 @@
                                     type="text"
                                     name="firstname"
                                     id="firstname"
+                                    #firstname="ngModel"
+                                    [(ngModel)]="updateUser.firstname"
                                     placeholder="Enter your name">
-                                <div class="input-box-error">
+                                <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
                                     Firstname is required and must be between 3 and 20 letters long !
                                 </div>
                             </label>
 
                             <label class="form-element">
                                 <input
-                                    required 
+                                    required
                                     title="Please insert your lastname"
                                     minlength="3"
                                     maxlength="20"
-                                    type="text" 
-                                    name="lastname" 
+                                    type="text"
+                                    name="lastname"
                                     id="lastname"
+                                    #lastname="ngModel"
+                                    [(ngModel)]="updateUser.lastname"
                                     placeholder="Enter your last name">
-                                <div class="input-box-error">
+                                <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
                                     Lastname is required and must be between 3 and 20 letters long !
                                 </div>
                             </label>
 
                             <label class="form-element">
                                 <input
-                                    required 
+                                    required
                                     title="Please insert your birth date"
                                     type="date"
-                                    name="birthDate" 
+                                    name="birthDate"
                                     id="birthDate"
+                                    #birthDate="ngModel"
+                                    [(ngModel)]="updateUser.birthDate"
                                     placeholder="Enter your birth date">
-                                <div class="input-box-error">
+                                <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
                                     Please pick a valid birth date !
                                 </div>
                             </label>
 
                             <label class="form-element">
-                                <input 
+                                <input
                                     required
                                     title="Please insert your phone number"
                                     pattern="^\+?(?:[0-9] ?){6,14}[0-9]$"
-                                    type="tel" 
+                                    type="tel"
                                     name="phone"
                                     id="phone"
+                                    #phone="ngModel"
+                                    [(ngModel)]="updateUser.phoneNumber"
                                     placeholder="Enter your phone number">
-                                <div class="input-box-error">
+                                <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
                                     Phone number is required !
                                 </div>
                             </label>
@@ -105,16 +119,18 @@
                             <label class="form-element">
                                 <select
                                     required
-                                    title="Please choose your job" 
-                                    name="job" 
+                                    title="Please choose your job"
+                                    name="job"
                                     id="job"
+                                    #job="ngModel"
+                                    [(ngModel)]="updateUser.job"
                                     placeholder="Enter your job">
                                     <option *ngFor="let job of jobList">
                                         {{ job.jobTitle }}
                                     </option>
                                 </select>
-                                <div class="input-box-error">
-                                    Please pick your job !
+                                <div *ngIf="job.touched && !job.valid" class="input-box-error">
+                                    Please pick a valid employment date !
                                 </div>
                             </label>
 
@@ -123,18 +139,21 @@
                                     required
                                     title="Please insert your employment date"
                                     type="date"
-                                    name="employmentDate" 
-                                    id="employmentDate">
-                                <div class="input-box-error">
+                                    name="employmentDate"
+                                    id="employmentDate"
+                                    #employmentDate="ngModel"
+                                    [(ngModel)]="updateUser.employmentDate">
+                                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
                                     Please pick a valid employment date !
                                 </div>
                             </label>
+
+
                         </div>
-                        <button type="submit" class="form-btn">Update</button>
+                        <button type="submit" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()">Update</button>
                     </form>
                 </div>
 
-                   
             </div>
         </div>
     </div>

@@ -183,7 +183,8 @@ class UserServiceImpl implements UserService {
         user.setBio(userView.getBio());
 
         try {
-            user.setImageBytes(encodeImageFromFilePath(userView.getImagePath()));
+            user.setImageBytes(encodeImageFromFilePath(userView.getImage()));
+            //user.setImageBytes(encodeImageFromFile(userView.getImageFile()));
         } catch (IOException e) {
             e.printStackTrace();
         }

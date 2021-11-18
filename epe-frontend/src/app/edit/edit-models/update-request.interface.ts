@@ -1,5 +1,5 @@
 export interface UpdateRequest {
-    imageFile: File
+    image?: File
     email: string
     firstname: string
     lastname: string

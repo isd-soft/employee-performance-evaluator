@@ -2,16 +2,20 @@ import { DatePipe } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { User } from "../edit-models/user.interface";
 import { UpdateRequest } from "../edit-models/update-request.interface";
+import { noUndefined } from "@angular/compiler/src/util";
+import {isFile} from "@angular/compiler-cli/src/ngtsc/file_system/testing/src/mock_file_system";
 
 @Injectable({providedIn : "root"})
 export class EditFiller{
 
 
-    updateUserToEditFromUser(user: User): UpdateRequest {
+    updateUserFromTemplate(user: User): UpdateRequest {
+
+        console.log(user)
 
         let datePipe = new DatePipe('en-US');
         let updateUser: UpdateRequest = {
-            imageFile: user.imageFile,
+            image :user.imageFile ,
             email: user.email,
             firstname: user.firstname,
             lastname: user.lastname,
@@ -25,21 +29,21 @@ export class EditFiller{
         return updateUser;
     }
 
-    /*loadUserToEdit(): User {
+    createUserToEdit(): UpdateRequest {
 
-        let user: User = {
-            imageFile: '',
+        let user: UpdateRequest = {
+            image: undefined,
             email: '',
             firstname: '',
             lastname: '',
-            birthDate: new Date(),
-            employmentDate: new Date(),
+            birthDate: '',
+            employmentDate: '',
             phoneNumber: '',
             job: '',
             bio: ''
-        }   
+        }
 
         return user;
-    }*/
+    }
 
 }
