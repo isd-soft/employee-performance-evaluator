@@ -2,7 +2,6 @@ package com.isdintership.epe.service;
 
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
-import com.isdintership.epe.dto.UserView;
 import com.isdintership.epe.dto.*;
 
 import java.util.List;
