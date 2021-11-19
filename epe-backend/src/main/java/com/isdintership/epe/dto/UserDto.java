@@ -23,6 +23,8 @@ public class UserDto {
     private String bio;
     private String buddyId;
     private String token;
+    private byte[] image_bytes;
+    private String image;
 
     public static UserDto fromUser(User user) {
         UserDto userDto = new UserDto();
@@ -36,7 +38,7 @@ public class UserDto {
         userDto.setJob(user.getJob().getJobTitle());
         userDto.setBio(user.getBio());
         userDto.setBuddyId(user.getBuddyId());
-
+        userDto.setImage_bytes(user.getImageBytes());
         return userDto;
     }
 }

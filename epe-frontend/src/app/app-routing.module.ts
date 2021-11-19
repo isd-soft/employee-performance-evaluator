@@ -24,6 +24,16 @@ import {AssessmentsUserComponent} from "./components/assessments/assessments-use
 import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 
 
+import { HomeComponent } from './components/home/home-component/home.component';
+import { LogoutComponent } from './components/logout/logout-component/logout.component';
+import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
+
+import { HomeGuard } from './guards/home/home.guard';
+import { DashboardGuard } from './guards/dashboard/dashboard.guard';
+import { AdminGuard } from './guards/admin/admin.guard';
+import { EditComponent } from './edit/edit-component/edit.component';
+
+
 const routes: Routes = [
   {
     path: 'home',
@@ -79,6 +89,8 @@ const routes: Routes = [
     component: UserComponent,
   },
   {
+    path: "edit",
+    component: EditComponent
     path: 'usersview',
     component: UsersView,
   },

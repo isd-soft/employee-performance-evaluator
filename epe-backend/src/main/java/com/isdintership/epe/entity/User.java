@@ -3,13 +3,10 @@ package com.isdintership.epe.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-
+import org.hibernate.annotations.Type;
 import javax.persistence.*;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -46,15 +43,10 @@ public class User extends BaseEntity {
     @Column(name = "bio", columnDefinition = "text")
     private String bio;
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "user")
-    //@PrimaryKeyJoinColumn
-    private Image photo;
-
-    /*@OneToOne(cascade = CascadeType.ALL)
-    private Image image;*/
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "image_bytes")
+    private byte[] imageBytes;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -62,6 +54,7 @@ public class User extends BaseEntity {
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
+            mappedBy = "user",
             orphanRemoval = true
     )
     @JoinColumn(name = "user_id")
@@ -93,8 +86,7 @@ public class User extends BaseEntity {
 
     public User(String email, String firstname, String lastname, LocalDate birthDate,
                 LocalDate employmentDate, String phoneNumber, Job job, String bio,
-                Image photo, String password, Role role, Team team,
-                String buddyId) {
+                byte[] imageBytes, String password, Role role, Team team, String buddyId) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -103,7 +95,7 @@ public class User extends BaseEntity {
         this.phoneNumber = phoneNumber;
         this.job = job;
         this.bio = bio;
-        this.photo = photo;
+        this.imageBytes = imageBytes;
         this.password = password;
         this.role = role;
         this.team = team;
@@ -121,7 +113,6 @@ public class User extends BaseEntity {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", job=" + job +
                 ", bio='" + bio + '\'' +
-                ", photo=" + photo +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", team=" + team +

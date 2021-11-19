@@ -9,6 +9,7 @@ import { TokenInterceptor } from "./interceptors/token.interceptor";
 // import {MatSort} from '@angular/material/sort';
 // import {MatTableDataSource} from '@angular/material/table';
 // import {MatFormFieldModule} from '@angular/material/form-field';
+import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +40,12 @@ import { AssessmentsUserComponent } from './components/assessments/assessments-u
 import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
+import { LogoutComponent } from './components/logout/logout-component/logout.component';
+import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
+import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
+import { HomeComponent } from './components/home/home-component/home.component';
+import { TeamsComponent } from './components/teams/team-component/teams.component';
+import {EditComponent} from "./edit/edit-component/edit.component";
 
 @NgModule({
   declarations: [
@@ -61,6 +68,9 @@ import { AssessmentsHistoryUserComponent } from './components/assessments/assess
     AssessmentsAdminComponent,
     ReplaceUnderscorePipe,
     AssessmentsHistoryUserComponent,
+    SidebarComponent,
+    TeamsComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -17,7 +18,7 @@ public interface UserService {
 
     UserDto getUserById(String id);
 
-    UserDto updateUser(UserDto userDto, String id);
+    UserDto updateUser(UserDto userDto, String id) throws IOException;
 
     String deleteUser(String id);
 

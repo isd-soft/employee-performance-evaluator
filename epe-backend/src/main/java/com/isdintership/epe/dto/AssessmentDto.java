@@ -7,6 +7,13 @@ import com.isdintership.epe.entity.StatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.isdintership.epe.entity.EvaluationGroup;
+import com.isdintership.epe.entity.StatusEnum;
+import lombok.Data;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

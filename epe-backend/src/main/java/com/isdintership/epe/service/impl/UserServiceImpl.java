@@ -24,9 +24,6 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.isdintership.epe.entity.Image.encodeImageFromFile;
-import static com.isdintership.epe.entity.Image.encodeImageFromFilePath;
-
 
 @Service
 @Slf4j
@@ -41,7 +38,6 @@ class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
-    private final ImageRepository imageRepository;
 
     @Override
     @Transactional
@@ -71,16 +67,8 @@ class UserServiceImpl implements UserService {
         user.setJob(jobUser);
 
         File imageSourceFile = new File("epe-backend//userDefaultImage.png");
-        Image image = new Image();
 
-        //String imagePath = request.getImageFolder();
-        try {
-            image.setImageBytes(encodeImageFromFile(imageSourceFile));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        image.setUser(user);
-        user.setPhoto(image);
+        user.setImageBytes(encodeImageFromFile(imageSourceFile));
 
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
@@ -134,21 +122,15 @@ class UserServiceImpl implements UserService {
         user.setJob(jobUser);
 
         File imageSourceFile = new File("epe-backend//userDefaultImage.png");
-        Image image = new Image();
 
-        //String imagePath = request.getImageFolder();
-        try {
-            image.setImageBytes(encodeImageFromFile(imageSourceFile));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        image.setUser(user);
-        user.setPhoto(image);
+        user.setImageBytes(encodeImageFromFile(imageSourceFile));
 
         log.info("Saving user {}", request.getEmail());
 
         return (UserDto.fromUser(userRepository.save(user)));
     }
+
+
 
     @Override
     @Transactional
@@ -172,7 +154,7 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto updateUser(UserDto userDto, String id) {
+    public UserDto updateUser(UserDto userDto, String id) throws IOException {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
@@ -182,28 +164,43 @@ class UserServiceImpl implements UserService {
             user.setBuddyId(userDto.getBuddyId());
         }
 
-        user.setEmail(userDto.getEmail());
-        user.setFirstname(userDto.getFirstname());
-        user.setLastname(userDto.getLastname());
-        user.setBirthDate(userDto.getBirthDate());
-        user.setEmploymentDate(userDto.getEmploymentDate());
-        user.setPhoneNumber(userDto.getPhoneNumber());
+        if (userDto.getEmail() != null) {
+            user.setEmail(userDto.getEmail());
+        }
+        if (userDto.getFirstname() != null) {
+            user.setFirstname(userDto.getFirstname());
+        }
+        if (userDto.getLastname() != null) {
+            user.setLastname(userDto.getLastname());
+        }
+        if (String.valueOf(userDto.getBirthDate()) != null) {
+            user.setBirthDate(userDto.getBirthDate());
+        }
+        if (String.valueOf(userDto.getEmploymentDate()) != null) {
+            user.setEmploymentDate(userDto.getEmploymentDate());
+        }
+        if (userDto.getPhoneNumber() != null) {
+            user.setPhoneNumber(userDto.getPhoneNumber());
+        }
+        if (userDto.getJob() != null) {
+            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
+                    new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
 
-        Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
-        user.setEmail(userDto.getEmail());
-        user.setFirstname(userDto.getFirstname());
-        user.setLastname(userDto.getLastname());
-        user.setBirthDate(userDto.getBirthDate());
-        user.setEmploymentDate(userDto.getEmploymentDate());
-        user.setPhoneNumber(userDto.getPhoneNumber());
-        job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
+            user.setJob(job);
+        }
+        if (userDto.getBio() != null) {
+            user.setBio(userDto.getBio());
+        }
 
-        user.setJob(job);
-        user.setBio(userDto.getBio());
-
+        if (userDto.getImage() != null) {
+            user.setImageBytes(encodeImageFromString(userDto.getImage()));
+        }
         return userDto;
+    }
+
+    private byte[] encodeImageFromString(String image) throws IOException {
+        byte[] bytes = new byte[2];
+        return bytes;
     }
 
     @Override
@@ -291,6 +288,10 @@ class UserServiceImpl implements UserService {
 //        imageRepository.save(image);
 //        return imageEditView;
 //    }
+    private byte[] encodeImageFromFile(File imageSourceFile) {
+        byte[] bytes = new byte[1];
+        return bytes;
+    }
 
 }
 
