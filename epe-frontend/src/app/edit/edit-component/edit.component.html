@@ -146,6 +146,20 @@
                                 </div>
                             </label>
 
+                            <label class="form-element">
+                                <input
+                                    title="Please insert your employment date"
+                                    type="text"
+                                    name="bio"
+                                    id="bio"
+                                    bio="ngModel"
+                                    placeholder="Insert your bio"
+                                    [(ngModel)]="updateUser.bio">
+                                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
+                                    Please pick a valid employment date !
+                                </div>
+                            </label>
+
 
                         </div>
                         <button type="submit" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()">Update</button>
