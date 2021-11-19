@@ -170,21 +170,37 @@ class UserServiceImpl implements UserService {
             user.setBuddyId(userView.getBuddyId());
         }
 
-        user.setEmail(userView.getEmail());
-        user.setFirstname(userView.getFirstname());
-        user.setLastname(userView.getLastname());
-        user.setBirthDate(userView.getBirthDate());
-        user.setEmploymentDate(userView.getEmploymentDate());
-        user.setPhoneNumber(userView.getPhoneNumber());
-        Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userView.getJob() + " not found"));
+        if (userView.getEmail() != null) {
+            user.setEmail(userView.getEmail());
+        }
+        if (userView.getFirstname() != null) {
+            user.setFirstname(userView.getFirstname());
+        }
+        if (userView.getLastname() != null) {
+            user.setLastname(userView.getLastname());
+        }
+        if (String.valueOf(userView.getBirthDate()) != null) {
+            user.setBirthDate(userView.getBirthDate());
+        }
+        if (String.valueOf(userView.getEmploymentDate()) != null) {
+            user.setEmploymentDate(userView.getEmploymentDate());
+        }
+        if (userView.getPhoneNumber() != null) {
+            user.setPhoneNumber(userView.getPhoneNumber());
+        }
+        if (userView.getJob() != null) {
+            Job job = jobRepository.findByJobTitle(userView.getJob()).orElseThrow(() ->
+                    new JobNotFoundException("Job with name " + userView.getJob() + " not found"));
 
-        user.setJob(job);
-        user.setBio(userView.getBio());
+            user.setJob(job);
+        }
+        if (userView.getBio() != null) {
+            user.setBio(userView.getBio());
+        }
 
-        user.setImageBytes(encodeImageFromString(userView.getImage()));
-
-        System.out.println();
+        if (userView.getImage() != null) {
+            user.setImageBytes(encodeImageFromString(userView.getImage()));
+        }
         return userView;
     }
 

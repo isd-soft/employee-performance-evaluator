@@ -23,6 +23,7 @@ export class EditComponent implements OnInit {
 
   auxUser?: User;
 
+  errorMessage? : string;
 
   constructor(private jwtService: JwtService,
               private editService: EditService,
@@ -68,8 +69,9 @@ export class EditComponent implements OnInit {
     this.auxUser.birthDate = datePipe.transform(this.auxUser.birthDate, 'dd-MM-yyyy') as string;
     this.auxUser.employmentDate = datePipe.transform(this.auxUser.employmentDate, 'dd-MM-yyyy') as string;
     this.auxUser.image = this.base64Output;
-    this.editService.update(this.auxUser).subscribe();
-
+    this.editService.update(this.auxUser).subscribe(data => {
+    }, error => {
+       this.errorMessage = error.error.title;})
 
   }
 

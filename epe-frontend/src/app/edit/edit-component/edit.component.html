@@ -19,18 +19,15 @@
 
 
                             <label class="form-element" >
-                                <img src="data:image/png;base64,{{auxUser.image}}" width="200">
+                                <h3>Old image</h3>
+                                <img src="data:image/png;base64,{{auxUser.image}}" height="200">
                             </label>
 
-
-                            <label class="form-element">
-                                <img [src]="url" height="200">
-                            </label>
-
+                            <h3>Choose new image</h3><br>
 
                             <label class="form-element input-file">
+                                
                                 <input
-                                    required
                                     title="Choose an image"
                                     type="file"
                                     name="image"
@@ -40,11 +37,15 @@
                             </label>
 
                             <label class="form-element">
+                                <img [src]="url" height="200">
+                            </label>
+
+                            <label class="form-element">
                                 <input
-                                    required
                                     title="Please insert your email"
                                     type="email"
                                     name="email"
+                                    readonly
                                     [email]="true"
                                     id="email"
                                     #email="ngModel"
@@ -57,7 +58,6 @@
 
                             <label class="form-element">
                                 <input
-                                    required
                                     title="Please insert your firstname"
                                     minlength="3"
                                     maxlength="20"
@@ -74,7 +74,6 @@
 
                             <label class="form-element">
                                 <input
-                                    required
                                     title="Please insert your lastname"
                                     minlength="3"
                                     maxlength="20"
@@ -105,7 +104,6 @@
 
                             <label class="form-element">
                                 <input
-                                    required
                                     title="Please insert your phone number"
                                     pattern="^\+?(?:[0-9] ?){6,14}[0-9]$"
                                     type="tel"
@@ -121,7 +119,6 @@
 
                             <label class="form-element">
                                 <select
-                                    required
                                     title="Please choose your job"
                                     name="job"
                                     id="job"
@@ -145,7 +142,8 @@
                                     name="employmentDate"
                                     id="employmentDate"
                                     #employmentDate="ngModel"
-                                    [(ngModel)]="auxUser.employmentDate">
+                                    [(ngModel)]="auxUser.employmentDate"
+                                    dateformat="d M y">
                                 <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
                                     Please pick a valid employment date !
                                 </div>
@@ -167,12 +165,17 @@
 
 
                         </div>
-                        <button type="submit" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()">Update</button>
+                        <button type="submit" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" routerLink="/dashboard">Update</button>
                     </form>
                 </div>
 
             </div>
         </div>
+    </div>
+    <div class="error-message">
+        <span *ngIf="errorMessage">
+            {{errorMessage}}
+        </span>
     </div>
 
 </body>
