@@ -1,13 +1,12 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {JobItem} from '../edit-models/job-item.interface';
 import {EditFiller} from './edit.filler';
-import {UpdateRequest} from '../edit-models/update-request.interface';
 import {User} from '../edit-models/user.interface';
 import {JwtService} from 'src/app/decoder/decoder-service/jwt.service';
 import {EditService} from '../edit-service/edit.service';
 import {Router} from '@angular/router';
 import {DatePipe} from "@angular/common";
-import {Observable, ReplaySubject, Subscriber} from "rxjs";
+import {Observable, ReplaySubject} from "rxjs";
 
 @Component({
   selector: 'app-edit',

@@ -38,8 +38,7 @@ import { AssessmentsUserComponent } from './components/assessments/assessments-u
 import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
-import {EditComponent} from "./edit/edit-component/edit.component";
-
+import { EditComponent } from './edit/edit-component/edit.component';
 @NgModule({
   declarations: [
     AppComponent,
