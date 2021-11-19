@@ -22,11 +22,15 @@ export class EditComponent implements OnInit {
 
   jobList?: JobItem[];
 
+  auxUser?: User;
+
 
   constructor(private jwtService: JwtService,
               private editService: EditService,
               private filler: EditFiller,
               private router: Router) {
+    this.editService.getUser().subscribe(data => 
+      this.auxUser = data as User);
     this.updateUser = this.filler.createUserToEdit();
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);

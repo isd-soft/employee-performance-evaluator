@@ -30,7 +30,7 @@ export class EditService {
       .pipe(catchError(this.errorHandler));
   }
 
-  getUser(user: User) {
+  getUser() {
     return this.http.get(this.url2 + '/' + this.id)
     .pipe(catchError(this.errorHandler));
   }
