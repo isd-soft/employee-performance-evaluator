@@ -38,6 +38,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { AssessmentsUserComponent } from './components/assessments/assessments-user/assessments-user.component';
 import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
+import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/
     AssessmentsUserComponent,
     AssessmentsAdminComponent,
     ReplaceUnderscorePipe,
+    AssessmentsHistoryUserComponent,
   ],
   imports: [
     BrowserModule,

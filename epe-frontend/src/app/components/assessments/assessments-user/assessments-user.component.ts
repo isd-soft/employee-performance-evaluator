@@ -23,13 +23,10 @@ import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 
 export class AssessmentsUserComponent implements OnInit, AfterViewInit {
 
-  displayedColumnsFirstTable: string[] = ['title', 'position', 'startDate', 'status', 'buttons'];
-  displayedColumnsSecondTable: string[] = ['title', 'startDate', 'endDate', 'score', 'buttons'];
-  firstDataSource!: MatTableDataSource<AssessmentView>;
-  secondDataSource!: MatTableDataSource<AssessmentView>;
+  displayedColumns: string[] = ['title', 'position', 'startDate', 'status', 'buttons'];
+  dataSource!: MatTableDataSource<AssessmentView>;
 
-  activeAssessments!: AssessmentView[];
-  finishedAssessments!: AssessmentView[];
+  assessments!: AssessmentView[];
   jwtUser : JwtUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,30 +44,20 @@ export class AssessmentsUserComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.assessmentsService.getAllAssessmentsByUserAndStatus(this.jwtUser.id, 'active').subscribe(
       data => {
-        this.activeAssessments = data as AssessmentView[];
-        this.firstDataSource = new MatTableDataSource<AssessmentView>(this.activeAssessments);
-        this.firstDataSource.paginator = this.paginator;
-        this.firstDataSource.sort = this.sort;
+        this.assessments = data as AssessmentView[];
+        this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     );
-
-    this.assessmentsService.getAllAssessmentsByUserAndStatus(this.jwtUser.id, 'FINISHED').subscribe(
-      data => {
-        this.finishedAssessments = data as AssessmentView[];
-        this.secondDataSource = new MatTableDataSource<AssessmentView>(this.finishedAssessments);
-        this.secondDataSource.paginator = this.paginator;
-        this.secondDataSource.sort = this.sort;
-      }
-    );
-
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.firstDataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.firstDataSource.paginator) {
-      this.firstDataSource.paginator.firstPage();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
 
   }
