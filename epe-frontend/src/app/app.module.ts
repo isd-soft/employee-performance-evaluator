@@ -45,11 +45,7 @@ import { UserEditComponent } from './components/users/user-edit/user-edit.compon
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-    // MatPaginator,
-    // MatSort,
-    // MatTableDataSource,
-    // MatFormFieldModule
+    BrowserAnimationsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

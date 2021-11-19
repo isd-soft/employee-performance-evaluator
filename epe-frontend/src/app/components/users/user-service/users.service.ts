@@ -3,15 +3,22 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
+import { RegisterRequest } from '../../home/home-models/register-request.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+  jobUrl: string = 'api-server/api/jobs';
   userUrl: string = 'api-server/api/users';
 
   constructor(private http: HttpClient) { }
+
+  getJobs() {
+    return this.http.get(this.jobUrl)
+    .pipe(catchError(this.errorHandler));
+  }
 
   getUsers() {
     return this.http.get(this.userUrl)
@@ -23,7 +30,7 @@ export class UsersService {
     .pipe(catchError(this.errorHandler));
   }
 
-  createUser(user: CreateUserRequest) {
+  createUser(user: RegisterRequest) {
     return this.http.post(this.userUrl, user)
     .pipe(catchError(this.errorHandler));
   }

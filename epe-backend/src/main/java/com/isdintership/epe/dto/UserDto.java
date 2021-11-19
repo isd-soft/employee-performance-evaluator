@@ -23,9 +23,9 @@ public class UserDto {
     private String job;
     private String bio;
 
-    // added by me !!!
-    private String team;
-    // end added !!!
+//    // added by me !!!
+//    private String team;
+//    // end added !!!
 
     private String buddyId;
     private String token;
@@ -42,13 +42,13 @@ public class UserDto {
         userDto.setJob(user.getJob().getJobTitle());
         userDto.setBio(user.getBio());
 
-        // added by me !!!
-        if(user.getTeam() != null) {
-            userDto.setTeam(user.getTeam().getName());
-        } else {
-            userDto.setTeam("");
-        }
-        // end added !!!
+//        // added by me !!!
+//        if(user.getTeam() != null) {
+//            userDto.setTeam(user.getTeam().getName());
+//        } else {
+//            userDto.setTeam("");
+//        }
+//        // end added !!!
 
         userDto.setBuddyId(user.getBuddyId());
 

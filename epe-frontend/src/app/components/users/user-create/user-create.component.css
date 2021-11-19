@@ -151,7 +151,8 @@ li,ul{
     text-align: center;
 }
 
-.login-form input {
+.login-form input,
+.login-form select {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
