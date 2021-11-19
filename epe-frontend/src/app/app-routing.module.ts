@@ -21,6 +21,7 @@ import {UsersView} from "./components/usersview/usersview-component/users-view.c
 import {UserComponent} from "./components/user/user-component/user.component";
 import {AdminGuard} from "./guards/admin/admin.guard";
 import {AssessmentsUserComponent} from "./components/assessments/assessments-user/assessments-user.component";
+import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 
 
 const routes: Routes = [
@@ -84,6 +85,11 @@ const routes: Routes = [
   {
     path: 'assessments',
     component: AssessmentsUserComponent,
+    canActivate: [DashboardGuard]
+  },
+  {
+    path: 'assessments-history',
+    component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
   },
   {

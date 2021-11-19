@@ -35,12 +35,20 @@
         </li>
         <li class="active">
           <a routerLink="/assessments">
-                  <span class="hidden-xs hidden-sm">
-                     <i class="fa fa-list-alt" aria-hidden="true"></i>
-                    Assessments
-                  </span>
+            <span class="hidden-xs hidden-sm">
+               <i class="fa fa-list-alt" aria-hidden="true"></i>
+              Assessments
+            </span>
           </a>
         </li>
+      <li class="active">
+        <a routerLink="/assessments-history">
+          <span class="hidden-xs hidden-sm">
+             <i class="fa fa-history" aria-hidden="true"></i>
+            History of assessments
+          </span>
+        </a>
+      </li>
     </ul>
     <ul *ngIf="isAdmin">
         <li class="active">
