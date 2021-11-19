@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class UserController {
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
     public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,
-                                              @PathVariable(name = "id") String id) {
+                                              @PathVariable(name = "id") String id) throws IOException {
         return ResponseEntity.ok(userService.updateUser(userDto, id));
     }
 

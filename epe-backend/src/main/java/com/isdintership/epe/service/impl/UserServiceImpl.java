@@ -68,7 +68,11 @@ class UserServiceImpl implements UserService {
 
         File imageSourceFile = new File("epe-backend//userDefaultImage.png");
 
-        user.setImageBytes(encodeImageFromFile(imageSourceFile));
+        try {
+            user.setImageBytes(encodeImageFromFile(imageSourceFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
@@ -76,6 +80,7 @@ class UserServiceImpl implements UserService {
         return "Registration successful";
 
     }
+
 
     @Override
     @Transactional
@@ -123,7 +128,11 @@ class UserServiceImpl implements UserService {
 
         File imageSourceFile = new File("epe-backend//userDefaultImage.png");
 
-        user.setImageBytes(encodeImageFromFile(imageSourceFile));
+        try {
+            user.setImageBytes(encodeImageFromFile(imageSourceFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         log.info("Saving user {}", request.getEmail());
 
@@ -152,9 +161,11 @@ class UserServiceImpl implements UserService {
         return UserDto.fromUser(user);
     }
 
+
+
     @Override
     @Transactional
-    public UserDto updateUser(UserDto userDto, String id) throws IOException {
+    public UserDto updateUser(UserDto userDto, String id) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
@@ -198,10 +209,6 @@ class UserServiceImpl implements UserService {
         return userDto;
     }
 
-    private byte[] encodeImageFromString(String image) throws IOException {
-        byte[] bytes = new byte[2];
-        return bytes;
-    }
 
     @Override
     @Transactional
@@ -288,9 +295,36 @@ class UserServiceImpl implements UserService {
 //        imageRepository.save(image);
 //        return imageEditView;
 //    }
-    private byte[] encodeImageFromFile(File imageSourceFile) {
-        byte[] bytes = new byte[1];
-        return bytes;
+public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
+    FileInputStream imageStream = new FileInputStream(imageFolder);
+
+    byte[] data = imageStream.readAllBytes();
+
+    String imageString = Base64.getEncoder().encodeToString(data);
+
+    byte[] finalData = imageString.getBytes();
+    imageStream.close();
+
+    return finalData;
+}
+
+
+    public static byte[] encodeImageFromFilePath(String imagePath) throws IOException {
+        FileInputStream imageStream = new FileInputStream(imagePath);
+
+        byte[] data = imageStream.readAllBytes();
+
+        String imageString = Base64.getEncoder().encodeToString(data);
+
+        byte[] finalData = imageString.getBytes();
+        imageStream.close();
+
+        return finalData;
+    }
+
+    public static byte[] encodeImageFromString(String imageBase64Encode) {
+        byte[] finalData = imageBase64Encode.getBytes();
+        return finalData;
     }
 
 }

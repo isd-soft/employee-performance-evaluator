@@ -54,7 +54,6 @@ public class User extends BaseEntity {
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
-            mappedBy = "user",
             orphanRemoval = true
     )
     @JoinColumn(name = "user_id")

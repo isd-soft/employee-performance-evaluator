@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
   //url = "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
   url = "";
 
-  base64Output : string;
+  base64Output? : string;
 
   selectFile(event) {
     if (event.target.files) {

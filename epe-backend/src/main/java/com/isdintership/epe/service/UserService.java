@@ -3,6 +3,7 @@ package com.isdintership.epe.service;
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
