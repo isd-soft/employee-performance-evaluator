@@ -49,6 +49,8 @@ public class UserView {
         userView.setPhoneNumber(user.getPhoneNumber());
         userView.setJob(user.getJob().getJobTitle());
         userView.setBuddyId(user.getBuddyId());
+        userView.setImage(new String(user.getImageBytes()));
+        userView.setBio(user.getBio());
         return userView;
     }
 }
