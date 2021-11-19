@@ -17,8 +17,7 @@ import {Observable, ReplaySubject, Subscriber} from "rxjs";
 @Injectable({providedIn: 'root'})
 export class EditComponent implements OnInit {
 
-  user?: User;
-  updateUser?: UpdateRequest;
+  user?: User
 
   jobList?: JobItem[];
 
@@ -30,8 +29,7 @@ export class EditComponent implements OnInit {
               private filler: EditFiller,
               private router: Router) {
     this.editService.getUser().subscribe(data => 
-      this.auxUser = data as User)
-    this.updateUser = this.filler.createUserToEdit();
+    this.auxUser = data as User);
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
   }
