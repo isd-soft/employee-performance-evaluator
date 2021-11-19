@@ -27,18 +27,18 @@ public class UserDto {
     private String image;
 
     public static UserDto fromUser(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setEmail(user.getEmail());
-        userDto.setFirstname(user.getFirstname());
-        userDto.setLastname(user.getLastname());
-        userDto.setBirthDate(user.getBirthDate());
-        userDto.setEmploymentDate(user.getEmploymentDate());
-        userDto.setPhoneNumber(user.getPhoneNumber());
-        userDto.setJob(user.getJob().getJobTitle());
-        userDto.setBio(user.getBio());
-        userDto.setBuddyId(user.getBuddyId());
-        userDto.setImage_bytes(user.getImageBytes());
-        return userDto;
+        UserDto userView = new UserDto();
+        userView.setId(user.getId());
+        userView.setEmail(user.getEmail());
+        userView.setFirstname(user.getFirstname());
+        userView.setLastname(user.getLastname());
+        userView.setBirthDate(user.getBirthDate());
+        userView.setEmploymentDate(user.getEmploymentDate());
+        userView.setPhoneNumber(user.getPhoneNumber());
+        userView.setJob(user.getJob().getJobTitle());
+        userView.setBuddyId(user.getBuddyId());
+        userView.setImage(new String(user.getImageBytes()));
+        userView.setBio(user.getBio());
+        return userView;
     }
 }
