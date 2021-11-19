@@ -4,4 +4,5 @@ export interface Assessment{
   overallScore: number
   startDate: Date
   endDate: Date
+  status: string
 }

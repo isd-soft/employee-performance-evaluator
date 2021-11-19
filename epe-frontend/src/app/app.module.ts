@@ -34,6 +34,7 @@ import { TeamCreateComponent } from './components/teams/team-create/team-create.
 import { UsersComponent } from './components/users/user-component/users.component';
 import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { UserEditComponent } from './components/users/user-edit/user-edit.compon
     TeamCreateComponent,
     UsersComponent,
     UserEditComponent,
-    UserCreateComponent
+    UserCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +70,7 @@ import { UserEditComponent } from './components/users/user-edit/user-edit.compon
     MatDialogModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
     // MatPaginator,
     // MatSort,
     // MatTableDataSource,

@@ -247,7 +247,7 @@ li,ul{
 
 /*Home Page*/
 
-.home {
+.home, html {
   background: #f6f7fa;
 }
 
@@ -263,12 +263,15 @@ li,ul{
   display: table;
   padding: 0;
   height: 100%;
+  min-height: 906px;
   width: 100%;
 }
 
 .display-table-row {
   display: table-row;
   height: 100%;
+  /*min-height: 100%;*/
+  /*display: flow;*/
 }
 
 .display-table-cell {
@@ -625,6 +628,12 @@ header {
 .modal-header.login-header {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.table-column{
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
 }
 /*Main CSS*/
 

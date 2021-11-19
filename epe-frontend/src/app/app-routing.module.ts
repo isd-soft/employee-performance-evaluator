@@ -19,6 +19,7 @@ import { HomeGuard } from './guards/home/home.guard';
 import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 import {UsersView} from "./components/usersview/usersview-component/users-view.component";
 import {UserComponent} from "./components/user/user-component/user.component";
+import {AdminGuard} from "./guards/admin/admin.guard";
 
 
 const routes: Routes = [
