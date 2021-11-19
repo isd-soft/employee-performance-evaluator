@@ -20,6 +20,7 @@ import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 import {UsersView} from "./components/usersview/usersview-component/users-view.component";
 import {UserComponent} from "./components/user/user-component/user.component";
 import {AdminGuard} from "./guards/admin/admin.guard";
+import {AssessmentsUserComponent} from "./components/assessments/assessments-user/assessments-user.component";
 
 
 const routes: Routes = [
@@ -79,6 +80,11 @@ const routes: Routes = [
   {
     path: 'usersview',
     component: UsersView,
+  },
+  {
+    path: 'assessments',
+    component: AssessmentsUserComponent,
+    canActivate: [DashboardGuard]
   },
   {
     path: '',
