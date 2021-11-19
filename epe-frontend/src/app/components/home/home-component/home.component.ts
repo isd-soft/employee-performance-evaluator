@@ -17,12 +17,9 @@ import { RegisterRequest } from '../home-models/register-request.interface';
 export class HomeComponent {
 
   hasAccount = true;
-
   loginUser?: LoginRequest;
   newUser?: NewUser;
-
-  jobList?: JobItem[]
-
+  jobList?: JobItem[];
   errorMessage?: string;
 
   constructor(private jwtService: JwtService,

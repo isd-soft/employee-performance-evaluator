@@ -134,6 +134,14 @@ public class AssessmentServiceImpl implements AssessmentService {
 
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
 
+        if (status.equals("active")) {
+
+            assessmentRepository.findByUserAndStatusIsNot(user, StatusEnum.FINISHED)
+                    .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
+
+            return assessmentDtos;
+        }
+
 
         try {
 

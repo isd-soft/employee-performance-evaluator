@@ -18,6 +18,8 @@ public interface AssessmentRepository extends JpaRepository<Assessment, String> 
 
     List<Assessment> findByUserAndStatus(User user, StatusEnum status);
 
+    List<Assessment> findByUserAndStatusIsNot(User user, StatusEnum status);
+
     List<Assessment> findAllByIsTemplate(Boolean isTemplate);
 
     Optional<Assessment> findByTitleAndIsTemplate(String title, Boolean isTemplate);
