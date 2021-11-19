@@ -30,7 +30,7 @@ export class EditComponent implements OnInit {
               private filler: EditFiller,
               private router: Router) {
     this.editService.getUser().subscribe(data => 
-      this.auxUser = data as User);
+      this.auxUser = data as User)
     this.updateUser = this.filler.createUserToEdit();
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
@@ -67,10 +67,10 @@ export class EditComponent implements OnInit {
 
   update() {
     let datePipe = new DatePipe('en-US');
-    this.updateUser.birthDate = datePipe.transform(this.updateUser.birthDate, 'dd-MM-yyyy') as string;
-    this.updateUser.employmentDate = datePipe.transform(this.updateUser.employmentDate, 'dd-MM-yyyy') as string;
-    this.updateUser.image = this.base64Output;
-    this.editService.update(this.updateUser).subscribe();
+    this.auxUser.birthDate = datePipe.transform(this.auxUser.birthDate, 'dd-MM-yyyy') as string;
+    this.auxUser.employmentDate = datePipe.transform(this.auxUser.employmentDate, 'dd-MM-yyyy') as string;
+    this.auxUser.image = this.base64Output;
+    this.editService.update(this.auxUser).subscribe();
 
 
   }

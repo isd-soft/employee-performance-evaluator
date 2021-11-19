@@ -49,7 +49,7 @@
                                     id="email"
                                     #email="ngModel"
                                     placeholder="Enter your email"
-                                    [(ngModel)]="updateUser.email">
+                                    [(ngModel)]="auxUser.email">
                                 <div *ngIf="email.touched && !email.valid" class="input-box-error">
                                     Email is required and must be a valid one !
                                 </div>
@@ -65,7 +65,7 @@
                                     name="firstname"
                                     id="firstname"
                                     #firstname="ngModel"
-                                    [(ngModel)]="updateUser.firstname"
+                                    [(ngModel)]="auxUser.firstname"
                                     placeholder="Enter your name">
                                 <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
                                     Firstname is required and must be between 3 and 20 letters long !
@@ -82,7 +82,7 @@
                                     name="lastname"
                                     id="lastname"
                                     #lastname="ngModel"
-                                    [(ngModel)]="updateUser.lastname"
+                                    [(ngModel)]="auxUser.lastname"
                                     placeholder="Enter your last name">
                                 <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
                                     Lastname is required and must be between 3 and 20 letters long !
@@ -97,7 +97,7 @@
                                     name="birthDate"
                                     id="birthDate"
                                     #birthDate="ngModel"
-                                    [(ngModel)]="updateUser.birthDate"
+                                    [(ngModel)]="auxUser.birthDate"
                                     placeholder="Enter your birth date">
                                 <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
                                     Please pick a valid birth date !
@@ -113,7 +113,7 @@
                                     name="phone"
                                     id="phone"
                                     #phone="ngModel"
-                                    [(ngModel)]="updateUser.phoneNumber"
+                                    [(ngModel)]="auxUser.phoneNumber"
                                     placeholder="Enter your phone number">
                                 <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
                                     Phone number is required !
@@ -127,7 +127,7 @@
                                     name="job"
                                     id="job"
                                     #job="ngModel"
-                                    [(ngModel)]="updateUser.job"
+                                    [(ngModel)]="auxUser.job"
                                     placeholder="Enter your job">
                                     <option *ngFor="let job of jobList">
                                         {{ job.jobTitle }}
@@ -146,7 +146,7 @@
                                     name="employmentDate"
                                     id="employmentDate"
                                     #employmentDate="ngModel"
-                                    [(ngModel)]="updateUser.employmentDate">
+                                    [(ngModel)]="auxUser.employmentDate">
                                 <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
                                     Please pick a valid employment date !
                                 </div>
@@ -160,7 +160,7 @@
                                     id="bio"
                                     bio="ngModel"
                                     placeholder="Insert your bio"
-                                    [(ngModel)]="updateUser.bio">
+                                    [(ngModel)]="auxUser.bio">
                                 <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
                                     Please pick a valid employment date !
                                 </div>
