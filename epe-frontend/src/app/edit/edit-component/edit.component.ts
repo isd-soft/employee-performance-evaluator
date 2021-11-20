@@ -28,7 +28,7 @@ export class EditComponent implements OnInit {
               private editService: EditService,
               private filler: EditFiller,
               private router: Router) {
-    this.editService.getUser().subscribe(data => 
+    this.editService.getUser().subscribe(data =>
     this.auxUser = data as User);
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
@@ -39,6 +39,7 @@ export class EditComponent implements OnInit {
 
   base64Output? : string;
 
+  // @ts-ignore
   selectFile(event) {
     if (event.target.files) {
       var reader = new FileReader();
@@ -56,6 +57,7 @@ export class EditComponent implements OnInit {
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
     reader.readAsBinaryString(file);
+    // @ts-ignore
     reader.onload = (event) => result.next(btoa(event.target.result.toString()));
     return result;
   }
@@ -65,8 +67,11 @@ export class EditComponent implements OnInit {
 
   update() {
     let datePipe = new DatePipe('en-US');
+    // @ts-ignore
     this.auxUser.birthDate = datePipe.transform(this.auxUser.birthDate, 'dd-MM-yyyy') as string;
+    // @ts-ignore
     this.auxUser.employmentDate = datePipe.transform(this.auxUser.employmentDate, 'dd-MM-yyyy') as string;
+    // @ts-ignore
     this.auxUser.image = this.base64Output;
     this.editService.update(this.auxUser).subscribe(data => {
     }, error => {

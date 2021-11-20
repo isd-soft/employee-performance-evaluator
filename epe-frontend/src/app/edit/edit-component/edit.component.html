@@ -13,7 +13,7 @@
                 <div class="title">
                     <h1>Update <span>profile!</span></h1>
                 </div>
-                <div class="login-form">
+                <div *ngIf="auxUser" class="login-form">
                     <form #editForm="ngForm">
                         <div class="form-details">
 
@@ -26,7 +26,7 @@
                             <h3>Choose new image</h3><br>
 
                             <label class="form-element input-file">
-                                
+
                                 <input
                                     title="Choose an image"
                                     type="file"

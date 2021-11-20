@@ -18,13 +18,13 @@ export class EditService {
   jwtUser?: JwtUser;
   id? : string
 
-  constructor(private http: HttpClient, private jwtService: JwtService) { 
+  constructor(private http: HttpClient, private jwtService: JwtService) {
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser)
     this.id = this.jwtUser.id;
   }
 
-  update(user: UpdateRequest) {
+  update(user: User | undefined) {
     console.log(user)
     return this.http.put(this.url2 + '/' + this.id, user)
       .pipe(catchError(this.errorHandler));
