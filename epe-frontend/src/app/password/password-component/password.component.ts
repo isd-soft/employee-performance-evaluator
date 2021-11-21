@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PasswordTemplate} from "../password-model/password.interface";
 
 @Component({
   selector: 'app-password',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordComponent implements OnInit {
 
+  passwordDto? : PasswordTemplate;
+
+  errorMessage? : string;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  changePassword() {
+
+  }
 }
