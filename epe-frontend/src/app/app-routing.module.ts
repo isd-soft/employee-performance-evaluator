@@ -24,6 +24,7 @@ import {AssessmentsUserComponent} from "./components/assessments/assessments-use
 import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 
 import { EditComponent } from './edit/edit-component/edit.component';
+import {PasswordComponent} from "./password/password-component/password.component";
 
 
 const routes: Routes = [
@@ -83,6 +84,10 @@ const routes: Routes = [
   {
     path: "edit",
     component: EditComponent
+  },
+  {
+    path: 'edit/password',
+    component: PasswordComponent
   },
   {
     path: 'usersview',

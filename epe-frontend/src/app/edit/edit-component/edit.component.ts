@@ -34,7 +34,6 @@ export class EditComponent implements OnInit {
       this.jobList = data as JobItem[]);
   }
 
-  //url = "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
   url = "";
 
   base64Output? : string;

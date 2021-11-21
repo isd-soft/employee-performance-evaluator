@@ -1,8 +1,10 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {JwtService} from "../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../decoder/decoder-model/jwt-user.interface";
 import {Injectable} from "@angular/core";
 import {PasswordTemplate} from "../password-model/password.interface";
+import {catchError} from "rxjs/operators";
+import {throwError as observableThrowError} from "rxjs/internal/observable/throwError";
 
 @Injectable({providedIn : 'root'})
 export class PasswordService {
@@ -19,6 +21,11 @@ export class PasswordService {
   }
 
   changePassword(passwordDto: PasswordTemplate) {
-    return this.http.put(this.url + '/' + this.id + '/password',)
+    return this.http.put(this.url + '/' + this.id + '/password',passwordDto).
+      pipe(catchError(this.errorHandler));
+  }
+
+  errorHandler(error: HttpErrorResponse){
+    return observableThrowError(error);
   }
 }
