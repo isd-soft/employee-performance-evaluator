@@ -39,6 +39,7 @@ import { AssessmentsAdminComponent } from './components/assessments/assessments-
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
 import { EditComponent } from './edit/edit-component/edit.component';
+import { PasswordComponent } from './password/password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,8 @@ import { EditComponent } from './edit/edit-component/edit.component';
     AssessmentsHistoryUserComponent,
     SidebarComponent,
     TeamsComponent,
-    EditComponent
+    EditComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,
