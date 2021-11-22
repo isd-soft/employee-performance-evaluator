@@ -1,0 +1,47 @@
+mat-card {
+  font-size: 20px ;
+}
+
+.header {
+  padding: 15px;
+  text-align: center;
+  font-family: 'Trocchi', serif;
+  font-weight: bolder;
+  font-size: 25px;
+  border: 1px solid #000;
+  margin: auto;
+}
+
+.bold {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mat-card-title, .mat-card-subtitle {
+  text-align: center;
+}
+
+.evaluation-groups-title {
+  margin: 2% 0;
+}
+
+.evaluation-groups {
+  padding-left: 3%;
+}
+
+.evaluation-group {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.evaluation-fields {
+  padding-left: 4%;
+}
+
+.mat-card-actions {
+  text-align: center;
+}
+
+.mat-button {
+  font-size: 16px;
+}

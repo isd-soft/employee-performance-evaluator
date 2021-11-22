@@ -1,0 +1,50 @@
+
+  <mat-card-title>Edit assessment</mat-card-title>
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput
+           value="{{ assessmentTemplate.title }}">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Job position</mat-label>
+    <mat-select [(ngModel)]="selectedJobTitle">
+      <mat-option *ngFor="let jobItem of jobItems" value="{{ jobItem.jobTitle }}">
+        {{ jobItem.jobTitle }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="10"
+    >{{ assessmentTemplate.description }}</textarea>
+  </mat-form-field>
+
+
+  <div class="evaluation-groups"
+  >
+    <div class="groups"
+         *ngFor="let evaluationGroup of assessmentTemplate.evaluationGroups; let i = index">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Evaluation group</mat-label>
+        <input matInput value="{{evaluationGroup.title}}">
+      </mat-form-field>
+
+      <div class="evaluation-groups"
+      >
+        <mat-form-field *ngFor="let evaluationField of evaluationGroup.evaluationFields; let j = index"
+                        appearance="fill"
+                        class="evaluation-field"
+        >
+          <mat-label>Evaluation field</mat-label>
+          <input matInput value="{{evaluationField.title}}">
+        </mat-form-field>
+      </div>
+
+
+    </div>
+
+  </div>

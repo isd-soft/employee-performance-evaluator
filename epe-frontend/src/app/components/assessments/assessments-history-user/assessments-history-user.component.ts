@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {AssessmentView} from "../assessments-models/assessment-view.interface";
+import {AssessmentView} from "../assessments-models/assessment-short-view.interface";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {AssessmentsService} from "../assessments-service/assessments.service";
+import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 
 @Component({

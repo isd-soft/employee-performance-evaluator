@@ -1,6 +1,7 @@
 package com.isdintership.epe.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isdintership.epe.entity.Assessment;
 import com.isdintership.epe.entity.StatusEnum;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class AssessmentTemplateDto {
     private String jobTitle;
     private StatusEnum status;
     private Boolean isTemplate;
+    @JsonProperty("evaluationGroups")
     private List<EvaluationGroupDto> evaluationGroupDto;
 
     public AssessmentTemplateDto() {

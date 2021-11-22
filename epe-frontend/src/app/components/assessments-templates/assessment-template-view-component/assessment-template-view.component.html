@@ -1,0 +1,20 @@
+<mat-card class="template-view">
+  <mat-card-title>{{ assessmentTemplate.title }}</mat-card-title>
+  <mat-card-subtitle>{{ assessmentTemplate.jobTitle }}</mat-card-subtitle>
+  <mat-card-content>
+    <p class="bold">Description</p>
+    <p>{{ assessmentTemplate.description }}</p>
+    <p class="bold evaluation-groups-title">Evaluation groups</p>
+    <div class="evaluation-groups" *ngFor="let evaluationGroup of assessmentTemplate.evaluationGroups">
+        <p class="evaluation-group">{{ evaluationGroup.title }}</p>
+        <div class="evaluation-fields" *ngFor="let evaluationField of evaluationGroup.evaluationFields">
+          <p>{{evaluationField.title}}</p>
+        </div>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="openEditDialog()">Edit</button>
+    <button mat-button>Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+}
+
+form {
+  width: 100%;
+  margin-left: 15%;
+}
+
+.evaluation-field {
+  padding-left: 5%;
+}
+
+mat-form-field {
+  width: 80%;
+}
+
+mat-form-field:first-child {
+  margin-top: 3%;
+}

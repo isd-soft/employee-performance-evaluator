@@ -1,5 +1,6 @@
 package com.isdintership.epe.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isdintership.epe.entity.EvaluationField;
 import com.isdintership.epe.entity.EvaluationGroup;
 import lombok.Data;
@@ -13,6 +14,7 @@ public class EvaluationGroupDto {
     private Float overallScore;
     private String title;
     private String assessmentId;
+    @JsonProperty("evaluationFields")
     private List<EvaluationFieldDto> evaluationFieldDtos;
 
 

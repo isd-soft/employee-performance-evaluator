@@ -1,0 +1,61 @@
+<form action="" [formGroup]="assessmentTemplateForm">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Job position</mat-label>
+    <mat-select formControlName="jobTitle">
+      <mat-option *ngFor="let jobItem of jobItems" value="{{ jobItem.jobTitle }}">
+        {{ jobItem.jobTitle }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput
+              formControlName="description"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="10">
+    </textarea>
+  </mat-form-field>
+
+  <div class="evaluation-groups" formArrayName="evaluationGroups">
+    <div class="groups"
+         *ngFor="let group of evaluationGroupArray.controls; let i = index;"
+         [formGroupName]="i"
+    >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Evaluation group</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+      <button mat-button (click)="removeEvaluationGroup(i)">Remove</button>
+
+      <div class="evaluation-fields" formArrayName="evaluationFields">
+        <div class="fields"
+             *ngFor="let field of evaluationFieldArray(group).controls; let j = index;"
+             [formGroupName]="j"
+        >
+
+          <mat-form-field appearance="fill" class="evaluation-field">
+            <mat-label>Evaluation field</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+          <button mat-button (click)="removeEvaluationField(group, j)">Remove</button>
+        </div>
+        <button mat-button (click)="addNewEvaluationField(group)">Add</button>
+
+      </div>
+
+    </div>
+
+    <button mat-button (click)="addNewEvaluationGroup()">Add</button>
+  </div>
+
+  <button mat-button (click)="onSubmit()">Submit</button>
+</form>

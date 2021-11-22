@@ -3,8 +3,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {AssessmentView} from "../assessments-models/assessment-view.interface";
-import {AssessmentsService} from "../assessments-service/assessments.service";
+import {AssessmentView} from "../assessments-models/assessment-short-view.interface";
+import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 
@@ -12,13 +12,6 @@ import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
   selector: 'app-assessments-user',
   templateUrl: './assessments-user.component.html',
   styleUrls: ['./assessments-user.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ]
 })
 
 export class AssessmentsUserComponent implements OnInit, AfterViewInit {

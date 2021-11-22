@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 // import { TableOverviewExample } from './table-overview-example/table-overview-example.component';
@@ -39,6 +39,13 @@ import { AssessmentsUserComponent } from './components/assessments/assessments-u
 import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { AssessmentsTemplatesComponent } from './components/assessments-templates/assessments-templates-component/assessments-templates.component';
+import {AssessmentTemplateViewComponent} from "./components/assessments-templates/assessment-template-view-component/assessment-template-view.component";
+import {MatCardModule} from "@angular/material/card";
+import { AssessmentTemplateEditComponent } from './components/assessments-templates/assessment-template-edit-component/assessment-template-edit.component';
+import {MatSelectModule} from "@angular/material/select";
+import { AssessmentTemplateCreateComponent } from './components/assessments-templates/assessment-template-create-component/assessment-template-create.component';
 
 @NgModule({
   declarations: [
@@ -61,29 +68,37 @@ import { AssessmentsHistoryUserComponent } from './components/assessments/assess
     AssessmentsAdminComponent,
     ReplaceUnderscorePipe,
     AssessmentsHistoryUserComponent,
+    AssessmentsTemplatesComponent,
+    AssessmentTemplateViewComponent,
+    AssessmentTemplateEditComponent,
+    AssessmentTemplateCreateComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    // MatPaginator,
-    // MatSort,
-    // MatTableDataSource,
-    // MatFormFieldModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatTabsModule,
+        MatCardModule,
+        MatSelectModule,
+        // MatPaginator,
+        // MatSort,
+        // MatTableDataSource,
+        // MatFormFieldModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: 'API_URL', useValue: getApiUrl()}
