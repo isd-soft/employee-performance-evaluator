@@ -23,8 +23,9 @@ import {AdminGuard} from "./guards/admin/admin.guard";
 import {AssessmentsUserComponent} from "./components/assessments/assessments-user/assessments-user.component";
 import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 
-import { EditComponent } from './edit/edit-component/edit.component';
-import {PasswordComponent} from "./password/password-component/password.component";
+import { EditComponent } from './components/edit/edit-component/edit.component';
+import {PasswordComponent} from "./components/password/password-component/password.component";
+import {NotfoundComponent} from "./components/notfound/notfound.component";
 
 
 const routes: Routes = [
@@ -102,6 +103,10 @@ const routes: Routes = [
     path: 'assessments-history',
     component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
   },
   {
     path: '',
