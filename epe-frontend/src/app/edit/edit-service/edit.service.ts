@@ -25,7 +25,6 @@ export class EditService {
   }
 
   update(user: User | undefined) {
-    console.log(user)
     return this.http.put(this.url2 + '/' + this.id, user)
       .pipe(catchError(this.errorHandler));
   }

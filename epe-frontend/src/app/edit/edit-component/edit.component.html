@@ -10,17 +10,8 @@
             </div>
             <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
 
-                <div class="title">
-                    <h1>Update <span>profile!</span></h1>
-                </div>
-
-              <div class="title">
-                <a routerLink="/edit/password">Change password</a>
-              </div>
-
-
                 <div *ngIf="auxUser" class="login-form">
-                    <form #editForm="ngForm">
+                    <form #editForm="ngForm" (ngSubmit)="update()">
                         <div class="form-details">
 
 
@@ -171,9 +162,13 @@
 
 
                         </div>
-                        <button type="submit" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" routerLink="/dashboard">Update</button>
+                        <button type="button" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" routerLink="/dashboard">Update</button>
                     </form>
                 </div>
+
+              <div class="title">
+                <a routerLink="/edit/password">Change password</a>
+              </div>
 
             </div>
         </div>

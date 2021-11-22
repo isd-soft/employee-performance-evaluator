@@ -65,6 +65,7 @@ export class EditComponent implements OnInit {
 
 
   update() {
+    console.log('smth');
     let datePipe = new DatePipe('en-US');
     // @ts-ignore
     this.auxUser.birthDate = datePipe.transform(this.auxUser.birthDate, 'dd-MM-yyyy') as string;

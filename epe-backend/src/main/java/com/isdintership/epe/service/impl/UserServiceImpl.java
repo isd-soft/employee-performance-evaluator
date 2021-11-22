@@ -169,6 +169,8 @@ class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
+        System.out.println(userDto);
+
         if (userDto.getBuddyId() != null) {
             userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
                     new UserNotFoundException("Buddy with id " + id + " was not found"));
@@ -251,8 +253,18 @@ class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
+        boolean isPasswordMatched = passwordEncoder.matches(user.getPassword(),passwordView.getNewPassword());
 
-        user.setPassword(passwordEncoder.encode(passwordView.getPassword()));
+        user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
+        System.out.println(passwordView.getNewPassword());
+
+//        if (isPasswordMatched) {
+//            if (passwordView.getNewPassword().equals(passwordView.getNewPasswordConfirmation())) {
+//                user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
+//                System.out.println("smth");
+//            }
+//        }
+
 
         return passwordView;
     }

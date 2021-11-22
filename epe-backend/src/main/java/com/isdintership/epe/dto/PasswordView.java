@@ -8,6 +8,8 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PasswordView {
 
-    private String password;
+    private String oldPassword;
+    private String newPassword;
+    private String newPasswordConfirmation;
 
 }

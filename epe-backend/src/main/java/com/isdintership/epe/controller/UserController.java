@@ -60,7 +60,7 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
-    @PatchMapping("password/{id}")
+    @PutMapping("/password/{id}")
     @RolesAllowed({ROLE_SYSADMIN,ROLE_USER})
     @CrossOrigin(origins = origin)
     public ResponseEntity<PasswordView> changePassword(@RequestBody PasswordView passwordView,
@@ -68,7 +68,7 @@ public class UserController {
         return new ResponseEntity<>(userService.changePassword(passwordView,id),HttpStatus.OK);
     }
 
-    @PatchMapping("group/{id}")
+    @PutMapping("/{id}/group")
     @RolesAllowed(ROLE_SYSADMIN)
     @CrossOrigin(origins = origin)
     public ResponseEntity<RoleView> changeGroup(@RequestBody RoleView roleView,
