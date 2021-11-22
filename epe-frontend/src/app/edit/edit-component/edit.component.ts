@@ -65,12 +65,6 @@ export class EditComponent implements OnInit {
 
 
   update() {
-    console.log('smth');
-    let datePipe = new DatePipe('en-US');
-    // @ts-ignore
-    this.auxUser.birthDate = datePipe.transform(this.auxUser.birthDate, 'dd-MM-yyyy') as string;
-    // @ts-ignore
-    this.auxUser.employmentDate = datePipe.transform(this.auxUser.employmentDate, 'dd-MM-yyyy') as string;
     // @ts-ignore
     this.auxUser.image = this.base64Output;
     this.editService.update(this.auxUser).subscribe(data => {

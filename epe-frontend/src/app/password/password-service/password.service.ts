@@ -21,7 +21,6 @@ export class PasswordService {
   }
 
   changePassword(passwordDto: PasswordTemplate) {
-    console.log('smth');
     return this.http.put(this.url + '/password/' + this.id,passwordDto).
       pipe(catchError(this.errorHandler));
   }

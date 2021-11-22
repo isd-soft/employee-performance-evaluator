@@ -26,7 +26,6 @@ export class PasswordComponent implements OnInit {
   }
 
   changePassword() {
-    console.log(this.passwordDto)
     if (this.passwordDto?.newPassword === this.passwordDto?.newPasswordConfirmation) {
       // @ts-ignore
       this.passwordService?.changePassword(this.passwordDto).subscribe(data => {

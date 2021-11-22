@@ -15,6 +15,7 @@ import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -169,8 +170,6 @@ class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
-        System.out.println(userDto);
-
         if (userDto.getBuddyId() != null) {
             userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
                     new UserNotFoundException("Buddy with id " + id + " was not found"));
@@ -253,18 +252,19 @@ class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + "was not found"));
 
-        boolean isPasswordMatched = passwordEncoder.matches(user.getPassword(),passwordView.getNewPassword());
+        boolean isPasswordMatched = passwordEncoder.matches(passwordView.getOldPassword(), user.getPassword());
 
-        user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
-        System.out.println(passwordView.getNewPassword());
-
-//        if (isPasswordMatched) {
-//            if (passwordView.getNewPassword().equals(passwordView.getNewPasswordConfirmation())) {
-//                user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
-//                System.out.println("smth");
-//            }
-//        }
-
+        if (isPasswordMatched) {
+            if (!(passwordView.getNewPassword().equals(passwordView.getNewPasswordConfirmation()))) {
+                throw new BadCredentialsException("New password was not confirmed");
+            } else if (passwordView.getNewPassword().equals(passwordView.getOldPassword())) {
+                throw new BadCredentialsException("Old and new passwords are the same");
+            } else {
+                user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
+            }
+        } else {
+            throw new BadCredentialsException("Old password doesn't match with the old inserted password");
+        }
 
         return passwordView;
     }
