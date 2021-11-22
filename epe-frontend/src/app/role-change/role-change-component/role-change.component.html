@@ -4,10 +4,15 @@
     <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
 
       <div class="login-form">
-        <form>
+        <form #roleForm="ngForm">
           <div class="form-details">
+
             <label>
-              <select>
+              <select
+                title="Please choose a role"
+                #role="ngModel"
+                [(ngModel)]="roleDto.role"
+                placeholder="Choose a role">
                 <option *ngFor="let role of rolesList">
                   {{role}}
                 </option>>
