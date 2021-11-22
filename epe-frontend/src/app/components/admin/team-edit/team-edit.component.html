@@ -8,37 +8,39 @@
             
             <span class="header"> Edit Team ! </span>
 
-            <!-- <form>
-                <mat-form-field class="new-team-input" appearance="fill">
+            <form>
+                <mat-form-field class="edit-team-input" appearance="fill">
                     <mat-label>Team Name</mat-label>
                     <input 
                       type="text" 
                       matInput 
                       [formControl]="teamNameFormControl" 
                       placeholder="Ex. C++ Developers"
-                      [(ngModel)]="newTeamName">
+                      [(ngModel)]="TeamName">
                     <mat-error 
                       *ngIf="teamNameFormControl.hasError('required')">
-                      New team name is required
+                      Team name is required
                     </mat-error>
                 </mat-form-field>
                 
-                <mat-form-field class="new-team-input" appearance="fill">
+                <mat-form-field class="edit-team-input" appearance="fill">
                     <mat-label>Team Leader</mat-label>
-                    <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="newTeamLeaderId">
+                    <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="TeamLeaderID">
                       <mat-select-trigger>
                         {{teamLeaderFormControl.value ? teamLeaderFormControl.value : ''}}
                       </mat-select-trigger>
+                      <mat-option disabled selected> {{TeamLeaderName}} </mat-option>
                       <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstname}} {{user.lastname}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="new-team-submit" (click)="createTeam()" mat-raised-button>Create Team</button>
+                <button class="edit-team-submit" (click)="updateTeam()" mat-raised-button>Update Team</button>
+                <button class="edit-team-submit" (click)="deleteTeam()" mat-raised-button>Delete Team</button>
             </form>
             <div class="error-message">
                 <span *ngIf="errorMessage">
                     {{errorMessage}}
                 </span>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
