@@ -40,6 +40,7 @@ import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
 import { EditComponent } from './edit/edit-component/edit.component';
 import { PasswordComponent } from './password/password-component/password.component';
+import { RoleChangeComponent } from './role-change/role-change.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { PasswordComponent } from './password/password-component/password.compon
     SidebarComponent,
     TeamsComponent,
     EditComponent,
-    PasswordComponent
+    PasswordComponent,
+    RoleChangeComponent
   ],
   imports: [
     BrowserModule,
