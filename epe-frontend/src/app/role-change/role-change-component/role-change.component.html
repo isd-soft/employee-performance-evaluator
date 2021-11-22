@@ -1,0 +1,26 @@
+<body class="home">
+<div class="container-fluid display-table">
+  <div class="row display-table-row">
+    <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
+
+      <div class="login-form">
+        <form>
+          <div class="form-details">
+            <label>
+              <select>
+                <option *ngFor="let role of rolesList">
+                  {{role}}
+                </option>>
+              </select>
+            </label>
+          </div>
+          <button type="button"  class="form-btn" disabled>Change group</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</body>

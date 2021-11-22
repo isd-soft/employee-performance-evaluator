@@ -68,7 +68,7 @@ public class UserController {
         return new ResponseEntity<>(userService.changePassword(passwordView,id),HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/group")
+    @PutMapping("/group/{id}")
     @RolesAllowed(ROLE_SYSADMIN)
     @CrossOrigin(origins = origin)
     public ResponseEntity<RoleView> changeGroup(@RequestBody RoleView roleView,

@@ -9,6 +9,7 @@ import {UserComponent} from "../../user/user-component/user.component";
 import {UserService} from "../../user/user-service/user.service.js";
 import {HomeComponent} from "../../home/home-component/home.component";
 import {identity} from "rxjs";
+import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
 
 @Component({
   selector: 'app-usersview',
@@ -27,8 +28,13 @@ export class UsersView implements AfterViewInit {
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userview: UserviewsServices, public dialog: MatDialog) {
 
+  role?: string;
+  requiredRole : string = "ROLE_SYSADMIN";
+
+  constructor(private userview: UserviewsServices, public dialog: MatDialog) {
+    this.role = this.userview.getRole();
+    console.log(this.role);
   }
 
   applyFilter(event: Event) {
@@ -52,5 +58,9 @@ export class UsersView implements AfterViewInit {
 
   onView(user : string) {
     this.dialog.open( UserComponent, {data: user} );
+  }
+
+  changeGroup() {
+    this.dialog.open(RoleChangeComponent);
   }
 }

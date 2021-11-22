@@ -81,6 +81,11 @@
                   <button mat-button (click)="onView(row.id)">
                     <mat-icon>person</mat-icon>
                   </button>
+                  <div *ngIf="role==requiredRole">
+                    <button mat-button (click)="changeGroup()">
+                      <mat-icon>group</mat-icon>
+                    </button>
+                  </div>
                 </mat-cell>
               </ng-container>
 

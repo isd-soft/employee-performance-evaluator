@@ -26,6 +26,8 @@ import {AssessmentsHistoryUserComponent} from "./components/assessments/assessme
 import { EditComponent } from './edit/edit-component/edit.component';
 import {PasswordComponent} from "./password/password-component/password.component";
 
+import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
+
 
 const routes: Routes = [
   {
@@ -102,6 +104,10 @@ const routes: Routes = [
     path: 'assessments-history',
     component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
+  },
+  {
+    path: 'group',
+    component: RoleChangeComponent
   },
   {
     path: '',
