@@ -1,30 +1,28 @@
+import { AdminGuard } from './guards/admin/admin.guard';
+import { UserGuard } from './guards/user/user.guard';
+import { GuestGuard } from './guards/guest/guest.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './components/home/home-component/home.component';
-import { LogoutComponent } from './components/logout/logout-component/logout.component';
-import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
-
-import { TeamsComponent } from './components/teams/team-component/teams.component';
-import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
-import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
-
-import { ProfileComponent } from './components/profile/profile-component/profile.component';
-
-import { UsersComponent } from './components/users/user-component/users.component';
-import { UserEditComponent } from './components/users/user-edit/user-edit.component';
-import { UserCreateComponent } from './components/users/user-create/user-create.component';
-
-import { HomeGuard } from './guards/home/home.guard';
-import { DashboardGuard } from './guards/dashboard/dashboard.guard';
-import { AdminGuard } from './guards/admin/admin.guard';
-
+import { LoginComponent } from './components/guest/login/login.component';
+import { LogoutComponent } from './components/guest/logout/logout.component';
+import { RegisterComponent } from './components/guest/register/register.component';
+import { DashboardComponent } from './components/user/user-dashboard/dashboard.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { TeamComponent } from './components/admin/team/team.component';
+import { TeamNewComponent } from './components/admin/team-new/team-new.component';
+import { TeamEditComponent } from './components/admin/team-edit/team-edit.component';
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [HomeGuard]
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [GuestGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [GuestGuard]
   },
   {
     path: 'logout',
@@ -33,46 +31,31 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [DashboardGuard]
+    canActivate: [UserGuard]
   },
   {
-    path: 'teams',
-    component: TeamsComponent,
+    path: 'admin',
+    component: AdminDashboardComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: 'team-edit',
+    path: 'teams',
+    component: TeamComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'team-new',
+    component: TeamNewComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'team-edit/:id',
     component: TeamEditComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: 'team-create',
-    component: TeamCreateComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'user-edit',
-    component: UserEditComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'user-create',
-    component: UserCreateComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'my-profile',
-    component: ProfileComponent,
-    canActivate: [DashboardGuard]
-  },
-  {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];

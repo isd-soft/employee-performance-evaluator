@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="sidebar">
+        <app-admin-sidebar></app-admin-sidebar>
+    </div>
+    <div class="content">
+
+        <span class="header" (click)="refreshTeams()"> Teams </span>
+
+        <div class="table">
+            <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+              </mat-form-field>
+              
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td class="align-left" mat-cell *matCellDef="let team"> {{team.name}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="teamLeader">
+                  <th mat-header-cell *matHeaderCellDef> Team Leader </th>
+                  <td class="align-left" mat-cell *matCellDef="let team"> {{team.teamLeader.firstname}} {{team.teamLeader.lastname}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td class="align-left" mat-cell *matCellDef="let team" [routerLink]="['/team-edit', team.id]"> Edit </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
+        </div>
+    </div>
+</div>

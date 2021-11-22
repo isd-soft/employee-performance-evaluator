@@ -1,0 +1,130 @@
+<div class="register-container">
+    <div class="welcome-message">
+        Create new account !
+    </div>
+    <div class="register-form">
+        <form>
+            <mat-form-field class="register-input" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input 
+                type="email" 
+                matInput 
+                [formControl]="emailFormControl" 
+                placeholder="Ex. user@me.com"
+                [(ngModel)]="registerUser.email">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error 
+                *ngIf="emailFormControl.hasError('required')">
+                Email is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Firstname</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="firstnameFormControl" 
+                  placeholder="Ex. John"
+                  [(ngModel)]="registerUser.firstname">
+                <mat-error 
+                  *ngIf="firstnameFormControl.hasError('required')">
+                  Firstname is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Lastname</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="lastnameFormControl" 
+                  placeholder="Ex. Doe"
+                  [(ngModel)]="registerUser.lastname">
+                <mat-error 
+                  *ngIf="lastnameFormControl.hasError('required')">
+                  Lastname is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Birthdate</mat-label>
+                <input 
+                  type="date" 
+                  matInput 
+                  [formControl]="birthdateFormControl" 
+                  placeholder="Ex. 01-01-1970"
+                  [(ngModel)]="registerUser.birthDate">
+                <mat-error 
+                  *ngIf="birthdateFormControl.hasError('required')">
+                  Birthdate is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Phone Number</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="phoneFormControl" 
+                  placeholder="Ex. 022123456"
+                  [(ngModel)]="registerUser.phoneNumber">
+                <mat-error 
+                  *ngIf="phoneFormControl.hasError('required')">
+                  Phone number is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Job</mat-label>
+                <mat-select [formControl]="jobFormControl" [(ngModel)]="registerUser.job">
+                  <mat-select-trigger>
+                    {{jobFormControl.value ? jobFormControl.value : ''}}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let job of jobList" [value]="job.jobTitle">{{job.jobTitle}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Employment date</mat-label>
+                <input 
+                  type="date" 
+                  matInput 
+                  [formControl]="employmentdateFormControl" 
+                  placeholder="Ex. 01-01-2020"
+                  [(ngModel)]="registerUser.employmentDate">
+                <mat-error 
+                  *ngIf="employmentdateFormControl.hasError('required')">
+                  Employment date is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Enter your password</mat-label>
+                <input 
+                    matInput type="password" 
+                    matInput 
+                    [formControl]="passwordFormControl" 
+                    placeholder="Ex. password"
+                    [(ngModel)]="registerUser.password">
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    Please enter your password
+                </mat-error>
+              </mat-form-field>
+            <button class="register-submit" (click)="register()" mat-raised-button>Register</button>
+        </form>
+          <div class="error-message">
+            <span *ngIf="errorMessage">
+                {{errorMessage}}
+            </span>
+          </div>
+          <div class="switch-page">
+            <hr class="fifty-percent">
+            <span routerLink="/login">
+                Sign In
+            </span>
+        </div>
+    </div>
+</div>

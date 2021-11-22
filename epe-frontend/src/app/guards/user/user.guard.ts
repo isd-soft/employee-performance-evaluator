@@ -7,26 +7,27 @@ import { JwtService } from 'src/app/jwt/jwt-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class UserGuard implements CanActivate {
 
   loggedUser?: Jwt;
 
   constructor(private jwtService: JwtService,
-    private router: Router) {
-
+              private router: Router) {
+    
     this.loggedUser = this.jwtService.getJwtUser();
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
-      if((!(this.loggedUser == null)) && (this.loggedUser.role == 'ROLE_ADMIN')) {
+      
+      if(!(this.loggedUser == null)) {
         return true;
       }
       else {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/home']);
         return false;
       }
-  } 
+  }
+  
 }

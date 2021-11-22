@@ -1,0 +1,40 @@
+<div class="menu-container">
+    <mat-accordion *ngIf="jwtUser" class="menu-block">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{jwtUser.firstname}} {{jwtUser.lastname}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="menu-item">
+              My Profile
+          </div>
+          <div class="menu-item">
+              Change Password
+          </div>
+          <div routerLink="/logout" class="menu-item">
+              Logout
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title routerLink="/dashboard">
+                  Dashboard
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Teams
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="menu-item" routerLink="/teams">
+                View Teams
+            </div>
+            <div class="menu-item" routerLink="/team-new">
+                New Team
+            </div>
+          </mat-expansion-panel>
+    </mat-accordion>
+</div>

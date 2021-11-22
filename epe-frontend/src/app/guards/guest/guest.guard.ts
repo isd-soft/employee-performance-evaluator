@@ -1,19 +1,19 @@
-import { Jwt } from './../../models/jwt.model';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JwtService } from 'src/app/jwt/jwt-service.service';
+import { Jwt } from 'src/app/models/jwt.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class GuestGuard implements CanActivate {
 
   loggedUser?: Jwt;
 
   constructor(private jwtService: JwtService,
-    private router: Router) {
-
+              private router: Router) {
+    
     this.loggedUser = this.jwtService.getJwtUser();
   }
 
@@ -21,12 +21,13 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      if((!(this.loggedUser == null)) && (this.loggedUser.role == 'ROLE_ADMIN')) {
+      if(this.loggedUser == null) {
         return true;
       }
       else {
         this.router.navigate(['/dashboard']);
         return false;
       }
-  } 
+  }
+  
 }

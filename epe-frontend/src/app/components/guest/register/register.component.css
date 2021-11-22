@@ -1,0 +1,56 @@
+.register-container {
+    left: 50%;
+    top: 50%;
+    width: 60vw;
+    height: 90vh;
+    position: absolute;
+    border-radius: 5px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px #CCCCCC;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.register-container::-webkit-scrollbar { 
+    display: none;
+}
+
+
+.welcome-message {
+    padding: 40px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.register-form {
+    padding: 20px;
+}
+
+.register-input {
+    width: 80%;
+}
+
+.register-submit {
+    margin: 20px;
+    width: 70%;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 25px;
+}
+
+.error-message {
+    color: #FF0000;
+    text-align: center;
+}
+
+.switch-page {
+    text-align: center;
+    padding: 15px;
+}
+
+.fifty-percent {
+    width: 50%;
+}

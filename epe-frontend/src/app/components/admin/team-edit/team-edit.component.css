@@ -1,0 +1,52 @@
+.sidebar {
+    float: left;
+    width: calc(20% - 12px);
+    height: 95vh;
+    margin: 5px;
+    border-radius: 10px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px #555555;
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.content {
+    float: left;
+    width: calc(80% - 12px);
+    height: 95vh;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px #555555;
+}
+
+.center {
+    margin-top: 10%;
+}
+
+.header {
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.edit-team-input {
+    width: 80%;
+}
+
+.edit-team-submit {
+    margin: 20px;
+    width: 70%;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 25px;
+}
+
+.error-message {
+    color: #FF0000;
+    text-align: center;
+}
