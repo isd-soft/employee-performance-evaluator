@@ -17,6 +17,14 @@
   font-size: 25px;
 }
 
+.mat-cell, .mat-header-cell, .mat-paginator {
+  font-size: 15px;
+}
+
+.mat-tab-label{
+  font-size: 18px;
+}
+
 .filter-field {
   margin: 0 15px;
 }

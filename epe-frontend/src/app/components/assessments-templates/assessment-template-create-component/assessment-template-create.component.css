@@ -40,10 +40,8 @@ form {
 }
 
 mat-form-field {
+  font-size: 15px;
   width: 80%;
-}
-
-mat-form-field {
   margin-top: 10px;
 }
 
