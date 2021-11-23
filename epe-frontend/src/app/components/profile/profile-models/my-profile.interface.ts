@@ -10,4 +10,5 @@ export interface MyProfile {
     bio: string
     buddyId : string
     token: string
+    image: string
 }

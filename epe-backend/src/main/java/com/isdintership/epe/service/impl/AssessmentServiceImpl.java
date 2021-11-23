@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class AssessmentServiceImpl implements AssessmentService {
+class AssessmentServiceImpl implements AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;

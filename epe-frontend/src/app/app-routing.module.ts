@@ -26,6 +26,7 @@ import {AssessmentsHistoryUserComponent} from "./components/assessments/assessme
 import { EditComponent } from './components/edit/edit-component/edit.component';
 import {PasswordComponent} from "./components/password/password-component/password.component";
 import {NotfoundComponent} from "./components/notfound/notfound.component";
+import {AssessmentComponent} from "./components/assessment/assessment-component/assessment.component";
 
 
 const routes: Routes = [
@@ -100,19 +101,24 @@ const routes: Routes = [
     canActivate: [DashboardGuard]
   },
   {
+    path: 'assessment',
+    component: AssessmentComponent,
+    canActivate: [DashboardGuard]
+  },
+  {
     path: 'assessments-history',
     component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
   },
   {
-    path: '**',
-    component: NotfoundComponent
-  },
-  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
+  },
 ];
 
 @NgModule({
