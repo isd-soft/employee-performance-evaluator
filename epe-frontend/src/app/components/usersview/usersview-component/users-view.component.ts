@@ -9,6 +9,10 @@ import {UserComponent} from "../../user/user-component/user.component";
 import {UserService} from "../../user/user-service/user.service.js";
 import {HomeComponent} from "../../home/home-component/home.component";
 import {identity} from "rxjs";
+import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
+import {EditComponent} from "../../../edit/edit-component/edit.component";
+import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
+import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 
 @Component({
   selector: 'app-usersview',
@@ -21,14 +25,25 @@ export class UsersView implements AfterViewInit {
   // @ts-ignore
   dataSource: MatTableDataSource<User>;
   users?: User[];
+  jwtUser?: JwtUser;
+
+  jwtUserId? : string;
+
+  jwtUserRole? : string;
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userview: UserviewsServices, public dialog: MatDialog) {
 
+  role?: string;
+  requiredRole : string = "ROLE_SYSADMIN";
+
+  constructor(private userview: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
+    this.jwtUser = jwtService.getJwtUser();
+    this.jwtUserId = this.jwtUser?.id;
+    this.role = this.userview.getRole();
   }
 
   applyFilter(event: Event) {
@@ -52,5 +67,25 @@ export class UsersView implements AfterViewInit {
 
   onView(user : string) {
     this.dialog.open( UserComponent, {data: user} );
+  }
+
+  edit(user : string) {
+    this.dialog.open(RoleChangeComponent, {height:'100%',width:'70%', data : user});
+    // this.dialog.afterAllClosed.
+  }
+
+  delete(user : string) {
+    this.userview.deleteUser(user);
+    this.reloadComponent();
+  }
+  reloadComponent() {
+    // @ts-ignore
+    let currentUrl = this.router.url;
+    // @ts-ignore
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // @ts-ignore
+    this.router.onSameUrlNavigation = 'reload';
+    // @ts-ignore
+    this.router.navigate([currentUrl]);
   }
 }

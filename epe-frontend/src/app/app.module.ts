@@ -38,6 +38,9 @@ import { AssessmentsUserComponent } from './components/assessments/assessments-u
 import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
+import { EditComponent } from './edit/edit-component/edit.component';
+import { PasswordComponent } from './password/password-component/password.component';
+import { RoleChangeComponent } from './role-change/role-change-component/role-change.component';
 import { EditComponent } from './components/edit/edit-component/edit.component';
 import { PasswordComponent } from './components/password/password-component/password.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
@@ -75,6 +78,8 @@ import {ToastrModule} from "ngx-toastr";
     PasswordComponent,
     NotfoundComponent,
     AssessmentComponent,
+    PasswordComponent,
+    RoleChangeComponent
   ],
   imports: [
     BrowserModule,

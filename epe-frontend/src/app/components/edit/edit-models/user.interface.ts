@@ -1,4 +1,5 @@
 export interface User{
+    id:string
     image: string
     firstname: string
     lastname: string
@@ -8,5 +9,5 @@ export interface User{
     phoneNumber: string
     job: string
     bio: string
-
+    role: string
 }

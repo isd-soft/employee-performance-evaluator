@@ -207,6 +207,65 @@ class UserServiceImpl implements UserService {
         if (userDto.getImage() != null) {
             user.setImageBytes(encodeImageFromString(userDto.getImage()));
         }
+
+        return userDto;
+    }
+
+    @Override
+    @Transactional
+    public UserDto updateUserAsAdmin(UserDto userDto, String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + "was not found"));
+
+        if (userDto.getBuddyId() != null) {
+            userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
+                    new UserNotFoundException("Buddy with id " + id + " was not found"));
+            user.setBuddyId(userDto.getBuddyId());
+        }
+
+        if (userDto.getEmail() != null) {
+            user.setEmail(userDto.getEmail());
+        }
+        if (userDto.getFirstname() != null) {
+            user.setFirstname(userDto.getFirstname());
+        }
+        if (userDto.getLastname() != null) {
+            user.setLastname(userDto.getLastname());
+        }
+        if (String.valueOf(userDto.getBirthDate()) != null) {
+            user.setBirthDate(userDto.getBirthDate());
+        }
+        if (String.valueOf(userDto.getEmploymentDate()) != null) {
+            user.setEmploymentDate(userDto.getEmploymentDate());
+        }
+        if (userDto.getPhoneNumber() != null) {
+            user.setPhoneNumber(userDto.getPhoneNumber());
+        }
+        if (userDto.getJob() != null) {
+            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
+                    new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
+
+            user.setJob(job);
+        }
+        if (userDto.getBio() != null) {
+            user.setBio(userDto.getBio());
+        }
+
+        if (userDto.getImage() != null) {
+            user.setImageBytes(encodeImageFromString(userDto.getImage()));
+        }
+
+
+
+        if (userDto.getRole() != null) {
+            Map<String,Integer> roles = new HashMap<>();
+            roles.put("User",1);
+            roles.put("Administrator",2);
+            int roleId = roles.get(userDto.getRole());
+            Role role = roleRepository.findById(roleId).orElseThrow(() ->
+                    new RoleNotFoundException("Role with id " + roleId + " was not found"));
+            user.setRole(role);
+        }
         return userDto;
     }
 

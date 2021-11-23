@@ -14,7 +14,7 @@ export class HomeFiller{
         let loginUser: LoginRequest = {
             email: '',
             password: ''
-        }   
+        }
 
         return loginUser;
     }
@@ -49,17 +49,17 @@ export class HomeFiller{
             job: '',
             password: '',
             confirmPassword: '',
-        }   
+        }
 
         return newUser;
     }
 
     createLoginUserFromRegisterUser(user: RegisterRequest): LoginRequest {
-        
+
         let loginUser: LoginRequest = {
             email: user.email,
             password: user.password
-        }   
+        }
 
         return loginUser;
     }

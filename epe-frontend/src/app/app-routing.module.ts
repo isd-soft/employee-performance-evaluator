@@ -28,6 +28,8 @@ import {PasswordComponent} from "./components/password/password-component/passwo
 import {NotfoundComponent} from "./components/notfound/notfound.component";
 import {AssessmentComponent} from "./components/assessment/assessment-component/assessment.component";
 
+import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
+
 
 const routes: Routes = [
   {
@@ -109,6 +111,10 @@ const routes: Routes = [
     path: 'assessments-history',
     component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
+  },
+  {
+    path: 'group',
+    component: RoleChangeComponent
   },
   {
     path: '',

@@ -26,6 +26,8 @@ public class UserDto {
     private byte[] image_bytes;
     private String image;
 
+    private String role;
+
     public static UserDto fromUser(User user) {
         UserDto userView = new UserDto();
         userView.setId(user.getId());
@@ -39,6 +41,13 @@ public class UserDto {
         userView.setBuddyId(user.getBuddyId());
         userView.setImage(new String(user.getImageBytes()));
         userView.setBio(user.getBio());
+
+        //userView.setRole(String.valueOf(user.getRole().getRole()));
+        if (String.valueOf(user.getRole().getRole()).equals("ROLE_USER")) {
+            userView.setRole("User");
+        } else if (String.valueOf(user.getRole().getRole()).equals("ROLE_ADMIN")) {
+            userView.setRole("Administrator");
+        }
         return userView;
     }
 }
