@@ -43,7 +43,6 @@ public class UserController {
 
     @PutMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<UserDto> updateUserAsAdmin(@Valid @RequestBody UserDto userDto,
                                               @PathVariable(name = "id") String id) throws IOException {
         return ResponseEntity.ok(userService.updateUserAsAdmin(userDto, id));
@@ -64,7 +63,6 @@ public class UserController {
 
     @PutMapping("/password/{id}")
     @RolesAllowed({ROLE_SYSADMIN,ROLE_USER})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<PasswordView> changePassword(@RequestBody PasswordView passwordView,
                                                        @PathVariable(name = "id") String id) {
         return new ResponseEntity<>(userService.changePassword(passwordView,id),HttpStatus.OK);
@@ -72,7 +70,6 @@ public class UserController {
 
     @PutMapping("/group/{id}")
     @RolesAllowed(ROLE_SYSADMIN)
-    @CrossOrigin(origins = origin)
     public ResponseEntity<RoleView> changeGroup(@RequestBody RoleView roleView,
                                                 @PathVariable(name = "id") String id) {
         return new ResponseEntity<>(userService.changeGroup(roleView,id),HttpStatus.OK);

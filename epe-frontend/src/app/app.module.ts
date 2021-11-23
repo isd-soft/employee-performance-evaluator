@@ -4,11 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 
-// import { TableOverviewExample } from './table-overview-example/table-overview-example.component';
-// import {MatPaginator} from '@angular/material/paginator';
-// import {MatSort} from '@angular/material/sort';
-// import {MatTableDataSource} from '@angular/material/table';
-// import {MatFormFieldModule} from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
@@ -41,22 +36,19 @@ import { AssessmentsHistoryUserComponent } from './components/assessments/assess
 import {MatTabsModule} from "@angular/material/tabs";
 import { AssessmentsTemplatesComponent } from './components/assessments-templates/assessments-templates-component/assessments-templates.component';
 import {AssessmentTemplateViewComponent} from "./components/assessments-templates/assessment-template-view-component/assessment-template-view.component";
-import {MatCardModule} from "@angular/material/card";
 import { AssessmentTemplateEditComponent } from './components/assessments-templates/assessment-template-edit-component/assessment-template-edit.component';
-import {MatSelectModule} from "@angular/material/select";
 import { AssessmentTemplateCreateComponent } from './components/assessments-templates/assessment-template-create-component/assessment-template-create.component';
-import {ToastrModule} from "ngx-toastr";
 import {DeleteConfirmationDialogComponent} from "./components/assessments-templates/assessment-template-view-component/delete-confirmation-dialog.component";
 import { RoleChangeComponent } from './role-change/role-change-component/role-change.component';
 import { EditComponent } from './components/edit/edit-component/edit.component';
 import { PasswordComponent } from './components/password/password-component/password.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import {MatCardModule} from "@angular/material/card";
-import {MatListModule} from "@angular/material/list";
-import {MatSidenavModule} from "@angular/material/sidenav";
 import { AssessmentComponent } from './components/assessment/assessment-component/assessment.component';
 import {MatSelectModule} from "@angular/material/select";
 import {ToastrModule} from "ngx-toastr";
+import {MatCardModule} from "@angular/material/card";
+import {MatListModule} from "@angular/material/list";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -83,7 +75,7 @@ import {ToastrModule} from "ngx-toastr";
     AssessmentTemplateViewComponent,
     AssessmentTemplateEditComponent,
     AssessmentTemplateCreateComponent,
-    DeleteConfirmationDialogComponent
+    DeleteConfirmationDialogComponent,
     SidebarComponent,
     TeamsComponent,
     EditComponent,
@@ -93,37 +85,12 @@ import {ToastrModule} from "ngx-toastr";
     PasswordComponent,
     RoleChangeComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDialogModule,
-        FormsModule,
-        MatToolbarModule,
-        MatTabsModule,
-        MatCardModule,
-        MatSelectModule,
-        ToastrModule.forRoot()
-        // MatPaginator,
-        // MatSort,
-        // MatTableDataSource,
-        // MatFormFieldModule
-    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -134,14 +101,17 @@ import {ToastrModule} from "ngx-toastr";
     MatButtonModule,
     MatDialogModule,
     FormsModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
+    MatTabsModule,
+    MatSelectModule,
+    ToastrModule.forRoot(),
     MatCardModule,
     MatListModule,
     MatSidenavModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot()
+    // MatPaginator,
+    // MatSort,
+    // MatTableDataSource,
+    // MatFormFieldModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

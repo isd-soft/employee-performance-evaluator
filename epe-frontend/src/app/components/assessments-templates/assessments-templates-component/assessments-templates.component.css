@@ -3,9 +3,10 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   display: inline-block;
   margin: 5px;
-  width: calc(100% - 10px);
-  min-height: calc(100vh - 50px);
+  width: calc(100% - 4%);
+  min-height: calc(100vh - 4%);
   border-radius: 10px;
+  margin: 2% 2%;
 }
 
 .header-header {
