@@ -5,19 +5,59 @@
   font-size: 16px;
 }
 
+form {
+  width: 85%;
+  margin-left: 15%;
+}
+
 .evaluation-groups {
-  width: 100%;
-  text-align: center;
+}
+
+.evaluation-field, .add-field-button {
+  margin-left: 5%;
 }
 
 .evaluation-field {
-  padding-left: 3%;
+  width: 75%;
+}
+
+.add-field-button {
+  margin: 2% 0 2.5% 81%;
+}
+
+.submit-button {
+  transition-duration: 0.4s;
+  font-size: 20px;
+  margin: 50px 0px 30px 35%;
+}
+
+.add-group-button {
+  margin-top: 35px;
+}
+
+.remove-button {
+  margin-left: 1%;
 }
 
 mat-form-field {
   width: 80%;
 }
 
-mat-card-title {
-  margin-bottom: 3%;
+mat-form-field {
+  margin-top: 10px;
+}
+
+.fields {
+  margin: 0;
+}
+
+.raise:hover,
+.raise:focus {
+  /*transform: translateY(-0.1em);*/
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+.material-icons {
+  transition-duration: 0.2s;
 }

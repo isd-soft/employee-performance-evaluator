@@ -29,13 +29,6 @@ public class AssessmentTemplateServiceImpl implements AssessmentTemplateService 
     @Transactional
     public AssessmentTemplateDto createAssessmentTemplate(AssessmentTemplateDto assessmentTemplateDto) {
 
-        Optional<Assessment> existingAssessment =
-                assessmentRepository.findByTitleAndIsTemplate(assessmentTemplateDto.getTitle(), true);
-        if (existingAssessment.isPresent()) {
-            throw new AssessmentTemplateExistsException
-                    ("Assessment template with name " + assessmentTemplateDto.getTitle() + " already exists");
-        }
-
         Job job = jobRepository.findByJobTitle(assessmentTemplateDto.getJobTitle()).orElseThrow(() ->
                 new JobNotFoundException("Job with name " + assessmentTemplateDto.getJobTitle() + " not found"));
 

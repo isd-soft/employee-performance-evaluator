@@ -46,6 +46,8 @@ import {MatCardModule} from "@angular/material/card";
 import { AssessmentTemplateEditComponent } from './components/assessments-templates/assessment-template-edit-component/assessment-template-edit.component';
 import {MatSelectModule} from "@angular/material/select";
 import { AssessmentTemplateCreateComponent } from './components/assessments-templates/assessment-template-create-component/assessment-template-create.component';
+import {ToastrModule} from "ngx-toastr";
+import {DeleteConfirmationDialogComponent} from "./components/assessments-templates/assessment-template-view-component/delete-confirmation-dialog.component";
 
 @NgModule({
   declarations: [
@@ -71,7 +73,8 @@ import { AssessmentTemplateCreateComponent } from './components/assessments-temp
     AssessmentsTemplatesComponent,
     AssessmentTemplateViewComponent,
     AssessmentTemplateEditComponent,
-    AssessmentTemplateCreateComponent
+    AssessmentTemplateCreateComponent,
+    DeleteConfirmationDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -89,11 +92,11 @@ import { AssessmentTemplateCreateComponent } from './components/assessments-temp
         MatButtonModule,
         MatDialogModule,
         FormsModule,
-        BrowserAnimationsModule,
         MatToolbarModule,
         MatTabsModule,
         MatCardModule,
         MatSelectModule,
+        ToastrModule.forRoot()
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {HomeService} from "../../home/home-service/home.service";
 import {JobItem} from "../../home/home-models/job-item.interface";
 import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {group} from "@angular/animations";
+import {AssessmentsTemplatesService} from "../assessments-templates-services/assessments-templates.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-assessment-template-create',
@@ -15,7 +17,9 @@ export class AssessmentTemplateCreateComponent implements OnInit {
   assessmentTemplateForm!: FormGroup;
 
   constructor(private homeService: HomeService,
-              private formBuilder: FormBuilder) { }
+              private assessmentsTemplatesService: AssessmentsTemplatesService,
+              private formBuilder: FormBuilder,
+              private notificationService: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -69,7 +73,25 @@ export class AssessmentTemplateCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.assessmentTemplateForm.value);
+
+    let hasEmptyGroups: boolean = false;
+
+    this.evaluationGroupArray.controls.forEach(group => {
+      if (this.evaluationFieldArray(group).length == 0) {
+        hasEmptyGroups = true;
+      }
+    })
+
+    if (this.assessmentTemplateForm.valid && this.evaluationGroupArray.length != 0 && !hasEmptyGroups) {
+      this.assessmentsTemplatesService.saveAssessmentTemplate(this.assessmentTemplateForm.value);
+    } else {
+      this.notificationService.error('Form should not have empty fields',
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    }
   }
+
 
 }

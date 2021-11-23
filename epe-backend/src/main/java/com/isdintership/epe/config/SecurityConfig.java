@@ -1,6 +1,7 @@
 package com.isdintership.epe.config;
 
 import com.isdintership.epe.security.ExceptionHandlerFilter;
+import com.isdintership.epe.security.SimpleCORSFilter;
 import com.isdintership.epe.security.jwt.JwtConfigurer;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final ExceptionHandlerFilter exceptionHandlerFilter;
+    private final SimpleCORSFilter corsFilter;
 
     private static final String ADMIN_ENDPOINT = "/api/admin/**";
     private static final String AUTHENTICATION_ENDPOINT = "/api/auth/**";
 
     @Autowired
-    public SecurityConfig(JwtTokenProvider jwtTokenProvider, ExceptionHandlerFilter exceptionHandlerFilter) {
+    public SecurityConfig(JwtTokenProvider jwtTokenProvider, ExceptionHandlerFilter exceptionHandlerFilter,
+                          SimpleCORSFilter corsFilter) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.exceptionHandlerFilter = exceptionHandlerFilter;
+        this.corsFilter = corsFilter;
     }
+
 
     @Override
     @Bean
@@ -49,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(exceptionHandlerFilter, ChannelProcessingFilter.class)
+                .addFilterAfter(corsFilter, ExceptionHandlerFilter.class)
                 .apply(new JwtConfigurer(jwtTokenProvider));
     }
 }

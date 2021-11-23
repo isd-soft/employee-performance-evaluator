@@ -21,11 +21,9 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 public class AssessmentController {
 
     private final AssessmentService assessmentService;
-    private final String origin = "http://localhost:4200";
 
     @PostMapping("users/{id}/assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentDto> startAssessment
             (@PathVariable(name = "id") String userId,
              @RequestBody AssessmentTemplateDto assessmentTemplateDto) {
@@ -36,7 +34,6 @@ public class AssessmentController {
 
     @GetMapping("users/{id}/assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<List<AssessmentDto>> getAllAssessmentsByUserId
             (@PathVariable(name = "id") String userId,
              @RequestParam(name = "status", required = false) String status) {
@@ -54,7 +51,6 @@ public class AssessmentController {
 
     @GetMapping("assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<List<AssessmentDto>> getAllAssessments() {
 
         return new ResponseEntity<>(assessmentService.getAllAssessments(), HttpStatus.OK);
@@ -63,7 +59,6 @@ public class AssessmentController {
 
     @GetMapping("assessments/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentDto> getAssessment(@PathVariable(name = "id") String id) {
 
         return new ResponseEntity<>(assessmentService.getAssessment(id), HttpStatus.OK);
@@ -73,7 +68,6 @@ public class AssessmentController {
 
     @PutMapping("assessments/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentDto> updateAssessment (@PathVariable(name = "id") String id,
                                                            @RequestBody AssessmentDto assessmentDto) {
 
@@ -83,7 +77,6 @@ public class AssessmentController {
 
     @DeleteMapping("assessments/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentDto> deleteAssessment (@PathVariable(name = "id") String id) {
 
         return new ResponseEntity<>(assessmentService.deleteAssessment(id), HttpStatus.OK);

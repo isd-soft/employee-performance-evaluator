@@ -1,50 +1,67 @@
+<form action="" [formGroup]="assessmentTemplateForm">
 
-  <mat-card-title>Edit assessment</mat-card-title>
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
-    <input matInput
-           value="{{ assessmentTemplate.title }}">
+    <input required matInput formControlName="title">
   </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Job position</mat-label>
-    <mat-select [(ngModel)]="selectedJobTitle">
+    <mat-select required formControlName="jobTitle">
       <mat-option *ngFor="let jobItem of jobItems" value="{{ jobItem.jobTitle }}">
         {{ jobItem.jobTitle }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
     <textarea matInput
+              required
+              formControlName="description"
               cdkTextareaAutosize
               cdkAutosizeMinRows="3"
-              cdkAutosizeMaxRows="10"
-    >{{ assessmentTemplate.description }}</textarea>
+              cdkAutosizeMaxRows="10">
+    </textarea>
   </mat-form-field>
 
-
-  <div class="evaluation-groups"
-  >
+  <div class="evaluation-groups" formArrayName="evaluationGroups">
     <div class="groups"
-         *ngFor="let evaluationGroup of assessmentTemplate.evaluationGroups; let i = index">
+         *ngFor="let group of evaluationGroupArray.controls; let i = index;"
+         [formGroupName]="i"
+    >
 
       <mat-form-field appearance="fill">
         <mat-label>Evaluation group</mat-label>
-        <input matInput value="{{evaluationGroup.title}}">
+        <input matInput required formControlName="title">
       </mat-form-field>
+      <i class="material-icons remove-button raise" (click)="removeEvaluationGroup(i)">remove_circle</i>
 
-      <div class="evaluation-groups"
-      >
-        <mat-form-field *ngFor="let evaluationField of evaluationGroup.evaluationFields; let j = index"
-                        appearance="fill"
-                        class="evaluation-field"
+      <div class="evaluation-fields" formArrayName="evaluationFields">
+        <div class="fields"
+             *ngFor="let field of evaluationFieldArray(group).controls; let j = index;"
+             [formGroupName]="j"
         >
-          <mat-label>Evaluation field</mat-label>
-          <input matInput value="{{evaluationField.title}}">
-        </mat-form-field>
-      </div>
 
+          <mat-form-field  appearance="fill" class="evaluation-field">
+            <mat-label>Evaluation field</mat-label>
+            <input matInput required formControlName="title">
+          </mat-form-field>
+          <i class="material-icons remove-button raise" (click)="removeEvaluationField(group, j)">remove_circle</i>
+        </div>
+        <i class="material-icons add-field-button raise" (click)="addNewEvaluationField(group)">add_circle</i>
+
+      </div>
 
     </div>
 
+    <i class="material-icons add-group-button raise" (click)="addNewEvaluationGroup()">playlist_add</i>
   </div>
+
+  <button mat-button
+          type="button"
+          class="submit-button raise"
+          (click)="onSubmit()">
+    Submit
+  </button>
+</form>

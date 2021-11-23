@@ -18,7 +18,6 @@ public class JobsController {
 
     private final JobService jobService;
 
-
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public List<JobDto> getAllJobs(){

@@ -27,12 +27,9 @@ export class AssessmentsTemplatesComponent implements OnInit, AfterViewInit {
   { }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
     this.assessmentsTemplatesService.getAllAssessmentsTemplates().subscribe(
       data => {
-
+        console.log(data);
         this.assessmentsTemplates = data as AssessmentTemplateView[];
         this.dataSource = new MatTableDataSource<AssessmentTemplateView>(this.assessmentsTemplates);
         this.dataSource.paginator = this.paginator;
@@ -40,6 +37,10 @@ export class AssessmentsTemplatesComponent implements OnInit, AfterViewInit {
 
       }
     );
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   applyFilter(event: Event) {

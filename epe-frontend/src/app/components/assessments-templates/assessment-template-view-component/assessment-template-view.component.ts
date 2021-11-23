@@ -2,6 +2,8 @@ import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {AssessmentTemplateView} from "../assessments-templates-models/assessment-template-view.interface";
 import {AssessmentTemplateEditComponent} from "../assessment-template-edit-component/assessment-template-edit.component";
+import {DeleteConfirmationDialogComponent} from "./delete-confirmation-dialog.component";
+import {AssessmentsTemplatesService} from "../assessments-templates-services/assessments-templates.service";
 
 @Component({
   selector: 'app-assessment-template-view',
@@ -14,7 +16,8 @@ export class AssessmentTemplateViewComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    public dialog: MatDialog)
+    public dialog: MatDialog,
+    private assessmentsTemplatesService: AssessmentsTemplatesService)
   {
     this.assessmentTemplate = data as AssessmentTemplateView;
   }
@@ -30,4 +33,23 @@ export class AssessmentTemplateViewComponent implements OnInit {
     });
   }
 
+  openConfirmDialog() {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent,{
+      data:{
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+
+      if (confirmed) {
+        this.assessmentsTemplatesService.deleteAssessmentTemplate(this.assessmentTemplate.id);
+      }
+
+    });
+  }
 }

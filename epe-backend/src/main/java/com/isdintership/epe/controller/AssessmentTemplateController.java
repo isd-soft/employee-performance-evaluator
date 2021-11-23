@@ -18,23 +18,19 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 @RequiredArgsConstructor
 public class AssessmentTemplateController {
 
-    private final String origin = "http://localhost:4200";
 
     public final AssessmentTemplateService assessmentTemplateService;
 
     @PostMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentTemplateDto> createAssessmentTemplate(
             @RequestBody AssessmentTemplateDto assessmentTemplateDto) {
-
         return new ResponseEntity<>(assessmentTemplateService.createAssessmentTemplate(assessmentTemplateDto),
                                     HttpStatus.CREATED);
     }
 
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<List<AssessmentTemplateDto>> getAllAssessmentTemplates() {
 
         return new ResponseEntity<>(assessmentTemplateService.getAllAssessmentTemplates(), HttpStatus.OK);
@@ -42,7 +38,6 @@ public class AssessmentTemplateController {
 
     @GetMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentTemplateDto> getAssessmentTemplate(@PathVariable(name = "id") String id) {
 
         return new ResponseEntity<>(assessmentTemplateService.getAssessmentTemplate(id), HttpStatus.OK);
@@ -51,7 +46,6 @@ public class AssessmentTemplateController {
 
     @PutMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentTemplateDto> updateAssessmentTemplate
             (@PathVariable(name = "id") String id,
              @RequestBody AssessmentTemplateDto assessmentTemplateDto) {
@@ -63,7 +57,6 @@ public class AssessmentTemplateController {
 
     @DeleteMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    @CrossOrigin(origins = origin)
     public ResponseEntity<AssessmentTemplateDto> deleteAssessmentTemplate(@PathVariable(name = "id") String id) {
 
         return new ResponseEntity<>(assessmentTemplateService.deleteAssessmentTemplate(id), HttpStatus.OK);
