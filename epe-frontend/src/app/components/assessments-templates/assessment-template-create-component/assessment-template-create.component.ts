@@ -60,8 +60,11 @@ export class AssessmentTemplateCreateComponent implements OnInit {
     this.evaluationFieldArray(group).push(this.addEvaluationField());
   }
 
-  removeEvaluationField(group: AbstractControl, index: number) {
+  removeEvaluationField(group: AbstractControl, index: number, groupIndex: number) {
     this.evaluationFieldArray(group).removeAt(index);
+    if (this.evaluationFieldArray(group).length == 0) {
+      this.removeEvaluationGroup(groupIndex);
+    }
   }
 
   get evaluationGroupArray() {
