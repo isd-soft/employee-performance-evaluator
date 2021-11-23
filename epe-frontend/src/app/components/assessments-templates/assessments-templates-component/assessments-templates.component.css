@@ -1,12 +1,11 @@
-.content-block {
-  background: #ffffff none repeat scroll 0 0;
+.mat-tab-group {
+  background: rgba(255, 255, 255, 0.58) none repeat scroll 0 0;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
   display: inline-block;
-  margin: 5px;
-  width: calc(100% - 4%);
-  min-height: calc(100vh - 4%);
+  width: calc(100% - 1%);
+  min-height: 98vh;
   border-radius: 10px;
-  margin: 2% 2%;
+  margin: 0.5% 0.5%;
 }
 
 .header-header {
@@ -24,10 +23,24 @@
 
 .mat-tab-label{
   font-size: 18px;
+  font-weight: 600;
+  color: black;
 }
 
 .filter-field {
   margin: 0 15px;
+}
+
+.column-title {
+  width: 45%;
+}
+
+.column-position {
+  width: 45%;
+}
+
+.column-view {
+  width: 10%;
 }
 
 table {

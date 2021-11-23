@@ -1,3 +1,36 @@
+.mat-tab-group {
+  background: rgba(255, 255, 255, 0.58) none repeat scroll 0 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  display: inline-block;
+  width: calc(100% - 1%);
+  min-height: 98vh;
+  border-radius: 10px;
+  margin: 0.5% 0.5%;
+}
+
+.mat-cell, .mat-header-cell, .mat-paginator {
+  font-size: 15px;
+}
+
+.mat-tab-label{
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
+.filter-field {
+  margin: 0 15px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 97%;
+}
+
 .img-logo{
   max-width: 194px;
   max-height: 100%;

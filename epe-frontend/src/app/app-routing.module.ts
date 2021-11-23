@@ -20,7 +20,7 @@ import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 import {UsersView} from "./components/usersview/usersview-component/users-view.component";
 import {UserComponent} from "./components/user/user-component/user.component";
 import {AdminGuard} from "./guards/admin/admin.guard";
-import {AssessmentsUserComponent} from "./components/assessments/assessments-user/assessments-user.component";
+import {AssessmentsComponent} from "./components/assessments/assessments-component/assessments.component";
 import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 import {AssessmentsTemplatesComponent} from "./components/assessments-templates/assessments-templates-component/assessments-templates.component";
 
@@ -100,7 +100,7 @@ const routes: Routes = [
   },
   {
     path: 'assessments',
-    component: AssessmentsUserComponent,
+    component: AssessmentsComponent,
     canActivate: [DashboardGuard]
   },
   {

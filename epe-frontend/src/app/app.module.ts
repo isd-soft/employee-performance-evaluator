@@ -29,8 +29,7 @@ import { UsersComponent } from './components/users/user-component/users.componen
 import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import { AssessmentsUserComponent } from './components/assessments/assessments-user/assessments-user.component';
-import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
+import { AssessmentsComponent } from './components/assessments/assessments-component/assessments.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
 import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
 import {MatTabsModule} from "@angular/material/tabs";
@@ -67,8 +66,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     UsersComponent,
     UserEditComponent,
     UserCreateComponent,
-    AssessmentsUserComponent,
-    AssessmentsAdminComponent,
+    AssessmentsComponent,
     ReplaceUnderscorePipe,
     AssessmentsHistoryUserComponent,
     AssessmentsTemplatesComponent,
