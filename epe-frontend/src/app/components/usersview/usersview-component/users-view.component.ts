@@ -11,6 +11,8 @@ import {HomeComponent} from "../../home/home-component/home.component";
 import {identity} from "rxjs";
 import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
 import {EditComponent} from "../../../edit/edit-component/edit.component";
+import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
+import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 
 @Component({
   selector: 'app-usersview',
@@ -23,6 +25,9 @@ export class UsersView implements AfterViewInit {
   // @ts-ignore
   dataSource: MatTableDataSource<User>;
   users?: User[];
+  jwtUser?: JwtUser;
+
+  jwtUserId? : string;
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,7 +38,11 @@ export class UsersView implements AfterViewInit {
   role?: string;
   requiredRole : string = "ROLE_SYSADMIN";
 
-  constructor(private userview: UserviewsServices, public dialog: MatDialog) {
+  constructor(private userview: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
+    this.jwtUser = jwtService.getJwtUser();
+    // @ts-ignore
+    console.log(this.jwtUser.id);
+    this.jwtUserId = this.jwtUser?.id;
     this.role = this.userview.getRole();
     console.log(this.role);
   }

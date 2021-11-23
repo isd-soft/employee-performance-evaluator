@@ -81,7 +81,7 @@
                   <button mat-button (click)="onView(row.id)">
                     <mat-icon>person</mat-icon>
                   </button>
-                  <div *ngIf="role==requiredRole">
+                  <div *ngIf="role==requiredRole && row.id != jwtUserId">
                     <button mat-button (click)="edit(row.id)">
                       <mat-icon>edit</mat-icon>
                     </button>
