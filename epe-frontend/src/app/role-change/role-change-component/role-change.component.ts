@@ -30,15 +30,13 @@ export class RoleChangeComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public userId : any,
     private jwtService: JwtService,
-              private editService: EditService,
-              private filler: EditFiller,
-              private router: Router) {
-    this.editService.getUserData(userId).subscribe(data =>
+              private roleService: RoleService) {
+    this.roleService.getUserData(userId).subscribe(data =>
       this.user = data as User);
-    this.editService.getJobList().subscribe(data =>
+    this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
-    this.role = this.editService.getRole();
-    this.editService.getRoles().subscribe(data => {
+    this.role = this.roleService.getRole();
+    this.roleService.getRoles().subscribe(data => {
       this.roles = data as string[]});
     console.log(this.userId);
   }
@@ -76,7 +74,7 @@ export class RoleChangeComponent implements OnInit {
   update() {
     // @ts-ignore
     this.user.image = this.base64Output;
-    this.editService.update(this.user).subscribe(data => {
+    this.roleService.updateUser(this.user,this.userId).subscribe(data => {
     }, error => {
       this.errorMessage = error.error.title;})
 

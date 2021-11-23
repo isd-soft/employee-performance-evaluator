@@ -39,9 +39,6 @@ export class EditService {
     .pipe(catchError(this.errorHandler));
   }
 
-  getUserData(userId: string) {
-    return this.http.get(`${this.url2}/${userId}`);
-  }
 
   getRole() {
     return this.role;

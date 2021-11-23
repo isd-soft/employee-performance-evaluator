@@ -31,6 +31,11 @@ export class RoleService {
       .pipe(catchError(this.errorHandler));
   }
 
+  updateUser(user: User | undefined,userId : string | undefined) {
+    return this.http.put(this.url2 + '/' + userId, user)
+      .pipe(catchError(this.errorHandler));
+  }
+
   getUser() {
     return this.http.get(this.url2 + '/' + this.id)
       .pipe(catchError(this.errorHandler));
@@ -46,6 +51,10 @@ export class RoleService {
 
   getRoles() {
     return this.http.get(this.url3);
+  }
+
+  getUserData(userId: string) {
+    return this.http.get(`${this.url2}/${userId}`);
   }
 
   errorHandler(error: HttpErrorResponse){
