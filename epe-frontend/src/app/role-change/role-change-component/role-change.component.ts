@@ -1,14 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Role} from "../role-change-model/role.interface";
 import {RoleService} from "../role-change-service/role.service";
-import {User} from "../../edit/edit-models/user.interface";
-import {JobItem} from "../../edit/edit-models/job-item.interface";
 import {JwtService} from "../../decoder/decoder-service/jwt.service";
-import {EditService} from "../../edit/edit-service/edit.service";
-import {EditFiller} from "../../edit/edit-component/edit.filler";
 import {Router} from "@angular/router";
 import {Observable, ReplaySubject} from "rxjs";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {JobItem} from "../../components/edit/edit-models/job-item.interface";
+import {User} from "../../components/edit/edit-models/user.interface";
 
 @Component({
   selector: 'app-role-change',

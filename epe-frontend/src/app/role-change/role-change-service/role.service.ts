@@ -2,9 +2,9 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {JwtUser} from "../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../decoder/decoder-service/jwt.service";
-import {User} from "../../edit/edit-models/user.interface";
 import {catchError} from "rxjs/operators";
 import {throwError as observableThrowError} from "rxjs/internal/observable/throwError";
+import {User} from "../../components/edit/edit-models/user.interface";
 
 @Injectable({providedIn: 'root'})
 export class RoleService {

@@ -6,11 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from "@angular/material/dialog";
 import {UserComponent} from "../../user/user-component/user.component";
-import {UserService} from "../../user/user-service/user.service.js";
-import {HomeComponent} from "../../home/home-component/home.component";
-import {identity} from "rxjs";
 import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
-import {EditComponent} from "../../../edit/edit-component/edit.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 
