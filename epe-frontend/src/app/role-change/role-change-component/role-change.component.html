@@ -3,25 +3,183 @@
   <div class="row display-table-row">
     <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
 
-<!--      <div class="login-form">-->
-<!--        <form #roleForm="ngForm">-->
-<!--          <div class="form-details">-->
+      <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
 
-<!--            <label>-->
-<!--              <select-->
-<!--                title="Please choose a role"-->
-<!--                #role="ngModel"-->
-<!--                [(ngModel)]="roleDto.role"-->
-<!--                placeholder="Choose a role">-->
-<!--                <option *ngFor="let role of rolesList">-->
-<!--                  {{role}}-->
-<!--                </option>>-->
-<!--              </select>-->
-<!--            </label>-->
-<!--          </div>-->
-<!--          <button type="button"  class="form-btn" disabled>Change group</button>-->
-<!--        </form>-->
-<!--      </div>-->
+        <div *ngIf="auxUser" class="login-form">
+          <form #editForm="ngForm" (ngSubmit)="update()">
+            <div class="form-details">
+
+
+              <label class="form-element" >
+                <h3>Old image</h3>
+                <img src="data:image/png;base64,{{auxUser.image}}" height="200">
+              </label>
+
+              <h3>Choose new image</h3><br>
+
+              <label class="form-element input-file">
+
+                <input
+                  title="Choose an image"
+                  type="file"
+                  name="image"
+                  id="image"
+                  (change)="selectFile($event)"
+                  placeholder="Enter your email">
+              </label>
+
+              <label class="form-element">
+                <img [src]="url" height="200">
+              </label>
+
+              <label class="form-element">
+                <input
+                  title="Please insert your email"
+                  type="email"
+                  name="email"
+                  readonly
+                  [email]="true"
+                  id="email"
+                  #email="ngModel"
+                  placeholder="Enter your email"
+                  [(ngModel)]="auxUser.email">
+                <div *ngIf="email.touched && !email.valid" class="input-box-error">
+                  Email is required and must be a valid one !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <input
+                  title="Please insert your firstname"
+                  minlength="3"
+                  maxlength="20"
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  #firstname="ngModel"
+                  [(ngModel)]="auxUser.firstname"
+                  placeholder="Enter your name">
+                <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
+                  Firstname is required and must be between 3 and 20 letters long !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <input
+                  title="Please insert your lastname"
+                  minlength="3"
+                  maxlength="20"
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  #lastname="ngModel"
+                  [(ngModel)]="auxUser.lastname"
+                  placeholder="Enter your last name">
+                <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
+                  Lastname is required and must be between 3 and 20 letters long !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <input
+                  required
+                  title="Please insert your birth date"
+                  type="date"
+                  name="birthDate"
+                  id="birthDate"
+                  #birthDate="ngModel"
+                  [(ngModel)]="auxUser.birthDate">
+                <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
+                  Please pick a valid birth date !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <input
+                  title="Please insert your phone number"
+                  pattern="^\+?(?:[0-9] ?){6,14}[0-9]$"
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  #phone="ngModel"
+                  [(ngModel)]="auxUser.phoneNumber"
+                  placeholder="Enter your phone number">
+                <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
+                  Phone number is required !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <select
+                  title="Please choose your job"
+                  name="job"
+                  id="job"
+                  #job="ngModel"
+                  [(ngModel)]="auxUser.job"
+                  placeholder="Enter your job">
+                  <option *ngFor="let job of jobList">
+                    {{ job.jobTitle }}
+                  </option>
+                </select>
+                <div *ngIf="job.touched && !job.valid" class="input-box-error">
+                  Please pick a job !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <input
+                  required
+                  title="Please insert your employment date"
+                  type="date"
+                  name="employmentDate"
+                  id="employmentDate"
+                  #employmentDate="ngModel"
+                  [(ngModel)]="auxUser.employmentDate"
+                  dateformat="d M y">
+                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
+                  Please pick a valid employment date !
+                </div>
+              </label>
+
+              <label class="form-element">
+                <input
+                  title="Please insert your employment date"
+                  type="text"
+                  name="bio"
+                  id="bio"
+                  bio="ngModel"
+                  placeholder="Insert your bio"
+                  [(ngModel)]="auxUser.bio">
+                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
+                  Please pick a valid employment date !
+                </div>
+              </label>
+
+              <div *ngIf="role==requiredRole">
+                <label class="form-element">
+                  <select
+                    title="Please choose a role"
+                    name="role"
+                    id="role"
+                    #role="ngModel"
+                    [(ngModel)]="auxUser.role"
+                    placeholder="Enter a role">
+                    <option *ngFor="let role of roles">
+                      {{ role }}
+                    </option>
+                  </select>
+                  <div *ngIf="role.touched && !role.valid" class="input-box-error">
+                    Please pick a role !
+                  </div>
+                </label>
+              </div>
+
+            </div>
+            <button type="button" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" >Update</button>
+          </form>
+        </div>
+
+      </div>
 
     </div>
   </div>

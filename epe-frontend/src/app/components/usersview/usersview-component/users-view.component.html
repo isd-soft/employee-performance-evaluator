@@ -82,7 +82,7 @@
                     <mat-icon>person</mat-icon>
                   </button>
                   <div *ngIf="role==requiredRole">
-                    <button mat-button (click)="edit()">
+                    <button mat-button (click)="edit(row.id)">
                       <mat-icon>edit</mat-icon>
                     </button>
                   </div>
