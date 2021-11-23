@@ -30,7 +30,7 @@ export class EditService {
   }
 
   update(user: User | undefined) {
-    return this.http.put(this.url2 + '/' + this.id, user)
+    return this.http.patch(this.url2 + '/' + this.id, user)
       .pipe(catchError(this.errorHandler));
   }
 

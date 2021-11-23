@@ -48,6 +48,14 @@ public class UserController {
     @PutMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     @CrossOrigin(origins = origin)
+    public ResponseEntity<UserDto> updateUserAsAdmin(@Valid @RequestBody UserDto userDto,
+                                              @PathVariable(name = "id") String id) throws IOException {
+        return ResponseEntity.ok(userService.updateUserAsAdmin(userDto, id));
+    }
+
+    @PatchMapping("/{id}")
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    @CrossOrigin(origins = origin)
     public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,
                                               @PathVariable(name = "id") String id) throws IOException {
         return ResponseEntity.ok(userService.updateUser(userDto, id));
