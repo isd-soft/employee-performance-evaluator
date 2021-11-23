@@ -24,6 +24,10 @@ export class EditComponent implements OnInit {
 
   errorMessage? : string;
 
+  roles?: string[];
+  role? : string;
+  requiredRole : string = "ROLE_SYSADMIN";
+
   constructor(private jwtService: JwtService,
               private editService: EditService,
               private filler: EditFiller,
@@ -32,6 +36,9 @@ export class EditComponent implements OnInit {
     this.auxUser = data as User);
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
+    this.role = this.editService.getRole();
+    this.editService.getRoles().subscribe(data => {
+      this.roles = data as string[]});
   }
 
   url = "";

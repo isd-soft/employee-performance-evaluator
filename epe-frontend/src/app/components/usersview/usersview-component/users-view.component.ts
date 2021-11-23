@@ -10,6 +10,7 @@ import {UserService} from "../../user/user-service/user.service.js";
 import {HomeComponent} from "../../home/home-component/home.component";
 import {identity} from "rxjs";
 import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
+import {EditComponent} from "../../../edit/edit-component/edit.component";
 
 @Component({
   selector: 'app-usersview',
@@ -60,7 +61,7 @@ export class UsersView implements AfterViewInit {
     this.dialog.open( UserComponent, {data: user} );
   }
 
-  changeGroup() {
-    this.dialog.open(RoleChangeComponent);
+  edit() {
+    this.dialog.open(EditComponent);
   }
 }

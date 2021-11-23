@@ -25,6 +25,7 @@ public class UserDto {
     private String token;
     private byte[] image_bytes;
     private String image;
+    private String role;
 
     public static UserDto fromUser(User user) {
         UserDto userView = new UserDto();
@@ -39,6 +40,7 @@ public class UserDto {
         userView.setBuddyId(user.getBuddyId());
         userView.setImage(new String(user.getImageBytes()));
         userView.setBio(user.getBio());
+        userView.setRole(String.valueOf(user.getRole().getRole()));
         return userView;
     }
 }

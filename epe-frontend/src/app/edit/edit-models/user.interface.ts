@@ -8,5 +8,5 @@ export interface User{
     phoneNumber: string
     job: string
     bio: string
-
+    role: string
 }

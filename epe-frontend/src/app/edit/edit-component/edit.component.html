@@ -127,7 +127,7 @@
                                     </option>
                                 </select>
                                 <div *ngIf="job.touched && !job.valid" class="input-box-error">
-                                    Please pick a valid employment date !
+                                    Please pick a job !
                                 </div>
                             </label>
 
@@ -160,6 +160,24 @@
                                 </div>
                             </label>
 
+                          <div *ngIf="role==requiredRole">
+                            <label class="form-element">
+                              <select
+                                title="Please choose a role"
+                                name="role"
+                                id="role"
+                                #role="ngModel"
+                                [(ngModel)]="auxUser.role"
+                                placeholder="Enter a role">
+                                <option *ngFor="let role of roles">
+                                  {{ role }}
+                                </option>
+                              </select>
+                              <div *ngIf="role.touched && !role.valid" class="input-box-error">
+                                Please pick a role !
+                              </div>
+                            </label>
+                          </div>
 
                         </div>
                         <button type="button" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" >Update</button>
