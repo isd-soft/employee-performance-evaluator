@@ -29,6 +29,8 @@ export class UsersView implements AfterViewInit {
 
   jwtUserId? : string;
 
+  jwtUserRole? : string;
+
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
