@@ -21,8 +21,6 @@ export class RoleChangeComponent implements OnInit {
 
   jobList?: JobItem[];
 
-  auxUser?: User;
-
   errorMessage? : string;
 
   roles?: string[];
@@ -36,12 +34,13 @@ export class RoleChangeComponent implements OnInit {
               private filler: EditFiller,
               private router: Router) {
     this.editService.getUserData(userId).subscribe(data =>
-      this.auxUser = data as User);
+      this.user = data as User);
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
     this.role = this.editService.getRole();
     this.editService.getRoles().subscribe(data => {
       this.roles = data as string[]});
+    console.log(this.userId);
   }
 
   url = "";
@@ -76,8 +75,8 @@ export class RoleChangeComponent implements OnInit {
 
   update() {
     // @ts-ignore
-    this.auxUser.image = this.base64Output;
-    this.editService.update(this.auxUser).subscribe(data => {
+    this.user.image = this.base64Output;
+    this.editService.update(this.user).subscribe(data => {
     }, error => {
       this.errorMessage = error.error.title;})
 

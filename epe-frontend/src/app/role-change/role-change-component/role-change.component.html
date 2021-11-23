@@ -5,14 +5,14 @@
 
       <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
 
-        <div *ngIf="auxUser" class="login-form">
+        <div *ngIf="user" class="login-form">
           <form #editForm="ngForm" (ngSubmit)="update()">
             <div class="form-details">
 
 
               <label class="form-element" >
                 <h3>Old image</h3>
-                <img src="data:image/png;base64,{{auxUser.image}}" height="200">
+                <img src="data:image/png;base64,{{user.image}}" height="200">
               </label>
 
               <h3>Choose new image</h3><br>
@@ -42,7 +42,7 @@
                   id="email"
                   #email="ngModel"
                   placeholder="Enter your email"
-                  [(ngModel)]="auxUser.email">
+                  [(ngModel)]="user.email">
                 <div *ngIf="email.touched && !email.valid" class="input-box-error">
                   Email is required and must be a valid one !
                 </div>
@@ -57,7 +57,7 @@
                   name="firstname"
                   id="firstname"
                   #firstname="ngModel"
-                  [(ngModel)]="auxUser.firstname"
+                  [(ngModel)]="user.firstname"
                   placeholder="Enter your name">
                 <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
                   Firstname is required and must be between 3 and 20 letters long !
@@ -73,7 +73,7 @@
                   name="lastname"
                   id="lastname"
                   #lastname="ngModel"
-                  [(ngModel)]="auxUser.lastname"
+                  [(ngModel)]="user.lastname"
                   placeholder="Enter your last name">
                 <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
                   Lastname is required and must be between 3 and 20 letters long !
@@ -88,7 +88,7 @@
                   name="birthDate"
                   id="birthDate"
                   #birthDate="ngModel"
-                  [(ngModel)]="auxUser.birthDate">
+                  [(ngModel)]="user.birthDate">
                 <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
                   Please pick a valid birth date !
                 </div>
@@ -102,7 +102,7 @@
                   name="phone"
                   id="phone"
                   #phone="ngModel"
-                  [(ngModel)]="auxUser.phoneNumber"
+                  [(ngModel)]="user.phoneNumber"
                   placeholder="Enter your phone number">
                 <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
                   Phone number is required !
@@ -115,7 +115,7 @@
                   name="job"
                   id="job"
                   #job="ngModel"
-                  [(ngModel)]="auxUser.job"
+                  [(ngModel)]="user.job"
                   placeholder="Enter your job">
                   <option *ngFor="let job of jobList">
                     {{ job.jobTitle }}
@@ -134,7 +134,7 @@
                   name="employmentDate"
                   id="employmentDate"
                   #employmentDate="ngModel"
-                  [(ngModel)]="auxUser.employmentDate"
+                  [(ngModel)]="user.employmentDate"
                   dateformat="d M y">
                 <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
                   Please pick a valid employment date !
@@ -149,7 +149,7 @@
                   id="bio"
                   bio="ngModel"
                   placeholder="Insert your bio"
-                  [(ngModel)]="auxUser.bio">
+                  [(ngModel)]="user.bio">
                 <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
                   Please pick a valid employment date !
                 </div>
@@ -162,7 +162,7 @@
                     name="role"
                     id="role"
                     #role="ngModel"
-                    [(ngModel)]="auxUser.role"
+                    [(ngModel)]="user.role"
                     placeholder="Enter a role">
                     <option *ngFor="let role of roles">
                       {{ role }}
