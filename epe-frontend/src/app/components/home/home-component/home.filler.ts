@@ -30,7 +30,7 @@ export class HomeFiller{
             employmentDate: datePipe.transform(newUser.employmentDate, 'dd-MM-yyyy') as string,
             phoneNumber: newUser.phoneNumber,
             job: newUser.job,
-            bio: '',
+            bio: 'new user',
             password: newUser.password,
         }
 

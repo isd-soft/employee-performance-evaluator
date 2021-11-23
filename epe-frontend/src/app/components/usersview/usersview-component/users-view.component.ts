@@ -76,4 +76,8 @@ export class UsersView implements AfterViewInit {
     this.dialog.open(RoleChangeComponent, {height:'100%',width:'70%', data : user});
     // this.dialog.afterAllClosed.
   }
+
+  delete(user : string) {
+    this.userview.deleteUser(user);
+  }
 }

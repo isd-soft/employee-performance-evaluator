@@ -68,9 +68,6 @@ export class EditComponent implements OnInit {
     return result;
   }
 
-
-
-
   update() {
     // @ts-ignore
     this.auxUser.image = this.base64Output;

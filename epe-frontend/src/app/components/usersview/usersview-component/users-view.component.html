@@ -85,6 +85,12 @@
                     <button mat-button (click)="edit(row.id)">
                       <mat-icon>edit</mat-icon>
                     </button>
+
+                  </div>
+                  <div *ngIf="role==requiredRole && row.id != jwtUserId">
+                    <button mat-button (click)="delete(row.id)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
                   </div>
                 </mat-cell>
               </ng-container>
