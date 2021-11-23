@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Role} from "../role-change-model/role.interface";
 import {RoleService} from "../role-change-service/role.service";
 import {User} from "../../edit/edit-models/user.interface";
@@ -8,6 +8,7 @@ import {EditService} from "../../edit/edit-service/edit.service";
 import {EditFiller} from "../../edit/edit-component/edit.filler";
 import {Router} from "@angular/router";
 import {Observable, ReplaySubject} from "rxjs";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-role-change',
@@ -28,11 +29,13 @@ export class RoleChangeComponent implements OnInit {
   role? : string;
   requiredRole : string = "ROLE_SYSADMIN";
 
-  constructor(private jwtService: JwtService,
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public userId : any,
+    private jwtService: JwtService,
               private editService: EditService,
               private filler: EditFiller,
               private router: Router) {
-    this.editService.getUser().subscribe(data =>
+    this.editService.getUserData(userId).subscribe(data =>
       this.auxUser = data as User);
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
