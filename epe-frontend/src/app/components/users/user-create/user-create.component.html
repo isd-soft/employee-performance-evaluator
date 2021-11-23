@@ -1,7 +1,7 @@
 <div class="container-fluid display-table">
     <div class="row display-table-row">
         <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-            <app-sidebar></app-sidebar>
+<!--            <app-sidebar></app-sidebar>-->
         </div>
         <div class="col-md-10 col-sm-11 display-table-cell v-align">
             <div class="content-block">
@@ -19,33 +19,33 @@
                                     required
                                     type="text"
                                     name="teamname"
-                                    #teamname="ngModel" 
+                                    #teamname="ngModel"
                                     id="teamname"
-                                    placeholder="Enter new team name" 
+                                    placeholder="Enter new team name"
                                     [(ngModel)]="newTeamName">
                             </label>
                             <label class="form-element">
                                 <span class="form-label">
                                     Team Leader
                                 </span>
-                                <select 
-                                    #selectElem 
+                                <select
+                                    #selectElem
                                     (change)="setTeamLeader(selectElem.value)">
-                                    <option 
-                                        value="" 
-                                        disabled 
+                                    <option
+                                        value=""
+                                        disabled
                                         selected>
                                             Select your option
                                     </option>
                                     <option *ngFor="let user of users" [value]="user.id">
-                                        {{user.firstname}} {{user.lastname}} 
+                                        {{user.firstname}} {{user.lastname}}
                                     </option>
                                 </select>
                             </label>
                         </div>
-                        <button 
-                            type="submit" 
-                            [disabled]="createTeamForm.form.invalid" 
+                        <button
+                            type="submit"
+                            [disabled]="createTeamForm.form.invalid"
                             class="form-btn"
                             (click)="createTeam()">
                             Create Team

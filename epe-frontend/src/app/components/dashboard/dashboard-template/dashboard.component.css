@@ -1,4 +1,16 @@
+.img-logo{
+  max-width: 194px;
+  max-height: 100%;
+}
 
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
 
 /*Login Signup Page*/
 a:focus,a:hover,a{
@@ -187,6 +199,7 @@ li,ul{
 /*Home Page*/
 
 .home {
+  height: 100vh;
     background: #f6f7fa;
 }
 

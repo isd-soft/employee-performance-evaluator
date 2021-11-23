@@ -14,7 +14,7 @@
 body{
   height: 100vh;
   /*background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6);*/
-  background: #8492af;
+  background: #efefee;
   background-size: 400%;
 }
 #error-page{
@@ -44,7 +44,7 @@ body{
   top: 0;
   left: 0;
   right: 0;
-  background: #1a3d91;
+  background: #444444;
   /*background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6);*/
   background-size: 400%;
   -webkit-background-clip: text;

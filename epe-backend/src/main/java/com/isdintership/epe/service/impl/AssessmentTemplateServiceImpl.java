@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
+class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
     private final JobRepository jobRepository;
     private final AssessmentRepository assessmentRepository;

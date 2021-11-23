@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 // import { TableOverviewExample } from './table-overview-example/table-overview-example.component';
@@ -41,6 +41,13 @@ import { AssessmentsHistoryUserComponent } from './components/assessments/assess
 import { EditComponent } from './components/edit/edit-component/edit.component';
 import { PasswordComponent } from './components/password/password-component/password.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatListModule} from "@angular/material/list";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { AssessmentComponent } from './components/assessment/assessment-component/assessment.component';
+import {MatSelectModule} from "@angular/material/select";
+import {ToastrModule} from "ngx-toastr";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +73,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     TeamsComponent,
     EditComponent,
     PasswordComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    AssessmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,10 +93,12 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    // MatPaginator,
-    // MatSort,
-    // MatTableDataSource,
-    // MatFormFieldModule
+    MatCardModule,
+    MatListModule,
+    MatSidenavModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

@@ -11,7 +11,7 @@ export class EditFiller{
 
     updateUserFromTemplate(user: User): UpdateRequest {
 
-        console.log(user)
+        // console.log(user)
 
         let datePipe = new DatePipe('en-US');
         let updateUser: UpdateRequest = {
