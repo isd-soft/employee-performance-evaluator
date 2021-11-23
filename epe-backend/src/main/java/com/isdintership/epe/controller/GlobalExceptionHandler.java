@@ -3,6 +3,11 @@ package com.isdintership.epe.controller;
 import com.isdintership.epe.dto.ErrorResponse;
 import com.isdintership.epe.exception.*;
 import org.springframework.http.HttpStatus;
+import com.isdintership.epe.exception.AssessmentNotFoundException;
+import com.isdintership.epe.exception.JobNotFoundException;
+import com.isdintership.epe.exception.UserExistsException;
+import com.isdintership.epe.exception.UserNotFoundException;
+import com.isdintership.epe.exception.RoleNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -56,6 +61,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAssessmentNotFoundException
             (AssessmentNotFoundException e, HttpServletRequest request) {
 
+        ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRoleNotFoundException(RoleNotFoundException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder().title(e.getMessage()).details(request.getRequestURI()).build();
         return ResponseEntity.badRequest().body(errorResponse);
     }

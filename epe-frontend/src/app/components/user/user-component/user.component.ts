@@ -12,8 +12,10 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 })
 export class UserComponent implements OnInit {
 
+  // @ts-ignore
   user: User;
-  assessments: Assessment[];
+  // @ts-ignore
+  assessments: Assessment[] ;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public userId: any, private userService: UserService) {
@@ -21,12 +23,14 @@ export class UserComponent implements OnInit {
     this.userService.getUser(userId).subscribe(userInfo => {
       this.user = userInfo as User;
     });
+
     // @ts-ignore
     this.userService.getAssessment(userId).subscribe(assessment => {
       this.assessments = assessment as Assessment[];
-      console.log(assessment);
+      // console.log(assessment);
     })
   }
+
 
   ngOnInit(): void {
 

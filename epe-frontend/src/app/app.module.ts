@@ -9,7 +9,6 @@ import { TokenInterceptor } from "./interceptors/token.interceptor";
 // import {MatSort} from '@angular/material/sort';
 // import {MatTableDataSource} from '@angular/material/table';
 // import {MatFormFieldModule} from '@angular/material/form-field';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
@@ -48,6 +47,16 @@ import {MatSelectModule} from "@angular/material/select";
 import { AssessmentTemplateCreateComponent } from './components/assessments-templates/assessment-template-create-component/assessment-template-create.component';
 import {ToastrModule} from "ngx-toastr";
 import {DeleteConfirmationDialogComponent} from "./components/assessments-templates/assessment-template-view-component/delete-confirmation-dialog.component";
+import { RoleChangeComponent } from './role-change/role-change-component/role-change.component';
+import { EditComponent } from './components/edit/edit-component/edit.component';
+import { PasswordComponent } from './components/password/password-component/password.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatListModule} from "@angular/material/list";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { AssessmentComponent } from './components/assessment/assessment-component/assessment.component';
+import {MatSelectModule} from "@angular/material/select";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -75,6 +84,14 @@ import {DeleteConfirmationDialogComponent} from "./components/assessments-templa
     AssessmentTemplateEditComponent,
     AssessmentTemplateCreateComponent,
     DeleteConfirmationDialogComponent
+    SidebarComponent,
+    TeamsComponent,
+    EditComponent,
+    PasswordComponent,
+    NotfoundComponent,
+    AssessmentComponent,
+    PasswordComponent,
+    RoleChangeComponent
   ],
     imports: [
         BrowserModule,
@@ -102,6 +119,30 @@ import {DeleteConfirmationDialogComponent} from "./components/assessments-templa
         // MatTableDataSource,
         // MatFormFieldModule
     ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatListModule,
+    MatSidenavModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: 'API_URL', useValue: getApiUrl()}

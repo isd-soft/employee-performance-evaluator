@@ -1,7 +1,7 @@
 <div class="container-fluid display-table">
     <div class="row display-table-row">
         <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-            <app-sidebar></app-sidebar>
+<!--            <app-sidebar></app-sidebar>-->
         </div>
         <div class="col-md-10 col-sm-11 display-table-cell v-align">
             <div *ngIf="getTeam" class="content-block">
@@ -19,7 +19,7 @@
                                     required
                                     type="text"
                                     name="teamname"
-                                    #teamname="ngModel" 
+                                    #teamname="ngModel"
                                     id="teamname"
                                     [(ngModel)]="TeamName">
                             </label>
@@ -27,30 +27,30 @@
                                 <span class="form-label">
                                     Team Leader
                                 </span>
-                                <select 
-                                    #selectElem 
+                                <select
+                                    #selectElem
                                     (change)="setTeamLeader(selectElem.value)">
                                     <option
-                                        disabled 
+                                        disabled
                                         selected>
                                         {{TeamLeaderName}}
                                     </option>
                                     <option *ngFor="let user of users" [value]="user.id">
-                                        {{user.firstname}} {{user.lastname}} 
+                                        {{user.firstname}} {{user.lastname}}
                                     </option>
                                 </select>
                             </label>
                         </div>
-                        <button 
-                            type="submit" 
-                            [disabled]="editTeamForm.form.invalid" 
+                        <button
+                            type="submit"
+                            [disabled]="editTeamForm.form.invalid"
                             class="form-btn"
                             (click)="updateTeam()">
                             Save Changes
                         </button>
-                        <button 
-                        type="submit" 
-                        [disabled]="editTeamForm.form.invalid" 
+                        <button
+                        type="submit"
+                        [disabled]="editTeamForm.form.invalid"
                         class="form-btn"
                         (click)="deleteTeam()">
                         Delete Team

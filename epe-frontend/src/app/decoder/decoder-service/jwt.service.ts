@@ -8,10 +8,10 @@ import jwt_decode from 'jwt-decode';
 export class JwtService {
 
   getJwtUser(): any {
-    
+
     let jwtUser: JwtUser;
     let token: any = localStorage.getItem('JWT_TOKEN');
-    
+
     if(token) {
       try{
 
@@ -52,8 +52,8 @@ export class JwtService {
     }
   }
 
-  validateDecodedJwtToken(decodedToken: any): boolean {  
-    
+  validateDecodedJwtToken(decodedToken: any): boolean {
+
     if(decodedToken.id)
       if(decodedToken.sub)
         if(decodedToken.firstname)

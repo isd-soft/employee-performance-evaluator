@@ -12,7 +12,7 @@ export class HomeGuardService {
 
   constructor(private jwtService: JwtService,
               private router: Router) {
-    
+
     this.loggedUser = this.jwtService.getJwtUser();
   }
 
@@ -25,5 +25,5 @@ export class HomeGuardService {
       this.router.navigate(['/dashboard']);
       return false;
     }
-  } 
+  }
 }

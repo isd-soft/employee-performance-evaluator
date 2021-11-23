@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import java.io.File;
 import java.time.LocalDate;
 
 @Data
@@ -33,6 +34,10 @@ public class RegistrationRequest {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate employmentDate;
+
+    private File imageFile;
+
+    private String imageFolder;
 
     @NotEmpty(message = "Phone number shouldn't be empty")
     @Pattern(regexp =  "^\\+?(?:[0-9] ?){6,14}[0-9]$")

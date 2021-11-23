@@ -24,6 +24,13 @@ import {AssessmentsUserComponent} from "./components/assessments/assessments-use
 import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 import {AssessmentsTemplatesComponent} from "./components/assessments-templates/assessments-templates-component/assessments-templates.component";
 
+import { EditComponent } from './components/edit/edit-component/edit.component';
+import {PasswordComponent} from "./components/password/password-component/password.component";
+import {NotfoundComponent} from "./components/notfound/notfound.component";
+import {AssessmentComponent} from "./components/assessment/assessment-component/assessment.component";
+
+import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
+
 
 const routes: Routes = [
   {
@@ -80,12 +87,25 @@ const routes: Routes = [
     component: UserComponent,
   },
   {
+    path: "edit",
+    component: EditComponent
+  },
+  {
+    path: 'edit/password',
+    component: PasswordComponent
+  },
+  {
     path: 'usersview',
     component: UsersView,
   },
   {
     path: 'assessments',
     component: AssessmentsUserComponent,
+    canActivate: [DashboardGuard]
+  },
+  {
+    path: 'assessment',
+    component: AssessmentComponent,
     canActivate: [DashboardGuard]
   },
   {
@@ -99,10 +119,18 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
+    path: 'group',
+    component: RoleChangeComponent
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
+  },
 ];
 
 @NgModule({

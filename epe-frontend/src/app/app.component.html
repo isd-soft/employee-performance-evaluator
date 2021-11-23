@@ -1,4 +1,42 @@
-<div>
-    <router-outlet></router-outlet>
-    <!-- <app-table-overview-example></app-table-overview-example> -->
-</div>
+<!--<div>-->
+<!--    <router-outlet></router-outlet>-->
+<!--    &lt;!&ndash; <app-table-overview-example></app-table-overview-example> &ndash;&gt;-->
+<!--</div>-->
+
+<body class="home" >
+<mat-sidenav-container class="example-container" style="position: absolute" >
+  <mat-sidenav mode="side" opened style="min-width: 150px">
+    <img src="./assets/epe-white-box.png" class="img-logo" routerLink="/dashboard">
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+
+      <mat-list-item routerLink="/my-profile">
+        <mat-icon mat-list-icon >person</mat-icon>&nbsp;My Profile
+      </mat-list-item>
+
+      <mat-list-item routerLink="/assessments">
+        <mat-icon>assessment</mat-icon>&nbsp;My Assessments
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item routerLink="/usersview">
+        <mat-icon mat-list-icon>supervisor_account</mat-icon>&nbsp;Users
+      </mat-list-item>
+
+      <mat-list-item routerLink="/logout" fxLayoutAlign="center center">
+        <mat-icon> directions_walk</mat-icon>&nbsp;Logout
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <div class="display-center">
+      <router-outlet>
+
+      </router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</body>

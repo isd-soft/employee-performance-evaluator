@@ -6,19 +6,25 @@ import com.isdintership.epe.entity.*;
 import com.isdintership.epe.exception.JobNotFoundException;
 import com.isdintership.epe.exception.UserExistsException;
 import com.isdintership.epe.exception.UserNotFoundException;
+
+import com.isdintership.epe.exception.RoleNotFoundException;
+
 import com.isdintership.epe.repository.*;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Service
 @Slf4j
@@ -61,12 +67,21 @@ class UserServiceImpl implements UserService {
                 new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
+        File imageSourceFile = new File("epe-backend/userDefaultImage.png");
+
+        try {
+            user.setImageBytes(encodeImageFromFile(imageSourceFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
 
         return "Registration successful";
 
     }
+
 
     @Override
     @Transactional
@@ -112,10 +127,20 @@ class UserServiceImpl implements UserService {
                 new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
+        File imageSourceFile = new File("../epe-backend//userDefaultImage.png");
+
+        try {
+            user.setImageBytes(encodeImageFromFile(imageSourceFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         log.info("Saving user {}", request.getEmail());
 
         return (UserDto.fromUser(userRepository.save(user)));
     }
+
+
 
     @Override
     @Transactional
@@ -137,6 +162,8 @@ class UserServiceImpl implements UserService {
         return UserDto.fromUser(user);
     }
 
+
+
     @Override
     @Transactional
     public UserDto updateUser(UserDto userDto, String id) {
@@ -149,21 +176,99 @@ class UserServiceImpl implements UserService {
             user.setBuddyId(userDto.getBuddyId());
         }
 
-        user.setEmail(userDto.getEmail());
-        user.setFirstname(userDto.getFirstname());
-        user.setLastname(userDto.getLastname());
-        user.setBirthDate(userDto.getBirthDate());
-        user.setEmploymentDate(userDto.getEmploymentDate());
-        user.setPhoneNumber(userDto.getPhoneNumber());
+        if (userDto.getEmail() != null) {
+            user.setEmail(userDto.getEmail());
+        }
+        if (userDto.getFirstname() != null) {
+            user.setFirstname(userDto.getFirstname());
+        }
+        if (userDto.getLastname() != null) {
+            user.setLastname(userDto.getLastname());
+        }
+        if (String.valueOf(userDto.getBirthDate()) != null) {
+            user.setBirthDate(userDto.getBirthDate());
+        }
+        if (String.valueOf(userDto.getEmploymentDate()) != null) {
+            user.setEmploymentDate(userDto.getEmploymentDate());
+        }
+        if (userDto.getPhoneNumber() != null) {
+            user.setPhoneNumber(userDto.getPhoneNumber());
+        }
+        if (userDto.getJob() != null) {
+            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
+                    new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
 
-        Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
+            user.setJob(job);
+        }
+        if (userDto.getBio() != null) {
+            user.setBio(userDto.getBio());
+        }
 
-        user.setJob(job);
-        user.setBio(userDto.getBio());
+        if (userDto.getImage() != null) {
+            user.setImageBytes(encodeImageFromString(userDto.getImage()));
+        }
 
         return userDto;
     }
+
+    @Override
+    @Transactional
+    public UserDto updateUserAsAdmin(UserDto userDto, String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + "was not found"));
+
+        if (userDto.getBuddyId() != null) {
+            userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
+                    new UserNotFoundException("Buddy with id " + id + " was not found"));
+            user.setBuddyId(userDto.getBuddyId());
+        }
+
+        if (userDto.getEmail() != null) {
+            user.setEmail(userDto.getEmail());
+        }
+        if (userDto.getFirstname() != null) {
+            user.setFirstname(userDto.getFirstname());
+        }
+        if (userDto.getLastname() != null) {
+            user.setLastname(userDto.getLastname());
+        }
+        if (String.valueOf(userDto.getBirthDate()) != null) {
+            user.setBirthDate(userDto.getBirthDate());
+        }
+        if (String.valueOf(userDto.getEmploymentDate()) != null) {
+            user.setEmploymentDate(userDto.getEmploymentDate());
+        }
+        if (userDto.getPhoneNumber() != null) {
+            user.setPhoneNumber(userDto.getPhoneNumber());
+        }
+        if (userDto.getJob() != null) {
+            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
+                    new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
+
+            user.setJob(job);
+        }
+        if (userDto.getBio() != null) {
+            user.setBio(userDto.getBio());
+        }
+
+        if (userDto.getImage() != null) {
+            user.setImageBytes(encodeImageFromString(userDto.getImage()));
+        }
+
+
+
+        if (userDto.getRole() != null) {
+            Map<String,Integer> roles = new HashMap<>();
+            roles.put("User",1);
+            roles.put("Administrator",2);
+            int roleId = roles.get(userDto.getRole());
+            Role role = roleRepository.findById(roleId).orElseThrow(() ->
+                    new RoleNotFoundException("Role with id " + roleId + " was not found"));
+            user.setRole(role);
+        }
+        return userDto;
+    }
+
 
     @Override
     @Transactional
@@ -199,4 +304,100 @@ class UserServiceImpl implements UserService {
         return assignedUsersDtos;
     }
 
+
+    @Override
+    @Transactional
+    public PasswordView changePassword(PasswordView passwordView, String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + "was not found"));
+
+        boolean isPasswordMatched = passwordEncoder.matches(passwordView.getOldPassword(), user.getPassword());
+
+        if (isPasswordMatched) {
+            if (!(passwordView.getNewPassword().equals(passwordView.getNewPasswordConfirmation()))) {
+                throw new BadCredentialsException("New password was not confirmed");
+            } else if (passwordView.getNewPassword().equals(passwordView.getOldPassword())) {
+                throw new BadCredentialsException("Old and new passwords are the same");
+            } else {
+                user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
+            }
+        } else {
+            throw new BadCredentialsException("Old password doesn't match with the old inserted password");
+        }
+
+        return passwordView;
+    }
+
+    @Override
+    @Transactional
+    public RoleView changeGroup(RoleView roleView, String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " was not found"));
+
+
+        Role role = roleRepository.findById(roleView.getId()).orElseThrow(() ->
+                new RoleNotFoundException("Role with id " + roleView.getId() + " was not found"));
+
+        user.setRole(role);
+
+        return roleView;
+    }
+
+//    @Override
+//    @Transactional
+//    public ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException{
+//        //File file = imageEditView.getFile();
+//        String imagePath = imageEditView.getImagePath();
+//        String encodedImage = "";
+//        /*try {
+//            encodedImage = encodeImage(imagePath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }*/
+//        byte[] data = encodeImage(imagePath);
+//        User user = userRepository.findById(id).orElseThrow(() ->
+//                new UserNotFoundException("User with " + id + " was not found"));
+//        Image image = new Image();
+//        image.setImageBytes(data);
+//        image.setUser(user);
+//        //image.setUser_id(id);
+//        System.out.println(Arrays.toString(data));
+//        System.out.println(user.getId());
+//        imageRepository.save(image);
+//        return imageEditView;
+//    }
+public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
+    FileInputStream imageStream = new FileInputStream(imageFolder);
+
+    byte[] data = imageStream.readAllBytes();
+
+    String imageString = Base64.getEncoder().encodeToString(data);
+
+    byte[] finalData = imageString.getBytes();
+    imageStream.close();
+
+    return finalData;
 }
+
+
+    public static byte[] encodeImageFromFilePath(String imagePath) throws IOException {
+        FileInputStream imageStream = new FileInputStream(imagePath);
+
+        byte[] data = imageStream.readAllBytes();
+
+        String imageString = Base64.getEncoder().encodeToString(data);
+
+        byte[] finalData = imageString.getBytes();
+        imageStream.close();
+
+        return finalData;
+    }
+
+    public static byte[] encodeImageFromString(String imageBase64Encode) {
+        byte[] finalData = imageBase64Encode.getBytes();
+        return finalData;
+    }
+
+}
+
+

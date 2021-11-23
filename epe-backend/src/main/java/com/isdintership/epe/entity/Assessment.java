@@ -104,6 +104,7 @@ public class Assessment extends BaseEntity {
         this.user = user;
         this.title = title;
         this.description = description;
+        /*this.job = job;*/
         this.overallScore = overallScore;
         this.status = status;
         this.isTemplate = isTemplate;
