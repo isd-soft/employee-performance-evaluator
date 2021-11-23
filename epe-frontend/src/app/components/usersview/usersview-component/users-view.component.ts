@@ -42,11 +42,8 @@ export class UsersView implements AfterViewInit {
 
   constructor(private userview: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
     this.jwtUser = jwtService.getJwtUser();
-    // @ts-ignore
-    console.log(this.jwtUser.id);
     this.jwtUserId = this.jwtUser?.id;
     this.role = this.userview.getRole();
-    console.log(this.role);
   }
 
   applyFilter(event: Event) {
@@ -79,5 +76,16 @@ export class UsersView implements AfterViewInit {
 
   delete(user : string) {
     this.userview.deleteUser(user);
+    this.reloadComponent();
+  }
+  reloadComponent() {
+    // @ts-ignore
+    let currentUrl = this.router.url;
+    // @ts-ignore
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // @ts-ignore
+    this.router.onSameUrlNavigation = 'reload';
+    // @ts-ignore
+    this.router.navigate([currentUrl]);
   }
 }

@@ -262,10 +262,8 @@ class UserServiceImpl implements UserService {
             roles.put("User",1);
             roles.put("Administrator",2);
             int roleId = roles.get(userDto.getRole());
-            System.out.println("URL");
             Role role = roleRepository.findById(roleId).orElseThrow(() ->
                     new RoleNotFoundException("Role with id " + roleId + " was not found"));
-            System.out.println(role);
             user.setRole(role);
         }
         return userDto;

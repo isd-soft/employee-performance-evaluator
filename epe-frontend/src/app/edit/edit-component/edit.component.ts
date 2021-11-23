@@ -37,8 +37,6 @@ export class EditComponent implements OnInit {
     this.editService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
     this.role = this.editService.getRole();
-    this.editService.getRoles().subscribe(data => {
-      this.roles = data as string[]});
   }
 
   url = "";
