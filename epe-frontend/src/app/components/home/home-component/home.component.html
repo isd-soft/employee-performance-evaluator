@@ -166,6 +166,20 @@
                     Please enter your password
                 </mat-error>
               </mat-form-field>
+
+              <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Confirm your password</mat-label>
+                <input 
+                    matInput type="password" 
+                    matInput 
+                    [formControl]="confirmPasswordFormControl" 
+                    placeholder="Ex. password"
+                    [(ngModel)]="confirmPassword">
+                <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+                    Please enter your password
+                </mat-error>
+              </mat-form-field>
+
             <button class="register-submit" (click)="register()" mat-raised-button>Register</button>
         </form>
           <div class="error-message">
@@ -175,7 +189,7 @@
           </div>
           <div class="switch-page">
             <hr class="fifty-percent">
-            <span (click)="requestLoginPage()">
+            <span class="reroute-link" (click)="requestLoginPage()">
                 Sign In
             </span>
         </div>

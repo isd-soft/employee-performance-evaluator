@@ -37,6 +37,7 @@ export class HomeComponent {
   jobList?: JobItem[];
   employmentdateFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required]);
+  confirmPasswordFormControl = new FormControl('', [Validators.required]);
 
   registerUser: RegisterRequest = {
     email: '',
@@ -65,10 +66,12 @@ export class HomeComponent {
    }
 
    requestRegisterPage() {
+    this.errorMessage = undefined;
     this.hasAccount = false;
    }
 
    requestLoginPage() {
+    this.errorMessage = undefined;
     this.hasAccount = true;
    }
 
@@ -78,11 +81,6 @@ export class HomeComponent {
         let response = data as LoginResponse;
         if(response.token) {
           this.jwtService.storeJWT(response.token);
-          this.toastr.success('Login succesful ! </br> You will be redirected to dashboard', '', {
-            timeOut: 1000,
-            progressBar: true,
-            enableHtml: true
-          });
           setTimeout(()=> {
             this.router.navigate(['/dashboard']);
            }, 2000);
@@ -100,30 +98,34 @@ export class HomeComponent {
 
   register() {
 
-    let datePipe = new DatePipe('en-US');
-    this.registerUser.birthDate = datePipe.transform(this.registerUser.birthDate, 'dd-MM-yyyy') as string,
-    this.registerUser.employmentDate = datePipe.transform(this.registerUser.employmentDate, 'dd-MM-yyyy') as string,
-
-
-    this.homeService.register(this.registerUser).subscribe(data => {
-    }, error => {
-       if(error.status == 200) {
-         this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
-           timeOut: 3000,
-           progressBar: true,
-           enableHtml: true
-         });
-         setTimeout(()=> {
-          this.requestLoginPage();
-         }, 4000);
-       } else {
-        this.errorMessage = error.error.title;
-         this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
-          timeOut: 3000,
-          progressBar: true,
-          enableHtml: true
-         });
-       }});
+    if(this.registerUser.password == this.confirmPassword) {
+      let datePipe = new DatePipe('en-US');
+      this.registerUser.birthDate = datePipe.transform(this.registerUser.birthDate, 'dd-MM-yyyy') as string,
+      this.registerUser.employmentDate = datePipe.transform(this.registerUser.employmentDate, 'dd-MM-yyyy') as string,
+  
+  
+      this.homeService.register(this.registerUser).subscribe(data => {
+      }, error => {
+         if(error.status == 200) {
+           this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
+             timeOut: 3000,
+             progressBar: true,
+             enableHtml: true
+           });
+           setTimeout(()=> {
+            this.requestLoginPage();
+           }, 4000);
+         } else {
+          this.errorMessage = error.error.title;
+           this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
+            timeOut: 3000,
+            progressBar: true,
+            enableHtml: true
+           });
+         }});
+    } else {
+      this.errorMessage = "Passwords do not match !";
+    }
   }
 
 }

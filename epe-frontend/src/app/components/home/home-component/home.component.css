@@ -19,6 +19,9 @@
 }
 
 .login-form {
+    margin-top:auto;
+    margin-bottom:auto;
+    text-align:center;
     padding: 20px;
 }
 
@@ -75,12 +78,16 @@
 
 .welcome-message {
     padding: 40px;
+    text-align: center;
     font-size: 40px;
     font-weight: 500;
 }
 
 .register-form {
     padding: 20px;
+    margin-top:auto;
+    margin-bottom:auto;
+    text-align:center;
 }
 
 .register-input {
