@@ -1,61 +1,77 @@
-<!--  CONTENT HERE, BIATCH  -->
 <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Teams">
-        <mat-form-field appearance="standard">
+  <mat-tab label="Teams">
+    <mat-form-field appearance="standard" class="filter-field">
 
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-        </mat-form-field>
-        
-        <div class="mat-elevation-z9 table">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-          
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Name </th>
-                  <td class="align-left" mat-cell *matCellDef="let team"> {{team.name}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="teamLeader">
-                  <th mat-header-cell *matHeaderCellDef> Team Leader </th>
-                  <td class="align-left" mat-cell *matCellDef="let team"> {{team.teamLeader.firstname}} {{team.teamLeader.lastname}} </td>
-                </ng-container>
-    
-                <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef> </th>
-                    <td class="align-left" mat-cell *matCellDef="let team" [routerLink]="['/team-edit', team.id]"> Edit </td>
-                  </ng-container>
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ex. R Team"
+        #input
+      />
+    </mat-form-field>
 
-                  <ng-container matColumnDef="buttons">
-                    <th mat-header-cell class = "table-buttons"  *matHeaderCellDef>&nbsp;&nbsp;&nbsp;View</th>
-                    <td mat-cell
-                        class = "table-buttons"
-                        *matCellDef="let row"
-                        (click)="$event.stopPropagation()"
-                    >
-                      <button mat-button (click)="onView(row.id)">
-                        <mat-icon>open_in_new</mat-icon>
-                      </button>
-                      <div *ngIf="role==requiredRole && row.id != jwtUserId">
-                        <button mat-button (click)="edit(row.id)">
-                          <mat-icon>edit</mat-icon>
-                        </button>
-          
-                      </div>
-                      <div *ngIf="role==requiredRole && row.id != jwtUserId">
-                        <button mat-button (click)="delete(row.id)">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                      </div>
-                    </td>
-                  </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              
-                <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                </tr>
-              </table>
-        </div>
-    </mat-tab>
-  </mat-tab-group>
+    <div class="mat-elevation-z9 table">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            Team Name
+          </th>
+          <td mat-cell class="table-column" *matCellDef="let team">{{ team.name }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="teamLeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            Team Leader
+          </th>
+          <td mat-cell class="table-column" *matCellDef="let team">{{ team.teamLeader.firstname }} {{ team.teamLeader.lastname }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="buttons">
+          <th mat-header-cell class = "table-buttons"  *matHeaderCellDef>&nbsp;&nbsp;&nbsp;View</th>
+          <td mat-cell
+              class = "table-buttons"
+              *matCellDef="let team"
+              (click)="$event.stopPropagation()"
+          >
+            <button mat-button (click)="onView(team.id)">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+            <div>
+              <button mat-button (click)="edit(team.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+            </div>
+            <div>
+              <button mat-button (click)="delete(team.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"
+      ></mat-paginator>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>

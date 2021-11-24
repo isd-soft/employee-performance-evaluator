@@ -28,8 +28,7 @@ export class UserviewsServices {
   }
 
   deleteUser(userId : string | undefined) {
-    console.log(userId);
-    return this.http.delete(this.url + '/' + userId).subscribe();
+    return this.http.delete(this.url + '/' + userId)
   }
 
   getRole() {

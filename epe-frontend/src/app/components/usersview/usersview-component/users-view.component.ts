@@ -9,6 +9,7 @@ import {UserComponent} from "../../user/user-component/user.component";
 import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usersview',
@@ -37,7 +38,7 @@ export class UsersView implements AfterViewInit {
   role?: string;
   requiredRole : string = "ROLE_SYSADMIN";
 
-  constructor(private userview: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
+  constructor(private router: Router, private userview: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
     this.jwtUser = jwtService.getJwtUser();
     this.jwtUserId = this.jwtUser?.id;
     this.role = this.userview.getRole();
@@ -53,13 +54,16 @@ export class UsersView implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.reloadData();
+  }
+
+  reloadData() {
     this.userview.getUserList().subscribe(data => {
       this.users = data as User[];
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-
   }
 
   onView(user : string) {
@@ -72,17 +76,7 @@ export class UsersView implements AfterViewInit {
   }
 
   delete(user : string) {
-    this.userview.deleteUser(user);
-    this.reloadComponent();
-  }
-  reloadComponent() {
-    // @ts-ignore
-    let currentUrl = this.router.url;
-    // @ts-ignore
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    // @ts-ignore
-    this.router.onSameUrlNavigation = 'reload';
-    // @ts-ignore
-    this.router.navigate([currentUrl]);
+    this.userview.deleteUser(user).subscribe();
+    this.reloadData();
   }
 }
