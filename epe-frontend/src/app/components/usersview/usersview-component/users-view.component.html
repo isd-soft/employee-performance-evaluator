@@ -72,21 +72,18 @@
               class = "table-buttons"
               *matCellDef="let row"
               (click)="$event.stopPropagation()"
-          >
+>
             <button mat-button (click)="onView(row.id)">
               <mat-icon>open_in_new</mat-icon>
             </button>
-            <div *ngIf="role==requiredRole && row.id != jwtUserId">
-              <button mat-button (click)="edit(row.id)">
-                <mat-icon>edit</mat-icon>
-              </button>
 
-            </div>
-            <div *ngIf="role==requiredRole && row.id != jwtUserId">
-              <button mat-button (click)="delete(row.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
+            <button *ngIf="role==requiredRole && row.id != jwtUserId" mat-button (click)="edit(row.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button *ngIf="role==requiredRole && row.id != jwtUserId" mat-button (click)="delete(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </ng-container>
 

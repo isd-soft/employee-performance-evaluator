@@ -1,63 +1,37 @@
-<div class="container-fluid display-table">
-    <div class="row display-table-row">
-        <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-<!--            <app-sidebar></app-sidebar>-->
-        </div>
-        <div class="col-md-10 col-sm-11 display-table-cell v-align">
-            <div class="content-block">
-                <div class="title">
-                    <h1>Create new <span>team !</span></h1>
-                </div>
-                <div class="new-team-form">
-                    <form #createTeamForm="ngForm">
-                        <div class="form-details">
-                            <label class="form-element">
-                                <span class="form-label">
-                                    Team Name
-                                </span>
-                                <input
-                                    required
-                                    type="text"
-                                    name="teamname"
-                                    #teamname="ngModel"
-                                    id="teamname"
-                                    placeholder="Enter new team name"
-                                    [(ngModel)]="newTeamName">
-                            </label>
-                            <label class="form-element">
-                                <span class="form-label">
-                                    Team Leader
-                                </span>
-                                <select
-                                    #selectElem
-                                    (change)="setTeamLeader(selectElem.value)">
-                                    <option
-                                        value=""
-                                        disabled
-                                        selected>
-                                            Select your option
-                                    </option>
-                                    <option *ngFor="let user of users" [value]="user.id">
-                                        {{user.firstname}} {{user.lastname}}
-                                    </option>
-                                </select>
-                            </label>
-                        </div>
-                        <button
-                            type="submit"
-                            [disabled]="createTeamForm.form.invalid"
-                            class="form-btn"
-                            (click)="createTeam()">
-                            Create Team
-                        </button>
-                    </form>
-                </div>
-                <div class="error-message">
-                    <span *ngIf="errorMessage">
-                        {{errorMessage}}
-                    </span>
-                </div>
-            </div>
+<div class="content">
+    <div class="center">
+        
+        <span class="header"> Create New Team ! </span>
+        <form>
+            <mat-form-field class="new-team-input" appearance="fill">
+                <mat-label>Team Name</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="teamNameFormControl" 
+                  placeholder="Ex. C++ Developers"
+                  [(ngModel)]="newTeamName">
+                <mat-error 
+                  *ngIf="teamNameFormControl.hasError('required')">
+                  New team name is required
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="new-team-input" appearance="fill">
+                <mat-label>Team Leader</mat-label>
+                <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="newTeamLeaderId">
+                  <mat-select-trigger>
+                    {{teamLeaderFormControl.value ? teamLeaderFormControl.value : ''}}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstname}} {{user.lastname}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button class="new-team-submit" (click)="createTeam()" mat-raised-button>Create Team</button>
+        </form>
+        <div class="error-message">
+            <span *ngIf="errorMessage">
+                {{errorMessage}}
+            </span>
         </div>
     </div>
 </div>

@@ -1,9 +1,10 @@
 import { CreateTeamRequest } from './../teams-model/create-team-request.interface';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { TeamsService } from '../teams-service/teams.service';
 import { UserView } from './../teams-model/user-view.interface';
 import { UserService } from '../user-service/user.service';
+import { FormControl, Validators } from '@angular/forms';
+import { TeamsService } from '../teams-service/teams.service';
 
 @Component({
   selector: 'app-team-create',
@@ -13,8 +14,9 @@ import { UserService } from '../user-service/user.service';
 export class TeamCreateComponent {
 
   newTeamName?: string = '';
-  newTeamLeaderId?: string;
-
+  teamNameFormControl = new FormControl('', [Validators.required]);
+  newTeamLeaderId?: string = '';
+  teamLeaderFormControl = new FormControl();
   users?: UserView[];
   errorMessage?: string;
 
@@ -37,25 +39,23 @@ export class TeamCreateComponent {
 
   createTeam() {
 
-    let newTeam: CreateTeamRequest = this.createNewTeamFromInputDetails();
-    this.teamService.createTeam(newTeam).subscribe(data => {
-    }, error => {
-       if(error.status == 201) {
-        this.router.navigate(['/teams']);
-       } 
-       this.errorMessage = error.error.title;})
-  }
 
-  createNewTeamFromInputDetails(): CreateTeamRequest {
+    if((this.newTeamName == '') || (this.newTeamLeaderId == '')) {
+      this.errorMessage = 'please complete all details'
+    } else {
+      let newTeam: CreateTeamRequest = {
+        name: this.newTeamName || '',
+        teamLeader: {
+          id: this.newTeamLeaderId || ''
+        }
+      }
   
-    let tempTeam: CreateTeamRequest = {
-      name: this.newTeamName || '',
-      teamLeader: {
-        id: this.newTeamLeaderId || ''
-      },
-      teamMembers: []
+      this.teamService.createTeam(newTeam).subscribe(data => {
+      }, error => {
+         if(error.status == 201) {
+          this.router.navigate(['/teams']);
+         } 
+         this.errorMessage = error.error.title;})
     }
-
-    return tempTeam;
   }
 }

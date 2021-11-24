@@ -50,14 +50,45 @@
   }
   
   .table-column {
-    width: 22%;
+    width: 35%;
   }
   
   .table-buttons {
-    width: 12%;
+    width: 30%;
   }
   
   mat-paginator {
     padding-bottom: 15px;
   }
-  
+
+.center {
+  text-align: center;
+    margin-top: 10%;
+}
+
+.header {
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.new-team-input {
+    width: 80%;
+}
+
+.new-team-submit {
+    margin: 20px;
+    width: 70%;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 25px;
+}
+
+.error-message {
+    color: #FF0000;
+    text-align: center;
+}
+
+mat-icon {
+  padding: 0px;
+  margin: 0px;
+}
