@@ -3,6 +3,17 @@
 
 <form action="" [formGroup]="user">
 
+
+  <mat-form-field>
+    <input type="file" name="fileUpload" accept="image/*" (change)="selectFile($event)" />
+    <input matInput readonly />
+    <mat-icon matSuffix>file</mat-icon>
+  </mat-form-field>
+
+  <label>
+    <img [src]="url" height="200">
+  </label>
+
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
     <input matInput required  readonly [value]="auxUser?.email" formControlName="email">
@@ -38,18 +49,13 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Employment date date</mat-label>
-    <input type="date" matInput required [value]="auxUser?.employmentDate" formControlName="employmentDate">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
      <mat-label>Bio</mat-label>
      <input matInput required [value]="auxUser?.bio" formControlName="bio">
   </mat-form-field>
 
   <button mat-button
           type="button"
-          (click)="xchg()"
+          (click)="update()"
           class="submit-button raise">
     Submit
   </button>

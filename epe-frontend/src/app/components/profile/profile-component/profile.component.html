@@ -50,7 +50,7 @@
       </mat-list>
     </mat-card-content>
     <div style="align-items: center; justify-content: center; display: flex;">
-      <button routerLink="/edit" style="margin-right: 8px" mat-raised-button><mat-icon>edit</mat-icon> Edit profile </button>
+      <button (click)="edit()" style="margin-right: 8px" mat-raised-button><mat-icon>edit</mat-icon> Edit profile </button>
       <button routerLink="/edit/password" style="margin-left: 8px" mat-raised-button><mat-icon>key</mat-icon> Change password </button>
     </div>
   </mat-card>

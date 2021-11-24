@@ -1,6 +1,8 @@
 import { MyProfile } from './../profile-models/my-profile.interface';
 import { ProfileService } from './../profile-service/profile.service';
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {EditComponent} from "../../edit/edit-component/edit.component";
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +13,8 @@ export class ProfileComponent implements OnInit {
 
   myProfile?: MyProfile;
 
-  constructor(private profileService: ProfileService) { 
+  constructor(private profileService: ProfileService,
+              private dialog: MatDialog) {
     this.profileService.getMyProfile().subscribe(data => {
       this.myProfile = data as MyProfile;
     });
@@ -23,4 +26,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  edit() {
+    this.dialog.open(EditComponent, {height: '80%', width:'70%'})
+  }
 }

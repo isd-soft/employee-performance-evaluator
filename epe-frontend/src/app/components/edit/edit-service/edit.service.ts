@@ -29,7 +29,7 @@ export class EditService {
     this.role = this.jwtUser?.role;
   }
 
-  update(user: User | undefined) {
+  update(user: User) {
     return this.http.patch(this.url2 + '/' + this.id, user)
       .pipe(catchError(this.errorHandler));
   }

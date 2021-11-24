@@ -29,6 +29,7 @@ export class EditComponent implements OnInit {
   role? : string;
   requiredRole : string = "ROLE_SYSADMIN";
 
+
   constructor(private jwtService: JwtService,
               private editService: EditService,
               private formBuilder: FormBuilder) {
@@ -79,22 +80,23 @@ export class EditComponent implements OnInit {
   update() {
     // @ts-ignore
     this.auxUser.image = this.base64Output;
-    this.editService.update(this.auxUser).subscribe(data => {
-    }, error => {
-       this.errorMessage = error.error.title;})
+    // @ts-ignore
+    this.editService.update(this.user?.value).subscribe();
 
   }
 
   ngOnInit(): void {
+    let datePipe = new DatePipe('en-US');
     this.user = this.formBuilder.group({
-      email: [],
-      firstname: [],
-      lastname: [],
-      birthDate: [],
-      phoneNumber: [],
-      job: [],
-      employmentDate: [],
-      bio: []
+      email: [this.auxUser?.email],
+      firstname: [this.auxUser?.firstname],
+      lastname: [this.auxUser?.lastname],
+      birthDate: [this.auxUser?.birthDate],
+      phoneNumber: [this.auxUser?.phoneNumber],
+      image: [this.base64Output],
+      job: [this.auxUser?.job],
+      employmentDate: [this.auxUser?.birthDate],
+      bio: [this.auxUser?.bio]
     })
 
   }
