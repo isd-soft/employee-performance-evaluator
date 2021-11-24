@@ -48,8 +48,8 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Job position</mat-label>
-    <mat-select [compareWith]="compareFunction" required formControlName="job">
-      <mat-option *ngFor="let jobItem of jobList" [value]="user?.job">
+    <mat-select  required value="user.job" formControlName="job">
+      <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">
         {{ jobItem.jobTitle }}
       </mat-option>
     </mat-select>
@@ -62,8 +62,8 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Role</mat-label>
-    <mat-select [compareWith]="secondCompareFunction" required formControlName="role">
-      <mat-option *ngFor="let role of roles" [value]="user?.role">
+    <mat-select value="user.role" required formControlName="role">
+      <mat-option *ngFor="let role of roles" [value]="role">
         {{ role }}
       </mat-option>
     </mat-select>
@@ -71,6 +71,7 @@
 
   <button mat-button
           type="button"
+          [mat-dialog-close]="true"
           (click)="update()"
           class="submit-button raise">
     Submit

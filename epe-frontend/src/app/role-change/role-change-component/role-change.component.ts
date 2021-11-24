@@ -28,6 +28,8 @@ export class RoleChangeComponent implements OnInit {
   role? : string;
   requiredRole : string = "ROLE_SYSADMIN";
 
+  selectedJob : string
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : any,
     private jwtService: JwtService,
@@ -48,6 +50,8 @@ export class RoleChangeComponent implements OnInit {
       role: [this.user?.role]
     });
 
+    this.selectedJob = this.user.job;
+
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
     this.role = this.roleService.getRole();
@@ -55,6 +59,7 @@ export class RoleChangeComponent implements OnInit {
       this.roles = data as string[]});
     console.log(this.user);
   }
+
 
   url = "";
 
