@@ -16,9 +16,9 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class RoleChangeComponent implements OnInit {
 
-  user?: User
+  user!: User
 
-  auxUser?: FormGroup;
+  auxUser!: FormGroup;
 
   jobList?: JobItem[];
 
@@ -29,18 +29,31 @@ export class RoleChangeComponent implements OnInit {
   requiredRole : string = "ROLE_SYSADMIN";
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public userId : any,
+    @Inject(MAT_DIALOG_DATA) public data : any,
     private jwtService: JwtService,
               private roleService: RoleService,
               private formBuilder: FormBuilder) {
-    this.roleService.getUserData(userId).subscribe(data =>
-      this.user = data as User);
+
+    this.user = data as User;
+    this.auxUser = this.formBuilder.group({
+      email: [this.user?.email],
+      firstname: [this.user?.firstname],
+      lastname: [this.user?.lastname],
+      birthDate: [this.user?.birthDate],
+      phoneNumber: [this.user?.phoneNumber],
+      image: [this.base64Output],
+      job: [this.user?.job],
+      employmentDate: [this.user?.employmentDate],
+      bio: [this.user?.bio],
+      role: [this.user?.role]
+    });
+
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
     this.role = this.roleService.getRole();
     this.roleService.getRoles().subscribe(data => {
       this.roles = data as string[]});
-    console.log(this.userId);
+    console.log(this.user);
   }
 
   url = "";
@@ -81,22 +94,12 @@ export class RoleChangeComponent implements OnInit {
 
   update() {
     // @ts-ignore
-    //this.user.image = this.base64Output;
-    this.roleService.updateUser(this.auxUser?.value, this.userId).subscribe();
+    this.auxUser?.value.image = this.base64Output;
+    this.roleService.updateUser(this.auxUser?.value, this.user.id);
   }
 
   ngOnInit(): void {
-    this.auxUser = this.formBuilder.group({
-      email: [this.user?.email],
-      firstname: [this.user?.firstname],
-      lastname: [this.user?.lastname],
-      birthDate: [this.user?.birthDate],
-      phoneNumber: [this.user?.phoneNumber],
-      image: [this.base64Output],
-      job: [this.user?.job],
-      employmentDate: [this.user?.birthDate],
-      bio: [this.user?.bio]
-    })
+
   }
 
 }

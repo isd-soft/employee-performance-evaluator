@@ -20,7 +20,7 @@ export class UsersView implements AfterViewInit {
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job', 'buttons'];
   // @ts-ignore
   dataSource: MatTableDataSource<User>;
-  users?: User[];
+  users!: User[];
   jwtUser?: JwtUser;
 
   jwtUserId? : string;
@@ -65,8 +65,8 @@ export class UsersView implements AfterViewInit {
     this.dialog.open( UserComponent, {data: user} );
   }
 
-  edit(user : string) {
-    this.dialog.open(RoleChangeComponent, { height:'100%', data : user});
+  edit(userId : number) {
+    this.dialog.open(RoleChangeComponent, { height:'100%', data : this.users[userId]});
     this.dialog.afterAllClosed;
   }
 

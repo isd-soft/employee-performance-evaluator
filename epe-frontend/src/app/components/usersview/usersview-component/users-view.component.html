@@ -75,7 +75,7 @@
                     <mat-icon>person</mat-icon>
                   </button>
                   <div *ngIf="role==requiredRole && row.id != jwtUserId">
-                    <button mat-button (click)="edit(row.id)">
+                    <button mat-button (click)="edit(dataSource.filteredData.indexOf(row))">
                       <mat-icon>edit</mat-icon>
                     </button>
 

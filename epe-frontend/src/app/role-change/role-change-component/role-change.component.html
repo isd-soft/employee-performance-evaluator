@@ -62,7 +62,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Job position</mat-label>
-    <mat-select [compareWith]="secondCompareFunction" required formControlName="job">
+    <mat-select [compareWith]="secondCompareFunction" required formControlName="role">
       <mat-option *ngFor="let role of roles" value="{{ user?.role }}">
         {{ role }}
       </mat-option>

@@ -32,6 +32,7 @@ export class RoleService {
   }
 
   updateUser(user: User | undefined,userId : string | undefined) {
+    console.log(user);
     return this.http.put(this.url2 + '/' + userId, user).subscribe( response => {
       this.reload();
       this.notificationService.success('User was edited successfully',
