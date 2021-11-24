@@ -7,6 +7,7 @@ import {EditService} from '../edit-service/edit.service';
 import {Router} from '@angular/router';
 import {DatePipe} from "@angular/common";
 import {Observable, ReplaySubject} from "rxjs";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-edit',
@@ -16,7 +17,7 @@ import {Observable, ReplaySubject} from "rxjs";
 @Injectable({providedIn: 'root'})
 export class EditComponent implements OnInit {
 
-  user?: User
+  user?: FormGroup;
 
   jobList?: JobItem[];
 
@@ -30,8 +31,7 @@ export class EditComponent implements OnInit {
 
   constructor(private jwtService: JwtService,
               private editService: EditService,
-              private filler: EditFiller,
-              private router: Router) {
+              private formBuilder: FormBuilder) {
     this.editService.getUser().subscribe(data =>
     this.auxUser = data as User);
     this.editService.getJobList().subscribe(data =>
@@ -66,6 +66,16 @@ export class EditComponent implements OnInit {
     return result;
   }
 
+  xchg() {
+    console.log(this.auxUser?.image);
+    console.log(this.auxUser?.job);
+  }
+
+  compareFunction(o1: any) {
+    return (o1.job == this.auxUser?.job && o1.id == this.auxUser?.id);
+  }
+
+
   update() {
     // @ts-ignore
     this.auxUser.image = this.base64Output;
@@ -76,6 +86,17 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.formBuilder.group({
+      email: [],
+      firstname: [],
+      lastname: [],
+      birthDate: [],
+      phoneNumber: [],
+      job: [],
+      employmentDate: [],
+      bio: []
+    })
+
   }
 
 
