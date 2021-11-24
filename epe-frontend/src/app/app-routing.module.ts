@@ -21,7 +21,6 @@ import {UsersView} from "./components/usersview/usersview-component/users-view.c
 import {UserComponent} from "./components/user/user-component/user.component";
 import {AdminGuard} from "./guards/admin/admin.guard";
 import {AssessmentsComponent} from "./components/assessments/assessments-component/assessments.component";
-import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
 import {AssessmentsTemplatesComponent} from "./components/assessments-templates/assessments-templates-component/assessments-templates.component";
 
 import { EditComponent } from './components/edit/edit-component/edit.component';
@@ -30,6 +29,7 @@ import {NotfoundComponent} from "./components/notfound/notfound.component";
 import {AssessmentComponent} from "./components/assessment/assessment-component/assessment.component";
 
 import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
+import {SysadminGuard} from "./guards/sysadmin/sysadmin.guard";
 
 
 const routes: Routes = [
@@ -50,32 +50,32 @@ const routes: Routes = [
   {
     path: 'teams',
     component: TeamsComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'team-edit',
     component: TeamEditComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'team-create',
     component: TeamCreateComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'users',
     component: UsersComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'user-edit',
     component: UserEditComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'user-create',
     component: UserCreateComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'my-profile',
@@ -106,11 +106,6 @@ const routes: Routes = [
   {
     path: 'assessment',
     component: AssessmentComponent,
-    canActivate: [DashboardGuard]
-  },
-  {
-    path: 'assessments-history',
-    component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
   },
   {

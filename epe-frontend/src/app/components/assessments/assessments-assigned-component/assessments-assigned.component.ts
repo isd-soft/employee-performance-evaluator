@@ -33,7 +33,7 @@ export class AssessmentsAssignedComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.assessmentsService.getAllAssessmentsByUserAndStatus(this.jwtUser.id, 'active').subscribe(
+    this.assessmentsService.getAllAssessmentsByUserId(this.jwtUser.id).subscribe(
       data => {
         this.assessments = data as AssessmentView[];
         this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);
