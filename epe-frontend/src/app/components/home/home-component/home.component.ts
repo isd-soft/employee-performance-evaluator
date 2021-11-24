@@ -81,9 +81,7 @@ export class HomeComponent {
         let response = data as LoginResponse;
         if(response.token) {
           this.jwtService.storeJWT(response.token);
-          setTimeout(()=> {
-            this.router.navigate(['/dashboard']);
-           }, 2000);
+          this.router.navigate(['/dashboard']);
         }
        }, error => {
          this.toastr.error('Something went wrong .. </br> Please check your credentials','', {
