@@ -35,6 +35,11 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
+    <mat-label>Employment date</mat-label>
+    <input type="date" matInput required [value]="auxUser?.employmentDate" formControlName="birthDate">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
     <mat-label>Phone number</mat-label>
     <input matInput required [value]="auxUser?.phoneNumber" formControlName="phoneNumber">
   </mat-form-field>

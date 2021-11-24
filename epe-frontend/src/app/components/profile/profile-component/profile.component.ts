@@ -3,6 +3,7 @@ import { ProfileService } from './../profile-service/profile.service';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {EditComponent} from "../../edit/edit-component/edit.component";
+import {PasswordComponent} from "../../password/password-component/password.component";
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +28,10 @@ export class ProfileComponent implements OnInit {
   }
 
   edit() {
-    this.dialog.open(EditComponent, {height: '80%', width:'70%'})
+    this.dialog.open(EditComponent,{height:'100%'})
+  }
+
+  changePassword() {
+    this.dialog.open(PasswordComponent)
   }
 }

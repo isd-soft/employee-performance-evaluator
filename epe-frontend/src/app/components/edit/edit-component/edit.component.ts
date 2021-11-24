@@ -86,16 +86,15 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let datePipe = new DatePipe('en-US');
     this.user = this.formBuilder.group({
       email: [this.auxUser?.email],
       firstname: [this.auxUser?.firstname],
       lastname: [this.auxUser?.lastname],
       birthDate: [this.auxUser?.birthDate],
+      employmentDate: [this.auxUser?.employmentDate],
       phoneNumber: [this.auxUser?.phoneNumber],
       image: [this.base64Output],
       job: [this.auxUser?.job],
-      employmentDate: [this.auxUser?.birthDate],
       bio: [this.auxUser?.bio]
     })
 

@@ -4,8 +4,8 @@ export interface User{
     firstname: string
     lastname: string
     email: string
-    birthDate: string
-    employmentDate: string
+    birthDate: Date
+    employmentDate: Date
     phoneNumber: string
     job: string
     bio: string
