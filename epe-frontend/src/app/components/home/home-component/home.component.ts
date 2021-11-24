@@ -89,7 +89,9 @@ export class HomeComponent {
           progressBar: true,
           enableHtml: true
          })
-        this.errorMessage = error.error.title;})
+        this.errorMessage = error.error.title;
+        console.log(this.errorMessage);
+      })
     }
   }
 
@@ -115,6 +117,7 @@ export class HomeComponent {
            }, 4000);
          } else {
           this.errorMessage = error.error.title;
+          console.log(this.errorMessage);
            this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
             timeOut: 3000,
             progressBar: true,
@@ -122,7 +125,11 @@ export class HomeComponent {
            });
          }});
     } else {
-      this.errorMessage = "Passwords do not match !";
+      this.toastr.error('Passwords do not match !','', {
+        timeOut: 3000,
+        progressBar: true,
+        enableHtml: true
+       });
     }
   }
 

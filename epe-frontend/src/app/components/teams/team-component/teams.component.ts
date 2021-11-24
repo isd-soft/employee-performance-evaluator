@@ -1,7 +1,8 @@
-import { Router } from '@angular/router';
-import { TeamView } from './../teams-model/team-view.interface';
-import { TeamsService } from './../teams-service/teams.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { TeamView } from '../teams-model/team-view.interface';
+import { TeamsService } from '../teams-service/teams.service';
 
 @Component({
   selector: 'app-teams',
@@ -12,6 +13,9 @@ export class TeamsComponent {
 
   teams?: TeamView[];
 
+  displayedColumns: string[] = ['name', 'teamLeader', 'action'];
+  dataSource: any;
+
   constructor(private teamService: TeamsService,
     private router: Router) {
 
@@ -20,15 +24,16 @@ export class TeamsComponent {
 
    refreshTeams() {
     this.teamService.getTeams().subscribe(data => {
-      this.teams = data as TeamView[] });
+      this.teams = data as TeamView[];
+      this.dataSource = new MatTableDataSource(this.teams); });
    }
 
-   createNewTeam() {
-    this.router.navigate(['/team-create']);
-   }
+   applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-   editTeam(id: string) {
-     localStorage.setItem("TEAM_ID", id);
-     this.router.navigate(['/team-edit']);
-   }
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

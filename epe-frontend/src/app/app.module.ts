@@ -10,7 +10,6 @@ import { LogoutComponent } from './components/logout/logout-component/logout.com
 import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
 import { HomeComponent } from './components/home/home-component/home.component';
-import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { UsersView } from './components/usersview/usersview-component/users-view.component';
 import { UserComponent } from './components/user/user-component/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,6 +48,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
+import { TeamsComponent } from './components/teams/team-component/teams.component';
 
 @NgModule({
   declarations: [
@@ -57,10 +57,8 @@ import { AssessmentsAssignedComponent } from './components/assessments/assessmen
     DashboardComponent,
     HomeComponent,
     SidebarComponent,
-    TeamsComponent,
     UsersView,
     UserComponent,
-    TeamsComponent,
     ProfileComponent,
     TeamEditComponent,
     TeamCreateComponent,

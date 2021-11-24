@@ -6,8 +6,16 @@
 }
 
 .display-table-row {
-    display: table-row;
-    height: 100%;
+    float: left;
+    width: calc(20% - 12px);
+    height: 95vh;
+    margin: 5px;
+    border-radius: 10px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px #555555;
 }
 
 .display-table-cell {

@@ -1,58 +1,61 @@
-<div class="container-fluid display-table">
-    <div class="row display-table-row">
-        <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-<!--            <app-sidebar></app-sidebar>-->
+<!--  CONTENT HERE, BIATCH  -->
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Teams">
+        <mat-form-field appearance="standard">
+
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+        
+        <div class="mat-elevation-z9 table">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td class="align-left" mat-cell *matCellDef="let team"> {{team.name}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="teamLeader">
+                  <th mat-header-cell *matHeaderCellDef> Team Leader </th>
+                  <td class="align-left" mat-cell *matCellDef="let team"> {{team.teamLeader.firstname}} {{team.teamLeader.lastname}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td class="align-left" mat-cell *matCellDef="let team" [routerLink]="['/team-edit', team.id]"> Edit </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="buttons">
+                    <th mat-header-cell class = "table-buttons"  *matHeaderCellDef>&nbsp;&nbsp;&nbsp;View</th>
+                    <td mat-cell
+                        class = "table-buttons"
+                        *matCellDef="let row"
+                        (click)="$event.stopPropagation()"
+                    >
+                      <button mat-button (click)="onView(row.id)">
+                        <mat-icon>open_in_new</mat-icon>
+                      </button>
+                      <div *ngIf="role==requiredRole && row.id != jwtUserId">
+                        <button mat-button (click)="edit(row.id)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+          
+                      </div>
+                      <div *ngIf="role==requiredRole && row.id != jwtUserId">
+                        <button mat-button (click)="delete(row.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
         </div>
-        <div class="col-md-10 col-sm-11 display-table-cell v-align">
-           <div *ngIf="teams" class="content-block">
-               <table class="team-table">
-                   <tr>
-                       <th class="header-header" colspan="4">
-                            <span (click)="refreshTeams()"> Teams </span>
-                       </th>
-                   </tr>
-                   <tr class="team-header">
-                       <th class="team-cell">
-                           Team Name
-                       </th>
-                       <th class="team-cell">
-                           Team Leader
-                       </th>
-                       <th class="team-cell">
-                           Team Members
-                       </th>
-                       <th class="team-cell">
-                           Action
-                       </th>
-                   </tr>
-                   <tr class="team-row" *ngFor="let team of teams">
-                       <td class="team-cell">
-                           {{team.name}}
-                       </td>
-                       <td class="team-cell">
-                           {{team.teamLeader.firstname}} {{team.teamLeader.lastname}}
-                       </td>
-                       <td class="team-cell">
-                           <p *ngFor="let member of team.members">
-                               {{member.firstname}} {{member.lastname}}
-                           </p>
-                       </td>
-                       <td>
-                           <div *ngIf="team.id">
-                            <button class="modify-button" (click)="editTeam(team.id)">
-                                Modify
-                            </button>
-                           </div>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="four-rows" colspan="4">
-                           <button class="new-member" (click)="createNewTeam()">
-                               New Team
-                           </button>
-                       </td>
-                   </tr>
-               </table>
-           </div>
-    </div>
-</div>
+    </mat-tab>
+  </mat-tab-group>

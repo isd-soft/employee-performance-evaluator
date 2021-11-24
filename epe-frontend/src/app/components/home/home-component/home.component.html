@@ -35,11 +35,6 @@
                   </mat-form-field>
                   <button class="login-submit" (click)="login()" mat-raised-button>Login</button>
               </form>
-              <div class="error-message">
-                <span *ngIf="errorMessage">
-                    {{errorMessage}}
-                </span>
-              </div>
               <div class="switch-page">
                 <hr class="fifty-percent">
                 <span class="reroute-link" (click)="requestRegisterPage()">
@@ -182,11 +177,6 @@
 
             <button class="register-submit" (click)="register()" mat-raised-button>Register</button>
         </form>
-          <div class="error-message">
-            <span *ngIf="errorMessage">
-                {{errorMessage}}
-            </span>
-          </div>
           <div class="switch-page">
             <hr class="fifty-percent">
             <span class="reroute-link" (click)="requestLoginPage()">

@@ -1,4 +1,3 @@
-import { TeamView } from './../teams-model/team-view.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
