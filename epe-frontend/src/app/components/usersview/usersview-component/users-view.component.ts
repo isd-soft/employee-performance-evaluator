@@ -26,8 +26,8 @@ export class UsersView implements AfterViewInit {
   dataSource: MatTableDataSource<User>;
   users?: User[];
   jwtUser?: JwtUser;
-  assessmentTemplates : AssessmentTemplate[];
-  assignedUsers: User[]
+  assessmentTemplates? : AssessmentTemplate[];
+  assignedUsers?: User[]
   role?: string;
   requiredRole : string = "ROLE_SYSADMIN";
 
@@ -37,8 +37,6 @@ export class UsersView implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  role?: string;
-  requiredRole : string = "ROLE_SYSADMIN";
 
   constructor(private userviewsServices: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
     this.jwtUser = jwtService.getJwtUser();
@@ -57,7 +55,7 @@ export class UsersView implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.reloadData();
+    // this.reloadData();
   }
 
   ngOnInit(){
@@ -86,7 +84,7 @@ export class UsersView implements AfterViewInit {
   }
 
   delete(user : string) {
-    this.userview.deleteUser(user);
+    this.userviewsServices.deleteUser(user);
     this.reloadComponent();
   }
   reloadComponent() {
@@ -113,7 +111,7 @@ export class UsersView implements AfterViewInit {
 
   containsUserId(userId: string){
     let flag = false;
-    this.assignedUsers.forEach(user => {
+    this.assignedUsers?.forEach(user => {
       if (user.id === userId){
         flag = true;
       }
