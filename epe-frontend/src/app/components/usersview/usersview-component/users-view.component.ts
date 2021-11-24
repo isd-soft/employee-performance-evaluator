@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {UserviewsServices} from "../userview-services/users-view.service";
 import {User} from "../userview-models/User";
 import {MatPaginator} from '@angular/material/paginator';
@@ -13,7 +13,8 @@ import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 @Component({
   selector: 'app-usersview',
   templateUrl: './users-view.component.html',
-  styleUrls: ['./users-view.component.css']
+  styleUrls: ['./users-view.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class UsersView implements AfterViewInit {

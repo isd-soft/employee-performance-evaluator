@@ -48,6 +48,7 @@ import {ToastrModule} from "ngx-toastr";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     NotfoundComponent,
     AssessmentComponent,
     PasswordComponent,
-    RoleChangeComponent
+    RoleChangeComponent,
+    AssessmentsAssignedComponent
   ],
   imports: [
     BrowserModule,
