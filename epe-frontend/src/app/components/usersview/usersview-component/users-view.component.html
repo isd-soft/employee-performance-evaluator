@@ -1,4 +1,3 @@
-<!--  CONTENT HERE, BIATCH  -->
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Users">
     <mat-form-field appearance="standard" class="filter-field">
@@ -66,26 +65,24 @@
           <td mat-cell class="table-column" *matCellDef="let row">{{ row.job }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="buttons">
-          <th mat-header-cell class = "table-buttons"  *matHeaderCellDef>&nbsp;&nbsp;&nbsp;View</th>
-          <td mat-cell
-              class = "table-buttons"
-              *matCellDef="let row"
-              (click)="$event.stopPropagation()"
->
-            <button mat-button (click)="onView(row.id)">
-              <mat-icon>open_in_new</mat-icon>
-            </button>
-
-            <button *ngIf="role==requiredRole && row.id != jwtUserId" mat-button (click)="edit(row.id)">
+      <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
+          <button mat-button (click)="onView(row.id)">
+            <mat-icon>person</mat-icon>
+          </button>
+          <div *ngIf="role == requiredRole && row.id != jwtUser.id">
+            <button mat-button (click)="startAssessment(row.id)">
               <mat-icon>edit</mat-icon>
             </button>
-
-            <button *ngIf="role==requiredRole && row.id != jwtUserId" mat-button (click)="delete(row.id)">
+          </div>
+          <div *ngIf="role == requiredRole && row.id != jwtUser.id">
+            <button mat-button (click)="delete(row.id)">
               <mat-icon>delete</mat-icon>
             </button>
-          </td>
-        </ng-container>
+          </div>
+        </mat-cell>
+      </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

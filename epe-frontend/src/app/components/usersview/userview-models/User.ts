@@ -4,4 +4,5 @@ export interface User {
   lastname?: string
   email?: string
   job?: string
+  status?: string
 }
