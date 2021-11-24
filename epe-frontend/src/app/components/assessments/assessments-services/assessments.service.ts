@@ -12,8 +12,13 @@ export class AssessmentsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllAssessmentsByUserAndStatus(userId : string, status : string) {
+  /*getAllAssessmentsByUserAndStatus(userId : string, status : string) {
     return this.http.get(this.assessmentsUrl + '/' + userId + '/assessments?status=' + status)
+      .pipe(catchError(this.errorHandler));
+  }*/
+
+  getAllAssessmentsByUserId(userId: string) {
+    return this.http.get(this.assessmentsUrl + '/' + userId)
       .pipe(catchError(this.errorHandler));
   }
 
