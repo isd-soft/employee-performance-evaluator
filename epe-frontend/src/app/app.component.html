@@ -5,7 +5,7 @@
 
 <body class="home" >
 <mat-sidenav-container class="example-container" style="position: absolute" >
-  <mat-sidenav *ngIf="jwtUser" mode="side" opened style="min-width: 150px">
+  <mat-sidenav mode="side" opened style="min-width: 150px">
     <img src="./assets/epe-white-box.png" class="img-logo" routerLink="/dashboard">
     <mat-nav-list>
       <mat-divider></mat-divider>
@@ -40,7 +40,9 @@
 
   <mat-sidenav-content>
     <div class="display-center">
-      <router-outlet> </router-outlet>
+      <router-outlet>
+
+      </router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
