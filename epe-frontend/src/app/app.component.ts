@@ -19,24 +19,23 @@ export class AppComponent {
 
     interval(100).subscribe(x => {
       this.jwtUser = this.jwtService.getJwtUser();
+
+      if(this.jwtUser) {
+        if(this.jwtUser.role == 'ROLE_SYSADMIN') {
+          this.isSysAdmin = true;
+          this.isAdmin = true;
+          this.isUser = true;
+        }
+
+        if(this.jwtUser.role == 'ROLE_ADMIN') {
+          this.isAdmin = true;
+          this.isUser = true;
+        }
+
+        if(this.jwtUser.role == 'ROLE_USER') {
+          this.isUser = true;
+        }
+      }
     });
-
-    if(this.jwtUser) {
-      if(this.jwtUser.role == 'ROLE_SYSADMIN') {
-        this.isSysAdmin = true;
-        this.isAdmin = true;
-        this.isUser = true;
-      }
-
-      if(this.jwtUser.role == 'ROLE_ADMIN') {
-        this.isAdmin = true;
-        this.isUser = true;
-      }
-
-      if(this.jwtUser.role == 'ROLE_USER') {
-        this.isUser = true;
-      }
-    }
-
   }
 }

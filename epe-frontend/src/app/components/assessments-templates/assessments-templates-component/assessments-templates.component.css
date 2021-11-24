@@ -19,30 +19,14 @@
   color: black;
 }
 
-.filter-field {
-  margin: 0 15px;
-}
-
-table {
+table, mat-paginator {
   width: 100%;
 }
 
-.mat-form-field {
-  font-size: 14px;
-  width: 97%;
-}
-
-.filter-field {
-  margin: 0 15px;
-}
 
 .mat-form-field {
   font-size: 14px;
   width: 97%;
-}
-
-.first-table {
-  margin-bottom: 25px;
 }
 
 .column-title, .column-position, .column-creation-date {
