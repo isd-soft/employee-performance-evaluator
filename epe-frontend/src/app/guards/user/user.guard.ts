@@ -25,7 +25,8 @@ export class UserGuard implements CanActivate {
         return true;
       }
       else {
-        this.router.navigate(['/home']);
+        this.loggedUser = this.jwtService.getJwtUser();
+        this.router.navigate(['/login']);
         return false;
       }
   }

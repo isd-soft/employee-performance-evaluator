@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@angular/material": "^13.0.1"
+    "@angular/material": "^13.0.1",
+    "ngx-toastr": "^14.2.1"
   }
 }

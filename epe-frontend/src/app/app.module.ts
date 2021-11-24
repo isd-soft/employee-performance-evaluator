@@ -29,6 +29,7 @@ import { RegisterComponent } from './components/guest/register/register.componen
 import { TeamComponent } from './components/admin/team/team.component';
 import { TeamEditComponent } from './components/admin/team-edit/team-edit.component';
 import { TeamNewComponent } from './components/admin/team-new/team-new.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TeamNewComponent } from './components/admin/team-new/team-new.component
     MatSelectModule,
     CdkAccordionModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    ToastrModule.forRoot()
   ],
   exports: [
     MatButtonModule,

@@ -6,6 +6,7 @@ import { JobItem } from 'src/app/models/job-item.model';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +42,8 @@ export class RegisterComponent {
 
   constructor(private jwtService: JwtService,
     private authService: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
 
       this.authService.getJobList().subscribe(data => {
       this.jobList = data as JobItem[];
@@ -58,8 +60,21 @@ export class RegisterComponent {
       this.authService.register(this.registerUser).subscribe(data => {
       }, error => {
          if(error.status == 200) {
-           this.router.navigate(['/home']);
-         }
-         this.errorMessage = error.error.title;});
+           this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
+             timeOut: 3000,
+             progressBar: true,
+             enableHtml: true
+           });
+           setTimeout(()=> {
+            this.router.navigate(['/login']);
+           }, 4000);
+         } else {
+          this.errorMessage = error.error.title;
+           this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
+            timeOut: 3000,
+            progressBar: true,
+            enableHtml: true
+           });
+         }});
     }
 }

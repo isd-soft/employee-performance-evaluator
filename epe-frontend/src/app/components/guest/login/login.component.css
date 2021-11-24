@@ -54,3 +54,7 @@
 .fifty-percent {
     width: 50%;
 }
+
+.reroute-link {
+    cursor: pointer;
+}

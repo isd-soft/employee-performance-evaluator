@@ -25,6 +25,7 @@ export class GuestGuard implements CanActivate {
         return true;
       }
       else {
+        this.loggedUser = this.jwtService.getJwtUser();
         this.router.navigate(['/dashboard']);
         return false;
       }
