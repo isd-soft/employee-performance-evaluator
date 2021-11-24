@@ -9,6 +9,8 @@ import {UserComponent} from "../../user/user-component/user.component";
 import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
+import {AssessmentTemplate} from "../userview-models/Assessment-template"
+import {AssessmentComponent} from "../../assessment/assessment-component/assessment.component";
 
 @Component({
   selector: 'app-usersview',
@@ -17,29 +19,27 @@ import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 })
 
 export class UsersView implements AfterViewInit {
-  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job', 'buttons'];
+  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job','assessment_status', 'buttons'];
   // @ts-ignore
   dataSource: MatTableDataSource<User>;
   users?: User[];
   jwtUser?: JwtUser;
-
-  jwtUserId? : string;
-
-  jwtUserRole? : string;
+  assessmentTemplates : AssessmentTemplate[];
+  assignedUsers: User[]
+  role?: string;
+  requiredRole : string = "ROLE_SYSADMIN";
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
 
-
-  role?: string;
-  requiredRole : string = "ROLE_SYSADMIN";
-
-  constructor(private userview: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
+  constructor(private userviewsServices: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
     this.jwtUser = jwtService.getJwtUser();
-    this.jwtUserId = this.jwtUser?.id;
-    this.role = this.userview.getRole();
+    this.role = this.userviewsServices.getRole();
+
+
+
   }
 
   applyFilter(event: Event) {
@@ -52,12 +52,22 @@ export class UsersView implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.userview.getUserList().subscribe(data => {
+
+  }
+
+  ngOnInit(){
+
+    this.userviewsServices.getAssignedUsers().subscribe(data =>{
+      this.assignedUsers = data as User[];
+    })
+
+    this.userviewsServices.getUserList().subscribe(data => {
       this.users = data as User[];
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+
 
   }
 
@@ -71,9 +81,10 @@ export class UsersView implements AfterViewInit {
   }
 
   delete(user : string) {
-    this.userview.deleteUser(user);
+    this.userviewsServices.deleteUser(user);
     this.reloadComponent();
   }
+
   reloadComponent() {
     // @ts-ignore
     let currentUrl = this.router.url;
@@ -83,5 +94,26 @@ export class UsersView implements AfterViewInit {
     this.router.onSameUrlNavigation = 'reload';
     // @ts-ignore
     this.router.navigate([currentUrl]);
+  }
+
+  startAssessment(id: string) {
+    this.userviewsServices.getAssessmentTemplates().subscribe(assessmentTemplate => {
+      this.assessmentTemplates = assessmentTemplate as AssessmentTemplate[]
+    })
+    this.dialog.open(AssessmentComponent, {data: id})
+
+    // this.dialog.open(AssessmentComponent, {data: id,});
+
+    // this.dialog.closeAll();
+  }
+
+  containsUserId(userId: string){
+    let flag = false;
+    this.assignedUsers.forEach(user => {
+      if (user.id === userId){
+        flag = true;
+      }
+    })
+    return flag || false;
   }
 }

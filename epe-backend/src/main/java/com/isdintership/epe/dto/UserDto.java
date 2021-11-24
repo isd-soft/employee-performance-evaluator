@@ -2,10 +2,14 @@ package com.isdintership.epe.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.isdintership.epe.entity.Assessment;
+import com.isdintership.epe.entity.StatusEnum;
 import com.isdintership.epe.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Optional;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -25,7 +29,7 @@ public class UserDto {
     private String token;
     private byte[] image_bytes;
     private String image;
-
+    private String status = "";
     private String role;
 
     public static UserDto fromUser(User user) {
@@ -42,7 +46,16 @@ public class UserDto {
         userView.setImage(new String(user.getImageBytes()));
         userView.setBio(user.getBio());
 
-        //userView.setRole(String.valueOf(user.getRole().getRole()));
+        Optional<Assessment> min = user.getAssessments().stream()
+                .max(Comparator.comparing(Assessment::getStartDate));
+
+        min.ifPresent(assessment -> {
+            var status = assessment.getStatus();
+            if ((status.equals(StatusEnum.CANCELED) || status.equals(StatusEnum.FINISHED))){
+                userView.setStatus("");
+            } else userView.setStatus(status.toString());
+        });
+
         if (String.valueOf(user.getRole().getRole()).equals("ROLE_USER")) {
             userView.setRole("User");
         } else if (String.valueOf(user.getRole().getRole()).equals("ROLE_ADMIN")) {
@@ -50,4 +63,8 @@ public class UserDto {
         }
         return userView;
     }
+
+
 }
+
+

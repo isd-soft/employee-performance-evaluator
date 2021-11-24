@@ -26,6 +26,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
+    private final EmailServiceImpl emailService;
 
     @Override
     @Transactional
@@ -37,17 +38,15 @@ class AssessmentServiceImpl implements AssessmentService {
         String assessmentTemplateId = assessmentTemplateDto.getId();
 
         Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(assessmentTemplateId, true)
-                .orElseThrow(() ->
-                new AssessmentTemplateNotFoundException
-                        ("Assessment template with id " + assessmentTemplateId + " was not found"));
+               .orElseThrow(() ->
+                new AssessmentTemplateNotFoundException ("Assessment template with id " + assessmentTemplateId + " was not found"));
 
-        Optional<Assessment> existingAssessment = assessmentRepository.findByTitleAndUser
-                (assessmentTemplate.getTitle(), user);
+        Optional<Assessment> existingAssessment = assessmentRepository.findByUserAndStatusIn
+        (user, List.of(StatusEnum.FIRST_PHASE, StatusEnum.SECOND_PHASE));
 
-        if ((existingAssessment.isPresent()) && (existingAssessment.get().getStatus() != StatusEnum.FINISHED)) {
+        if (existingAssessment.isPresent()) {
             throw new AssessmentExistsException
-                    ("Assessment " + assessmentTemplate.getTitle() + " already assigned to "
-                     + "user " + user.getFirstname() + " " + user.getLastname() + " and is still unfinished");
+                    ("User already has unfinished assessment " + existingAssessment.get().getTitle());
         }
 
         if (user.getJob() != assessmentTemplate.getJob()) {
@@ -79,24 +78,21 @@ class AssessmentServiceImpl implements AssessmentService {
             List<EvaluationField> evaluationFields = new ArrayList<>();
 
             for (EvaluationField templateField : templateGroup.getEvaluationFields()) {
-
                 EvaluationField field = new EvaluationField();
-
                 field.setEvaluationGroup(group);
                 field.setTitle(templateField.getTitle());
                 field.setComment(templateField.getComment());
-
                 evaluationFields.add(field);
 
             }
             group.setEvaluationFields(evaluationFields);
-
             evaluationGroups.add(group);
         }
-
         assessment.setEvaluationGroups(evaluationGroups);
 
         assessmentRepository.save(assessment);
+
+//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
 
         return AssessmentDto.fromAssessment(assessment);
     }
@@ -181,7 +177,6 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto) {
-
         Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
                 new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
 

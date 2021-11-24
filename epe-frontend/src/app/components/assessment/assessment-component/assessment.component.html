@@ -1,37 +1,27 @@
-<form [formGroup]="startAssessment">
+<form #element [formGroup]="startAssessment">
   <mat-card class="mat-card" style="padding-top: 20px">
     <mat-card-title>
       Start new Assessment
     </mat-card-title>
-    <mat-card-content>
-        <mat-form-field appearance="fill">
-          <mat-label>Assessment template</mat-label>
-          <mat-select formControlName="assessmentTemplateId">
-            <mat-option
-              *ngFor="let assessmentTemplate of assessmentTemplates"
-              [value]="assessmentTemplate.id"
-            >
-              {{assessmentTemplate.title}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>Select employee</mat-label>
-          <mat-select formControlName="userId">
-            <mat-option
-              *ngFor="let user of assignableUser"
-              [value]="user.id"
-            >
-              {{user.firstname + ' ' + user.lastname}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      <button
-        mat-button
-        (click)="startAssess()"
-      >Start assessment
-      </button>
-    </mat-card-content>
+      <mat-card-content class="parent">
+          <mat-form-field appearance="fill">
+            <mat-label>Assessment template</mat-label>
+            <mat-select required formControlName="assessmentTemplateId">
+              <mat-option
+                *ngFor="let assessmentTemplate of assessmentTemplates"
+                [value]="assessmentTemplate.id"
+              >
+                {{assessmentTemplate.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <br>
+        <button
+          mat-raised-button
+          [disabled]=""
+          (click)="startAssess()"
+        >Start assessment
+        </button>
+      </mat-card-content>
   </mat-card>
 </form>
