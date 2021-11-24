@@ -18,7 +18,7 @@ export class AdminGuardService {
 
   isAdmin(): boolean {
 
-    if((!(this.loggedUser == null)) && ((this.loggedUser.role == 'ROLE_ADMIN') || (this.loggedUser.role == 'ROLE_SYSADMIN'))) {
+    if((!(this.loggedUser == null)) && (this.loggedUser.role == 'ROLE_ADMIN' || this.loggedUser.role == "ROLE_SYSADMIN")) {
       return true;
     }
     else {
