@@ -7,7 +7,6 @@ import { DashboardComponent } from './components/dashboard/dashboard-template/da
 
 import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
-import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
 
 import { ProfileComponent } from './components/profile/profile-component/profile.component';
 
@@ -55,11 +54,6 @@ const routes: Routes = [
   {
     path: 'team-edit',
     component: TeamEditComponent,
-    canActivate: [AdminGuard, SysadminGuard]
-  },
-  {
-    path: 'team-create',
-    component: TeamCreateComponent,
     canActivate: [AdminGuard, SysadminGuard]
   },
   {

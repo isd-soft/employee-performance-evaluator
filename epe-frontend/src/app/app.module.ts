@@ -23,7 +23,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ProfileComponent } from './components/profile/profile-component/profile.component';
 import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
-import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
 import { UsersComponent } from './components/users/user-component/users.component';
 import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
@@ -60,7 +59,6 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
     UserComponent,
     ProfileComponent,
     TeamEditComponent,
-    TeamCreateComponent,
     UsersComponent,
     UserEditComponent,
     UserCreateComponent,
