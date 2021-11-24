@@ -26,17 +26,15 @@ export class AppComponent {
           this.isAdmin = true;
           this.isUser = true;
         }
-  
+
         if(this.jwtUser.role == 'ROLE_ADMIN') {
           this.isAdmin = true;
           this.isUser = true;
         }
-  
         if(this.jwtUser.role == 'ROLE_USER') {
           this.isUser = true;
         }
       }
     });
-
   }
 }

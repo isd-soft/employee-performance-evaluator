@@ -19,10 +19,6 @@
   color: black;
 }
 
-.filter-field {
-  margin: 0 15px;
-}
-
 table {
   width: 100%;
 }
@@ -40,21 +36,8 @@ table {
   width: 97%;
 }
 
-.filter-field {
-  margin: 0 15px;
-}
-
 table {
   width: 100%;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 97%;
-}
-
-.first-table {
-  margin-bottom: 25px;
 }
 
 mat-paginator {
