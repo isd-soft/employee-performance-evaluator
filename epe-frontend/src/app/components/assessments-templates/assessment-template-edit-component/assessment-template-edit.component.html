@@ -48,6 +48,11 @@
             <input matInput required formControlName="title">
           </mat-form-field>
           <i class="material-icons remove-button raise" (click)="removeEvaluationField(group, j)">remove_circle</i>
+
+          <mat-form-field  appearance="fill" class="evaluation-field">
+            <mat-label>Comment</mat-label>
+            <input matInput required formControlName="comment">
+          </mat-form-field>
         </div>
         <i class="material-icons add-field-button raise" (click)="addNewEvaluationField(group)">add_circle</i>
 

@@ -44,7 +44,8 @@ export class AssessmentTemplateCreateComponent implements OnInit {
 
   addEvaluationField() {
     return this.formBuilder.group({
-      title: []
+      title: [],
+      comment: []
     });
   }
 

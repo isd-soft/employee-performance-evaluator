@@ -6,6 +6,7 @@ export interface AssessmentTemplateView {
   title: string,
   description: string,
   jobTitle: string,
+  creationDate: string,
   evaluationGroups: EvaluationGroupView[]
 
 }
