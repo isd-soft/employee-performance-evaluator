@@ -33,6 +33,18 @@
           <td mat-cell class="column-position" *matCellDef="let row"> {{row.jobTitle}} </td>
         </ng-container>
 
+        <!-- Creation date Column -->
+        <ng-container matColumnDef="creationDate">
+          <th mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="column-creation-date"
+          >
+            Creation date
+          </th>
+          <td mat-cell class="column-creation-date" *matCellDef="let row"> {{row.creationDate}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="buttons">
           <th mat-header-cell class="column-view" *matHeaderCellDef>&nbsp;&nbsp;&nbsp;View</th>
           <td mat-cell

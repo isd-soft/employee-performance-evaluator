@@ -45,16 +45,8 @@ table {
   margin-bottom: 25px;
 }
 
-.column-title {
-  width: 44%;
-}
-
-.column-position {
-  width: 44%;
-}
-
-.column-view {
-  width: 12%;
+.column-title, .column-position, .column-creation-date {
+  width: 29.333%;
 }
 
 mat-paginator {

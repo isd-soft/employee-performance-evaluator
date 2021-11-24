@@ -48,6 +48,10 @@ public class Assessment extends BaseEntity {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime endDate;
 
+    @Column(name = "creation_date")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime creationDate;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -97,24 +101,24 @@ public class Assessment extends BaseEntity {
     public Assessment() {
     }
 
-    public Assessment(User user, String title, String description, Float overallScore,
-                      StatusEnum status, Boolean isTemplate, LocalDateTime startDate, LocalDateTime endDate,
+    public Assessment(User user, String title, String description, Job job, Float overallScore,
+                      StatusEnum status, Boolean isTemplate, LocalDateTime startDate,
+                      LocalDateTime endDate, LocalDateTime creationDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {
         this.user = user;
         this.title = title;
         this.description = description;
-        /*this.job = job;*/
+        this.job = job;
         this.overallScore = overallScore;
         this.status = status;
         this.isTemplate = isTemplate;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.creationDate = creationDate;
         this.evaluationGroups = evaluationGroups;
         this.personalGoals = personalGoals;
         this.departmentGoals = departmentGoals;
         this.feedbacks = feedbacks;
-
     }
-
 }

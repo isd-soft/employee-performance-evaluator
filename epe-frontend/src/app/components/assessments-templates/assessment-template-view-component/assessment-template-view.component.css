@@ -37,13 +37,18 @@ mat-card, .mat-card-content {
   padding-left: 3%;
 }
 
-.evaluation-group {
+.evaluation-group, .evaluation-group-comments {
+  display: inline-block;
   font-weight: 600;
   font-size: 16px;
 }
 
+.evaluation-group {
+  width: 30%;
+}
+
 .evaluation-fields {
-  padding-left: 4%;
+  margin-left: 4%;
 }
 
 .mat-card-actions {
@@ -56,4 +61,17 @@ mat-card, .mat-card-content {
 
 .mat-raised-button {
   font-size: 16px;
+}
+
+.evaluation-field-title {
+  display: inline-block;
+  width: 27.5%;
+}
+
+.evaluation-field-comment {
+  display: inline-block;
+}
+
+.creation-date-header {
+  margin-top: 10px;
 }
