@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {User} from "../user-model/User";
 import {UserService} from "../user-service/user.service.js";
 import {Assessment} from "../user-model/Assessment";
-import {JobItem} from "../../home/home-models/job-item.interface";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({

@@ -10,6 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { UserView } from '../teams-model/user-view.interface';
 import { UserService } from '../user-service/user.service';
 import { CreateTeamRequest } from '../teams-model/create-team-request.interface';
+import { TeamEditComponent } from '../team-edit/team-edit.component';
 
 @Component({
   selector: 'app-teams',
@@ -98,9 +99,9 @@ export class TeamsComponent {
     }
   }
 
-  // onView(user : string) {
-  //   this.dialog.open( UserComponent, {data: user} );
-  // }
+  onView(id: string) {
+    this.dialog.open( TeamEditComponent, {data: id} );
+  }
 
   // edit(user : string) {
   //   console.log('edit');
@@ -108,19 +109,10 @@ export class TeamsComponent {
   //   // this.dialog.afterAllClosed.
   // }
 
-  // delete(user : string) {
-  //   console.log('delete');
-  //   // this.userview.deleteUser(user);
-  //   // this.reloadComponent();
-  // }
-  // reloadComponent() {
-  //   // @ts-ignore
-  //   let currentUrl = this.router.url;
-  //   // @ts-ignore
-  //   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  //   // @ts-ignore
-  //   this.router.onSameUrlNavigation = 'reload';
-  //   // @ts-ignore
-  //   this.router.navigate([currentUrl]);
-  // }
+  delete(id: string) {
+    this.teamService.deleteTeam(id).subscribe(data => {}, error => {
+      if(error.status == 200)
+        this.reloadTeams();
+    });
+  }
 }
