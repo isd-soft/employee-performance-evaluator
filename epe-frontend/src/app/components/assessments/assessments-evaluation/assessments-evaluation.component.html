@@ -1,0 +1,254 @@
+<form action="" [formGroup]="assessmentForm">
+  <mat-card class="template-view">
+    <mat-card-title>{{ assessment.title }}</mat-card-title>
+    <mat-card-subtitle>{{ assessment.jobTitle }}</mat-card-subtitle>
+    <mat-card-content>
+      <p class="bold">Description</p>
+      <p>{{ assessment.description }}</p>
+      <p class="bold evaluation-groups-title">Evaluation groups</p>
+
+
+      <div formArrayName="evaluationGroups">
+
+
+        <div class="evaluation-groups"
+             *ngFor="let evaluationGroup of evaluationGroupArray.controls; let i = index;"
+             [formGroupName]="i"
+        >
+          <p class="evaluation-group">{{evaluationGroup.value.title}}</p>
+          <p class="evaluation-group-comments">Comments</p>
+
+          <div formArrayName="evaluationFields">
+
+            <div class="evaluation-fields"
+                 *ngFor="let evaluationField of evaluationFieldArray(evaluationGroup).controls; let j = index"
+                 [formGroupName]="j"
+            >
+              <div class="column-content">
+                <p class="evaluation-field-title">{{evaluationField.value.title}}</p>
+                <p class="evaluation-field-comment">
+                  {{evaluationField.value.comment}}
+                </p>
+                <p class="evaluation-field-score">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Score</mat-label>
+                    <mat-select required formControlName="firstScore">
+                      <mat-option *ngFor="let score of scores" value="{{ score }}">
+                        {{ score }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          </div>
+
+      </div>
+
+
+      <p class="bold smart-goals-header">Personal SMART goals
+        <span class="minor-text">&nbsp;&nbsp;&nbsp;&nbsp;What is SMART goal? Hover over the letters to find out!</span>
+      </p>
+
+      <div class="personal-goals" formArrayName="personalGoals">
+        <div *ngFor="let personalGoal of personalGoalArray.controls; let i = index;"
+             [formGroupName]="i"
+        >
+
+          <div class="abbreviation abbreviation-s">
+            <div class="letter-meaning">
+              <span class="bold">Specific</span> - Target a specific area for improvement</div>
+            <span class="goal-capital-letter">S</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>S part of goal</mat-label>
+              <input matInput required formControlName="goalSPart">
+            </mat-form-field>
+            <i class="material-icons remove-button raise" (click)="removePersonalGoal(i)">remove_circle</i>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Measurable</span> - Quantify or suggest an indicator of progress
+            </div>
+            <span class="goal-capital-letter">M</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>M part of goal</mat-label>
+              <input matInput required formControlName="goalMPart">
+            </mat-form-field>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Assignable</span> - Specify who will do it
+            </div>
+            <span class="goal-capital-letter">A</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>A part of goal</mat-label>
+              <input matInput required formControlName="goalAPart">
+            </mat-form-field>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Realistic</span> - What results can realistically be achieved
+            </div>
+            <span class="goal-capital-letter">R</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>R part of goal</mat-label>
+              <input matInput required formControlName="goalRPart">
+            </mat-form-field>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Time-related</span> - Specify when the result(s) can be achieved
+            </div>
+            <span class="goal-capital-letter">T</span>
+          </div>
+
+          <div class="smart-goal-input smart-goal-input-t">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>T part of goal</mat-label>
+              <input matInput required formControlName="goalTPart">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <i class="material-icons add-group-button raise" (click)="addNewPersonalGoal()">playlist_add</i>
+
+      </div>
+
+      <p class="bold smart-goals-header">Department SMART goals</p>
+
+
+      <div class="department-goals" formArrayName="departmentGoals">
+        <div *ngFor="let departmentGoal of departmentGoalArray.controls; let i = index;"
+             [formGroupName]="i"
+        >
+
+          <div class="abbreviation abbreviation-s">
+            <div class="letter-meaning">
+              <span class="bold">Specific</span> - Target a specific area for improvement</div>
+            <span class="goal-capital-letter">S</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>S part of goal</mat-label>
+              <input matInput required formControlName="goalSPart">
+            </mat-form-field>
+            <i class="material-icons remove-button raise" (click)="removeDepartmentGoal(i)">remove_circle</i>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Measurable</span> - Quantify or suggest an indicator of progress
+            </div>
+            <span class="goal-capital-letter">M</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>M part of goal</mat-label>
+              <input matInput required formControlName="goalMPart">
+            </mat-form-field>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Assignable</span> - Specify who will do it
+            </div>
+            <span class="goal-capital-letter">A</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>A part of goal</mat-label>
+              <input matInput required formControlName="goalAPart">
+            </mat-form-field>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Realistic</span> - What results can realistically be achieved
+            </div>
+            <span class="goal-capital-letter">R</span>
+          </div>
+
+          <div class="smart-goal-input">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>R part of goal</mat-label>
+              <input matInput required formControlName="goalRPart">
+            </mat-form-field>
+          </div>
+
+          <div class="abbreviation">
+            <div class="letter-meaning">
+              <span class="bold">Time-related</span> - Specify when the result(s) can be achieved
+            </div>
+            <span class="goal-capital-letter">T</span>
+          </div>
+
+          <div class="smart-goal-input smart-goal-input-t">
+            <mat-form-field appearance="fill" class="smart-goal-field">
+              <mat-label>T part of goal</mat-label>
+              <input matInput required formControlName="goalTPart">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <i class="material-icons add-group-button raise" (click)="addNewDepartmentGoal()">playlist_add</i>
+
+      </div>
+
+
+      <p class="bold smart-goals-header">Feedback</p>
+
+      <div class="feedbacks" formArrayName="feedbacks">
+        <div *ngFor="let feedback of feedbackArray.controls; let i = index;"
+             [formGroupName]="i"
+        >
+
+          <mat-form-field appearance="fill" class="feedback-input-field">
+            <mat-label>Your feedback</mat-label>
+            <textarea matInput
+                      formControlName="context"
+                      cdkTextareaAutosize
+                      cdkAutosizeMinRows="4"
+                      cdkAutosizeMaxRows="8">
+            </textarea>
+          </mat-form-field>
+
+        </div>
+      </div>
+      
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button
+        mat-button
+        class="raise submit-button"
+        (click) = "onSubmit()"
+      >
+        Submit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -12,7 +12,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -166,6 +165,107 @@ class AssessmentServiceImpl implements AssessmentService {
         return assessmentDtos;
     }
 
+    @Override
+    @Transactional
+    public AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto) {
+
+        User user = userRepository.findById(userId).orElseThrow(() ->
+            new UserNotFoundException("User with id " + userId + " was not found"));
+
+        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() ->
+                new AssessmentNotFoundException("Assessment with id " + assessmentId + " was not found"));
+
+        if (assessmentDto.getStatus() == StatusEnum.FIRST_PHASE) {
+
+            List<EvaluationGroupDto> evaluationGroupDtos = assessmentDto.getEvaluationGroups();
+            List<EvaluationGroup>  evaluationGroups = assessment.getEvaluationGroups();
+
+            if (evaluationGroupDtos.size() != evaluationGroups.size()) {
+                throw new InvalidAssessmentDataException("Invalid quantity of evaluation groups");
+            }
+
+            for (int i = 0; i < evaluationGroups.size(); i++) {
+
+                List<EvaluationFieldDto> evaluationFieldDtos = evaluationGroupDtos.get(i).getEvaluationFields();
+                List<EvaluationField> evaluationFields = evaluationGroups.get(i).getEvaluationFields();
+
+                if (evaluationFieldDtos.size() != evaluationFields.size()) {
+                    throw new InvalidAssessmentDataException("Invalid quantity of evaluation fields in group "
+                            + evaluationGroupDtos.get(i).getTitle());
+                }
+
+                for (int j = 0; j < evaluationFields.size(); j++) {
+
+                    evaluationFields.get(j).setFirstScore(
+                            evaluationFieldDtos.get(j).getFirstScore()
+                    );
+
+                }
+
+            }
+
+            List<PersonalGoal> personalGoals = assessment.getPersonalGoals();
+            personalGoals.clear();
+
+            for (PersonalGoalDto personalGoalDto : assessmentDto.getPersonalGoals()) {
+
+                PersonalGoal personalGoal = new PersonalGoal();
+
+                personalGoal.setGoalSPart(personalGoalDto.getGoalSPart());
+                personalGoal.setGoalMPart(personalGoalDto.getGoalMPart());
+                personalGoal.setGoalAPart(personalGoalDto.getGoalAPart());
+                personalGoal.setGoalRPart(personalGoalDto.getGoalRPart());
+                personalGoal.setGoalTPart(personalGoalDto.getGoalTPart());
+
+                personalGoal.setAssessment(assessment);
+
+                personalGoals.add(personalGoal);
+
+            }
+
+            List<DepartmentGoal> departmentGoals = assessment.getDepartmentGoals();
+            departmentGoals.clear();
+
+            for (DepartmentGoalDto departmentGoalDto : assessmentDto.getDepartmentGoals()) {
+
+                DepartmentGoal departmentGoal = new DepartmentGoal();
+
+                departmentGoal.setGoalSPart(departmentGoalDto.getGoalSPart());
+                departmentGoal.setGoalMPart(departmentGoalDto.getGoalMPart());
+                departmentGoal.setGoalAPart(departmentGoalDto.getGoalAPart());
+                departmentGoal.setGoalRPart(departmentGoalDto.getGoalRPart());
+                departmentGoal.setGoalTPart(departmentGoalDto.getGoalTPart());
+
+                departmentGoal.setAssessment(assessment);
+
+                departmentGoals.add(departmentGoal);
+
+            }
+
+            List<Feedback> feedbacks = assessment.getFeedbacks();
+            feedbacks.clear();
+
+            if (!assessmentDto.getFeedbacks().isEmpty()) {
+
+                Feedback feedback = new Feedback();
+
+                feedback.setAuthorId(userId);
+                feedback.setAuthorFullName(user.getFirstname() + " " + user.getLastname());
+                feedback.setContext(assessmentDto.getFeedbacks().get(0).getContext());
+
+                feedback.setAssessment(assessment);
+
+                feedbacks.add(feedback);
+
+            }
+
+            assessment.setStatus(StatusEnum.SECOND_PHASE);
+        }
+
+        return AssessmentDto.fromAssessment(assessment);
+
+    }
+
     /*@Override
     @Transactional
     public AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto) {
@@ -180,8 +280,8 @@ class AssessmentServiceImpl implements AssessmentService {
         Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
                 new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
 
-        Job job = jobRepository.findByJobTitle(assessmentDto.getJobPosition()).orElseThrow(() ->
-                new JobNotFoundException("Job with id " + assessmentDto.getJobPosition() + " was not found"));
+        Job job = jobRepository.findByJobTitle(assessmentDto.getJobTitle()).orElseThrow(() ->
+                new JobNotFoundException("Job with id " + assessmentDto.getJobTitle() + " was not found"));
 
         User user = userRepository.findById(assessmentDto.getUserId()).orElseThrow(() ->
                 new UserNotFoundException("User with id " + assessmentDto.getUserId() + " was not found"));
@@ -245,7 +345,12 @@ class AssessmentServiceImpl implements AssessmentService {
                 PersonalGoal personalGoal = new PersonalGoal();
 
                 personalGoal.setAssessment(assessment);
-                personalGoal.setContext(personalGoalDto.getContext());
+
+                personalGoal.setGoalSPart(personalGoalDto.getGoalSPart());
+                personalGoal.setGoalMPart(personalGoalDto.getGoalMPart());
+                personalGoal.setGoalAPart(personalGoalDto.getGoalAPart());
+                personalGoal.setGoalRPart(personalGoalDto.getGoalRPart());
+                personalGoal.setGoalTPart(personalGoalDto.getGoalTPart());
 
                 assessment.getPersonalGoals().add(personalGoal);
 
@@ -260,7 +365,12 @@ class AssessmentServiceImpl implements AssessmentService {
                 DepartmentGoal departmentGoal = new DepartmentGoal();
 
                 departmentGoal.setAssessment(assessment);
-                departmentGoal.setContext(departmentGoalDto.getContext());
+
+                departmentGoal.setGoalSPart(departmentGoalDto.getGoalSPart());
+                departmentGoal.setGoalMPart(departmentGoalDto.getGoalMPart());
+                departmentGoal.setGoalAPart(departmentGoalDto.getGoalAPart());
+                departmentGoal.setGoalRPart(departmentGoalDto.getGoalRPart());
+                departmentGoal.setGoalTPart(departmentGoalDto.getGoalTPart());
 
                 assessment.getDepartmentGoals().add(departmentGoal);
 
@@ -269,18 +379,15 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessment.getFeedbacks().clear();
 
-        if (assessmentDto.getFeedbackDtos() != null) {
+        if (assessmentDto.getFeedbacks() != null) {
 
-            for(FeedbackDto feedbackDto : assessmentDto.getFeedbackDtos()) {
+            for(FeedbackDto feedbackDto : assessmentDto.getFeedbacks()) {
 
                 Feedback feedback = new Feedback();
 
                 feedback.setAssessment(assessment);
 
-                userRepository.findById(feedbackDto.getAuthorId()).orElseThrow(() ->
-                        new UserNotFoundException("Comment author with id " + feedbackDto.getAuthorId() + " was not found"));
-
-                feedback.setAuthorId(feedbackDto.getAuthorId());
+                feedback.setAuthorFullName(feedbackDto.getAuthorFullName());
                 feedback.setContext(feedbackDto.getContext());
 
                 assessment.getFeedbacks().add(feedback);
@@ -288,8 +395,6 @@ class AssessmentServiceImpl implements AssessmentService {
             }
 
         }
-
-
 
         return AssessmentDto.fromAssessment(assessment);
 

@@ -13,6 +13,7 @@ public interface AssessmentService {
     List<AssessmentDto> getAllAssessmentsByUserId(String id);
     List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, String status);
     List<AssessmentDto> getAllAssessments();
+    AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto);
 //    AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto);
     AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto);
     AssessmentDto deleteAssessment(String id);

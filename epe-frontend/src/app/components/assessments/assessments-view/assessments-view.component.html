@@ -1,0 +1,212 @@
+<mat-card class="template-view">
+  <mat-card-title>{{ assessment.title }}</mat-card-title>
+  <mat-card-subtitle>{{ assessment.jobTitle }}</mat-card-subtitle>
+  <mat-card-content>
+    <p class="bold">Description</p>
+    <p>{{ assessment.description }}</p>
+    <p class="bold evaluation-groups-title">Evaluation groups</p>
+
+    <p class="bold evaluation-group-user-score"
+       *ngIf="assessment.status == 'SECOND_PHASE'
+          || assessment.status == 'FINISHED'
+          || assessment.status == 'CANCELED'"
+    >
+      First score
+    </p>
+
+    <p class="bold evaluation-group-user-score"
+       *ngIf="assessment.status == 'FINISHED'
+          || assessment.status == 'CANCELED'"
+    >
+      Second score
+    </p>
+
+    <div class="evaluation-groups" *ngFor="let evaluationGroup of assessment.evaluationGroups">
+      <p class="evaluation-group">{{ evaluationGroup.title }}</p>
+      <p class="evaluation-group-comments">Comments</p>
+
+      <div class="evaluation-fields" *ngFor="let evaluationField of evaluationGroup.evaluationFields">
+        <p class="evaluation-field-title">{{evaluationField.title}}</p>
+        <p class="evaluation-field-comment">
+          {{evaluationField.comment}}
+        </p>
+        <p class="evaluation-field-user-score"
+           *ngIf="assessment.status == 'SECOND_PHASE'
+          || assessment.status == 'FINISHED'
+          || assessment.status == 'CANCELED'">
+          {{evaluationField.firstScore}}
+        </p>
+
+        <p class="evaluation-field-assigned-user-score"
+           *ngIf="assessment.status == 'FINISHED'
+              || assessment.status == 'CANCELED'">
+          {{evaluationField.secondScore}}
+        </p>
+      </div>
+    </div>
+
+    <p class="bold smart-goals-header">Personal SMART goals
+      <span class="minor-text"
+            *ngIf="assessment.personalGoals.length != 0"
+
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;What is SMART goal? Hover over the letters to find out!</span>
+    </p>
+
+    <div class="personal-goals">
+      <div *ngFor="let personalGoal of assessment.personalGoals" class="personal-goal">
+
+        <div class="abbreviation abbreviation-s">
+          <div class="letter-meaning">
+            <span class="bold">Specific</span> - Target a specific area for improvement</div>
+          <span class="goal-capital-letter">S</span>
+        </div>
+
+        <div class="smart-goal-input">
+              {{personalGoal.goalSPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Measurable</span> - Quantify or suggest an indicator of progress
+          </div>
+          <span class="goal-capital-letter">M</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{personalGoal.goalMPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Assignable</span> - Specify who will do it
+          </div>
+          <span class="goal-capital-letter">A</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{personalGoal.goalAPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Realistic</span> - What results can realistically be achieved
+          </div>
+          <span class="goal-capital-letter">R</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{personalGoal.goalRPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Time-related</span> - Specify when the result(s) can be achieved
+          </div>
+          <span class="goal-capital-letter">T</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{personalGoal.goalTPart}}
+        </div>
+
+      </div>
+
+    </div>
+
+    <p class="bold smart-goals-header">Department SMART goals</p>
+
+
+    <div class="department-goals">
+      <div *ngFor="let departmentGoal of assessment.departmentGoals" >
+
+        <div class="abbreviation abbreviation-s">
+          <div class="letter-meaning">
+            <span class="bold">Specific</span> - Target a specific area for improvement</div>
+          <span class="goal-capital-letter">S</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{departmentGoal.goalSPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Measurable</span> - Quantify or suggest an indicator of progress
+          </div>
+          <span class="goal-capital-letter">M</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{departmentGoal.goalMPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Assignable</span> - Specify who will do it
+          </div>
+          <span class="goal-capital-letter">A</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{departmentGoal.goalAPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Realistic</span> - What results can realistically be achieved
+          </div>
+          <span class="goal-capital-letter">R</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{departmentGoal.goalRPart}}
+        </div>
+
+        <div class="abbreviation">
+          <div class="letter-meaning">
+            <span class="bold">Time-related</span> - Specify when the result(s) can be achieved
+          </div>
+          <span class="goal-capital-letter">T</span>
+        </div>
+
+        <div class="smart-goal-input">
+            {{departmentGoal.goalTPart}}
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <p class="bold smart-goals-header feedback-header">Feedbacks</p>
+
+    <div class="feedback-author-header bold">Author</div>
+    <div class="feedback-text-header bold">Feedback</div>
+
+    <div class="feedbacks">
+      <div *ngFor="let feedback of assessment.feedbacks" class="feedback">
+
+        <div class="feedback-author bold">
+          {{feedback.authorFullName}}
+        </div>
+
+        <div class="feedback-text">
+          {{ feedback.context }}
+        </div>
+
+        </div>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-button
+      *ngIf="assessment.status == 'FIRST_PHASE'"
+      class="raise"
+      (click)="openEvaluationDialog()"
+    >
+      Start evaluation
+    </button>
+  </mat-card-actions>
+</mat-card>

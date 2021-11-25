@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {AssessmentTemplateView} from "../assessments-templates-models/assessment-template-view.interface";
 import {AssessmentTemplateEditComponent} from "../assessment-template-edit-component/assessment-template-edit.component";
@@ -29,7 +29,8 @@ export class AssessmentTemplateViewComponent implements OnInit {
     this.dialog.open(AssessmentTemplateEditComponent, {
       height: '90%',
       width: '90%',
-      data : this.assessmentTemplate
+      data : this.assessmentTemplate,
+      autoFocus: false
     });
   }
 
@@ -41,7 +42,8 @@ export class AssessmentTemplateViewComponent implements OnInit {
           ok: 'Yes',
           cancel: 'No'
         }
-      }
+      },
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
