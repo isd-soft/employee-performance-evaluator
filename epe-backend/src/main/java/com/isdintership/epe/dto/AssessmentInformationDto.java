@@ -1,5 +1,6 @@
 package com.isdintership.epe.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isdintership.epe.entity.AssessmentInformation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class AssessmentInformationDto {
     private String performedAction;
     private String performedOnUser;
     private String performedByUser;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime performedTime;
 
 

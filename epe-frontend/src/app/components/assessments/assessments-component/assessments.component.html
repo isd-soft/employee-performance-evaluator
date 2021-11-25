@@ -86,7 +86,7 @@
         <!-- Start date Column-->
         <ng-container matColumnDef="performedTime">
           <th mat-header-cell class="start-date-column" *matHeaderCellDef mat-sort-header> Date  </th>
-          <td mat-cell class="start-date-column" *matCellDef="let row"> {{row.performedTime | date: 'd:MMM:y, hh:mm:ss'}} </td>
+          <td mat-cell class="start-date-column" *matCellDef="let row"> {{row.performedTime}} </td>
         </ng-container>
 
         <!-- Status Column -->
