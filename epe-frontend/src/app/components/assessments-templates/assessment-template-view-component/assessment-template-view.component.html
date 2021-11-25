@@ -7,10 +7,16 @@
     <p class="bold evaluation-groups-title">Evaluation groups</p>
     <div class="evaluation-groups" *ngFor="let evaluationGroup of assessmentTemplate.evaluationGroups">
         <p class="evaluation-group">{{ evaluationGroup.title }}</p>
+        <p class="evaluation-group-comments">Comments</p>
         <div class="evaluation-fields" *ngFor="let evaluationField of evaluationGroup.evaluationFields">
-          <p>{{evaluationField.title}}</p>
+            <p class="evaluation-field-title">{{evaluationField.title}}</p>
+            <p class="evaluation-field-comment">
+              {{evaluationField.comment}}
+            </p>
         </div>
     </div>
+    <p class="bold creation-date-header">Creation date</p>
+    <p>{{ assessmentTemplate.creationDate }}</p>
 
   </mat-card-content>
   <mat-card-actions>

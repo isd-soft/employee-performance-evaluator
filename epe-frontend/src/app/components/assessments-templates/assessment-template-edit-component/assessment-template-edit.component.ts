@@ -58,7 +58,8 @@ export class AssessmentTemplateEditComponent implements OnInit {
 
   createField(field: any): FormGroup {
     return this.formBuilder.group({
-      title: [field.title]
+      title: [field.title],
+      comment: [field.comment]
     });
   }
 
@@ -71,7 +72,8 @@ export class AssessmentTemplateEditComponent implements OnInit {
 
   addEvaluationField() {
     return this.formBuilder.group({
-      title: []
+      title: [],
+      comment: []
     });
   }
 

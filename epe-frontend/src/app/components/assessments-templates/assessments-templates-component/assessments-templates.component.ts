@@ -15,7 +15,7 @@ import {AssessmentTemplateView} from "../assessments-templates-models/assessment
 })
 export class AssessmentsTemplatesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['title', 'jobTitle', 'buttons'];
+  displayedColumns: string[] = ['title', 'jobTitle', 'creationDate', 'buttons'];
   dataSource!: MatTableDataSource<AssessmentTemplateView>;
 
   assessmentsTemplates!: AssessmentTemplateView[];

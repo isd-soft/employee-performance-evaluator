@@ -10,7 +10,6 @@ import { LogoutComponent } from './components/logout/logout-component/logout.com
 import { SidebarComponent } from './components/sidebar/sidebar-template/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard-template/dashboard.component';
 import { HomeComponent } from './components/home/home-component/home.component';
-import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { UsersView } from './components/usersview/usersview-component/users-view.component';
 import { UserComponent } from './components/user/user-component/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,15 +23,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ProfileComponent } from './components/profile/profile-component/profile.component';
 import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
-import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
 import { UsersComponent } from './components/users/user-component/users.component';
 import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import { AssessmentsUserComponent } from './components/assessments/assessments-user/assessments-user.component';
-import { AssessmentsAdminComponent } from './components/assessments/assessments-admin/assessments-admin.component';
+import { AssessmentsComponent } from './components/assessments/assessments-component/assessments.component';
 import {ReplaceUnderscorePipe} from "./components/assessments/assessments-pipes/replace-underscore.pipe";
-import { AssessmentsHistoryUserComponent } from './components/assessments/assessments-history-user/assessments-history-user.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { AssessmentsTemplatesComponent } from './components/assessments-templates/assessments-templates-component/assessments-templates.component';
 import {AssessmentTemplateViewComponent} from "./components/assessments-templates/assessment-template-view-component/assessment-template-view.component";
@@ -49,6 +45,9 @@ import {ToastrModule} from "ngx-toastr";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
+import { TeamsComponent } from './components/teams/team-component/teams.component';
+import { TeamViewComponent } from './components/teams/team-view/team-view.component';
 
 @NgModule({
   declarations: [
@@ -57,20 +56,15 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     DashboardComponent,
     HomeComponent,
     SidebarComponent,
-    TeamsComponent,
     UsersView,
     UserComponent,
-    TeamsComponent,
     ProfileComponent,
     TeamEditComponent,
-    TeamCreateComponent,
     UsersComponent,
     UserEditComponent,
     UserCreateComponent,
-    AssessmentsUserComponent,
-    AssessmentsAdminComponent,
+    AssessmentsComponent,
     ReplaceUnderscorePipe,
-    AssessmentsHistoryUserComponent,
     AssessmentsTemplatesComponent,
     AssessmentTemplateViewComponent,
     AssessmentTemplateEditComponent,
@@ -83,7 +77,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     NotfoundComponent,
     AssessmentComponent,
     PasswordComponent,
-    RoleChangeComponent
+    RoleChangeComponent,
+    AssessmentsAssignedComponent,
+    TeamViewComponent
   ],
   imports: [
     BrowserModule,

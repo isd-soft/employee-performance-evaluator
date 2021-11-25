@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
@@ -9,12 +8,13 @@ import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 
 @Component({
-  selector: 'app-assessments-user',
-  templateUrl: './assessments-user.component.html',
-  styleUrls: ['./assessments-user.component.css'],
+  selector: 'app-assessments',
+  templateUrl: './assessments.component.html',
+  styleUrls: ['./assessments.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
-export class AssessmentsUserComponent implements OnInit, AfterViewInit {
+export class AssessmentsComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['title', 'position', 'startDate', 'status', 'buttons'];
   dataSource!: MatTableDataSource<AssessmentView>;
@@ -35,7 +35,7 @@ export class AssessmentsUserComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.assessmentsService.getAllAssessmentsByUserAndStatus(this.jwtUser.id, 'active').subscribe(
+    this.assessmentsService.getAllAssessmentsByUserId(this.jwtUser.id).subscribe(
       data => {
         this.assessments = data as AssessmentView[];
         this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);

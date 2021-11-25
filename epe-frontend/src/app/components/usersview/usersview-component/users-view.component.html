@@ -1,100 +1,118 @@
-<!--  CONTENT HERE, BIATCH  -->
-<div style="padding: 50px;">
-  <mat-form-field appearance="standard">
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Users">
+    <mat-form-field appearance="standard" class="filter-field">
 
-    <mat-label>Filter</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="Ex. Mia"
-      #input
-    />
-  </mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ex. Mia"
+        #input
+      />
+    </mat-form-field>
 
-  <div class="mat-elevation-z9">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <!-- ID Column -->
-      <ng-container matColumnDef="firstname">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="table-column"
-        >
-          First Name
-        </th>
-        <td mat-cell *matCellDef="let row">{{ row.firstname }}</td>
+    <div class="mat-elevation-z9 table">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="firstname">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            First Name
+          </th>
+          <td mat-cell class="table-column" *matCellDef="let row">{{ row.firstname }}</td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="lastname">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            Last Name
+          </th>
+          <td mat-cell class="table-column" *matCellDef="let row">{{ row.lastname }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="email">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            Email
+          </th>
+          <td mat-cell class="table-column" *matCellDef="let row">{{ row.email }}</td>
+        </ng-container>
+
+        <!-- Fruit Column -->
+        <ng-container matColumnDef="job">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            Job
+          </th>
+          <td mat-cell class="table-column" *matCellDef="let row">{{ row.job }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="assessment_status">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="table-column"
+          >
+            Assessment Status
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <div *ngIf="(row.status == '' && containsUserId(row.id)) || (row.status == '' && jwtUser.role === 'ROLE_ADMIN')  ">
+              <button mat-button (click)="startAssessment(row.id)">
+                Add
+                <mat-icon>add_box</mat-icon>
+              </button>
+            </div>
+            {{ row.status }}
+          </td>
+        </ng-container>
+
+      <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
+          <button mat-button (click)="onView(row.id)">
+            <mat-icon>person</mat-icon>
+          </button>
+          <div *ngIf="role == requiredRole && row.id != jwtUser.id">
+            <button mat-button (click)="edit(row.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="role == requiredRole && row.id != jwtUser.id">
+            <button mat-button (click)="delete(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
       </ng-container>
 
-      <!-- Progress Column -->
-      <ng-container matColumnDef="lastname">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="table-column"
-        >
-          Last Name
-        </th>
-        <td mat-cell *matCellDef="let row">{{ row.lastname }}</td>
-      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="email">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="table-column"
-        >
-          Email
-        </th>
-        <td mat-cell *matCellDef="let row">{{ row.email }}</td>
-      </ng-container>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"
+      ></mat-paginator>
+    </div>
 
-      <!-- Fruit Column -->
-      <ng-container matColumnDef="job">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="table-column"
-        >
-          Job
-        </th>
-        <td mat-cell *matCellDef="let row">{{ row.job }}</td>
-      </ng-container>
-
-              <ng-container matColumnDef="buttons">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell
-                  *matCellDef="let row"
-                  (click)="$event.stopPropagation()"
-                >
-                  <button mat-button (click)="onView(row.id)">
-                    <mat-icon>person</mat-icon>
-                  </button>
-                  <div *ngIf="role==requiredRole && row.id != jwtUserId">
-                    <button mat-button (click)="edit(row.id)">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-
-                  </div>
-                  <div *ngIf="role==requiredRole && row.id != jwtUserId">
-                    <button mat-button (click)="delete(row.id)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-                </mat-cell>
-              </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-
-    <mat-paginator
-      [pageSizeOptions]="[10]"
-      aria-label="Select page of users"
-    ></mat-paginator>
-  </div>
-</div>
+  </mat-tab>
+</mat-tab-group>

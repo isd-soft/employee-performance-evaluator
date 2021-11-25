@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {AssessmentView} from "../assessments-models/assessment-short-view.interface";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
@@ -8,17 +8,17 @@ import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 
 @Component({
-  selector: 'app-assessments-history-user',
-  templateUrl: './assessments-history-user.component.html',
-  styleUrls: ['./assessments-history-user.component.css']
+  selector: 'app-assessments-assigned',
+  templateUrl: './assessments-assigned.component.html',
+  styleUrls: ['./assessments-assigned.component.css']
 })
-export class AssessmentsHistoryUserComponent implements OnInit {
+export class AssessmentsAssignedComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['title', 'startDate', 'endDate', 'score', 'buttons'];
+  displayedColumns: string[] = ['title', 'position', 'startDate', 'status', 'buttons'];
   dataSource!: MatTableDataSource<AssessmentView>;
 
-  finishedAssessments!: AssessmentView[];
-  jwtUser: JwtUser;
+  assessments!: AssessmentView[];
+  jwtUser : JwtUser;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,15 +33,14 @@ export class AssessmentsHistoryUserComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.assessmentsService.getAllAssessmentsByUserAndStatus(this.jwtUser.id, 'FINISHED').subscribe(
+    this.assessmentsService.getAllAssessmentsByUserId(this.jwtUser.id).subscribe(
       data => {
-        this.finishedAssessments = data as AssessmentView[];
-        this.dataSource = new MatTableDataSource<AssessmentView>(this.finishedAssessments);
+        this.assessments = data as AssessmentView[];
+        this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     );
-
   }
 
   applyFilter(event: Event) {
@@ -51,5 +50,7 @@ export class AssessmentsHistoryUserComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+
   }
+
 }

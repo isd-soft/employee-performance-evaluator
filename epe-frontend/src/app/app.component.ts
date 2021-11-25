@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {JwtService} from "./decoder/decoder-service/jwt.service";
 import {JwtUser} from "./decoder/decoder-model/jwt-user.interface";
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,25 +17,24 @@ export class AppComponent {
 
   constructor(private jwtService: JwtService) {
 
-    this.jwtUser = this.jwtService.getJwtUser();
+    interval(100).subscribe(x => {
+      this.jwtUser = this.jwtService.getJwtUser();
 
-    if(this.jwtUser) {
-      if(this.jwtUser.role == 'ROLE_SYSADMIN') {
-        this.isSysAdmin = true;
-        this.isAdmin = true;
-        this.isUser = true;
+      if(this.jwtUser) {
+        if(this.jwtUser.role == 'ROLE_SYSADMIN') {
+          this.isSysAdmin = true;
+          this.isAdmin = true;
+          this.isUser = true;
+        }
+
+        if(this.jwtUser.role == 'ROLE_ADMIN') {
+          this.isAdmin = true;
+          this.isUser = true;
+        }
+        if(this.jwtUser.role == 'ROLE_USER') {
+          this.isUser = true;
+        }
       }
-
-      if(this.jwtUser.role == 'ROLE_ADMIN') {
-        this.isAdmin = true;
-        this.isUser = true;
-      }
-
-      if(this.jwtUser.role == 'ROLE_USER') {
-        this.isUser = true;
-      }
-    }
-
+    });
   }
-
 }

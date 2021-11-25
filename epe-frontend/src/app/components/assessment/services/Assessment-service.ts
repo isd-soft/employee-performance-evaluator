@@ -45,13 +45,11 @@ export class AssessmentService {
           timeOut: 3000,
           progressBar: true,
         })
-        console.log('Success')
       }, error => {
         this.notificationService.error(error.error.title,'',{
           timeOut: 3000,
           progressBar: true,
         })
-        console.log('Error')
       },
     );
   }

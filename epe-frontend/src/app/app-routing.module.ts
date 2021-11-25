@@ -7,7 +7,6 @@ import { DashboardComponent } from './components/dashboard/dashboard-template/da
 
 import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
-import { TeamCreateComponent } from './components/teams/team-create/team-create.component';
 
 import { ProfileComponent } from './components/profile/profile-component/profile.component';
 
@@ -20,8 +19,7 @@ import { DashboardGuard } from './guards/dashboard/dashboard.guard';
 import {UsersView} from "./components/usersview/usersview-component/users-view.component";
 import {UserComponent} from "./components/user/user-component/user.component";
 import {AdminGuard} from "./guards/admin/admin.guard";
-import {AssessmentsUserComponent} from "./components/assessments/assessments-user/assessments-user.component";
-import {AssessmentsHistoryUserComponent} from "./components/assessments/assessments-history-user/assessments-history-user.component";
+import {AssessmentsComponent} from "./components/assessments/assessments-component/assessments.component";
 import {AssessmentsTemplatesComponent} from "./components/assessments-templates/assessments-templates-component/assessments-templates.component";
 
 import { EditComponent } from './components/edit/edit-component/edit.component';
@@ -30,6 +28,7 @@ import {NotfoundComponent} from "./components/notfound/notfound.component";
 import {AssessmentComponent} from "./components/assessment/assessment-component/assessment.component";
 
 import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
+import {SysadminGuard} from "./guards/sysadmin/sysadmin.guard";
 
 
 const routes: Routes = [
@@ -50,32 +49,27 @@ const routes: Routes = [
   {
     path: 'teams',
     component: TeamsComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'team-edit',
     component: TeamEditComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'team-create',
-    component: TeamCreateComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'users',
     component: UsersComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'user-edit',
     component: UserEditComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'user-create',
     component: UserCreateComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard, SysadminGuard]
   },
   {
     path: 'my-profile',
@@ -100,17 +94,12 @@ const routes: Routes = [
   },
   {
     path: 'assessments',
-    component: AssessmentsUserComponent,
+    component: AssessmentsComponent,
     canActivate: [DashboardGuard]
   },
   {
     path: 'assessment',
     component: AssessmentComponent,
-    canActivate: [DashboardGuard]
-  },
-  {
-    path: 'assessments-history',
-    component: AssessmentsHistoryUserComponent,
     canActivate: [DashboardGuard]
   },
   {

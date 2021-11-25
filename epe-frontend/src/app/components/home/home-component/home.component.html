@@ -1,263 +1,188 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
-<div class="login-area">
-    <div class="bg-image">
-        <div class="login-signup">
-            <div class="container">
-                <div class="tab-content">
-                    <div *ngIf="hasAccount; else noAccount">
-                        <div id="login" class="tab-pane fade in active">
-                            <div class="login-inner">
-                                <div class="title">
-                                    <h1>Welcome <span>back!</span></h1>
-                                </div>
-                                <div *ngIf="loginUser" class="login-form">
-                                    <form #loginForm="ngForm">
-                                        <div class="form-details">
-                                            <label class="form-element">
-                                                <input
-                                                    required
-                                                    data-toggle="tooltip" 
-                                                    data-placement="top" 
-                                                    title="Please insert your email"
-                                                    [email]="true"
-                                                    type="email"
-                                                    name="email"
-                                                    #email="ngModel"
-                                                    id="email"
-                                                    placeholder="Enter your email" 
-                                                    [(ngModel)]="loginUser.email">
-                                                <div *ngIf="email.touched && !email.valid" class="input-box-error">
-                                                    Please enter a valid email !
-                                                </div>
-                                            </label>
-                                            <label class="form-element">
-                                                <input 
-                                                    required
-                                                    data-toggle="tooltip" 
-                                                    data-placement="top" 
-                                                    title="Please insert your password"
-                                                    minlength="7"
-                                                    maxlength="20"   
-                                                    type="password" 
-                                                    name="password" 
-                                                    #password="ngModel"
-                                                    id="password"
-                                                    placeholder="Enter your password" 
-                                                    [(ngModel)]="loginUser.password">
-                                                <div *ngIf="password.touched && !password.valid" class="input-box-error">
-                                                    Please enter your password !
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <button type="submit" [disabled]="loginForm.form.invalid" class="form-btn" (click)="login()">Login</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="error-message">
-                            <span *ngIf="errorMessage">
-                                {{errorMessage}}
-                            </span>
-                        </div>
-                        <div class="switch-page">
-                            <hr class="fifty-percent">
-                            <span (click)="requestRegisterPage()">
-                                Create new account
-                            </span>
-                        </div>
-                    </div>
-                </div>
+<div *ngIf="hasAccount; else noAccount">
+    <div class="login-container">
+        <div class="welcome-message">
+            Welcome back !
+        </div>
+        <div class="login-form">
+            <form>
+                <mat-form-field class="login-input" appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input 
+                    type="email" 
+                    matInput 
+                    [formControl]="loginEmailFormControl" 
+                    placeholder="Ex. user@me.com"
+                    [(ngModel)]="loginUser.email">
+                  <mat-error *ngIf="loginEmailFormControl.hasError('email') && !loginEmailFormControl.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error 
+                    *ngIf="loginEmailFormControl.hasError('required')">
+                    Email is required
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="login-input" appearance="fill">
+                    <mat-label>Enter your password</mat-label>
+                    <input 
+                        matInput type="password" 
+                        matInput 
+                        [formControl]="loginPasswordFormControl" 
+                        placeholder="Ex. password"
+                        [(ngModel)]="loginUser.password">
+                    <mat-error *ngIf="loginPasswordFormControl.hasError('required')">
+                        Please enter your password
+                      </mat-error>
+                  </mat-form-field>
+                  <button class="login-submit" (click)="login()" mat-raised-button>Login</button>
+              </form>
+              <div class="switch-page">
+                <hr class="fifty-percent">
+                <span class="reroute-link" (click)="requestRegisterPage()">
+                    Create new account
+                </span>
             </div>
         </div>
     </div>
 </div>
 
 <ng-template #noAccount>
-    <div id="login" class="tab-pane fade in active">
-        <div class="login-inner">
-            <div class="title">
-                <h1>Create new <span>account!</span></h1>
-            </div>
-            <div *ngIf="newUser" class="login-form">
-                <form #loginForm="ngForm">
-                    <div class="form-details">
-                        <label class="form-element">
-                            <input 
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your password"
-                                [email]="true"
-                                type="email"
-                                name="email"
-                                #email="ngModel"
-                                id="email"
-                                placeholder="Enter your email" 
-                                [(ngModel)]="newUser.email">
-                            <div *ngIf="email.touched && !email.valid" class="input-box-error">
-                                Email is required and must be a valid one !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your firstname"
-                                minlength="3"
-                                maxlength="20"
-                                type="text"
-                                name="firstname"
-                                #firstname="ngModel" 
-                                id="firstname"
-                                placeholder="Enter your name" 
-                                [(ngModel)]="newUser.firstname">
-                            <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
-                                Firstname is required and must be between 3 and 20 letters long !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your lastname"
-                                minlength="3"
-                                maxlength="20"
-                                type="text" 
-                                name="lastname" 
-                                #lastname="ngModel"
-                                id="lastname"
-                                placeholder="Enter your last name"
-                                [(ngModel)]="newUser.lastname">
-                            <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
-                                Lastname is required and must be between 3 and 20 letters long !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your birth date"
-                                type="date"
-                                name="birthDate" 
-                                #birthDate="ngModel"
-                                id="birthDate"
-                                placeholder="Enter your birth date"
-                                [(ngModel)]="newUser.birthDate">
-                            <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
-                                Please pick a valid birth date !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input 
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your phone number"
-                                pattern="^\+?(?:[0-9] ?){6,14}[0-9]$"
-                                type="tel" 
-                                name="phone"
-                                #phone="ngModel"
-                                id="phone"
-                                placeholder="Enter your phone number"
-                                [(ngModel)]="newUser.phoneNumber">
-                            <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
-                                Phone number is required !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <select
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please choose your job" 
-                                name="job" 
-                                #job="ngModel"
-                                id="job"
-                                placeholder="Enter your job"
-                                [(ngModel)]="newUser.job">
-                                <option *ngFor="let job of jobList">
-                                    {{ job.jobTitle }}
-                                </option>
-                            </select>
-                            <div *ngIf="job.touched && !job.valid" class="input-box-error">
-                                Please pick your job !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your employment date"
-                                type="date"
-                                name="employmentDate" 
-                                #employmentDate="ngModel"
-                                id="employmentDate"
-                                [(ngModel)]="newUser.employmentDate">
-                            <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
-                                Please pick a valid employment date !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input 
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please insert your password"
-                                minlength="7"
-                                maxlength="20"   
-                                type="password" 
-                                name="password" 
-                                #password="ngModel"
-                                id="password"
-                                placeholder="Enter your password" 
-                                [(ngModel)]="newUser.password">
-                            <div *ngIf="password.touched && !password.valid" class="input-box-error">
-                                Password must be between 3 and 20 characters long !
-                            </div>
-                        </label>
-                        <label class="form-element">
-                            <input
-                                required
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="Please confirm your password"
-                                minlength="7"
-                                maxlength="20"   
-                                type="password" 
-                                name="confirmPassword" 
-                                #confirmPassword="ngModel"
-                                id="confirmPassword"
-                                placeholder="Confirm your password" 
-                                [(ngModel)]="newUser.confirmPassword">
-                            <div *ngIf="confirmPassword.touched && !confirmPassword.valid" class="input-box-error">
-                                Password must be between 3 and 20 characters long !
-                            </div>
-                        </label>
-                    </div>
-                    <button type="submit" [disabled]="loginForm.form.invalid" class="form-btn" (click)="register()">Register</button>
-                </form>
-            </div>
+    <div class="register-container">
+    <div class="welcome-message">
+        Create new account !
+    </div>
+    <div class="register-form">
+        <form>
+            <mat-form-field class="register-input" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input 
+                type="email" 
+                matInput 
+                [formControl]="emailFormControl" 
+                placeholder="Ex. user@me.com"
+                [(ngModel)]="registerUser.email">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error 
+                *ngIf="emailFormControl.hasError('required')">
+                Email is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Firstname</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="firstnameFormControl" 
+                  placeholder="Ex. John"
+                  [(ngModel)]="registerUser.firstname">
+                <mat-error 
+                  *ngIf="firstnameFormControl.hasError('required')">
+                  Firstname is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Lastname</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="lastnameFormControl" 
+                  placeholder="Ex. Doe"
+                  [(ngModel)]="registerUser.lastname">
+                <mat-error 
+                  *ngIf="lastnameFormControl.hasError('required')">
+                  Lastname is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Birthdate</mat-label>
+                <input 
+                  type="date" 
+                  matInput 
+                  [formControl]="birthdateFormControl" 
+                  placeholder="Ex. 01-01-1970"
+                  [(ngModel)]="registerUser.birthDate">
+                <mat-error 
+                  *ngIf="birthdateFormControl.hasError('required')">
+                  Birthdate is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Phone Number</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  [formControl]="phoneFormControl" 
+                  placeholder="Ex. 022123456"
+                  [(ngModel)]="registerUser.phoneNumber">
+                <mat-error 
+                  *ngIf="phoneFormControl.hasError('required')">
+                  Phone number is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Job</mat-label>
+                <mat-select [formControl]="jobFormControl" [(ngModel)]="registerUser.job">
+                  <mat-select-trigger>
+                    {{jobFormControl.value ? jobFormControl.value : ''}}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let job of jobList" [value]="job.jobTitle">{{job.jobTitle}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Employment date</mat-label>
+                <input 
+                  type="date" 
+                  matInput 
+                  [formControl]="employmentdateFormControl" 
+                  placeholder="Ex. 01-01-2020"
+                  [(ngModel)]="registerUser.employmentDate">
+                <mat-error 
+                  *ngIf="employmentdateFormControl.hasError('required')">
+                  Employment date is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Enter your password</mat-label>
+                <input 
+                    matInput type="password" 
+                    matInput 
+                    [formControl]="passwordFormControl" 
+                    placeholder="Ex. password"
+                    [(ngModel)]="registerUser.password">
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    Please enter your password
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="register-input" appearance="fill">
+                <mat-label>Confirm your password</mat-label>
+                <input 
+                    matInput type="password" 
+                    matInput 
+                    [formControl]="confirmPasswordFormControl" 
+                    placeholder="Ex. password"
+                    [(ngModel)]="confirmPassword">
+                <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+                    Please enter your password
+                </mat-error>
+              </mat-form-field>
+
+            <button class="register-submit" (click)="register()" mat-raised-button>Register</button>
+        </form>
+          <div class="switch-page">
+            <hr class="fifty-percent">
+            <span class="reroute-link" (click)="requestLoginPage()">
+                Sign In
+            </span>
         </div>
     </div>
-    <div class="error-message">
-        <span *ngIf="errorMessage">
-            {{errorMessage}}
-        </span>
-    </div>
-    <div class="switch-page">
-        <hr class="fifty-percent">
-        <span (click)="requestLoginPage()">
-            Sign In
-        </span>
-    </div>
+</div>
 </ng-template>
-    

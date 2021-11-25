@@ -1,5 +1,8 @@
 package com.isdintership.epe.service.impl;
 
+import com.isdintership.epe.dto.AssessmentDto;
+import com.isdintership.epe.dto.AssessmentTemplateDto;
+import com.isdintership.epe.entity.Assessment;
 import com.isdintership.epe.service.EmailService;
 import com.isdintership.epe.entity.User;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,15 +24,17 @@ class EmailServiceImpl implements EmailService {
 
     @Override
     @Transactional
-    public void sendEmail(User user){
+    public void sendEmail(User user, String title, String description){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getEmail());
         mailMessage.setFrom("employeeperformanceevaluator@gmail.com");
 
-
         //Sets the subject and the text of the email
         mailMessage.setSubject("Employee evaluation");
-        mailMessage.setText("Random generated string: " + UUID.randomUUID());
+        mailMessage.setText("Hello, " + user.getFirstname() + "," +
+                " there is a new assessment starting with the title "
+                + title + "\n" + description + "\nGood luck!");
+
 
         javaMailSender.send(mailMessage);
     }

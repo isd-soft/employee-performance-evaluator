@@ -1,121 +1,45 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
-
-html, body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    height: 100%;
+.login-container {
+    left: 50%;
+    top: 50%;
+    width: 60vw;
+    height: 70vh;
+    position: absolute;
+    border-radius: 5px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px #CCCCCC;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
-.container {
-    max-width:800px;
-    width: 100%;
-}
-
-.bg-image {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: table;
-}
-
-.login-signup {
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-}
-
-.login-inner h1 {
-    color: #333333;
-    font-size: 35px;
-    font-weight: 300;
-    text-align: center;
-    margin-top: 0;
-}
-
-.login-inner h1 span {
-    color: #000000;
+.login-container::-webkit-scrollbar { 
+    display: none;
 }
 
 .login-form {
-    text-align: center;
+    margin-top:auto;
+    margin-bottom:auto;
+    text-align:center;
+    padding: 20px;
 }
 
-.login-form input,
-.login-form select
- {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: #00000000 none repeat scroll 0 0;
-    border-color: -moz-use-text-color -moz-use-text-color #D4D9E3;
-    border-image: none;
-    border-style: none none solid;
-    border-width: medium medium 1px;
-    font-size: 13px;
-    font-weight: 300;
-    width: 100%;
-    color: #333333;
-    padding: 15px 50px;
-    font-size: 17px;
-    max-width: 550px;
+.login-input {
+    width: 80%;
 }
 
-.login-form label {
-    margin-bottom: 30px;
-    width: 100%;
+.login-submit {
+    margin: 20px;
+    width: 70%;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 25px;
 }
 
-.form-element input {
-    background-color: #00000000;
-}
-
-.login-signup .tab-content {
-    background: #ffffff none repeat scroll 0 0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
-    display: inline-block;
-    margin-top: -8px;
-    width: 100%;
-}
-
-.form-btn {
-    background: #000000 none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 100px;
-    color: #ffffff;
-    font-weight: 400;
-    max-width: 250px;
-    padding: 10px 0;
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 8px #d2d2d2;
-    -moz-box-shadow: 0 2px 8px #d2d2d2;
-    -webkit-box-shadow: 0 2px 8px #d2d2d2;
-}
-
-.form-btn:disabled {
-    background: #444444 none repeat scroll 0 0;
-}
-
-.form-btn::before {
-    font-family: FontAwesome;
-    position: absolute;
-    right: 17px;
-    top: 9px;
-}
-
-.form-details {
-    padding: 35px 0;
-}
-
-.tab-content .tab-pane {
-    padding:35px 0;
-}
-
-.input-box-error {
-    font-size: 9px;
+.error-message {
     color: #FF0000;
+    text-align: center;
 }
 
 .switch-page {
@@ -127,55 +51,53 @@ html, body {
     width: 50%;
 }
 
-.error-message {
-    color: red;
+.reroute-link {
+    cursor: pointer;
+}
+
+.register-container {
+    left: 50%;
+    top: 50%;
+    width: 60vw;
+    height: 90vh;
+    position: absolute;
+    border-radius: 5px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px #CCCCCC;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.register-container::-webkit-scrollbar { 
+    display: none;
+}
+
+
+.welcome-message {
+    padding: 40px;
     text-align: center;
-    padding: 15px;
+    font-size: 40px;
+    font-weight: 500;
 }
 
-
-@media only screen and (max-device-width: 767px) {
-    .login-signup .login-inner h1 {
-        font-size: 26px;
-        margin-bottom: 0;
-        margin-top: 10px;
-    }
-
-    .login-inner .login-form input {
-        font-size: 15px;
-        max-width: 100%;
-        padding: 15px 45px;
-    }
-
-    .login-inner .form-details {
-        padding: 25px;
-    }
-
-    .login-inner .login-form label {
-        margin-bottom: 20px;
-        width: 100%;
-    }
-
-    .login-inner .form-btn {
-        margin: 0;
-        max-width: 180px;
-    }
-    .tab-content .tab-pane {
-        padding: 20px 0;
-    }
-
-    button,
-        html [type="button"],
-        [type="reset"],
-        [type="submit"] {
-            outline: medium none;
-    }
+.register-form {
+    padding: 20px;
+    margin-top:auto;
+    margin-bottom:auto;
+    text-align:center;
 }
 
-@media only screen and (max-device-width: 992px) {
-    header .header-top li {
-        padding-left: 20px !important;
-        padding-right: 0;
-    }
+.register-input {
+    width: 80%;
+}
 
+.register-submit {
+    margin: 20px;
+    width: 70%;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 25px;
 }

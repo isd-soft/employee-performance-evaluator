@@ -27,13 +27,20 @@ export class UserviewsServices {
     return this.http.get(this.url);
   }
 
+  getAssignedUsers(){
+    return this.http.get("api-server/api/users/" + this.jwtUser?.id + "/assignedUsers");
+  }
+
   deleteUser(userId : string | undefined) {
-    console.log(userId);
-    return this.http.delete(this.url + '/' + userId).subscribe();
+    return this.http.delete(this.url + '/' + userId)
   }
 
   getRole() {
     return this.role;
+  }
+
+  getAssessmentTemplates() {
+    return this.http.get("api-server/api/assessments-templates");
   }
 
   errorHandler(error: HttpErrorResponse){
