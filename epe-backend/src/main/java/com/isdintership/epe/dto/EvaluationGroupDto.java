@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class EvaluationGroupDto {
     private String id;
-    private Float overallScore;
+    private Integer overallScore;
     private String title;
     private String assessmentId;
     @JsonProperty("evaluationFields")

@@ -2,22 +2,14 @@ package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.AssessmentTemplateDto;
-import com.isdintership.epe.entity.StatusEnum;
+import com.isdintership.epe.entity.Status;
 import com.isdintership.epe.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import com.isdintership.epe.dao.EvaluationFieldService;
-import com.isdintership.epe.dao.EvaluationGroupService;
-import com.isdintership.epe.dto.AssessmentDto;
-import com.isdintership.epe.service.AssessmentService;
-import com.isdintership.epe.dto.EvaluationFieldDto;
-import com.isdintership.epe.dto.EvaluationGroupDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
-import javax.validation.Valid;
 
 import java.util.List;
 
@@ -44,12 +36,11 @@ public class AssessmentController {
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public ResponseEntity<List<AssessmentDto>> getAllAssessmentsByUserId
             (@PathVariable(name = "id") String userId,
-             @RequestParam(name = "status", required = false) String status) {
+             @RequestParam(name = "status", required = false) Status status) {
 
         if (status != null) {
 
-            return new ResponseEntity<>(assessmentService.getAllAssessmentsByUserIdAndStatus(userId, status),
-                                        HttpStatus.OK);
+            return new ResponseEntity<>(assessmentService.getAllAssessmentsByUserIdAndStatus(userId, status), HttpStatus.OK);
 
         }
 

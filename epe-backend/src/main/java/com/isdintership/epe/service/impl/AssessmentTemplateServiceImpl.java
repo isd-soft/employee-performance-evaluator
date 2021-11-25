@@ -38,7 +38,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         assessmentTemplate.setTitle(assessmentTemplateDto.getTitle());
         assessmentTemplate.setDescription(assessmentTemplateDto.getDescription());
         assessmentTemplate.setJob(job);
-        assessmentTemplate.setStatus(StatusEnum.FIRST_PHASE);
+        assessmentTemplate.setStatus(Status.FIRST_PHASE);
         assessmentTemplate.setIsTemplate(true);
         assessmentTemplate.setCreationDate(LocalDateTime.now());
 

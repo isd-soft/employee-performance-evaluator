@@ -7,7 +7,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -31,11 +30,11 @@ public class Assessment extends BaseEntity {
     private Job job;
 
     @Column(name = "overall_score")
-    private Float overallScore;
+    private Integer overallScore;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private StatusEnum status;
+    private Status status;
 
     @Column(name = "is_template")
     private Boolean isTemplate;
@@ -101,8 +100,8 @@ public class Assessment extends BaseEntity {
     public Assessment() {
     }
 
-    public Assessment(User user, String title, String description, Job job, Float overallScore,
-                      StatusEnum status, Boolean isTemplate, LocalDateTime startDate,
+    public Assessment(User user, String title, String description, Job job, Integer overallScore,
+                      Status status, Boolean isTemplate, LocalDateTime startDate,
                       LocalDateTime endDate, LocalDateTime creationDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {

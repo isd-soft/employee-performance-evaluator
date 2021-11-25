@@ -1,6 +1,6 @@
 package com.isdintership.epe.entity;
 
-public enum StatusEnum {
+public enum Status {
     FIRST_PHASE,
     SECOND_PHASE,
     CANCELED,
