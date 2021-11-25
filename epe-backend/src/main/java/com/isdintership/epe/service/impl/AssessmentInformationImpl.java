@@ -6,6 +6,7 @@ import com.isdintership.epe.service.AssessmentInformationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
     public List<AssessmentInformationDto> getAllAssessmentInformation() {
         return assessmentInformationRepository.findAll().stream()
                                                 .map(AssessmentInformationDto::new)
+                                                .sorted(Comparator
+                                                        .comparing(AssessmentInformationDto::getPerformedTime)
+                                                        .reversed())
                                                 .collect(Collectors.toList());
     }
 }

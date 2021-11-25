@@ -1,7 +1,7 @@
 export interface AssessmentInformation {
   "assessmentTitle": string
-  "performedAction": string,
-  "performedOnUserId": string,
-  "performedByUserId": string,
+  "status": string,
+  "performedOnUser": string,
+  "performedByUser": string,
   "performedTime": Date
 }

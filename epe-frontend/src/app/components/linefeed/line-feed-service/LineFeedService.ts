@@ -6,19 +6,10 @@ import {throwError as observableThrowError} from "rxjs/internal/observable/throw
 @Injectable({
   providedIn: 'root'
 })
-export class AssessmentsService {
-
-  assessmentsUrl: string = 'api-server/api/users';
-
+export class LineFeedService{
   constructor(private http: HttpClient) { }
 
-
-  getAllAssessmentsByUserId(userId: string) {
-    return this.http.get(this.assessmentsUrl + '/' + userId)
-      .pipe(catchError(this.errorHandler));
-  }
-
-  errorHandler(error: HttpErrorResponse){
-    return observableThrowError(error);
+  getAssessmentInformation(){
+    return this.http.get("api-server/api/assessments-information");
   }
 }

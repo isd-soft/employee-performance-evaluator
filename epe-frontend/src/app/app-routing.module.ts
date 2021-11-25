@@ -29,6 +29,7 @@ import {AssessmentComponent} from "./components/assessment/assessment-component/
 
 import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
 import {SysadminGuard} from "./guards/sysadmin/sysadmin.guard";
+import {LineFeedComponent} from "./components/linefeed/line-feed-components/line-feed.component";
 
 
 const routes: Routes = [
@@ -101,6 +102,10 @@ const routes: Routes = [
     path: 'assessment',
     component: AssessmentComponent,
     canActivate: [DashboardGuard]
+  },
+  {
+    path: 'feed',
+    component: LineFeedComponent
   },
   {
     path: 'assessments-templates',

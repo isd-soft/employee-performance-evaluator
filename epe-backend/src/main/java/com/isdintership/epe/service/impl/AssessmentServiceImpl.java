@@ -98,7 +98,7 @@ class AssessmentServiceImpl implements AssessmentService {
 
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
-        assessmentInformation.setPerformedAction("Started Assessment");
+        assessmentInformation.setStatus(assessment.getStatus());
         assessmentInformation.setPerformedOnUser(assessment.getUser());
         User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
                 .orElseThrow(UserNotFoundException::new);

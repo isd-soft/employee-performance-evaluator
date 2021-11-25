@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 public class AssessmentInformation extends BaseEntity{
 
     private String assessmentTitle;
-    private String performedAction;
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
     @OneToOne
     private User performedOnUser;
     @OneToOne

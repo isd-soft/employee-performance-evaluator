@@ -6,7 +6,7 @@ import {AssessmentView} from "../assessments-models/assessment-short-view.interf
 import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
-import {AssessmentInformation} from "../assessments-models/AssessmentInformation";
+import {AssessmentInformation} from "../../linefeed/line-feed-models/AssessmentInformation";
 
 @Component({
   selector: 'app-assessments',
@@ -18,13 +18,10 @@ import {AssessmentInformation} from "../assessments-models/AssessmentInformation
 export class AssessmentsComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['title', 'position', 'startDate', 'status', 'buttons'];
-  columnAssessmentInformation: string[] = ['assessmentTitle', 'performedAction', 'performedTime', 'performedOnUser', 'performedByUser'];
 
   dataSource!: MatTableDataSource<AssessmentView>;
-  dataSourceInformation!: MatTableDataSource<AssessmentInformation>
 
   assessments!: AssessmentView[];
-  assessmentInformation!: AssessmentInformation[];
 
   jwtUser : JwtUser;
 
@@ -50,16 +47,6 @@ export class AssessmentsComponent implements OnInit, AfterViewInit {
         this.dataSource.sort = this.sort;
       }
     )
-
-    this.assessmentsService.getAssessmentInformation().subscribe(
-      data => {
-        this.assessmentInformation = data as AssessmentInformation[];
-        this.dataSourceInformation = new MatTableDataSource<AssessmentInformation>(this.assessmentInformation);
-        this.dataSourceInformation.paginator = this.paginator
-        this.dataSourceInformation.sort = this.sort;
-      }
-    )
-
   }
 
   applyFilter(event: Event) {
@@ -71,13 +58,4 @@ export class AssessmentsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  applyFilter2(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-
-  }
 }

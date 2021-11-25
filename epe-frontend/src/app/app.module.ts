@@ -47,6 +47,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
+import { LineFeedComponent } from './components/linefeed/line-feed-components/line-feed.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
     AssessmentComponent,
     PasswordComponent,
     RoleChangeComponent,
-    AssessmentsAssignedComponent
+    AssessmentsAssignedComponent,
+    LineFeedComponent
   ],
   imports: [
     BrowserModule,
