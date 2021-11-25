@@ -48,6 +48,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
+import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { TeamViewComponent } from './components/teams/team-view/team-view.compon
     PasswordComponent,
     RoleChangeComponent,
     AssessmentsAssignedComponent,
-    TeamViewComponent
+    TeamViewComponent,
+    TeamDeleteComponent
   ],
   imports: [
     BrowserModule,
