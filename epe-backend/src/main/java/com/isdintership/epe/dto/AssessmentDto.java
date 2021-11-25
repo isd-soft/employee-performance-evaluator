@@ -32,6 +32,7 @@ public class AssessmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
     private String userId;
+    private String startedById;
 
     private List<EvaluationGroupDto> evaluationGroupDtos;
     private List<PersonalGoalDto> personalGoalDtos;

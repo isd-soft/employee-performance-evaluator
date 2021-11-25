@@ -90,7 +90,7 @@ export class HomeComponent {
           enableHtml: true
          })
         this.errorMessage = error.error.title;
-        console.log(this.errorMessage);
+        // console.log(this.errorMessage);
       })
     }
   }
@@ -102,8 +102,8 @@ export class HomeComponent {
       let datePipe = new DatePipe('en-US');
       this.registerUser.birthDate = datePipe.transform(this.registerUser.birthDate, 'dd-MM-yyyy') as string,
       this.registerUser.employmentDate = datePipe.transform(this.registerUser.employmentDate, 'dd-MM-yyyy') as string,
-  
-  
+
+
       this.homeService.register(this.registerUser).subscribe(data => {
       }, error => {
          if(error.status == 200) {

@@ -27,8 +27,7 @@ export class RoleChangeComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public userId : any,
-    private jwtService: JwtService,
-              private roleService: RoleService) {
+    private jwtService: JwtService, private roleService: RoleService) {
     this.roleService.getUserData(userId).subscribe(data =>
       this.user = data as User);
     this.roleService.getJobList().subscribe(data =>
@@ -36,7 +35,7 @@ export class RoleChangeComponent implements OnInit {
     this.role = this.roleService.getRole();
     this.roleService.getRoles().subscribe(data => {
       this.roles = data as string[]});
-    console.log(this.userId);
+    // console.log(this.userId);
   }
 
   url = "";

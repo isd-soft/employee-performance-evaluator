@@ -60,7 +60,53 @@
 
   </mat-tab>
   <mat-tab label="Assigned assessments">
-
   </mat-tab>
-  <mat-tab label="Assigned users">Content 3</mat-tab>
+
+  <mat-tab label="History">
+    <mat-form-field appearance="standard" class="filter-field">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter2($event)" placeholder="Ex. Assessment title" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8 table">
+      <table mat-table [dataSource]="dataSourceInformation" matSort>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="assessmentTitle">
+          <th mat-header-cell class="title-column" *matHeaderCellDef mat-sort-header> Assessment Title </th>
+          <td mat-cell class="title-column" *matCellDef="let row"> {{row.assessmentTitle}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="performedAction">
+          <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell class="title-position" *matCellDef="let row"> {{row.performedAction}} </td>
+        </ng-container>
+
+        <!-- Start date Column-->
+        <ng-container matColumnDef="performedTime">
+          <th mat-header-cell class="start-date-column" *matHeaderCellDef mat-sort-header> Date  </th>
+          <td mat-cell class="start-date-column" *matCellDef="let row"> {{row.performedTime | date: 'd:MMM:y, hh:mm:ss'}} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="performedOnUser">
+          <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Performed On </th>
+          <td mat-cell class="title-position" *matCellDef="let row"> {{row.performedOnUser}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="performedByUser">
+          <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Performed By </th>
+          <td mat-cell class="title-position" *matCellDef="let row"> {{row.performedByUser}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="columnAssessmentInformation"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnAssessmentInformation;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+  </mat-tab>
 </mat-tab-group>

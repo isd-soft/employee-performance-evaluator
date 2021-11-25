@@ -25,6 +25,7 @@ public class AssessmentTemplateDto {
     private LocalDateTime creationDate;
     @JsonProperty("evaluationGroups")
     private List<EvaluationGroupDto> evaluationGroupDto;
+    private String createdUserById;
 
     public AssessmentTemplateDto() {
     }

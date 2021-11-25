@@ -27,19 +27,22 @@ class AssessmentServiceImpl implements AssessmentService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
     private final EmailServiceImpl emailService;
+    private final AssessmentInformationRepository assessmentInformationRepository;
 
     @Override
     @Transactional
     public AssessmentDto startAssessment(String userId, AssessmentTemplateDto assessmentTemplateDto) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with id " + userId + " was not found"));
+        System.out.println(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " was not found"));
 
         String assessmentTemplateId = assessmentTemplateDto.getId();
 
-        Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(assessmentTemplateId, true)
-               .orElseThrow(() ->
-                new AssessmentTemplateNotFoundException ("Assessment template with id " + assessmentTemplateId + " was not found"));
+        Assessment assessmentTemplate = assessmentRepository.
+                findByIdAndIsTemplate(assessmentTemplateId, true)
+               .orElseThrow(() -> new AssessmentTemplateNotFoundException
+                       ("Assessment template with id " + assessmentTemplateId + " was not found"));
 
         Optional<Assessment> existingAssessment = assessmentRepository.findByUserAndStatusIn
         (user, List.of(StatusEnum.FIRST_PHASE, StatusEnum.SECOND_PHASE));
@@ -59,7 +62,6 @@ class AssessmentServiceImpl implements AssessmentService {
         Assessment assessment = new Assessment();
 
         assessment.setUser(user);
-
         assessment.setTitle(assessmentTemplate.getTitle());
         assessment.setDescription(assessmentTemplate.getDescription());
         assessment.setJob(assessmentTemplate.getJob());
@@ -92,7 +94,17 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessmentRepository.save(assessment);
 
-//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setPerformedAction("Started Assessment");
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
+                .orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(creationUser);
+        assessmentInformation.setPerformedTime(assessment.getStartDate());
+        assessmentInformationRepository.save(assessmentInformation);
 
         return AssessmentDto.fromAssessment(assessment);
     }
@@ -177,6 +189,8 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto) {
+        //TODO add information about update in assessments_information table
+
         Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
                 new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
 

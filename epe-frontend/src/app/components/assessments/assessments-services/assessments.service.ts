@@ -25,4 +25,9 @@ export class AssessmentsService {
   errorHandler(error: HttpErrorResponse){
     return observableThrowError(error);
   }
+
+  getAssessmentInformation(){
+    return this.http.get("api-server/api/assessments-information");
+  }
+
 }
