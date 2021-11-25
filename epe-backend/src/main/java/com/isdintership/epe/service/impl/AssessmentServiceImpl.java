@@ -310,15 +310,15 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessment.getEvaluationGroups().clear();
 
-        if (assessmentDto.getEvaluationGroupDtos() != null) {
-            for (EvaluationGroupDto evaluationGroupDto  : assessmentDto.getEvaluationGroupDtos()) {
+        if (assessmentDto.getEvaluationGroups() != null) {
+            for (EvaluationGroupDto evaluationGroupDto  : assessmentDto.getEvaluationGroups()) {
 
                 EvaluationGroup group = new EvaluationGroup();
                 group.setAssessment(assessment);
                 group.setTitle(evaluationGroupDto.getTitle());
                 group.setOverallScore(evaluationGroupDto.getOverallScore());
 
-                for (EvaluationFieldDto evaluationFieldDto : evaluationGroupDto.getEvaluationFieldDtos()) {
+                for (EvaluationFieldDto evaluationFieldDto : evaluationGroupDto.getEvaluationFields()) {
 
                     EvaluationField field = new EvaluationField();
 
@@ -339,8 +339,8 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessment.getPersonalGoals().clear();
 
-        if (assessmentDto.getPersonalGoalDtos() != null) {
-            for (PersonalGoalDto personalGoalDto : assessmentDto.getPersonalGoalDtos()) {
+        if (assessmentDto.getPersonalGoals() != null) {
+            for (PersonalGoalDto personalGoalDto : assessmentDto.getPersonalGoals()) {
 
                 PersonalGoal personalGoal = new PersonalGoal();
 
@@ -359,8 +359,8 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessment.getDepartmentGoals().clear();
 
-        if (assessmentDto.getDepartmentGoalDtos() != null) {
-            for (DepartmentGoalDto departmentGoalDto : assessmentDto.getDepartmentGoalDtos()) {
+        if (assessmentDto.getDepartmentGoals() != null) {
+            for (DepartmentGoalDto departmentGoalDto : assessmentDto.getDepartmentGoals()) {
 
                 DepartmentGoal departmentGoal = new DepartmentGoal();
 
