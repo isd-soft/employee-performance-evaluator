@@ -1,9 +1,9 @@
+import { TeamView } from './../teams-model/team-view.interface';
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from "@angular/material/dialog";
-import { TeamView } from '../teams-model/team-view.interface';
 import { TeamsService } from '../teams-service/teams.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { FormControl, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { UserView } from '../teams-model/user-view.interface';
 import { UserService } from '../user-service/user.service';
 import { CreateTeamRequest } from '../teams-model/create-team-request.interface';
 import { TeamEditComponent } from '../team-edit/team-edit.component';
+import { TeamViewComponent } from '../team-view/team-view.component';
 
 @Component({
   selector: 'app-teams',
@@ -100,7 +101,7 @@ export class TeamsComponent {
   }
 
   onView(id: string) {
-    this.dialog.open( TeamEditComponent, {data: id} );
+    this.dialog.open( TeamViewComponent, {data: id} );
   }
 
   // edit(user : string) {
