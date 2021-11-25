@@ -46,8 +46,8 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Job position</mat-label>
-    <mat-select [compareWith]="compareFunction" required formControlName="job">
-      <mat-option *ngFor="let jobItem of jobList" value="{{ auxUser?.job }}">
+    <mat-select  required value="auxUser.job" formControlName="job">
+      <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">
         {{ jobItem.jobTitle }}
       </mat-option>
     </mat-select>

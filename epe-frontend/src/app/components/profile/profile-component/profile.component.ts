@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {EditComponent} from "../../edit/edit-component/edit.component";
 import {PasswordComponent} from "../../password/password-component/password.component";
+import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   edit() {
-    this.dialog.open(EditComponent,{height:'100%'})
+    this.dialog.open(RoleChangeComponent,{height:'100%',data:this.myProfile})
   }
 
   changePassword() {

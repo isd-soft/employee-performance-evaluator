@@ -88,14 +88,6 @@ export class RoleChangeComponent implements OnInit {
     return result;
   }
 
-  compareFunction(o1: any) {
-    return (o1.job == this.user?.job && o1.id == this.user?.id);
-  }
-
-  secondCompareFunction(o1: any) {
-    return (o1.role == this.user?.role && o1.id == this.user?.id);
-  }
-
 
   update() {
     // @ts-ignore

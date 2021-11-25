@@ -5,6 +5,17 @@
   max-height: 100%;
 }
 
+.centralizer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-card{
+  width: 80%;
+}
+
+
 .example-container {
   position: absolute;
   top: 0;
