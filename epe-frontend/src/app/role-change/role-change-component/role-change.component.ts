@@ -31,8 +31,6 @@ export class RoleChangeComponent implements OnInit {
   requiredRole: string = "ROLE_SYSADMIN";
   currentRole?: string;
 
-  selectedJob : string
-
   currentUserId?: string
 
   jwtUser?: JwtUser;
@@ -57,8 +55,6 @@ export class RoleChangeComponent implements OnInit {
       bio: [this.user?.bio],
       role: [this.user?.role]
     });
-
-    this.selectedJob = this.user.job;
 
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser) {
