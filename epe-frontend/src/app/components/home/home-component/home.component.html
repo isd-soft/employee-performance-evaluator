@@ -7,26 +7,25 @@
             <form>
                 <mat-form-field class="login-input" appearance="fill">
                   <mat-label>Email</mat-label>
-                  <input 
-                    type="email" 
-                    matInput 
-                    [formControl]="loginEmailFormControl" 
+                  <input
+                    type="email"
+                    matInput
+                    [formControl]="loginEmailFormControl"
                     placeholder="Ex. user@me.com"
                     [(ngModel)]="loginUser.email">
                   <mat-error *ngIf="loginEmailFormControl.hasError('email') && !loginEmailFormControl.hasError('required')">
                     Please enter a valid email address
                   </mat-error>
-                  <mat-error 
+                  <mat-error
                     *ngIf="loginEmailFormControl.hasError('required')">
                     Email is required
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field class="login-input" appearance="fill">
                     <mat-label>Enter your password</mat-label>
-                    <input 
-                        matInput type="password" 
-                        matInput 
-                        [formControl]="loginPasswordFormControl" 
+                    <input
+                        matInput type="password"
+                        [formControl]="loginPasswordFormControl"
                         placeholder="Ex. password"
                         [(ngModel)]="loginUser.password">
                     <mat-error *ngIf="loginPasswordFormControl.hasError('required')">
@@ -54,16 +53,16 @@
         <form>
             <mat-form-field class="register-input" appearance="fill">
               <mat-label>Email</mat-label>
-              <input 
-                type="email" 
-                matInput 
-                [formControl]="emailFormControl" 
+              <input
+                type="email"
+                matInput
+                [formControl]="emailFormControl"
                 placeholder="Ex. user@me.com"
                 [(ngModel)]="registerUser.email">
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Please enter a valid email address
               </mat-error>
-              <mat-error 
+              <mat-error
                 *ngIf="emailFormControl.hasError('required')">
                 Email is required
               </mat-error>
@@ -71,13 +70,13 @@
 
             <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Firstname</mat-label>
-                <input 
-                  type="text" 
-                  matInput 
-                  [formControl]="firstnameFormControl" 
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="firstnameFormControl"
                   placeholder="Ex. John"
                   [(ngModel)]="registerUser.firstname">
-                <mat-error 
+                <mat-error
                   *ngIf="firstnameFormControl.hasError('required')">
                   Firstname is required
                 </mat-error>
@@ -85,13 +84,13 @@
 
             <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Lastname</mat-label>
-                <input 
-                  type="text" 
-                  matInput 
-                  [formControl]="lastnameFormControl" 
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="lastnameFormControl"
                   placeholder="Ex. Doe"
                   [(ngModel)]="registerUser.lastname">
-                <mat-error 
+                <mat-error
                   *ngIf="lastnameFormControl.hasError('required')">
                   Lastname is required
                 </mat-error>
@@ -99,13 +98,13 @@
 
             <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Birthdate</mat-label>
-                <input 
-                  type="date" 
-                  matInput 
-                  [formControl]="birthdateFormControl" 
+                <input
+                  type="date"
+                  matInput
+                  [formControl]="birthdateFormControl"
                   placeholder="Ex. 01-01-1970"
                   [(ngModel)]="registerUser.birthDate">
-                <mat-error 
+                <mat-error
                   *ngIf="birthdateFormControl.hasError('required')">
                   Birthdate is required
                 </mat-error>
@@ -113,13 +112,13 @@
 
             <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Phone Number</mat-label>
-                <input 
-                  type="text" 
-                  matInput 
-                  [formControl]="phoneFormControl" 
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="phoneFormControl"
                   placeholder="Ex. 022123456"
                   [(ngModel)]="registerUser.phoneNumber">
-                <mat-error 
+                <mat-error
                   *ngIf="phoneFormControl.hasError('required')">
                   Phone number is required
                 </mat-error>
@@ -137,13 +136,13 @@
 
             <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Employment date</mat-label>
-                <input 
-                  type="date" 
-                  matInput 
-                  [formControl]="employmentdateFormControl" 
+                <input
+                  type="date"
+                  matInput
+                  [formControl]="employmentdateFormControl"
                   placeholder="Ex. 01-01-2020"
                   [(ngModel)]="registerUser.employmentDate">
-                <mat-error 
+                <mat-error
                   *ngIf="employmentdateFormControl.hasError('required')">
                   Employment date is required
                 </mat-error>
@@ -151,10 +150,10 @@
 
             <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Enter your password</mat-label>
-                <input 
-                    matInput type="password" 
-                    matInput 
-                    [formControl]="passwordFormControl" 
+                <input
+                    matInput type="password"
+                    matInput
+                    [formControl]="passwordFormControl"
                     placeholder="Ex. password"
                     [(ngModel)]="registerUser.password">
                 <mat-error *ngIf="passwordFormControl.hasError('required')">
@@ -164,10 +163,10 @@
 
               <mat-form-field class="register-input" appearance="fill">
                 <mat-label>Confirm your password</mat-label>
-                <input 
-                    matInput type="password" 
-                    matInput 
-                    [formControl]="confirmPasswordFormControl" 
+                <input
+                    matInput type="password"
+                    matInput
+                    [formControl]="confirmPasswordFormControl"
                     placeholder="Ex. password"
                     [(ngModel)]="confirmPassword">
                 <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">

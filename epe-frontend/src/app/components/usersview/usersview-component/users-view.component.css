@@ -13,6 +13,13 @@
   font-size: 15px;
 }
 
+.centralize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5%;
+}
+
 .mat-tab-label{
   font-size: 18px;
   font-weight: 600;
@@ -38,3 +45,4 @@ table {
 mat-paginator {
   padding-bottom: 15px;
 }
+

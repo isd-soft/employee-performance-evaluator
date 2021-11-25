@@ -12,6 +12,7 @@ import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import { Router } from '@angular/router';
 import {AssessmentTemplate} from "../userview-models/Assessment-template"
 import {AssessmentComponent} from "../../assessment/assessment-component/assessment.component";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-usersview',
@@ -30,6 +31,9 @@ export class UsersView implements AfterViewInit {
   assignedUsers?: User[]
   role?: string;
   requiredRole : string = "ROLE_SYSADMIN";
+
+  newUser?: FormGroup;
+
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -79,7 +83,7 @@ export class UsersView implements AfterViewInit {
   }
 
   edit(userId : number) {
-    this.dialog.open(RoleChangeComponent, {width: '40%', data : this.users[userId]});
+    this.dialog.open(RoleChangeComponent, {width: '45%', data : this.users[userId]});
     this.dialog.afterAllClosed;
   }
 

@@ -12,8 +12,6 @@ export class PasswordComponent implements OnInit {
 
   passwordDto? : PasswordTemplate;
 
-  errorMessage? : string;
-
   password? : FormGroup;
 
   // @ts-ignore

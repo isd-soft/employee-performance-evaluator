@@ -1,7 +1,7 @@
 <mat-dialog-content class="edit-container">
 
-<form action="" [formGroup]="auxUser">
-  <div class="centralize">
+<form action="" [formGroup]="auxUser" style="padding-right: 3%">
+  <div>
     <mat-label>Old image</mat-label><br>
     <img src="data:image/png;base64,{{user?.image}}" height="200">
   </div>
@@ -83,7 +83,7 @@
           type="button"
           [mat-dialog-close]="true"
           class="">
-    Cancel
+    cancel
   </button>
 </div>
 </form>
