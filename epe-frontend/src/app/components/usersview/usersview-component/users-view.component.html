@@ -154,11 +154,9 @@
       <mat-form-field appearance="fill">
         <mat-label>Job position</mat-label>
         <mat-select  required value="user.job" formControlName="job">
-<!--          <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">-->
-<!--            {{ jobItem.jobTitle }}-->
-<!--          </mat-option>-->
-              <mat-option>1</mat-option>
-              <mat-option>2</mat-option>
+          <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">
+            {{ jobItem.jobTitle }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 

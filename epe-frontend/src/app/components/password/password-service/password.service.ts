@@ -7,6 +7,7 @@ import {catchError} from "rxjs/operators";
 import {throwError as observableThrowError} from "rxjs/internal/observable/throwError";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({providedIn : 'root'})
 export class PasswordService {
@@ -19,7 +20,8 @@ export class PasswordService {
   constructor(private http: HttpClient,
               private jwtService: JwtService,
               private notificationService: ToastrService,
-              private router: Router) {
+              private router: Router,
+              private dialogRef: MatDialog) {
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser)
       this.id = this.jwtUser.id;
@@ -27,6 +29,7 @@ export class PasswordService {
 
   changePassword(passwordDto: PasswordTemplate) {
     return this.http.put(this.url + '/password/' + this.id,passwordDto).subscribe( response => {
+      this.closeDialogs();
       this.reload();
       this.notificationService.success('Password was updated successfully',
         '', {
@@ -60,7 +63,11 @@ export class PasswordService {
   reload() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/my-profile']);
+  }
+
+  closeDialogs() {
+    this.dialogRef.closeAll();
   }
 
   errorHandler(error: HttpErrorResponse){

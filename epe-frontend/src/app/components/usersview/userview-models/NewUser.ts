@@ -3,6 +3,7 @@ export interface NewUser {
   firstname: string;
   lastname: string;
   birthDate: string;
+  job: string;
   employmentDate: string;
   phoneNumber: string;
   password: string;

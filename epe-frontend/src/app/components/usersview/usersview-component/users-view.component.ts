@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
 import {AssessmentTemplate} from "../userview-models/Assessment-template"
 import {AssessmentComponent} from "../../assessment/assessment-component/assessment.component";
 import {FormGroup} from "@angular/forms";
+import {NewUser} from "../userview-models/NewUser";
+
+import {RoleService} from "../../../role-change/role-change-service/role.service";
+import {JobItem} from "../../home/home-models/job-item.interface";
+import {Role} from "../../../role-change/role-change-model/role.interface";
 
 @Component({
   selector: 'app-usersview',
@@ -34,6 +39,9 @@ export class UsersView implements AfterViewInit {
 
   newUser?: FormGroup;
 
+  userDto?: NewUser;
+
+  jobList?: JobItem[];
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,10 +49,26 @@ export class UsersView implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-
-  constructor(private userviewsServices: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
+  constructor(private userviewsServices: UserviewsServices,
+              public dialog: MatDialog,
+              private jwtService: JwtService,
+              private roleService: RoleService){
     this.jwtUser = jwtService.getJwtUser();
     this.role = this.userviewsServices.getRole();
+
+
+    // @ts-ignore
+    this.userDto = {
+      email: '',
+      firstname: '',
+      lastname: '',
+      birthDate: '',
+      job : '',
+      employmentDate: '',
+      phoneNumber: '',
+      password: '1234321',
+      bio: 'new user'
+    }
 
   }
 
@@ -75,6 +99,9 @@ export class UsersView implements AfterViewInit {
       this.dataSource.sort = this.sort;
     });
 
+    this.roleService.getJobList().subscribe(data =>
+      this.jobList = data as JobItem[]
+    );
 
   }
 
