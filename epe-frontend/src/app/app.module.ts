@@ -50,6 +50,7 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
 import { AssessmentsViewComponent } from './components/assessments/assessments-view/assessments-view.component';
 import { AssessmentsEvaluationComponent } from './components/assessments/assessments-evaluation/assessments-evaluation.component';
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
+import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,8 @@ import { TeamViewComponent } from './components/teams/team-view/team-view.compon
     PasswordComponent,
     RoleChangeComponent,
     AssessmentsAssignedComponent,
+    TeamViewComponent,
+    TeamDeleteComponent,
     AssessmentsViewComponent,
     AssessmentsEvaluationComponent,
     TeamViewComponent
