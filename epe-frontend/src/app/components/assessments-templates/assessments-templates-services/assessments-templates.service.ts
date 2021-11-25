@@ -51,10 +51,10 @@ export class AssessmentsTemplatesService {
             message = "Bad request. " + error.error.title;
             break;
           case 401:
-            message = "Unauthorized"
+            message = "Unauthorized. " + error.error.title;
             break;
           default:
-            message = "Unknown error"
+            message = "Error! " + error.message;
         }
           this.notificationService.error(message,
             '', {
@@ -84,10 +84,10 @@ export class AssessmentsTemplatesService {
             message = "Bad request. " + error.error.title;
             break;
           case 401:
-            message = "Unauthorized"
+            message = "Unauthorized. " + error.error.title;
             break;
           default:
-            message = "Unknown error"
+            message = "Error! " + error.message;
         }
         this.notificationService.error(message,
           '', {
@@ -117,7 +117,7 @@ export class AssessmentsTemplatesService {
             message = "Bad request. " + error.error.title;
             break;
           case 401:
-            message = "Unauthorized";
+            message = "Unauthorized. " + error.error.title;
             break;
           default:
             message = "Error! " + error.message;

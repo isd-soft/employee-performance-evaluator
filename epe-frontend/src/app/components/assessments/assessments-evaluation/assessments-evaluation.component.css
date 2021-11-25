@@ -1,0 +1,192 @@
+mat-card, .mat-card-content {
+  font-size: 15px;
+}
+
+.mat-card-title {
+  font-size: 24px;
+}
+
+.mat-card-subtitle {
+  font-size: 18px;
+}
+
+.header {
+  padding: 15px;
+  text-align: center;
+  font-family: 'Trocchi', serif;
+  font-weight: bolder;
+  font-size: 25px;
+  border: 1px solid #000;
+  margin: auto;
+}
+
+.bold {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mat-card-title, .mat-card-subtitle {
+  text-align: center;
+}
+
+.evaluation-groups-title {
+  margin: 2% 0;
+}
+
+.evaluation-groups {
+  padding-left: 3%;
+}
+
+.evaluation-group, .evaluation-group-comments {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+.evaluation-group {
+  width: 30%;
+}
+
+.evaluation-fields {
+  margin-left: 4%;
+}
+
+.mat-card-actions {
+  text-align: center;
+}
+
+.mat-button {
+  font-size: 16px;
+}
+
+.mat-raised-button {
+  font-size: 16px;
+}
+
+#column-content {
+  display: inline-block;
+}
+
+.evaluation-field-title {
+  display: inline-block;
+  vertical-align: middle;
+  width: 27.5%;
+}
+
+.evaluation-field-comment {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.evaluation-field-score {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 1%;
+}
+
+.smart-goals-header {
+  margin-bottom: 3.5%;
+}
+
+.abbreviation {
+  position: relative;
+  display: inline-block;
+  padding-left: 1.25%;
+  margin-right: 2%;
+  z-index: 2;
+  cursor: pointer;
+  width: 5%;
+}
+
+.abbreviation-s {
+  padding-left: 1.5%;
+}
+
+.goal-capital-letter {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width: 85%;
+}
+
+.smart-goal-field {
+  width: 95%;
+}
+
+.smart-goal-input-t {
+  margin-bottom: 50px;
+}
+
+.add-group-button {
+  margin: 0 0 30px 2%;
+}
+
+.remove-button {
+  margin-left: 1.5%;
+}
+
+.raise:hover,
+.raise:focus {
+  transition-duration: 0.4s;
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+.smart-goal-input {
+  display: inline-block;
+  width: 93%;
+}
+
+.minor-text {
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 3%;
+  font-size: 14px;
+  color: gray;
+}
+
+.letter-meaning {
+  position: absolute;
+  background: rgb(224, 224, 224);
+  border-radius: 10px;
+  padding: 8px;
+  width: 470px;
+  height: 40px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  font-size: 15px;
+  top: -50px;
+  right: -450px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.abbreviation:hover .letter-meaning {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.feedback-input-field {
+
+  margin-left: 5%;
+  width: 90.5%;
+
+}
+
+mat-form-field, mat-form-field label {
+  font-size: 15px;
+}
+
+.submit-button {
+  margin: 3% 0;
+}

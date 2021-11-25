@@ -7,13 +7,7 @@ import com.isdintership.epe.entity.StatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.isdintership.epe.entity.EvaluationGroup;
-import com.isdintership.epe.entity.StatusEnum;
-import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +17,7 @@ public class AssessmentDto {
     private String id;
     private String title;
     private String description;
-    private String jobPosition;
+    private String jobTitle;
     private Float overallScore;
     private StatusEnum status;
     private Boolean isTemplate;
@@ -33,10 +27,10 @@ public class AssessmentDto {
     private LocalDateTime endDate;
     private String userId;
 
-    private List<EvaluationGroupDto> evaluationGroupDtos;
-    private List<PersonalGoalDto> personalGoalDtos;
-    private List<DepartmentGoalDto> departmentGoalDtos;
-    private List<FeedbackDto> feedbackDtos;
+    private List<EvaluationGroupDto> evaluationGroups;
+    private List<PersonalGoalDto> personalGoals;
+    private List<DepartmentGoalDto> departmentGoals;
+    private List<FeedbackDto> feedbacks;
 
     public AssessmentDto() {
     }
@@ -49,7 +43,7 @@ public class AssessmentDto {
         assessmentDto.setId(assessment.getId());
         assessmentDto.setTitle(assessment.getTitle());
         assessmentDto.setDescription(assessment.getDescription());
-        assessmentDto.setJobPosition(assessment.getJob().getJobTitle());
+        assessmentDto.setJobTitle(assessment.getJob().getJobTitle());
         assessmentDto.setOverallScore(assessment.getOverallScore());
         assessmentDto.setStatus(assessment.getStatus());
         assessmentDto.setIsTemplate(assessment.getIsTemplate());
@@ -60,22 +54,22 @@ public class AssessmentDto {
         List<EvaluationGroupDto> evaluationGroupDtos = new ArrayList<>();
         assessment.getEvaluationGroups()
                   .forEach(group -> evaluationGroupDtos.add(EvaluationGroupDto.fromEvaluationGroup(group)));
-        assessmentDto.setEvaluationGroupDtos(evaluationGroupDtos);
+        assessmentDto.setEvaluationGroups(evaluationGroupDtos);
 
         List<PersonalGoalDto> personalGoalDtos = new ArrayList<>();
         assessment.getPersonalGoals()
                 .forEach(goal -> personalGoalDtos.add(PersonalGoalDto.fromPersonalGoal(goal)));
-        assessmentDto.setPersonalGoalDtos(personalGoalDtos);
+        assessmentDto.setPersonalGoals(personalGoalDtos);
 
         List<DepartmentGoalDto> departmentGoalDtos = new ArrayList<>();
         assessment.getDepartmentGoals()
                 .forEach(goal -> departmentGoalDtos.add(DepartmentGoalDto.fromDepartmentGoal(goal)));
-        assessmentDto.setDepartmentGoalDtos(departmentGoalDtos);
+        assessmentDto.setDepartmentGoals(departmentGoalDtos);
 
         List<FeedbackDto> feedbackDtos = new ArrayList<>();
         assessment.getFeedbacks()
                 .forEach(feedback -> feedbackDtos.add(FeedbackDto.fromFeedback(feedback)));
-        assessmentDto.setFeedbackDtos(feedbackDtos);
+        assessmentDto.setFeedbacks(feedbackDtos);
 
         return assessmentDto;
     }

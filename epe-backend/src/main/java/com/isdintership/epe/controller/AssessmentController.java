@@ -83,6 +83,17 @@ public class AssessmentController {
 
     }
 
+    @PutMapping("users/{userId}/assessments/{assessmentId}")
+    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    public ResponseEntity<AssessmentDto> evaluateAssessment
+            (@PathVariable(name = "userId") String userId,
+             @PathVariable(name = "assessmentId") String assessmentId,
+             @RequestBody AssessmentDto assessmentDto) {
+
+        return new ResponseEntity<>(assessmentService.evaluateAssessment
+                (userId, assessmentId, assessmentDto), HttpStatus.OK);
+    }
+
     @DeleteMapping("assessments/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
     public ResponseEntity<AssessmentDto> deleteAssessment (@PathVariable(name = "id") String id) {

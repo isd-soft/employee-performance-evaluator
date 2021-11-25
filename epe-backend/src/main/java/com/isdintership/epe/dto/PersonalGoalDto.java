@@ -10,7 +10,11 @@ public class PersonalGoalDto {
 
     @NotNull
     private String id;
-    private String context;
+    private String goalSPart;
+    private String goalMPart;
+    private String goalAPart;
+    private String goalRPart;
+    private String goalTPart;
     private String assessmentId;
 
     public static PersonalGoalDto fromPersonalGoal(PersonalGoal goal) {
@@ -18,7 +22,11 @@ public class PersonalGoalDto {
         PersonalGoalDto goalDto = new PersonalGoalDto();
 
         goalDto.setId(goal.getId());
-        goalDto.setContext(goal.getContext());
+        goalDto.setGoalSPart(goal.getGoalSPart());
+        goalDto.setGoalMPart(goal.getGoalMPart());
+        goalDto.setGoalAPart(goal.getGoalAPart());
+        goalDto.setGoalRPart(goal.getGoalRPart());
+        goalDto.setGoalTPart(goal.getGoalTPart());
         goalDto.setAssessmentId(goal.getAssessment().getId());
 
         return goalDto;

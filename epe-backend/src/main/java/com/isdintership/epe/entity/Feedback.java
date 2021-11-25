@@ -14,8 +14,10 @@ public class Feedback extends BaseEntity {
     @Column(name = "author_id", nullable = false)
     private String authorId;
 
+    @Column(name = "author_full_name", nullable = false)
+    private String authorFullName;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 
     @Column(name = "context", nullable = false)
@@ -34,8 +36,9 @@ public class Feedback extends BaseEntity {
     public Feedback() {
     }
 
-    public Feedback(String authorId, Assessment assessment, String context) {
+    public Feedback(String authorId, String authorFullName, Assessment assessment, String context) {
         this.authorId = authorId;
+        this.authorFullName = authorFullName;
         this.assessment = assessment;
         this.context = context;
     }
