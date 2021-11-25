@@ -37,11 +37,17 @@ export class RoleService {
     this.currentUrl = this.router.url;
   }
 
-  updateUser(user: User | undefined,userId : string | undefined) {
+  updateUser(user: User | undefined,userId : string | undefined,currentUserId: string | undefined) {
     console.log(user);
+    let currentUrl : string;
+    if (userId == currentUserId) {
+      currentUrl = '/my-profile';
+    } else {
+      currentUrl = "/usersview"
+    }
     return this.http.put(this.url2 + '/' + userId, user).subscribe( response => {
       this.closeDialogs();
-      this.reload();
+      this.reload(currentUrl);
       this.notificationService.success('User was edited successfully',
         '', {
           timeOut: 3000,
@@ -72,10 +78,10 @@ export class RoleService {
   }
 
 
-  reload() {
+  reload(currentUrl : string | undefined) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([this.currentUrl]);
+    this.router.navigate([currentUrl]);
     console.log(this.currentUrl);
   }
 

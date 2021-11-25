@@ -62,7 +62,7 @@
     <input matInput required [value]="user?.bio" formControlName="bio">
   </mat-form-field>
 
-  <div *ngIf="currentUserId != user.id">
+  <div *ngIf="currentRole == requiredRole && currentUserId != user.id">
     <mat-form-field appearance="fill">
       <mat-label>Role</mat-label>
       <mat-select value="user.role" required formControlName="role">

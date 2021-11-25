@@ -27,7 +27,9 @@ export class RoleChangeComponent implements OnInit {
 
   roles?: string[];
   role? : string;
-  requiredRole : string = "ROLE_SYSADMIN";
+
+  requiredRole: string = "ROLE_SYSADMIN";
+  currentRole?: string;
 
   selectedJob : string
 
@@ -59,8 +61,10 @@ export class RoleChangeComponent implements OnInit {
     this.selectedJob = this.user.job;
 
     this.jwtUser = this.jwtService.getJwtUser();
-    if(this.jwtUser)
+    if(this.jwtUser) {
       this.currentUserId = this.jwtUser.id;
+      this.currentRole = this.jwtUser.role;
+    }
 
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
@@ -102,7 +106,7 @@ export class RoleChangeComponent implements OnInit {
   update() {
     // @ts-ignore
     this.auxUser?.value.image = this.base64Output;
-    this.roleService.updateUser(this.auxUser?.value, this.user.id);
+    this.roleService.updateUser(this.auxUser?.value, this.user.id, this.currentUserId);
   }
 
   ngOnInit(): void {
