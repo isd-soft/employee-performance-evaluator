@@ -7,6 +7,7 @@ import {throwError as observableThrowError} from "rxjs/internal/observable/throw
 import {User} from "../../components/edit/edit-models/user.interface";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({providedIn: 'root'})
 export class RoleService {
@@ -21,19 +22,25 @@ export class RoleService {
 
   role? : string;
 
+  currentUrl?: string;
+
+
   constructor(private http: HttpClient,
               private jwtService: JwtService,
               private notificationService: ToastrService,
+              private dialogRef : MatDialog,
               private router: Router) {
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser)
       this.id = this.jwtUser.id;
     this.role = this.jwtUser?.role;
+    this.currentUrl = this.router.url;
   }
 
   updateUser(user: User | undefined,userId : string | undefined) {
     console.log(user);
     return this.http.put(this.url2 + '/' + userId, user).subscribe( response => {
+      this.closeDialogs();
       this.reload();
       this.notificationService.success('User was edited successfully',
         '', {
@@ -64,11 +71,14 @@ export class RoleService {
 
   }
 
+
   reload() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/usersview']);
+    this.router.navigate([this.currentUrl]);
+    console.log(this.currentUrl);
   }
+
 
   getUser() {
     return this.http.get(this.url2 + '/' + this.id)
@@ -79,6 +89,9 @@ export class RoleService {
     return this.role;
   }
 
+  closeDialogs() {
+    this.dialogRef.closeAll();
+  }
 
   getJobList() {
     return this.http.get(this.url + 'jobs')

@@ -8,6 +8,7 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {JobItem} from "../../components/edit/edit-models/job-item.interface";
 import {User} from "../../components/edit/edit-models/user.interface";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {JwtUser} from "../../decoder/decoder-model/jwt-user.interface";
 
 @Component({
   selector: 'app-role-change',
@@ -32,6 +33,9 @@ export class RoleChangeComponent implements OnInit {
 
   currentUserId?: string
 
+  jwtUser?: JwtUser;
+
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : any,
     private jwtService: JwtService,
@@ -53,6 +57,10 @@ export class RoleChangeComponent implements OnInit {
     });
 
     this.selectedJob = this.user.job;
+
+    this.jwtUser = this.jwtService.getJwtUser();
+    if(this.jwtUser)
+      this.currentUserId = this.jwtUser.id;
 
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);

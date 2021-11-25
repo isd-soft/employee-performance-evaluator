@@ -1,8 +1,10 @@
-<mat-label>Old image</mat-label>
-<img src="data:image/png;base64,{{user?.image}}" height="200">
+<mat-dialog-content class="edit-container">
 
 <form action="" [formGroup]="auxUser">
-
+  <div class="centralize">
+    <mat-label>Old image</mat-label><br>
+    <img src="data:image/png;base64,{{user?.image}}" height="200">
+  </div>
 
   <mat-form-field>
     <input type="file" name="fileUpload" accept="image/*" (change)="selectFile($event)" />
@@ -60,7 +62,7 @@
     <input matInput required [value]="user?.bio" formControlName="bio">
   </mat-form-field>
 
-  <div *ngIf="">
+  <div *ngIf="currentUserId != user.id">
     <mat-form-field appearance="fill">
       <mat-label>Role</mat-label>
       <mat-select value="user.role" required formControlName="role">
@@ -70,12 +72,19 @@
       </mat-select>
     </mat-form-field>
   </div>
-
+<div class="centralize">
+  <button mat-button
+          type="button"
+          (click)="update()"
+          class="">
+    Submit
+  </button>
   <button mat-button
           type="button"
           [mat-dialog-close]="true"
-          (click)="update()"
-          class="submit-button raise">
-    Submit
+          class="">
+    Cancel
   </button>
+</div>
 </form>
+</mat-dialog-content>

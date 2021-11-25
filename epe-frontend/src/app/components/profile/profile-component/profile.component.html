@@ -1,5 +1,5 @@
 <div class="col-md-10 col-sm-11 display-table-cell v-align centralizer" style="padding-top: 75px">
-  <mat-card class="example-card" style="margin-left: 30%; margin-right: 25%; background-color: white; min-width: 150%" >
+  <mat-card class="example-card" style="margin-left: 35%; margin-right: 25%; background-color: white; min-width: 230%" >
     <mat-card-header>
       <img mat-card-avatar style="font-size: 40px" src="data:image/png;base64,{{myProfile?.image}}"/>
       <mat-card-title>{{myProfile?.firstname + ' ' + myProfile?.lastname}}</mat-card-title>
@@ -45,7 +45,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <div style="align-items: center; justify-content: center; display: flex; margin-top: 20px">
+      <div style="align-items: center; justify-content: center; display: flex; margin-top: 20px; margin-bottom: 20px;">
         <button (click)="edit()" style="margin-right: 8px" mat-raised-button><mat-icon>edit</mat-icon> Edit profile </button>
         <button (click)="changePassword()" style="margin-left: 8px" mat-raised-button><mat-icon>key</mat-icon> Change password </button>
       </div>

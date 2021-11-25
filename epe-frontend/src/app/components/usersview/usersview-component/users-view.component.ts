@@ -66,7 +66,7 @@ export class UsersView implements AfterViewInit {
   }
 
   edit(userId : number) {
-    this.dialog.open(RoleChangeComponent, { height:'100%', data : this.users[userId]});
+    this.dialog.open(RoleChangeComponent, {width: '40%', data : this.users[userId]});
     this.dialog.afterAllClosed;
   }
 

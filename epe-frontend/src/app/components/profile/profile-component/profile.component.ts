@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   edit() {
-    this.dialog.open(RoleChangeComponent,{height:'100%',data:this.myProfile})
+    this.dialog.open(RoleChangeComponent,{width:'40%', data:this.myProfile})
   }
 
   changePassword() {
