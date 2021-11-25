@@ -1,44 +1,85 @@
-<div class="center">
-        
-    <span class="header"> Edit Team ! </span>
-
-    <form>
-        <mat-form-field class="edit-team-input" appearance="fill">
-            <mat-label>Team Name</mat-label>
-            <input 
-              type="text" 
-              matInput 
-              [formControl]="teamNameFormControl" 
-              placeholder="Ex. C++ Developers"
-              [(ngModel)]="TeamName">
-            <mat-error 
-              *ngIf="teamNameFormControl.hasError('required')">
-              Team name is required
+<mat-card class="edit-container" *ngIf="getTeam">
+  <mat-card-title-group>
+    <mat-card-title>
+      Edit Team !
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    <div class="edit-element">
+      <div class="edit-element-header">
+        <div class="edit-text">
+          Current Team Name : {{ getTeam.name }}
+        </div>
+      </div>
+      <div class="edit-element-container">
+        <form>
+          <mat-form-field class="full-size" appearance="fill">
+            <mat-label>New Team Name</mat-label>
+            <input matInput [formControl]="teamNameFormControl" [(ngModel)]="TeamName" placeholder="Ex. R Team">
+            <mat-error *ngIf="!teamNameFormControl.hasError('required')">
+              Please insert the new team name !
             </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field class="edit-team-input" appearance="fill">
-          <mat-label>Team Leader</mat-label>
-          <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="TeamLeaderID">
-            <mat-select-trigger>
-              {{teamLeaderFormControl.value ? teamLeaderFormControl.value : ''}}
-            </mat-select-trigger>
-            <mat-option disabled selected> {{TeamLeaderName}} </mat-option>
-            <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstname}} {{user.lastname}}</mat-option>
-          </mat-select>
-      </mat-form-field>
-
-        <mat-list *ngIf="getTeam">
-          <mat-list-item *ngFor="let member of getTeam.members">
-            {{member.firstname}} {{member.lastname}}
-          </mat-list-item>
-        </mat-list>
-
-        <button class="edit-team-submit" (click)="updateTeam()" mat-raised-button>Update Team</button>
-    </form>
-    <div class="error-message">
-        <span *ngIf="errorMessage">
-            {{errorMessage}}
-        </span>
+          </mat-form-field>
+          <button class="half-size" mat-raised-button (click)="changeTeamName()">Change Name</button>
+        </form>
+      </div>
     </div>
-</div>
+
+    <br> <br> <br>
+
+    <div class="edit-element">
+      <div class="edit-element-header">
+        <div class="edit-text">
+          Current Team Leader : {{ getTeam.teamLeader.firstname }} {{ getTeam.teamLeader.lastname }}
+        </div>
+      </div>
+      <div class="edit-element-container">
+        <form>
+          <mat-form-field class="full-size" appearance="fill">
+            <mat-label>New Team Leader</mat-label>
+            <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="TeamLeaderID">
+              <mat-option *ngFor="let user of users" [value]="user.id"> {{user.firstname}} {{user.lastname}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button class="half-size" mat-raised-button (click)="changeTeamLeader()">Change Team Leader</button>
+        </form>
+      </div>
+    </div>
+
+    <br> <br> <br>
+
+    <div class="edit-element">
+        <div class="edit-element-container">
+          <form>
+            <mat-form-field class="full-size" appearance="fill">
+              <mat-label>New Team Member</mat-label>
+              <mat-select [formControl]="teamMemberFormControl" [(ngModel)]="TeamMemberID">
+                <mat-option *ngFor="let user of users" [value]="user.id"> {{user.firstname}} {{user.lastname}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button class="half-size" mat-raised-button (click)="addMember()">Add Member to Local List</button>
+          </form>
+
+          <br> <br>
+
+          <form>
+            <div *ngFor="let member of TeamMembers" class="full-size">
+              <mat-form-field  appearance="fill">
+                <input matInput disabled placeholder="{{member.firstname}} {{member.lastname}}">
+              </mat-form-field>
+              <span (click)="removeMember(member.id)"> Remove</span>
+            </div>
+          </form>
+
+          <br> <br>
+
+          <form>
+            <button class="half-size" mat-raised-button (click)="updateMembers()">Update Member List</button>
+          </form>
+        </div>
+    </div>
+
+    <br> <br> <br>
+
+  </mat-card-content>
+</mat-card>

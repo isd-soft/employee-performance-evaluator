@@ -104,11 +104,10 @@ export class TeamsComponent {
     this.dialog.open( TeamViewComponent, {data: id} );
   }
 
-  // edit(user : string) {
-  //   console.log('edit');
-  //   // this.dialog.open(RoleChangeComponent, {height:'100%',width:'70%', data : user});
-  //   // this.dialog.afterAllClosed.
-  // }
+  edit(id: string) {
+    this.dialog.open( TeamEditComponent, {data: id});
+    this.reloadTeams();
+  }
 
   delete(id: string) {
     this.teamService.deleteTeam(id).subscribe(data => {}, error => {
