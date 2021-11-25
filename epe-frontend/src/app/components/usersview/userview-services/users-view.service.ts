@@ -32,7 +32,8 @@ export class UserviewsServices {
   }
 
   deleteUser(userId : string | undefined) {
-    return this.http.delete(this.url + '/' + userId)
+    //return this.http.delete(this.url + '/' + userId)
+    return this.http.delete(this.url + '/' + userId).subscribe();
   }
 
   getRole() {

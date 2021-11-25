@@ -3,7 +3,18 @@
 
 <form action="" [formGroup]="user">
 
-  
+
+  <mat-form-field>
+    <input type="file" name="fileUpload" accept="image/*" (change)="selectFile($event)" />
+    <input matInput readonly />
+    <mat-icon matSuffix>file</mat-icon>
+  </mat-form-field>
+
+  <label>
+    <img [src]="url" height="200">
+  </label>
+
+
 
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
@@ -26,22 +37,22 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
+    <mat-label>Employment date</mat-label>
+    <input type="date" matInput required [value]="auxUser?.employmentDate" formControlName="birthDate">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
     <mat-label>Phone number</mat-label>
     <input matInput required [value]="auxUser?.phoneNumber" formControlName="phoneNumber">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Job position</mat-label>
-    <mat-select [compareWith]="compareFunction" required formControlName="job">
-      <mat-option *ngFor="let jobItem of jobList" value="{{ auxUser?.job }}">
+    <mat-select  required value="auxUser.job" formControlName="job">
+      <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">
         {{ jobItem.jobTitle }}
       </mat-option>
     </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Employment date date</mat-label>
-    <input type="date" matInput required [value]="auxUser?.employmentDate" formControlName="employmentDate">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -51,7 +62,7 @@
 
   <button mat-button
           type="button"
-          (click)="xchg()"
+          (click)="update()"
           class="submit-button raise">
     Submit
   </button>

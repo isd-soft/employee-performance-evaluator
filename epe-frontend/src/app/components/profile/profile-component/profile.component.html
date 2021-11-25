@@ -1,57 +1,57 @@
-<div class="col-md-10 col-sm-11 display-table-cell v-align" style="padding-top: 75px">
-  <mat-card class="example-card" style="margin-left: 25%; margin-right: 25%; background-color: white; min-width: 100%" >
-    <mat-card-title-group >
-      <mat-card-title style="font-size: 48px; padding: 15px; padding-top: 25px">
-        My Profile
-      </mat-card-title>
-      <mat-card-subtitle style="font-size: 20px; padding-top: 10px" >{{myProfile?.bio}}</mat-card-subtitle>
-      <mat-card-subtitle></mat-card-subtitle>
-      <img style="padding: 15px; height: 128px; width: auto" mat-card-xl-image src="data:image/png;base64,{{myProfile?.image}}">
-    </mat-card-title-group>
-    <mat-divider></mat-divider>
-    <!--        <img src="data:image/png;base64,{{auxUser.image}}-->
+<div class="col-md-10 col-sm-11 display-table-cell v-align centralizer" style="padding-top: 75px">
+  <mat-card class="example-card" style="margin-left: 35%; margin-right: 25%; background-color: white; min-width: 230%" >
+    <mat-card-header>
+      <img mat-card-avatar style="font-size: 40px" src="data:image/png;base64,{{myProfile?.image}}"/>
+      <mat-card-title>{{myProfile?.firstname + ' ' + myProfile?.lastname}}</mat-card-title>
+      <mat-card-subtitle>
+        {{myProfile?.bio}}
+      </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
-      <mat-list>
-        <mat-list-item style="font-size: 16px;">
-          <div style="font-size: x-large;">Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          {{ myProfile?.firstname + " " + myProfile?.lastname}}
+
+      <mat-list role="list">
+
+
+        <mat-list-item style="font-size: 16px; margin-top: 15px; margin-bottom: 15px;">
+          <div style="font-size: x-large;">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            {{ myProfile?.email}}
         </mat-list-item>
         <mat-divider></mat-divider>
 
-        <mat-list-item style="font-size: 16px;">
-          <div style="font-size: x-large;">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          {{ myProfile?.email}}
-        </mat-list-item>
-        <mat-divider></mat-divider>
-
-        <mat-list-item style="font-size: 16px;">
-          <div style="font-size: x-large;">Phone Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <mat-list-item style="font-size: 16px;margin-top: 15px; margin-bottom: 15px;">
+          <div style="font-size: x-large;">Phone Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           {{ myProfile?.phoneNumber}}
         </mat-list-item>
         <mat-divider></mat-divider>
 
-        <mat-list-item style="font-size: 16px;">
-          <div style="font-size: x-large;">Job:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          {{ myProfile?.job}}
+        <mat-list-item style="font-size: 16px;margin-top: 15px; margin-bottom: 15px;">
+          <div style="font-size: x-large;">Job:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            {{ myProfile?.job}}
         </mat-list-item>
         <mat-divider></mat-divider>
 
-        <mat-list-item style="font-size: 16px;">
-          <div style="font-size: x-large;">Birth Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          {{ myProfile?.birthDate}}
+        <mat-list-item style="font-size: 16px;margin-top: 15px; margin-bottom: 15px;">
+          <div style="font-size: x-large;">Birth Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            {{ myProfile?.birthDate}}
         </mat-list-item>
         <mat-divider></mat-divider>
 
-        <mat-list-item style="font-size: 16px;">
-          <div style="font-size: x-large;">Employment Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          {{ myProfile?.employmentDate}}
+        <mat-list-item style="font-size: 16px;margin-top: 15px; margin-bottom: 15px;">
+          <div style="font-size: x-large;">Employment Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+           {{ myProfile?.employmentDate}}
         </mat-list-item>
+        </mat-list>
 
-      </mat-list>
     </mat-card-content>
-    <div style="align-items: center; justify-content: center; display: flex;">
-      <button routerLink="/edit" style="margin-right: 8px" mat-raised-button><mat-icon>edit</mat-icon> Edit profile </button>
-      <button routerLink="/edit/password" style="margin-left: 8px" mat-raised-button><mat-icon>key</mat-icon> Change password </button>
-    </div>
+
+    <mat-card-actions>
+      <div style="align-items: center; justify-content: center; display: flex; margin-top: 20px; margin-bottom: 20px;">
+        <button (click)="edit()" style="margin-right: 8px" mat-raised-button><mat-icon>edit</mat-icon> Edit profile </button>
+        <button (click)="changePassword()" style="margin-left: 8px" mat-raised-button><mat-icon>key</mat-icon> Change password </button>
+      </div>
+    </mat-card-actions>
   </mat-card>
+
 </div>
+
+

@@ -17,26 +17,21 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 @Injectable({providedIn: 'root'})
 export class EditComponent implements OnInit {
 
-  user?: FormGroup;
+  user!: FormGroup;
 
   jobList?: JobItem[];
 
-  auxUser?: User;
-
-  errorMessage? : string;
+  auxUser!: User;
 
   roles?: string[];
   role? : string;
   requiredRole : string = "ROLE_SYSADMIN";
 
+
   constructor(private jwtService: JwtService,
               private editService: EditService,
               private formBuilder: FormBuilder) {
-    this.editService.getUser().subscribe(data =>
-    this.auxUser = data as User);
-    this.editService.getJobList().subscribe(data =>
-      this.jobList = data as JobItem[]);
-    this.role = this.editService.getRole();
+
   }
 
   url = "";
@@ -66,37 +61,33 @@ export class EditComponent implements OnInit {
     return result;
   }
 
-  xchg() {
-    console.log(this.auxUser?.image);
-    console.log(this.auxUser?.job);
-  }
-
-  compareFunction(o1: any) {
-    return (o1.job == this.auxUser?.job && o1.id == this.auxUser?.id);
-  }
-
-
   update() {
     // @ts-ignore
     this.auxUser.image = this.base64Output;
-    this.editService.update(this.auxUser).subscribe(data => {
-    }, error => {
-       this.errorMessage = error.error.title;})
+    // @ts-ignore
+    this.editService.update(this.user?.value);
 
   }
 
   ngOnInit(): void {
-    this.user = this.formBuilder.group({
-      email: [],
-      firstname: [],
-      lastname: [],
-      birthDate: [],
-      phoneNumber: [],
-      job: [],
-      employmentDate: [],
-      bio: []
-    })
+    this.editService.getUser().subscribe(data =>
+      this.auxUser = data as User);
+    this.editService.getJobList().subscribe(data =>
+      this.jobList = data as JobItem[]);
+    this.role = this.editService.getRole();
 
+
+    this.user = this.formBuilder.group({
+      email: [this.auxUser.email],
+      firstname: [this.auxUser.firstname],
+      lastname: [this.auxUser.lastname],
+      birthDate: [this.auxUser.birthDate],
+      employmentDate: [this.auxUser.employmentDate],
+      phoneNumber: [this.auxUser.phoneNumber],
+      image: [this.base64Output],
+      job: [this.auxUser.job],
+      bio: [this.auxUser.bio]
+    });
   }
 
 
