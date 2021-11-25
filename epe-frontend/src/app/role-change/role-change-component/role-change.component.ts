@@ -30,6 +30,8 @@ export class RoleChangeComponent implements OnInit {
 
   selectedJob : string
 
+  currentUserId?: string
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : any,
     private jwtService: JwtService,

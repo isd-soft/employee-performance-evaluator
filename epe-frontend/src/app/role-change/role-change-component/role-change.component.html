@@ -60,14 +60,16 @@
     <input matInput required [value]="user?.bio" formControlName="bio">
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Role</mat-label>
-    <mat-select value="user.role" required formControlName="role">
-      <mat-option *ngFor="let role of roles" [value]="role">
-        {{ role }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div *ngIf="">
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select value="user.role" required formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <button mat-button
           type="button"

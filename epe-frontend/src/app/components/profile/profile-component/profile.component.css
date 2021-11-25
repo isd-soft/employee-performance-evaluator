@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Trocchi&display=swap');
 
+body{
+  background: #efefee;
+}
+
+mat-card img{
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  width: 10%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 8%;
+}
+
 .img-logo{
   max-width: 194px;
   max-height: 100%;
