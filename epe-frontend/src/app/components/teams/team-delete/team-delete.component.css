@@ -4,3 +4,10 @@
     border-radius: 5px;
     background-color: #FF0000;
 }
+
+.full-size-cancel {
+    color: #FFFFFF;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #000000;
+}
