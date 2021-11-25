@@ -52,7 +52,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
             List<EvaluationField> evaluationFields = new ArrayList<>();
 
-            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFieldDtos()) {
+            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFields()) {
 
                 EvaluationField field = new EvaluationField();
 
@@ -137,7 +137,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
             group.getEvaluationFields().clear();
 
-            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFieldDtos()) {
+            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFields()) {
 
                 EvaluationField field = new EvaluationField();
 

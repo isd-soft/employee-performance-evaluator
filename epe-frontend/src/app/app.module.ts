@@ -48,6 +48,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
+import { AssessmentsViewComponent } from './components/assessments/assessments-view/assessments-view.component';
+import { AssessmentsEvaluationComponent } from './components/assessments/assessments-evaluation/assessments-evaluation.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
     AssessmentComponent,
     PasswordComponent,
     RoleChangeComponent,
-    AssessmentsAssignedComponent
+    AssessmentsAssignedComponent,
+    AssessmentsViewComponent,
+    AssessmentsEvaluationComponent
   ],
   imports: [
     BrowserModule,

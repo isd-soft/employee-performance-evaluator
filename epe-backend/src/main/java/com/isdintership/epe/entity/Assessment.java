@@ -62,29 +62,29 @@ public class Assessment extends BaseEntity {
     private List<EvaluationGroup> evaluationGroups = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
+    @JoinColumn(name = "assessment_id")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<PersonalGoal> personalGoals = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
+    @JoinColumn(name = "assessment_id")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<DepartmentGoal> departmentGoals = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "assessment",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
+    @JoinColumn(name = "assessment_id")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Feedback> feedbacks = new ArrayList<>();
 

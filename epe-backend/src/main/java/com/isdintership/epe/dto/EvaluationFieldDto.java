@@ -19,9 +19,9 @@ public class EvaluationFieldDto {
         fieldDto.setId(field.getId());
         fieldDto.setTitle(field.getTitle());
         fieldDto.setComment(field.getComment());
-        fieldDto.setFirstScore(fieldDto.getFirstScore());
-        fieldDto.setSecondScore(fieldDto.getSecondScore());
-        fieldDto.setOverallScore(fieldDto.getOverallScore());
+        fieldDto.setFirstScore(field.getFirstScore());
+        fieldDto.setSecondScore(field.getSecondScore());
+        fieldDto.setOverallScore(field.getOverallScore());
         fieldDto.setEvaluationGroupId(field.getEvaluationGroup().getId());
 
         return fieldDto;
