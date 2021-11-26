@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ShortUser } from '../teams-model/short-user.interface';
+import { ShortUserSelected } from '../teams-model/short-user-selected';
 
 @Component({
   selector: 'app-team-edit',
@@ -19,17 +20,16 @@ export class TeamEditComponent {
 
   getTeam?: TeamView;
 
-  TeamName?: string;
-  teamNameFormControl = new FormControl('', [Validators.required]);
+  NewTeamName?: string;
+  teamNameFormControl = new FormControl();
 
-  TeamLeaderID?: string;
+  NewTeamLeaderID?: string;
   teamLeaderFormControl = new FormControl();
 
-  TeamMemberID?: string;
-  teamMemberFormControl = new FormControl();
+  teamMembersFormControl = new FormControl();
+  selectedMembers?: any[] = [];
 
-  TeamMembers: ShortUser[] = [];
-
+  CurrentTeamMembers: ShortUser[] = [];
   users?: UserView[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public teamID: string,
@@ -37,62 +37,57 @@ export class TeamEditComponent {
               private teamService: TeamsService,
               private toastr: ToastrService) {
 
-    this.refreshCurrentTeam();
-    this.refreshUsers();
+    this.refreshCurrentTeam().then(res => this.refreshUsers());
   }
 
   refreshCurrentTeam() {
     this.teamService.getTeam(this.teamID).subscribe(data => {
       this.getTeam = data as TeamView;
-      this.TeamMembers = this.getTeam.members; });
+      this.CurrentTeamMembers = this.getTeam.members; });
+    return new Promise<void>((resolve, reject) => {resolve(); });
   }
 
   refreshUsers() {
-    this.userService.getUsers().subscribe(data => {
+    this.userService.getUsers().subscribe(data => { 
       this.users = data as UserView[];
-    });
+      this.psuhTeamMembersToList();
+     });
+    return new Promise<void>((resolve, reject) => {resolve(); });
   }
 
-  fillTempTeam() {
-    
-    if(this.getTeam) {
-      let tempTeamName: string = this.getTeam.name;
-      let tempTeamLeader: CreateTeamUser = { id: this.getTeam.teamLeader.id};
-      let tempTeamMembers: CreateTeamUser[] = [];
-      this.getTeam.members.forEach(member => {
-        let tempMember: CreateTeamUser = { id: member.id }
-        tempTeamMembers.push(tempMember);
-      });
+  psuhTeamMembersToList() {
 
+    if(this.users) {
+      this.users.forEach(user => {
+        if(this.CurrentTeamMembers.find(member => member.id == user.id) && this.selectedMembers)
+          this.selectedMembers.push(user.id);
+      });
+    }
+  }
+
+  updateTeam() {
+
+    if(this.getTeam) {
+      let tempTeamName = this.NewTeamName ? this.NewTeamName : this.getTeam.name;
+      let tempTeamLeader: CreateTeamUser = { id : this.NewTeamLeaderID ? this.NewTeamLeaderID : this.getTeam.teamLeader.id };
+      let tempTeamMembers: CreateTeamUser[] = [];
+      
+      if(this.selectedMembers) {
+        this.selectedMembers.forEach(member => {
+          let tempMember: CreateTeamUser = { id: member };
+          tempTeamMembers.push(tempMember);
+        });
+      }
+      
       let tempTeam: CreateTeamRequest = {
         name: tempTeamName,
         teamLeader: tempTeamLeader,
-        members: tempTeamMembers,
+        members: tempTeamMembers
       }
 
-      return tempTeam;
-    }
-
-    let tempUndefined: CreateTeamRequest = {
-      name: '',
-      teamLeader: {id: ''},
-      members: []
-    }
-
-    return tempUndefined;
-  }
-
-  changeTeamName() {
-
-    if(this.getTeam) {
-      
-      let tempId: string = this.getTeam.id || '';
-      let tempTeam: CreateTeamRequest = this.fillTempTeam();
-      tempTeam.name = this.TeamName || '';
-
-      this.teamService.updateTeam(tempId, tempTeam).subscribe(data => {
+      this.teamService.updateTeam(this.getTeam.id || '', tempTeam).subscribe(data => {
         this.refreshCurrentTeam();
-        this.toastr.success('team name updated !', '', {
+        this.toastr.success('team details updated !', '', {
           timeOut: 2000,
           progressBar: true
         });;
@@ -103,93 +98,5 @@ export class TeamEditComponent {
         })
       });
     }
-  }
-
-  changeTeamLeader() {
-    if(this.getTeam) {
-      
-      let tempId: string = this.getTeam.id || '';
-      let tempTeam: CreateTeamRequest = this.fillTempTeam();
-      tempTeam.teamLeader = {id: this.TeamLeaderID || ''}
-
-      this.teamService.updateTeam(tempId, tempTeam).subscribe(data => {
-        this.refreshCurrentTeam();
-        this.toastr.success('team leader updated !', '', {
-          timeOut: 2000,
-          progressBar: true
-        });;
-      }, error => {
-        this.toastr.error('something went wrong ..','', {
-          timeOut: 2000,
-          progressBar: true
-        })
-      });
-    }
-  }
-
-  updateMembers() {
-    if(this.getTeam) {
-      
-      let tempId: string = this.getTeam.id || '';
-      let tempTeam: CreateTeamRequest = this.fillTempTeam();
-      tempTeam.members = [];
-      this.TeamMembers.forEach(member => {
-        let tempMember: CreateTeamUser = { id: member.id }
-        if(tempTeam.members)
-          tempTeam.members.push(tempMember);
-      });
-
-      console.log(tempTeam.members);
-
-      this.teamService.updateTeam(tempId, tempTeam).subscribe(data => {
-        this.refreshCurrentTeam();
-        this.toastr.success('team members updated !', '', {
-          timeOut: 2000,
-          progressBar: true
-        });;
-      }, error => {
-        this.toastr.error('something went wrong ..','', {
-          timeOut: 2000,
-          progressBar: true
-        })
-      });
-    }
-  }
-
-  removeMember(removeMemberId: string) {
-    if(this.TeamMembers)
-      this.TeamMembers = this.TeamMembers.filter(member => member.id !== removeMemberId);
-  }
-
-  addMember() {
-    if(this.users)
-      if(this.TeamMembers)
-        if(this.TeamMemberID) {
-          let newUser: UserView = this.users.find(member => member.id == this.TeamMemberID) || this.createEmptyUserView();
-          let newMember: ShortUser = {
-            id: newUser.id,
-            firstname: newUser.firstname,
-            lastname: newUser.lastname
-          }
-          this.TeamMembers.push(newMember);
-      }
-  }
-
-  createEmptyUserView() {
-    let temp: UserView = {
-      id: '',
-      email: '',
-      firstname: '',
-      lastname: '',
-      birthDate: '',
-      employmentDate: '',
-      phoneNumber: '',
-      job: '',
-      bio: '',
-      buddyId: '',
-      token: '',
-    }
-
-    return temp;
   }
 }
