@@ -11,6 +11,29 @@ body {
   display: none;
 }
 
+
+
+.close-button {
+  float: right;
+  top:-21px;
+  right:-50%;
+}
+
+.close-icon {
+
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+  transition-duration: 0.4s;
+}
+
+.centralize {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 :host {
   display: flex;
   flex-direction: column;
