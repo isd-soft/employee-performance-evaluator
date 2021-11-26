@@ -52,6 +52,8 @@ import { AssessmentsEvaluationComponent } from './components/assessments/assessm
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
+import { AssessmentsHistoryComponent } from './components/assessments/assessments-history-component/assessments-history.component';
+import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,10 @@ import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.
     TeamViewComponent,
     TeamDeleteComponent,
     AssessmentsViewComponent,
-    AssessmentsEvaluationComponent
+    AssessmentsEvaluationComponent,
+    TeamViewComponent,
+    AssessmentsHistoryComponent,
+    AssessmentsHistoryAssignedComponent
   ],
     imports: [
         BrowserModule,

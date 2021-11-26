@@ -90,7 +90,6 @@ export class HomeComponent {
           enableHtml: true
          })
         this.errorMessage = error.error.title;
-        console.log(this.errorMessage);
       })
     }
   }
@@ -102,8 +101,8 @@ export class HomeComponent {
       let datePipe = new DatePipe('en-US');
       this.registerUser.birthDate = datePipe.transform(this.registerUser.birthDate, 'dd-MM-yyyy') as string,
       this.registerUser.employmentDate = datePipe.transform(this.registerUser.employmentDate, 'dd-MM-yyyy') as string,
-  
-  
+
+
       this.homeService.register(this.registerUser).subscribe(data => {
       }, error => {
          if(error.status == 200) {
@@ -117,7 +116,6 @@ export class HomeComponent {
            }, 4000);
          } else {
           this.errorMessage = error.error.title;
-          console.log(this.errorMessage);
            this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
             timeOut: 3000,
             progressBar: true,

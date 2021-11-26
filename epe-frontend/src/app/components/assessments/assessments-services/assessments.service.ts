@@ -27,6 +27,21 @@ export class AssessmentsService {
       .pipe(catchError(this.errorHandler));
   }
 
+  getAllAssessmentsByUserIdAndStatus(userId: string, status: string) {
+    return this.http.get(this.assessmentsUrl + 'users/' + userId + '/assessments?status=' + status)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getAllAssignedAssessments(userId: string) {
+    return this.http.get(this.assessmentsUrl + 'users/' + userId + '/assigned-assessments')
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getAllAssignedAssessmentsByStatus(userId: string, status: string) {
+    return this.http.get(this.assessmentsUrl + 'users/' + userId + '/assigned-assessments?status=' + status)
+      .pipe(catchError(this.errorHandler));
+  }
+
   evaluateAssessment(assessmentId: string, assessment: AssessmentView) {
     return this.http.put(this.assessmentsUrl + 'users/' + this.jwtService.getJwtUser().id + '/assessments/'
       + assessmentId, assessment,

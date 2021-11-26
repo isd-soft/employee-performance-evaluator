@@ -1,14 +1,3 @@
-.mat-tab-group {
-  background: rgba(255, 255, 255, 0.58) none repeat scroll 0 0;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
-  display: inline-block;
-  width: 95%;
-  min-height: 98vh;
-  border-radius: 10px;
-  margin: 0.5% 0.5%;
-  padding: 0 4%;
-}
-
 .mat-cell, .mat-header-cell, .mat-paginator {
   font-size: 15px;
 }
