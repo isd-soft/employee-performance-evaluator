@@ -6,6 +6,8 @@ import {FeedbackView} from "./feedback-view.interface";
 export interface AssessmentView {
 
   id: string,
+  evaluatedUserFullName: string,
+  evaluatorFullName: string,
   title: string,
   description: string,
   jobTitle: string,

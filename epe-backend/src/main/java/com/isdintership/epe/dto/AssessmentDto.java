@@ -15,6 +15,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AssessmentDto {
     private String id;
+    private String evaluatedUserFullName;
+    private String evaluatorFullName;
     private String title;
     private String description;
     private String jobTitle;
@@ -42,6 +44,8 @@ public class AssessmentDto {
 
         assessmentDto.setId(assessment.getId());
         assessmentDto.setTitle(assessment.getTitle());
+        assessmentDto.setEvaluatedUserFullName(assessment.getEvaluatedUserFullName());
+        assessmentDto.setEvaluatorFullName(assessment.getEvaluatorFullName());
         assessmentDto.setDescription(assessment.getDescription());
         assessmentDto.setJobTitle(assessment.getJob().getJobTitle());
         assessmentDto.setOverallScore(assessment.getOverallScore());

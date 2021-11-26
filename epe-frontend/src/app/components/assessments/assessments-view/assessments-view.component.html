@@ -2,14 +2,26 @@
   <mat-card-title>{{ assessment.title }}</mat-card-title>
   <mat-card-subtitle>{{ assessment.jobTitle }}</mat-card-subtitle>
   <mat-card-content>
+    <p class="bold">Start date</p>
+    <p>{{assessment.startDate}}</p>
+    <p class="bold"
+       *ngIf="assessment.status == 'FINISHED'"
+    >
+      End date
+    </p>
+    <p>{{assessment.endDate}}</p>
+    <p class="bold">Evaluated employee</p>
+    <p>{{assessment.evaluatedUserFullName}}</p>
+    <p class="bold">Evaluator</p>
+    <p>{{assessment.evaluatorFullName}}</p>
     <p class="bold">Description</p>
     <p>{{ assessment.description }}</p>
+
+
     <p class="bold evaluation-groups-title">Evaluation groups</p>
 
     <p class="bold evaluation-group-user-score"
-       *ngIf="assessment.status == 'SECOND_PHASE'
-          || assessment.status == 'FINISHED'
-          || assessment.status == 'CANCELED'"
+       *ngIf="assessment.status != 'FIRST_PHASE'"
     >
       First score
     </p>
@@ -38,14 +50,26 @@
         </p>
 
         <p class="evaluation-field-assigned-user-score"
-           *ngIf="assessment.status == 'FINISHED'
-              || assessment.status == 'CANCELED'">
+           *ngIf="assessment.status == 'FINISHED'">
           {{evaluationField.secondScore}}
         </p>
       </div>
+      <p class="group-score"
+         *ngIf="assessment.status == 'FINISHED'"
+      >
+        <span class="bold group-score-title">Total group score: </span>
+        {{evaluationGroup.overallScore}}
+      </p>
     </div>
 
-    <p class="bold smart-goals-header">Personal SMART goals
+    <p class="assessment-score"
+       *ngIf="assessment.status == 'FINISHED'"
+    >
+      <span class="bold assessment-score-title">Total assessment score: </span>
+      {{assessment.overallScore}}
+    </p>
+
+    <p *ngIf="assessment.status != 'FIRST_PHASE'" class="bold smart-goals-header">Personal SMART goals
       <span class="minor-text"
             *ngIf="assessment.personalGoals.length != 0"
 
@@ -53,7 +77,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;What is SMART goal? Hover over the letters to find out!</span>
     </p>
 
-    <div class="personal-goals">
+    <div *ngIf="assessment.status != 'FIRST_PHASE'" class="personal-goals">
       <div *ngFor="let personalGoal of assessment.personalGoals" class="personal-goal">
 
         <div class="abbreviation abbreviation-s">
@@ -114,10 +138,10 @@
 
     </div>
 
-    <p class="bold smart-goals-header">Department SMART goals</p>
+    <p *ngIf="assessment.status != 'FIRST_PHASE'" class="bold smart-goals-header">Department SMART goals</p>
 
 
-    <div class="department-goals">
+    <div *ngIf="assessment.status != 'FIRST_PHASE'" class="department-goals">
       <div *ngFor="let departmentGoal of assessment.departmentGoals" >
 
         <div class="abbreviation abbreviation-s">
@@ -179,12 +203,17 @@
     </div>
 
 
-    <p class="bold smart-goals-header feedback-header">Feedbacks</p>
+    <p *ngIf="assessment.status != 'FIRST_PHASE'"
+       class="bold smart-goals-header feedback-header">Feedbacks</p>
 
-    <div class="feedback-author-header bold">Author</div>
-    <div class="feedback-text-header bold">Feedback</div>
+    <div *ngIf="assessment.status != 'FIRST_PHASE'"
+         class="feedback-author-header bold">Author</div>
 
-    <div class="feedbacks">
+    <div *ngIf="assessment.status != 'FIRST_PHASE'"
+         class="feedback-text-header bold">Feedback</div>
+
+    <div *ngIf="assessment.status != 'FIRST_PHASE'"
+         class="feedbacks">
       <div *ngFor="let feedback of assessment.feedbacks" class="feedback">
 
         <div class="feedback-author bold">
@@ -202,7 +231,9 @@
   <mat-card-actions>
     <button
       mat-button
-      *ngIf="assessment.status == 'FIRST_PHASE'"
+      *ngIf="(assessment.status == 'FIRST_PHASE' &&
+       assessment.userId == userId) ||
+       (assessment.status == 'SECOND_PHASE' && assessment.userId != userId)"
       class="raise"
       (click)="openEvaluationDialog()"
     >

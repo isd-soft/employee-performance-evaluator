@@ -36,24 +36,27 @@ public class AssessmentController {
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public ResponseEntity<List<AssessmentDto>> getAllAssessmentsByUserId
             (@PathVariable(name = "id") String userId,
-             @RequestParam(name = "status", required = false) Status status) {
+             @RequestParam(name = "status", required = false) String status) {
 
         if (status != null) {
-
             return new ResponseEntity<>(assessmentService.getAllAssessmentsByUserIdAndStatus(userId, status), HttpStatus.OK);
-
         }
 
         return new ResponseEntity<>(assessmentService.getAllAssessmentsByUserId(userId), HttpStatus.OK);
-
     }
 
     @GetMapping("assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public ResponseEntity<List<AssessmentDto>> getAllAssessments() {
-
         return new ResponseEntity<>(assessmentService.getAllAssessments(), HttpStatus.OK);
+    }
 
+    @GetMapping("/users/{id}/assigned-assessments")
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    public ResponseEntity<List<AssessmentDto>> getAllAssignedAssessments
+            (@PathVariable(name = "id") String id,
+             @RequestParam(name = "status", required = false) String status) {
+        return ResponseEntity.ok(assessmentService.getAllAssignedAssessmentsByStatus(id, status));
     }
 
     @GetMapping("assessments/{id}")
@@ -75,7 +78,7 @@ public class AssessmentController {
     }
 
     @PutMapping("users/{userId}/assessments/{assessmentId}")
-    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public ResponseEntity<AssessmentDto> evaluateAssessment
             (@PathVariable(name = "userId") String userId,
              @PathVariable(name = "assessmentId") String assessmentId,

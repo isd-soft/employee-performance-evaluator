@@ -22,6 +22,12 @@ public class Assessment extends BaseEntity {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "evaluated_user_full_name")
+    private String evaluatedUserFullName;
+
+    @Column(name = "evaluator_full_name")
+    private String evaluatorFullName;
+
     @Column(name = "description", columnDefinition = "text")
     private String description;
 
@@ -100,13 +106,14 @@ public class Assessment extends BaseEntity {
     public Assessment() {
     }
 
-    public Assessment(User user, String title, String description, Job job, Integer overallScore,
-                      Status status, Boolean isTemplate, LocalDateTime startDate,
-                      LocalDateTime endDate, LocalDateTime creationDate,
+    public Assessment(User user, String title, String evaluatedUserFullName, String description,
+                      Job job, Integer overallScore, Status status, Boolean isTemplate,
+                      LocalDateTime startDate, LocalDateTime endDate, LocalDateTime creationDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {
         this.user = user;
         this.title = title;
+        this.evaluatedUserFullName = evaluatedUserFullName;
         this.description = description;
         this.job = job;
         this.overallScore = overallScore;

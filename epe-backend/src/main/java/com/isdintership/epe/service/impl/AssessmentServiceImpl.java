@@ -9,6 +9,7 @@ import com.isdintership.epe.service.AssessmentService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.jni.Local;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
     private final EmailServiceImpl emailService;
 
     @Override
@@ -41,12 +43,12 @@ class AssessmentServiceImpl implements AssessmentService {
                 .orElseThrow(() ->
                         new AssessmentTemplateNotFoundException("Assessment template with id " + assessmentTemplateId + " was not found"));
 
-        Optional<Assessment> existingAssessment = assessmentRepository.findByUserAndStatusIn
+        List<Assessment> existingAssessment = assessmentRepository.findByUserAndStatusIn
                 (user, List.of(Status.FIRST_PHASE, Status.SECOND_PHASE));
 
-        if (existingAssessment.isPresent()) {
+        if (!existingAssessment.isEmpty()) {
             throw new AssessmentExistsException
-                    ("User already has unfinished assessment " + existingAssessment.get().getTitle());
+                    ("User already has unfinished assessment " + existingAssessment.get(0).getTitle());
         }
 
         if (user.getJob() != assessmentTemplate.getJob()) {
@@ -59,6 +61,7 @@ class AssessmentServiceImpl implements AssessmentService {
         Assessment assessment = new Assessment();
 
         assessment.setUser(user);
+        assessment.setEvaluatedUserFullName(user.getFirstname() + " " + user.getLastname());
         assessment.setTitle(assessmentTemplate.getTitle());
         assessment.setDescription(assessmentTemplate.getDescription());
         assessment.setJob(assessmentTemplate.getJob());
@@ -122,31 +125,28 @@ class AssessmentServiceImpl implements AssessmentService {
 
     @Override
     @Transactional
-    public List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, Status status) {
+    public List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, String status) {
 
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with id " + id + " not found"));
 
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
 
-        if (status != Status.FINISHED) {
-
-            assessmentRepository.findByUserAndStatusIsNot(user, Status.FINISHED)
+        if (status.equals("ACTIVE")) {
+            assessmentRepository.findByUserAndStatusIn(user, List.of(Status.FIRST_PHASE, Status.SECOND_PHASE))
                     .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
-
+            return assessmentDtos;
+        } else if (status.equals("INACTIVE")) {
+            assessmentRepository.findByUserAndStatusIn(user, List.of(Status.FINISHED, Status.CANCELED))
+                    .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
             return assessmentDtos;
         }
 
-
         try {
-
-            assessmentRepository.findByUserAndStatus(user, status)
+            assessmentRepository.findByUserAndStatus(user, Status.valueOf(status))
                     .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
-
         } catch (IllegalArgumentException e) {
-
             throw new AssessmentStatusNotFound("Assessment status " + status + " was not found");
-
         }
 
         return assessmentDtos;
@@ -161,6 +161,30 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentRepository.findAllByIsTemplate(false)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
 
+        return assessmentDtos;
+    }
+
+    @Override
+    @Transactional
+    public List<AssessmentDto> getAllAssignedAssessmentsByStatus(String userId, String status) {
+
+        List<Status> statuses;
+        if (status == null) {
+            statuses = List.of(Status.values());
+        } else if (status.equals("ACTIVE")) {
+            statuses = List.of(Status.FIRST_PHASE, Status.SECOND_PHASE);
+        } else if (status.equals("INACTIVE")) {
+            statuses = List.of(Status.CANCELED, Status.FINISHED);
+        } else {
+            throw new AssessmentStatusNotFound("Status not found. Should be ACTIVE or INACTIVE");
+        }
+
+        List<User> assignedUsers = userRepository.findByBuddyId(userId);
+        Optional<Team> team = teamRepository.findByTeamLeaderId(userId);
+        team.ifPresent(value -> assignedUsers.addAll(value.getMembers()));
+        List<AssessmentDto> assessmentDtos = new ArrayList<>();
+        assessmentRepository.findByUserInAndStatusIn(assignedUsers, statuses)
+                .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
         return assessmentDtos;
     }
 
@@ -182,30 +206,41 @@ class AssessmentServiceImpl implements AssessmentService {
             assessment.setStatus(Status.SECOND_PHASE);
         }
         if (assessmentDto.isSecondPhase()) {
-            calculateOverallScore(assessment);
+            assessment.setEvaluatorFullName(assessmentDto.getEvaluatorFullName());
+            calculateOverallScore(assessment, assessmentDto);
+            assessment.setEndDate(LocalDateTime.now());
             assessment.setStatus(Status.FINISHED);
         }
 
         return AssessmentDto.fromAssessment(assessment);
     }
 
-    private void calculateOverallScore(Assessment assessment) {
+    private void calculateOverallScore(Assessment assessment, AssessmentDto assessmentDto) {
 
+        List<EvaluationGroup> evaluationGroups = assessment.getEvaluationGroups();
+        List<EvaluationGroupDto> evaluationGroupDtos = assessmentDto.getEvaluationGroups();
         int groupsSum = 0;
-        for (EvaluationGroup evaluationGroup : assessment.getEvaluationGroups()) {
-            calculateOverallScoreGroup(evaluationGroup);
-            groupsSum += evaluationGroup.getOverallScore();
+
+        for (int i = 0; i < evaluationGroups.size(); i++) {
+            calculateOverallScoreGroup(evaluationGroups.get(i), evaluationGroupDtos.get(i));
+            groupsSum += evaluationGroups.get(i).getOverallScore();
         }
         assessment.setOverallScore(getAvgInteger(groupsSum, assessment.getEvaluationGroups().size()));
     }
 
-    private void calculateOverallScoreGroup(EvaluationGroup evaluationGroup) {
+    private void calculateOverallScoreGroup(EvaluationGroup evaluationGroup, EvaluationGroupDto evaluationGroupDto) {
 
+        List<EvaluationField> evaluationFields = evaluationGroup.getEvaluationFields();
+        List<EvaluationFieldDto> evaluationFieldDtos = evaluationGroupDto.getEvaluationFields();
         int fieldsSum = 0;
-        for (EvaluationField evaluationField : evaluationGroup.getEvaluationFields()) {
-            evaluationField.setOverallScore
-                (getOverallScoreField(evaluationField.getFirstScore(), evaluationField.getSecondScore()));
-            fieldsSum += evaluationField.getOverallScore();
+
+        for (int i = 0; i < evaluationFields.size(); i++) {
+
+            EvaluationFieldDto evaluationFieldDto = evaluationFieldDtos.get(i);
+            evaluationFields.get(i).setOverallScore(
+                    getOverallScoreField(evaluationFieldDto.getFirstScore(),
+                                         evaluationFieldDto.getSecondScore()));
+            fieldsSum += evaluationFields.get(i).getOverallScore();
         }
         evaluationGroup.setOverallScore(
                 getAvgInteger(fieldsSum, evaluationGroup.getEvaluationFields().size()));
@@ -238,17 +273,17 @@ class AssessmentServiceImpl implements AssessmentService {
             }
             for (int j = 0; j < evaluationFields.size(); j++) {
                 evaluationFields.get(j).setFirstScore(evaluationFieldDtos.get(j).getFirstScore());
+                evaluationFields.get(j).setSecondScore(evaluationFieldDtos.get(j).getSecondScore());
             }
         }
     }
 
     private void processFeedback(String userId, AssessmentDto assessmentDto, User user, Assessment assessment, List<Feedback> feedbacks) {
-        feedbacks.clear();
 
-        if (!assessmentDto.getFeedbacks().isEmpty()) {
-            Feedback feedback = getFeedback(userId, assessmentDto, user, feedbacks);
-            feedback.setAssessment(assessment);
-        }
+        Feedback feedback = getFeedback(userId, assessmentDto, user, feedbacks);
+        feedback.setAssessment(assessment);
+        feedbacks.add(feedback);
+
     }
 
     private Feedback getFeedback(String userId, AssessmentDto assessmentDto, User user, List<Feedback> feedbacks) {
