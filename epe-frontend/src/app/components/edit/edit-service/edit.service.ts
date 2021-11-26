@@ -7,6 +7,8 @@ import { UpdateRequest } from '../edit-models/update-request.interface';
 import { User } from '../edit-models/user.interface';
 import { JwtUser } from 'src/app/decoder/decoder-model/jwt-user.interface';
 import { JwtService } from 'src/app/decoder/decoder-service/jwt.service';
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 
 @Injectable({providedIn : 'root'})
@@ -22,16 +24,51 @@ export class EditService {
 
   role? : string;
 
-  constructor(private http: HttpClient, private jwtService: JwtService) {
+  constructor(private http: HttpClient,
+              private jwtService: JwtService,
+              private router : Router,
+              private notificationService: ToastrService) {
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser)
     this.id = this.jwtUser.id;
     this.role = this.jwtUser?.role;
   }
 
-  update(user: User | undefined) {
-    return this.http.patch(this.url2 + '/' + this.id, user)
-      .pipe(catchError(this.errorHandler));
+  update(user: User) {
+    return this.http.patch(this.url2 + '/' + this.id, user).subscribe( response => {
+      this.reload();
+      this.notificationService.success('Profile was edited successfully',
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    }, error => {
+      let message: string;
+      switch (error.status) {
+        case 400:
+          message = "Bad request. " + error.error.title;
+          break;
+        case 401:
+          message = "Unauthorized"
+          break;
+        case 500:
+          message = "Internal server error"
+          break;
+        default:
+          message = "Unknown error"
+      }
+      this.notificationService.error(message,
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    });
+  }
+
+  reload() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/profile']);
   }
 
   getUser() {

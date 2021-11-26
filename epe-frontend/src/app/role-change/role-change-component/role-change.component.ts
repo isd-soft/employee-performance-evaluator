@@ -7,6 +7,8 @@ import {Observable, ReplaySubject} from "rxjs";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {JobItem} from "../../components/edit/edit-models/job-item.interface";
 import {User} from "../../components/edit/edit-models/user.interface";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {JwtUser} from "../../decoder/decoder-model/jwt-user.interface";
 
 @Component({
   selector: 'app-role-change',
@@ -15,7 +17,9 @@ import {User} from "../../components/edit/edit-models/user.interface";
 })
 export class RoleChangeComponent implements OnInit {
 
-  user?: User
+  user!: User
+
+  auxUser!: FormGroup;
 
   jobList?: JobItem[];
 
@@ -23,21 +27,50 @@ export class RoleChangeComponent implements OnInit {
 
   roles?: string[];
   role? : string;
-  requiredRole : string = "ROLE_SYSADMIN";
+
+  requiredRole: string = "ROLE_SYSADMIN";
+  currentRole?: string;
+
+  currentUserId?: string
+
+  jwtUser?: JwtUser;
+
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public userId : any,
+    @Inject(MAT_DIALOG_DATA) public data : any,
     private jwtService: JwtService,
-              private roleService: RoleService) {
-    this.roleService.getUserData(userId).subscribe(data =>
-      this.user = data as User);
+              private roleService: RoleService,
+              private formBuilder: FormBuilder) {
+
+    this.user = data as User;
+    this.auxUser = this.formBuilder.group({
+      email: [this.user?.email],
+      firstname: [this.user?.firstname],
+      lastname: [this.user?.lastname],
+      birthDate: [this.user?.birthDate],
+      phoneNumber: [this.user?.phoneNumber],
+      image: [this.base64Output],
+      job: [this.user?.job],
+      employmentDate: [this.user?.employmentDate],
+      bio: [this.user?.bio],
+      role: [this.user?.role]
+    });
+
+    this.jwtUser = this.jwtService.getJwtUser();
+    if(this.jwtUser) {
+      this.currentUserId = this.jwtUser.id;
+      this.currentRole = this.jwtUser.role;
+    }
+
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
     this.role = this.roleService.getRole();
+    // @ts-ignore
     this.roleService.getRoles().subscribe(data => {
       this.roles = data as string[]});
-    console.log(this.userId);
+    console.log(this.user);
   }
+
 
   url = "";
 
@@ -67,18 +100,14 @@ export class RoleChangeComponent implements OnInit {
   }
 
 
-
-
   update() {
     // @ts-ignore
-    this.user.image = this.base64Output;
-    this.roleService.updateUser(this.user,this.userId).subscribe(data => {
-    }, error => {
-      this.errorMessage = error.error.title;})
-
+    this.auxUser?.value.image = this.base64Output;
+    this.roleService.updateUser(this.auxUser?.value, this.user.id, this.currentUserId);
   }
 
   ngOnInit(): void {
+
   }
 
 }

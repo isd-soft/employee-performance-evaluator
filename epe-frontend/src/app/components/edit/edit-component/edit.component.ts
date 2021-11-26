@@ -7,6 +7,7 @@ import {EditService} from '../edit-service/edit.service';
 import {Router} from '@angular/router';
 import {DatePipe} from "@angular/common";
 import {Observable, ReplaySubject} from "rxjs";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-edit',
@@ -16,27 +17,21 @@ import {Observable, ReplaySubject} from "rxjs";
 @Injectable({providedIn: 'root'})
 export class EditComponent implements OnInit {
 
-  user?: User
+  user!: FormGroup;
 
   jobList?: JobItem[];
 
-  auxUser?: User;
-
-  errorMessage? : string;
+  auxUser!: User;
 
   roles?: string[];
   role? : string;
   requiredRole : string = "ROLE_SYSADMIN";
 
+
   constructor(private jwtService: JwtService,
               private editService: EditService,
-              private filler: EditFiller,
-              private router: Router) {
-    this.editService.getUser().subscribe(data =>
-    this.auxUser = data as User);
-    this.editService.getJobList().subscribe(data =>
-      this.jobList = data as JobItem[]);
-    this.role = this.editService.getRole();
+              private formBuilder: FormBuilder) {
+
   }
 
   url = "";
@@ -69,13 +64,30 @@ export class EditComponent implements OnInit {
   update() {
     // @ts-ignore
     this.auxUser.image = this.base64Output;
-    this.editService.update(this.auxUser).subscribe(data => {
-    }, error => {
-       this.errorMessage = error.error.title;})
+    // @ts-ignore
+    this.editService.update(this.user?.value);
 
   }
 
   ngOnInit(): void {
+    this.editService.getUser().subscribe(data =>
+      this.auxUser = data as User);
+    this.editService.getJobList().subscribe(data =>
+      this.jobList = data as JobItem[]);
+    this.role = this.editService.getRole();
+
+
+    this.user = this.formBuilder.group({
+      email: [this.auxUser.email],
+      firstname: [this.auxUser.firstname],
+      lastname: [this.auxUser.lastname],
+      birthDate: [this.auxUser.birthDate],
+      employmentDate: [this.auxUser.employmentDate],
+      phoneNumber: [this.auxUser.phoneNumber],
+      image: [this.base64Output],
+      job: [this.auxUser.job],
+      bio: [this.auxUser.bio]
+    });
   }
 
 

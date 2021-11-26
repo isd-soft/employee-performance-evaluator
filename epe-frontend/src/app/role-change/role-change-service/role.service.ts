@@ -5,6 +5,9 @@ import {JwtService} from "../../decoder/decoder-service/jwt.service";
 import {catchError} from "rxjs/operators";
 import {throwError as observableThrowError} from "rxjs/internal/observable/throwError";
 import {User} from "../../components/edit/edit-models/user.interface";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({providedIn: 'root'})
 export class RoleService {
@@ -18,23 +21,72 @@ export class RoleService {
   id? : string
 
   role? : string;
+  requiredRole: string = "SYS_ADMIN";
 
-  constructor(private http: HttpClient, private jwtService: JwtService) {
+  currentUrl?: string;
+
+
+  constructor(private http: HttpClient,
+              private jwtService: JwtService,
+              private notificationService: ToastrService,
+              private dialogRef : MatDialog,
+              private router: Router) {
     this.jwtUser = this.jwtService.getJwtUser();
-    if(this.jwtUser)
+    if(this.jwtUser) {
       this.id = this.jwtUser.id;
-    this.role = this.jwtUser?.role;
+      this.role = this.jwtUser?.role;
+    }
+    this.currentUrl = this.router.url;
   }
 
-  update(user: User | undefined) {
-    return this.http.put(this.url2 + '/' + this.id, user)
-      .pipe(catchError(this.errorHandler));
+  updateUser(user: User | undefined,userId : string | undefined,currentUserId: string | undefined) {
+    console.log(user);
+    let currentUrl : string;
+    if (userId == currentUserId) {
+      currentUrl = '/my-profile';
+    } else {
+      currentUrl = "/usersview"
+    }
+    return this.http.put(this.url2 + '/' + userId, user).subscribe( response => {
+      this.closeDialogs();
+      this.reload(currentUrl);
+      this.notificationService.success('User was edited successfully',
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    }, error => {
+      let message: string;
+      switch (error.status) {
+        case 400:
+          message = "Bad request. " + error.error.title;
+          break;
+        case 401:
+          message = "Unauthorized"
+          break;
+        case 500:
+          message = "Internal server error"
+          break;
+        default:
+          message = "Unknown error"
+      }
+      this.notificationService.error(message,
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    });
+
   }
 
-  updateUser(user: User | undefined,userId : string | undefined) {
-    return this.http.put(this.url2 + '/' + userId, user)
-      .pipe(catchError(this.errorHandler));
+
+  reload(currentUrl : string | undefined) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+    console.log(this.currentUrl);
   }
+
 
   getUser() {
     return this.http.get(this.url2 + '/' + this.id)
@@ -45,11 +97,19 @@ export class RoleService {
     return this.role;
   }
 
+  closeDialogs() {
+    this.dialogRef.closeAll();
+  }
+
   getJobList() {
     return this.http.get(this.url + 'jobs')
   }
 
   getRoles() {
+    // if (this.role == this.requiredRole) {
+    //   return this.http.get(this.url3);
+    // }
+    // return 'user';
     return this.http.get(this.url3);
   }
 

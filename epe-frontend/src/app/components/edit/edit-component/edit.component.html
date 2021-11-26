@@ -1,168 +1,69 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<mat-label>Old image</mat-label>
+<img src="data:image/png;base64,{{auxUser?.image}}" height="200">
 
-    <!--  CONTENT HERE, BIATCH  -->
-    <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
-
-      <div *ngIf="auxUser" class="login-form">
-        <form #editForm="ngForm" (ngSubmit)="update()">
-          <div class="form-details">
+<form action="" [formGroup]="user">
 
 
-            <label class="form-element" >
-              <h3>Old image</h3>
-              <img src="data:image/png;base64,{{auxUser.image}}" height="200">
-            </label>
+  <mat-form-field>
+    <input type="file" name="fileUpload" accept="image/*" (change)="selectFile($event)" />
+    <input matInput readonly />
+    <mat-icon matSuffix>file</mat-icon>
+  </mat-form-field>
 
-            <h3>Choose new image</h3><br>
-
-            <label class="form-element input-file">
-
-              <input
-                title="Choose an image"
-                type="file"
-                name="image"
-                id="image"
-                (change)="selectFile($event)"
-                placeholder="Enter your email">
-            </label>
-
-            <label class="form-element">
-              <img [src]="url" height="200">
-            </label>
-
-            <label class="form-element">
-              <input
-                title="Please insert your email"
-                type="email"
-                name="email"
-                readonly
-                [email]="true"
-                id="email"
-                #email="ngModel"
-                placeholder="Enter your email"
-                [(ngModel)]="auxUser.email">
-              <div *ngIf="email.touched && !email.valid" class="input-box-error">
-                Email is required and must be a valid one !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <input
-                title="Please insert your firstname"
-                minlength="3"
-                maxlength="20"
-                type="text"
-                name="firstname"
-                id="firstname"
-                #firstname="ngModel"
-                [(ngModel)]="auxUser.firstname"
-                placeholder="Enter your name">
-              <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
-                Firstname is required and must be between 3 and 20 letters long !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <input
-                title="Please insert your lastname"
-                minlength="3"
-                maxlength="20"
-                type="text"
-                name="lastname"
-                id="lastname"
-                #lastname="ngModel"
-                [(ngModel)]="auxUser.lastname"
-                placeholder="Enter your last name">
-              <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
-                Lastname is required and must be between 3 and 20 letters long !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <input
-                required
-                title="Please insert your birth date"
-                type="date"
-                name="birthDate"
-                id="birthDate"
-                #birthDate="ngModel"
-                [(ngModel)]="auxUser.birthDate">
-              <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
-                Please pick a valid birth date !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <input
-                title="Please insert your phone number"
-                pattern="^\+?(?:[0-9] ?){6,14}[0-9]$"
-                type="tel"
-                name="phone"
-                id="phone"
-                #phone="ngModel"
-                [(ngModel)]="auxUser.phoneNumber"
-                placeholder="Enter your phone number">
-              <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
-                Phone number is required !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <select
-                title="Please choose your job"
-                name="job"
-                id="job"
-                #job="ngModel"
-                [(ngModel)]="auxUser.job"
-                placeholder="Enter your job">
-                <option *ngFor="let job of jobList">
-                  {{ job.jobTitle }}
-                </option>
-              </select>
-              <div *ngIf="job.touched && !job.valid" class="input-box-error">
-                Please pick a valid employment date !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <input
-                required
-                title="Please insert your employment date"
-                type="date"
-                name="employmentDate"
-                id="employmentDate"
-                #employmentDate="ngModel"
-                [(ngModel)]="auxUser.employmentDate"
-                dateformat="d M y">
-              <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
-                Please pick a valid employment date !
-              </div>
-            </label>
-
-            <label class="form-element">
-              <input
-                title="Please insert your employment date"
-                type="text"
-                name="bio"
-                id="bio"
-                bio="ngModel"
-                placeholder="Insert your bio"
-                [(ngModel)]="auxUser.bio">
-              <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
-                Please pick a valid employment date !
-              </div>
-            </label>
+  <label>
+    <img [src]="url" height="200">
+  </label>
 
 
-          </div>
-          <button type="button" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" >Update</button>
-        </form>
-      </div>
 
-      <div class="title">
-        <a routerLink="/edit/password">Change password</a>
-      </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput required  readonly [value]="auxUser?.email" formControlName="email">
+  </mat-form-field>
 
-    </div>
+  <mat-form-field appearance="fill">
+    <mat-label>First name</mat-label>
+    <input matInput required [value]="auxUser?.firstname" formControlName="firstname">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Last name</mat-label>
+    <input matInput required [value]="auxUser?.lastname" formControlName="lastname">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Birth date</mat-label>
+    <input type="date" matInput required [value]="auxUser?.birthDate" formControlName="birthDate">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Employment date</mat-label>
+    <input type="date" matInput required [value]="auxUser?.employmentDate" formControlName="birthDate">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <input matInput required [value]="auxUser?.phoneNumber" formControlName="phoneNumber">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Job position</mat-label>
+    <mat-select  required value="auxUser.job" formControlName="job">
+      <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">
+        {{ jobItem.jobTitle }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+     <mat-label>Bio</mat-label>
+     <input matInput required [value]="auxUser?.bio" formControlName="bio">
+  </mat-form-field>
+
+  <button mat-button
+          type="button"
+          (click)="update()"
+          class="submit-button raise">
+    Submit
+  </button>
+</form>

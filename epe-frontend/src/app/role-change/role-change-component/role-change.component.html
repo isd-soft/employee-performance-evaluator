@@ -1,189 +1,94 @@
-<body class="home">
-<div class="container-fluid display-table">
-  <div class="row display-table-row">
-    <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<mat-dialog-content class="edit-container">
 
-      <div class="col-md-10 col-sm-11 centralizer display-table-cell v-align">
-
-        <div *ngIf="user" class="login-form">
-          <form #editForm="ngForm" (ngSubmit)="update()">
-            <div class="form-details">
-
-
-              <label class="form-element" >
-                <h3>Old image</h3>
-                <img src="data:image/png;base64,{{user.image}}" height="200">
-              </label>
-
-              <h3>Choose new image</h3><br>
-
-              <label class="form-element input-file">
-
-                <input
-                  title="Choose an image"
-                  type="file"
-                  name="image"
-                  id="image"
-                  (change)="selectFile($event)"
-                  placeholder="Enter your email">
-              </label>
-
-              <label class="form-element">
-                <img [src]="url" height="200">
-              </label>
-
-              <label class="form-element">
-                <input
-                  title="Please insert your email"
-                  type="email"
-                  name="email"
-                  readonly
-                  [email]="true"
-                  id="email"
-                  #email="ngModel"
-                  placeholder="Enter your email"
-                  [(ngModel)]="user.email">
-                <div *ngIf="email.touched && !email.valid" class="input-box-error">
-                  Email is required and must be a valid one !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <input
-                  title="Please insert your firstname"
-                  minlength="3"
-                  maxlength="20"
-                  type="text"
-                  name="firstname"
-                  id="firstname"
-                  #firstname="ngModel"
-                  [(ngModel)]="user.firstname"
-                  placeholder="Enter your name">
-                <div *ngIf="firstname.touched && !firstname.valid" class="input-box-error">
-                  Firstname is required and must be between 3 and 20 letters long !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <input
-                  title="Please insert your lastname"
-                  minlength="3"
-                  maxlength="20"
-                  type="text"
-                  name="lastname"
-                  id="lastname"
-                  #lastname="ngModel"
-                  [(ngModel)]="user.lastname"
-                  placeholder="Enter your last name">
-                <div *ngIf="lastname.touched && !lastname.valid" class="input-box-error">
-                  Lastname is required and must be between 3 and 20 letters long !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <input
-                  required
-                  title="Please insert your birth date"
-                  type="date"
-                  name="birthDate"
-                  id="birthDate"
-                  #birthDate="ngModel"
-                  [(ngModel)]="user.birthDate">
-                <div *ngIf="birthDate.touched && !birthDate.valid" class="input-box-error">
-                  Please pick a valid birth date !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <input
-                  title="Please insert your phone number"
-                  pattern="^\+?(?:[0-9] ?){6,14}[0-9]$"
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  #phone="ngModel"
-                  [(ngModel)]="user.phoneNumber"
-                  placeholder="Enter your phone number">
-                <div *ngIf="phone.touched && !phone.valid" class="input-box-error">
-                  Phone number is required !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <select
-                  title="Please choose your job"
-                  name="job"
-                  id="job"
-                  #job="ngModel"
-                  [(ngModel)]="user.job"
-                  placeholder="Enter your job">
-                  <option *ngFor="let job of jobList">
-                    {{ job.jobTitle }}
-                  </option>
-                </select>
-                <div *ngIf="job.touched && !job.valid" class="input-box-error">
-                  Please pick a job !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <input
-                  required
-                  title="Please insert your employment date"
-                  type="date"
-                  name="employmentDate"
-                  id="employmentDate"
-                  #employmentDate="ngModel"
-                  [(ngModel)]="user.employmentDate"
-                  dateformat="d M y">
-                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
-                  Please pick a valid employment date !
-                </div>
-              </label>
-
-              <label class="form-element">
-                <input
-                  title="Please insert your employment date"
-                  type="text"
-                  name="bio"
-                  id="bio"
-                  bio="ngModel"
-                  placeholder="Insert your bio"
-                  [(ngModel)]="user.bio">
-                <div *ngIf="employmentDate.touched && !employmentDate.valid" class="input-box-error">
-                  Please pick a valid employment date !
-                </div>
-              </label>
-
-              <div *ngIf="role==requiredRole">
-                <label class="form-element">
-                  <select
-                    title="Please choose a role"
-                    name="role"
-                    id="role"
-                    #role="ngModel"
-                    [(ngModel)]="user.role"
-                    placeholder="Enter a role">
-                    <option *ngFor="let role of roles">
-                      {{ role }}
-                    </option>
-                  </select>
-                  <div *ngIf="role.touched && !role.valid" class="input-box-error">
-                    Please pick a role !
-                  </div>
-                </label>
-              </div>
-
-            </div>
-            <button mat-button mat-dialog-close type="button" [disabled]="editForm.form.invalid" class="form-btn" (click)="update()" >Update</button>
-          </form>
-        </div>
-
-      </div>
-
-    </div>
+<form action="" [formGroup]="auxUser" style="padding-right: 12%">
+  <div>
+    <mat-label>Old image</mat-label><br>
+    <img src="data:image/png;base64,{{user?.image}}" height="200">
   </div>
-</div>
+
+  <mat-form-field>
+    <input type="file" name="fileUpload" accept="image/*" (change)="selectFile($event)" />
+    <input matInput readonly />
+    <mat-icon matSuffix>file</mat-icon>
+  </mat-form-field>
+
+  <label>
+    <img [src]="url" height="200">
+  </label>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput required  readonly [value]="user?.email" formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>First name</mat-label>
+    <input matInput required [value]="user?.firstname" formControlName="firstname">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Last name</mat-label>
+    <input matInput required [value]="user?.lastname" formControlName="lastname">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Birth date</mat-label>
+    <input type="date" matInput required [value]="user?.birthDate" formControlName="birthDate">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Employment date</mat-label>
+    <input type="date" matInput required [value]="user?.employmentDate" formControlName="employmentDate">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <input matInput required [value]="user?.phoneNumber" formControlName="phoneNumber">
+  </mat-form-field>
 
 
-</body>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Job position</mat-label>
+    <mat-select  required value="user.job" formControlName="job">
+      <mat-option *ngFor="let jobItem of jobList" [value]="jobItem.jobTitle">
+        {{ jobItem.jobTitle }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Bio</mat-label>
+    <input matInput required [value]="user?.bio" formControlName="bio">
+  </mat-form-field>
+
+  <div *ngIf="currentRole == requiredRole && currentUserId != user.id">
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select value="user.role" required formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="centralize" style="margin-top: 1%; padding-right: 13%">
+    <button mat-raised-button color="primary" style="margin-right: 1%"
+            type="button"
+            (click)="update()"
+            class="">
+      Submit
+    </button>
+    <button mat-button mat-raised-button color="warn" style="margin-left: 1%"
+            type="button"
+            [mat-dialog-close]="true"
+            class="">
+      Cancel
+    </button>
+  </div>
+
+</form>
+</mat-dialog-content>

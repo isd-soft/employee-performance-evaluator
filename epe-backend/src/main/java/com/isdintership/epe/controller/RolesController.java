@@ -20,7 +20,6 @@ public class RolesController {
 
 
     @GetMapping
-    @RolesAllowed({ROLE_SYSADMIN})
     public List<String> getAllRoles() {
         return Arrays.asList("User","Administrator");
     }

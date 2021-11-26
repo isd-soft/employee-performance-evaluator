@@ -3,13 +3,14 @@ package com.isdintership.epe.service;
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.*;
+import com.isdintership.epe.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    String register(RegistrationRequest user);
+    UserDto register(RegistrationRequest user);
 
     UserDto login (LoginRequest signInRequest);
 

@@ -50,6 +50,7 @@ import { TeamsComponent } from './components/teams/team-component/teams.componen
 import { AssessmentsViewComponent } from './components/assessments/assessments-view/assessments-view.component';
 import { AssessmentsEvaluationComponent } from './components/assessments/assessments-evaluation/assessments-evaluation.component';
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
 import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
 
 @NgModule({
@@ -87,29 +88,35 @@ import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.
     AssessmentsViewComponent,
     AssessmentsEvaluationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatTabsModule,
-    MatSelectModule,
-    ToastrModule.forRoot(),
-    MatCardModule,
-    MatListModule,
-    MatSidenavModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        FormsModule,
+        MatToolbarModule,
+        MatTabsModule,
+        MatSelectModule,
+        ToastrModule.forRoot(),
+        MatCardModule,
+        MatListModule,
+        MatSidenavModule,
+        MatDatepickerModule,
+        // MatPaginator,
+        // MatSort,
+        // MatTableDataSource,
+        // MatFormFieldModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: 'API_URL', useValue: getApiUrl() }

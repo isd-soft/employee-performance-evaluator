@@ -12,6 +12,14 @@ import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import { Router } from '@angular/router';
 import {AssessmentTemplate} from "../userview-models/Assessment-template"
 import {AssessmentComponent} from "../../assessment/assessment-component/assessment.component";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {NewUser} from "../userview-models/NewUser";
+
+import {RoleService} from "../../../role-change/role-change-service/role.service";
+import {JobItem} from "../../home/home-models/job-item.interface";
+import {Role} from "../../../role-change/role-change-model/role.interface";
+import {CreateUserService} from "../userview-services/create-user.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-usersview',
@@ -24,12 +32,18 @@ export class UsersView implements AfterViewInit {
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job','assessment_status', 'buttons'];
   // @ts-ignore
   dataSource: MatTableDataSource<User>;
-  users?: User[];
+  users!: User[];
   jwtUser?: JwtUser;
   assessmentTemplates? : AssessmentTemplate[];
   assignedUsers?: User[]
   role?: string;
   requiredRole : string = "ROLE_SYSADMIN";
+
+  newUser?: FormGroup;
+
+  userDto?: NewUser;
+
+  jobList?: JobItem[];
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -37,10 +51,28 @@ export class UsersView implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-
-  constructor(private userviewsServices: UserviewsServices, public dialog: MatDialog, private jwtService: JwtService){
+  constructor(private userviewsServices: UserviewsServices,
+              public dialog: MatDialog,
+              private jwtService: JwtService,
+              private roleService: RoleService,
+              private formBuilder: FormBuilder,
+              private createService: CreateUserService){
     this.jwtUser = jwtService.getJwtUser();
     this.role = this.userviewsServices.getRole();
+
+
+    // @ts-ignore
+    this.userDto = {
+      email: '',
+      firstname: '',
+      lastname: '',
+      birthDate: '',
+      job : '',
+      employmentDate: '',
+      phoneNumber: '',
+      password: '1234321',
+      bio: 'new user'
+    }
 
   }
 
@@ -71,6 +103,21 @@ export class UsersView implements AfterViewInit {
       this.dataSource.sort = this.sort;
     });
 
+    this.roleService.getJobList().subscribe(data =>
+      this.jobList = data as JobItem[]
+    );
+
+    this.newUser = this.formBuilder.group({
+      email: [],
+      firstname: [],
+      lastname: [],
+      birthDate: [],
+      employmentDate: [],
+      phoneNumber: [],
+      job: [],
+      password: [this.userDto?.password],
+      bio: [this.userDto?.bio]
+    })
 
   }
 
@@ -78,9 +125,9 @@ export class UsersView implements AfterViewInit {
     this.dialog.open( UserComponent, {data: user} );
   }
 
-  edit(user : string) {
-    this.dialog.open(RoleChangeComponent, {height:'100%',width:'70%', data : user});
-    // this.dialog.afterAllClosed.
+  edit(userId : number) {
+    this.dialog.open(RoleChangeComponent, {width: '45%', data : this.users[userId]});
+    this.dialog.afterAllClosed;
   }
 
   delete(user : string) {
@@ -117,5 +164,16 @@ export class UsersView implements AfterViewInit {
       }
     })
     return flag || false;
+  }
+
+  createUser() {
+    console.log(this.newUser?.value)
+    let datePipe = new DatePipe('en-US');
+    // @ts-ignore
+    this.newUser?.value.birthDate = datePipe.transform(this.newUser?.value.birthDate, 'dd-MM-yyyy') as string;
+    // @ts-ignore
+    this.newUser?.value.employmentDate = datePipe.transform(this.newUser?.value.employmentDate, 'dd-MM-yyyy') as string;
+    console.log(this.newUser?.value);
+    this.createService.createUser(this.newUser?.value);
   }
 }

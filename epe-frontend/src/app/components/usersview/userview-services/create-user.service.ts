@@ -2,17 +2,18 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {Injectable} from "@angular/core";
-import {PasswordTemplate} from "../password-model/password.interface";
-import {catchError} from "rxjs/operators";
 import {throwError as observableThrowError} from "rxjs/internal/observable/throwError";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
+import {NewUser} from "../userview-models/NewUser";
 
 @Injectable({providedIn : 'root'})
-export class PasswordService {
+export class CreateUserService {
 
   url: string = 'api-server/api/users';
+  url2: string = 'api-server/api/auth/';
+
 
   jwtUser?: JwtUser;
   id? : string
@@ -27,16 +28,17 @@ export class PasswordService {
       this.id = this.jwtUser.id;
   }
 
-  changePassword(passwordDto: PasswordTemplate) {
-    return this.http.put(this.url + '/password/' + this.id,passwordDto).subscribe( response => {
+    createUser(userDto: NewUser) {
+    return this.http.post(this.url2 + 'register',userDto).subscribe( response => {
       this.closeDialogs();
       this.reload();
-      this.notificationService.success('Password was updated successfully',
+      this.notificationService.success('User was created successfully',
         '', {
           timeOut: 3000,
           progressBar: true
         });
     }, error => {
+      console.log(error)
       let message: string;
       switch (error.status) {
         case 400:
@@ -63,7 +65,7 @@ export class PasswordService {
   reload() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/my-profile']);
+    this.router.navigate(['/usersview']);
   }
 
   closeDialogs() {
