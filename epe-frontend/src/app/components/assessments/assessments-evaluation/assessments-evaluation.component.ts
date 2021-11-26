@@ -44,6 +44,7 @@ export class AssessmentsEvaluationComponent implements OnInit {
       description: [this.assessment.description],
       status: [this.assessment.status],
       userId: [this.assessment.userId],
+      startedById: this.jwtUser.id,
       evaluationGroups: this.formBuilder.array
         (this.assessment.evaluationGroups.map(group => this.createGroup(group))),
       personalGoals: this.formBuilder.array

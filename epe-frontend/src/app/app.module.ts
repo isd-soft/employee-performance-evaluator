@@ -93,7 +93,7 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
     AssessmentsEvaluationComponent,
     TeamViewComponent,
     AssessmentsHistoryComponent,
-    AssessmentsHistoryAssignedComponent
+    AssessmentsHistoryAssignedComponent,
     TeamViewComponent,
     AssessmentsAssignedComponent,
     LineFeedComponent,

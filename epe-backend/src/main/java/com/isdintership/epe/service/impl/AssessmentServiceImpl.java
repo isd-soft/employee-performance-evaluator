@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,6 +98,13 @@ class AssessmentServiceImpl implements AssessmentService {
 
         emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
 
+        AssessmentInformation assessmentInformation = getAssessmentInformation(assessmentTemplateDto, assessment);
+        assessmentInformationRepository.save(assessmentInformation);
+
+        return AssessmentDto.fromAssessment(assessment);
+    }
+
+    private AssessmentInformation getAssessmentInformation(AssessmentTemplateDto assessmentTemplateDto, Assessment assessment) {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
         assessmentInformation.setStatus(assessment.getStatus());
@@ -105,9 +113,7 @@ class AssessmentServiceImpl implements AssessmentService {
                 .orElseThrow(UserNotFoundException::new);
         assessmentInformation.setPerformedByUser(creationUser);
         assessmentInformation.setPerformedTime(assessment.getStartDate());
-        assessmentInformationRepository.save(assessmentInformation);
-
-        return AssessmentDto.fromAssessment(assessment);
+        return assessmentInformation;
     }
 
     @Override
@@ -215,6 +221,8 @@ class AssessmentServiceImpl implements AssessmentService {
 
         if (assessmentDto.isFirstPhase()) {
             assessment.setStatus(Status.SECOND_PHASE);
+
+
         }
         if (assessmentDto.isSecondPhase()) {
             assessment.setEvaluatorFullName(assessmentDto.getEvaluatorFullName());
@@ -223,7 +231,21 @@ class AssessmentServiceImpl implements AssessmentService {
             assessment.setStatus(Status.FINISHED);
         }
 
+        AssessmentInformation assessmentInformation = getAssessmentInformation(assessment, assessmentDto);
+        assessmentInformationRepository.save(assessmentInformation);
+
         return AssessmentDto.fromAssessment(assessment);
+    }
+
+    private AssessmentInformation getAssessmentInformation(Assessment assessment, AssessmentDto assessmentDto) {
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setStatus(assessment.getStatus());
+        User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(user);
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        assessmentInformation.setPerformedTime(LocalDateTime.now());
+        return assessmentInformation;
     }
 
     private void calculateOverallScore(Assessment assessment, AssessmentDto assessmentDto) {
