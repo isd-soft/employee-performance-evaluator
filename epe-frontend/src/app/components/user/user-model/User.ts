@@ -7,4 +7,5 @@ export interface User {
   job: string
   phoneNumber: string
   bio: string
+  image: string
 }

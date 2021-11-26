@@ -65,6 +65,7 @@ export class RoleChangeComponent implements OnInit {
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]);
     this.role = this.roleService.getRole();
+    // @ts-ignore
     this.roleService.getRoles().subscribe(data => {
       this.roles = data as string[]});
     console.log(this.user);
