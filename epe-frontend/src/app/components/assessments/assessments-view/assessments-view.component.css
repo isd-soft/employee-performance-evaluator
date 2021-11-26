@@ -72,6 +72,7 @@ mat-card .mat-card-content {
 }
 
 .mat-button {
+  border: 2px solid black;
   font-size: 16px;
 }
 

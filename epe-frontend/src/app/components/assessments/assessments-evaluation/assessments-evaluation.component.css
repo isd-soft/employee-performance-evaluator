@@ -192,5 +192,6 @@ mat-form-field, mat-form-field label {
 }
 
 .submit-button {
+  border: 2px solid black;
   margin: 3% 0;
 }
