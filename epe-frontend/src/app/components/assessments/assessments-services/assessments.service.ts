@@ -15,6 +15,7 @@ export class AssessmentsService {
 
   assessmentsUrl: string = 'api-server/api/';
 
+
   constructor(private http: HttpClient,
               private notificationService: ToastrService,
               private router: Router,
@@ -81,6 +82,10 @@ export class AssessmentsService {
 
   closeDialogs() {
     this.dialogRef.closeAll();
+  }
+
+  getAllAssessments(){
+    return this.http.get("api-server/api/assessments");
   }
 
   errorHandler(error: HttpErrorResponse){

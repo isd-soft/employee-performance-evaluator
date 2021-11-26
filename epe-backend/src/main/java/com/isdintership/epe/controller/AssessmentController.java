@@ -1,18 +1,16 @@
 package com.isdintership.epe.controller;
 
-import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.AssessmentTemplateDto;
 import com.isdintership.epe.entity.Status;
+import com.isdintership.epe.dto.*;
+import com.isdintership.epe.service.AssessmentInformationService;
 import com.isdintership.epe.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.security.RolesAllowed;
-
 import java.util.List;
-
 import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 
 @RestController
@@ -21,6 +19,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 public class AssessmentController {
 
     private final AssessmentService assessmentService;
+    private final AssessmentInformationService assessmentInformationService;
 
     @PostMapping("users/{id}/assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
@@ -94,6 +93,12 @@ public class AssessmentController {
 
         return new ResponseEntity<>(assessmentService.deleteAssessment(id), HttpStatus.OK);
 
+    }
+
+    @GetMapping("assessments-information")
+    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    public ResponseEntity<List<AssessmentInformationDto>> getAssessmentInformation(){
+        return new ResponseEntity<>(assessmentInformationService.getAllAssessmentInformation(), HttpStatus.OK);
     }
 
 }

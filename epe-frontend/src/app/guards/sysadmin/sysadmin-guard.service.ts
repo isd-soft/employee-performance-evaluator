@@ -18,7 +18,7 @@ export class SysadminGuardService {
 
   isSysadmin(): boolean {
 
-    console.log(this.loggedUser?.role);
+    // console.log(this.loggedUser?.role);
 
     if((this.loggedUser) && (this.loggedUser.role == 'ROLE_SYSADMIN')) {
       return true;

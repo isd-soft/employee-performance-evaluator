@@ -29,6 +29,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
     private final EmailServiceImpl emailService;
+    private final AssessmentInformationRepository assessmentInformationRepository;
 
     @Override
     @Transactional
@@ -94,7 +95,17 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessmentRepository.save(assessment);
 
-//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setStatus(assessment.getStatus());
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
+                .orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(creationUser);
+        assessmentInformation.setPerformedTime(assessment.getStartDate());
+        assessmentInformationRepository.save(assessmentInformation);
 
         return AssessmentDto.fromAssessment(assessment);
     }
@@ -327,13 +338,6 @@ class AssessmentServiceImpl implements AssessmentService {
         return departmentGoal;
     }
 
-    /*@Override
-    @Transactional
-    public AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto) {
-
-        return null;
-
-    }*/
 
     @Override
     @Transactional

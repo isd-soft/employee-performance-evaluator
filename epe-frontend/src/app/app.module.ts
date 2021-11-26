@@ -47,6 +47,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
+import { LineFeedComponent } from './components/linefeed/line-feed-components/line-feed.component';
 import { AssessmentsViewComponent } from './components/assessments/assessments-view/assessments-view.component';
 import { AssessmentsEvaluationComponent } from './components/assessments/assessments-evaluation/assessments-evaluation.component';
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
@@ -54,6 +55,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
 import { AssessmentsHistoryComponent } from './components/assessments/assessments-history-component/assessments-history.component';
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
+import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 
 @NgModule({
   declarations: [
@@ -92,6 +94,10 @@ import { AssessmentsHistoryAssignedComponent } from './components/assessments/as
     TeamViewComponent,
     AssessmentsHistoryComponent,
     AssessmentsHistoryAssignedComponent
+    TeamViewComponent,
+    AssessmentsAssignedComponent,
+    LineFeedComponent,
+    AdminBoardComponent
   ],
     imports: [
         BrowserModule,
