@@ -7,6 +7,21 @@ body {
   scrollbar-width: none;
 }
 
+.close-button {
+  float: right;
+  top:-21px;
+  right:-50%;
+}
+
+.close-icon {
+
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+  transition-duration: 0.4s;
+}
+
 .edit-container::-webkit-scrollbar {
   display: none;
 }
@@ -296,6 +311,7 @@ table {
 mat-paginator {
   padding-bottom: 15px;
 }
+
 
 .centralize {
   display: flex;

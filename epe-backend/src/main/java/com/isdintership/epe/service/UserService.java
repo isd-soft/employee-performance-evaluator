@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    String register(RegistrationRequest user);
+    UserDto register(RegistrationRequest user);
 
     UserDto login (LoginRequest signInRequest);
 

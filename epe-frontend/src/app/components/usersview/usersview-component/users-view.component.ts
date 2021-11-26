@@ -12,12 +12,14 @@ import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import { Router } from '@angular/router';
 import {AssessmentTemplate} from "../userview-models/Assessment-template"
 import {AssessmentComponent} from "../../assessment/assessment-component/assessment.component";
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {NewUser} from "../userview-models/NewUser";
 
 import {RoleService} from "../../../role-change/role-change-service/role.service";
 import {JobItem} from "../../home/home-models/job-item.interface";
 import {Role} from "../../../role-change/role-change-model/role.interface";
+import {CreateUserService} from "../userview-services/create-user.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-usersview',
@@ -52,7 +54,9 @@ export class UsersView implements AfterViewInit {
   constructor(private userviewsServices: UserviewsServices,
               public dialog: MatDialog,
               private jwtService: JwtService,
-              private roleService: RoleService){
+              private roleService: RoleService,
+              private formBuilder: FormBuilder,
+              private createService: CreateUserService){
     this.jwtUser = jwtService.getJwtUser();
     this.role = this.userviewsServices.getRole();
 
@@ -103,6 +107,18 @@ export class UsersView implements AfterViewInit {
       this.jobList = data as JobItem[]
     );
 
+    this.newUser = this.formBuilder.group({
+      email: [],
+      firstname: [],
+      lastname: [],
+      birthDate: [],
+      employmentDate: [],
+      phoneNumber: [],
+      job: [],
+      password: [this.userDto?.password],
+      bio: [this.userDto?.bio]
+    })
+
   }
 
   onView(user : string) {
@@ -148,5 +164,16 @@ export class UsersView implements AfterViewInit {
       }
     })
     return flag || false;
+  }
+
+  createUser() {
+    console.log(this.newUser?.value)
+    let datePipe = new DatePipe('en-US');
+    // @ts-ignore
+    this.newUser?.value.birthDate = datePipe.transform(this.newUser?.value.birthDate, 'dd-MM-yyyy') as string;
+    // @ts-ignore
+    this.newUser?.value.employmentDate = datePipe.transform(this.newUser?.value.employmentDate, 'dd-MM-yyyy') as string;
+    console.log(this.newUser?.value);
+    this.createService.createUser(this.newUser?.value);
   }
 }

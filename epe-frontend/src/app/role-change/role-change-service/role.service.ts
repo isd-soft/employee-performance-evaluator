@@ -21,6 +21,7 @@ export class RoleService {
   id? : string
 
   role? : string;
+  requiredRole: string = "SYS_ADMIN";
 
   currentUrl?: string;
 
@@ -31,9 +32,10 @@ export class RoleService {
               private dialogRef : MatDialog,
               private router: Router) {
     this.jwtUser = this.jwtService.getJwtUser();
-    if(this.jwtUser)
+    if(this.jwtUser) {
       this.id = this.jwtUser.id;
-    this.role = this.jwtUser?.role;
+      this.role = this.jwtUser?.role;
+    }
     this.currentUrl = this.router.url;
   }
 
@@ -104,6 +106,10 @@ export class RoleService {
   }
 
   getRoles() {
+    // if (this.role == this.requiredRole) {
+    //   return this.http.get(this.url3);
+    // }
+    // return 'user';
     return this.http.get(this.url3);
   }
 
