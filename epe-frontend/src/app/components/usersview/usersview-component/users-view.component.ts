@@ -9,7 +9,6 @@ import {UserComponent} from "../../user/user-component/user.component";
 import {RoleChangeComponent} from "../../../role-change/role-change-component/role-change.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
-import { Router } from '@angular/router';
 import {AssessmentTemplate} from "../userview-models/Assessment-template"
 import {AssessmentComponent} from "../../assessment/assessment-component/assessment.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -57,8 +56,8 @@ export class UsersView implements AfterViewInit {
               private roleService: RoleService,
               private formBuilder: FormBuilder,
               private createService: CreateUserService){
-    this.jwtUser = jwtService.getJwtUser();
-    this.role = this.userviewsServices.getRole();
+    this.jwtUser = this.jwtService.getJwtUser();
+    if(this.jwtUser) this.role = this.jwtUser.role;
 
 
     // @ts-ignore

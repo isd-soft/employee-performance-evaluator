@@ -28,10 +28,13 @@ export class AppComponent {
         }
 
         if(this.jwtUser.role == 'ROLE_ADMIN') {
+          this.isSysAdmin = false;
           this.isAdmin = true;
           this.isUser = true;
         }
         if(this.jwtUser.role == 'ROLE_USER') {
+          this.isSysAdmin = false;
+          this.isAdmin = false;
           this.isUser = true;
         }
       }
