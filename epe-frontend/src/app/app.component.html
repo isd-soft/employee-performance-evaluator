@@ -10,27 +10,35 @@
       </mat-list-item>
 
       <mat-list-item routerLink="/assessments">
-        <mat-icon>assessment</mat-icon>&nbsp;My Assessments
+        <mat-icon>assessment</mat-icon>&nbsp;&nbsp;&nbsp;My Assessments
       </mat-list-item>
-      <mat-divider></mat-divider>
+
 
       <mat-list-item routerLink="/usersview">
         <mat-icon mat-list-icon>supervisor_account</mat-icon>&nbsp;Users
       </mat-list-item>
+      <mat-divider></mat-divider>
 
       <mat-list-item *ngIf="isAdmin" routerLink="/teams">
         <mat-icon mat-list-icon>group_work</mat-icon>&nbsp;Teams
       </mat-list-item>
 
       <mat-list-item
+        routerLink="/admin-board"
+        *ngIf="isAdmin || isSysAdmin"
+      >
+        <mat-icon mat-list-icon>assignment</mat-icon>&nbsp;All assessments
+      </mat-list-item>
+
+      <mat-list-item
         routerLink="/assessments-templates"
         *ngIf="isAdmin || isSysAdmin"
       >
-        <mat-icon mat-list-icon>description</mat-icon>Assessments templates
+        <mat-icon mat-list-icon>description</mat-icon>&nbsp;Assessments templates
       </mat-list-item>
 
       <mat-list-item routerLink="/logout" fxLayoutAlign="center center">
-        <mat-icon> directions_walk</mat-icon>&nbsp;Logout
+        &nbsp;<mat-icon> directions_walk</mat-icon>&nbsp;&nbsp;&nbsp;Logout
       </mat-list-item>
 
     </mat-nav-list>

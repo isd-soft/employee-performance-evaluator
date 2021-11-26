@@ -96,7 +96,7 @@ public class AssessmentController {
     }
 
     @GetMapping("assessments-information")
-    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public ResponseEntity<List<AssessmentInformationDto>> getAssessmentInformation(){
         return new ResponseEntity<>(assessmentInformationService.getAllAssessmentInformation(), HttpStatus.OK);
     }

@@ -161,7 +161,6 @@ export class AssessmentsEvaluationComponent implements OnInit {
 
     if (this.assessmentForm.valid) {
 
-      console.log(this.assessmentForm.value);
       this.assessmentService.evaluateAssessment(this.assessment.id,
         this.assessmentForm.value);
     } else {

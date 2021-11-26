@@ -96,7 +96,7 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessmentRepository.save(assessment);
 
-        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
 
         AssessmentInformation assessmentInformation = getAssessmentInformation(assessmentTemplateDto, assessment);
         assessmentInformationRepository.save(assessmentInformation);
