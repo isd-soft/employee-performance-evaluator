@@ -52,6 +52,7 @@ import { AssessmentsViewComponent } from './components/assessments/assessments-v
 import { AssessmentsEvaluationComponent } from './components/assessments/assessments-evaluation/assessments-evaluation.component';
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
 import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
+import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 
 @NgModule({
   declarations: [
@@ -87,9 +88,10 @@ import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.
     TeamDeleteComponent,
     AssessmentsViewComponent,
     AssessmentsEvaluationComponent,
-    TeamViewComponent
+    TeamViewComponent,
     AssessmentsAssignedComponent,
-    LineFeedComponent
+    LineFeedComponent,
+    AdminBoardComponent
   ],
   imports: [
     BrowserModule,

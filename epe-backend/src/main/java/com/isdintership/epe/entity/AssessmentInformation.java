@@ -16,7 +16,7 @@ public class AssessmentInformation extends BaseEntity{
 
     private String assessmentTitle;
     @Enumerated(EnumType.STRING)
-    private StatusEnum status;
+    private Status status;
     @OneToOne
     private User performedOnUser;
     @OneToOne

@@ -2,7 +2,7 @@ package com.isdintership.epe.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isdintership.epe.entity.AssessmentInformation;
-import com.isdintership.epe.entity.StatusEnum;
+import com.isdintership.epe.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class AssessmentInformationDto {
 
     private String assessmentTitle;
-    private StatusEnum status;
+    private Status status;
     private String performedOnUser;
     private String performedByUser;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

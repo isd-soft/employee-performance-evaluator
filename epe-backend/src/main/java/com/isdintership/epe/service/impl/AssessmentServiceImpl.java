@@ -191,6 +191,7 @@ class AssessmentServiceImpl implements AssessmentService {
         processFeedback(userId, assessmentDto, user, assessment, assessment.getFeedbacks());
 
         if (assessmentDto.isFirstPhase()) {
+
             assessment.setStatus(Status.SECOND_PHASE);
         }
         if (assessmentDto.isSecondPhase()) {
@@ -304,13 +305,6 @@ class AssessmentServiceImpl implements AssessmentService {
         return departmentGoal;
     }
 
-    /*@Override
-    @Transactional
-    public AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto) {
-
-        return null;
-
-    }*/
 
     @Override
     @Transactional

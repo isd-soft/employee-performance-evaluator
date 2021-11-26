@@ -1,6 +1,5 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="My assessments">
-
+  <mat-tab label="All assessments">
     <mat-form-field appearance="standard" class="filter-field">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. annual assessment" #input>
@@ -57,13 +56,6 @@
 
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
-
   </mat-tab>
-  <mat-tab label="Assigned assessments">
-  </mat-tab>
-
-  <mat-tab label="History">
-
-  </mat-tab>
-
 </mat-tab-group>
+

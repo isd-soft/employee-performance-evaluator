@@ -30,6 +30,7 @@ import {AssessmentComponent} from "./components/assessment/assessment-component/
 import {RoleChangeComponent} from "./role-change/role-change-component/role-change.component";
 import {SysadminGuard} from "./guards/sysadmin/sysadmin.guard";
 import {LineFeedComponent} from "./components/linefeed/line-feed-components/line-feed.component";
+import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 
 
 const routes: Routes = [
@@ -88,6 +89,10 @@ const routes: Routes = [
   {
     path: 'edit/password',
     component: PasswordComponent
+  },
+  {
+    path: 'admin-board',
+    component: AdminBoardComponent
   },
   {
     path: 'usersview',

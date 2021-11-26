@@ -69,6 +69,10 @@ export class AssessmentsService {
     this.dialogRef.closeAll();
   }
 
+  getAllAssessments(){
+    return this.http.get("api-server/api/assessments");
+  }
+
   errorHandler(error: HttpErrorResponse){
     return observableThrowError(error);
   }

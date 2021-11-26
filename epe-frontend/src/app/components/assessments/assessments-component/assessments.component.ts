@@ -2,13 +2,13 @@ import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@a
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {AssessmentView} from "../assessments-models/assessment-short-view.interface";
 import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {AssessmentInformation} from "../../linefeed/line-feed-models/AssessmentInformation";
 import {AssessmentsViewComponent} from "../assessments-view/assessments-view.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AssessmentView} from "../assessments-models/assessment-view.interface";
 
 @Component({
   selector: 'app-assessments',
@@ -19,7 +19,7 @@ import {MatDialog} from "@angular/material/dialog";
 
 export class AssessmentsComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['title', 'position', 'startDate', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'jobPosition', 'startDate', 'status', 'buttons'];
 
   dataSource!: MatTableDataSource<AssessmentView>;
 

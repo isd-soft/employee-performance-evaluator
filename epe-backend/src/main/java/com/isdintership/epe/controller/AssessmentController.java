@@ -1,26 +1,16 @@
 package com.isdintership.epe.controller;
 
-import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.AssessmentTemplateDto;
 import com.isdintership.epe.entity.Status;
 import com.isdintership.epe.dto.*;
-import com.isdintership.epe.entity.StatusEnum;
 import com.isdintership.epe.service.AssessmentInformationService;
 import com.isdintership.epe.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import com.isdintership.epe.dao.EvaluationFieldService;
-import com.isdintership.epe.dao.EvaluationGroupService;
-import com.isdintership.epe.dto.AssessmentDto;
-import com.isdintership.epe.service.AssessmentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.security.RolesAllowed;
-
 import java.util.List;
-
 import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 
 @RestController

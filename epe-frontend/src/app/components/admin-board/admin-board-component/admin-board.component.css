@@ -1,0 +1,89 @@
+.mat-tab-group {
+  background: rgba(255, 255, 255, 0.58) none repeat scroll 0 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  display: inline-block;
+  width: 95%;
+  min-height: 98vh;
+  border-radius: 10px;
+  margin: 0.5% 0.5%;
+  padding: 0 4%;
+}
+
+.mat-cell, .mat-header-cell, .mat-paginator {
+  font-size: 15px;
+}
+
+.mat-tab-label{
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
+.filter-field {
+  margin: 0 15px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 97%;
+}
+
+.filter-field {
+  margin: 0 15px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 97%;
+}
+
+.first-table {
+  margin-bottom: 25px;
+}
+
+.table-column {
+  width: 30%;
+}
+
+.table-buttons {
+  width: 30%;
+}
+
+mat-paginator {
+  padding-bottom: 15px;
+}
+
+.center {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.header {
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.new-team-input {
+  width: 80%;
+}
+
+.new-team-submit {
+  margin: 20px;
+  width: 70%;
+  color: #FFFFFF;
+  background-color: #000000;
+  border-radius: 25px;
+}
+
+.error-message {
+  color: #FF0000;
+  text-align: center;
+}
