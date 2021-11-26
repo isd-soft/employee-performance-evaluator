@@ -53,6 +53,7 @@ import { AssessmentsEvaluationComponent } from './components/assessments/assessm
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
+import { UserDeleteComponent } from './components/usersview/user-delete/user-delete.component';
 import { AssessmentsHistoryComponent } from './components/assessments/assessments-history-component/assessments-history.component';
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
@@ -91,7 +92,7 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
     TeamDeleteComponent,
     AssessmentsViewComponent,
     AssessmentsEvaluationComponent,
-    TeamViewComponent,
+    UserDeleteComponent,
     AssessmentsHistoryComponent,
     AssessmentsHistoryAssignedComponent,
     TeamViewComponent,
