@@ -52,6 +52,7 @@ import { AssessmentsEvaluationComponent } from './components/assessments/assessm
 import { TeamViewComponent } from './components/teams/team-view/team-view.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
+import { UserDeleteComponent } from './components/usersview/user-delete/user-delete.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.
     TeamViewComponent,
     TeamDeleteComponent,
     AssessmentsViewComponent,
-    AssessmentsEvaluationComponent
+    AssessmentsEvaluationComponent,
+    UserDeleteComponent
   ],
     imports: [
         BrowserModule,
