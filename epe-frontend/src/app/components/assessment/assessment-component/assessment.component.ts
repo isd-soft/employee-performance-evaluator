@@ -21,7 +21,6 @@ export class AssessmentComponent implements OnInit {
   assignableUser: UserTemplate[];
   // @ts-ignore
   startAssessment?: FormGroup;
-  //TODO make a interface for assessment templates
   constructor( @Inject(MAT_DIALOG_DATA) public userId: string,
                public dialogRef: MatDialogRef<AssessmentComponent>,
                private assessmentService: AssessmentService,

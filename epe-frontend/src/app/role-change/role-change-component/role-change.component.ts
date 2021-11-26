@@ -68,9 +68,7 @@ export class RoleChangeComponent implements OnInit {
     // @ts-ignore
     this.roleService.getRoles().subscribe(data => {
       this.roles = data as string[]});
-    console.log(this.user);
   }
-
 
   url = "";
 
@@ -99,7 +97,6 @@ export class RoleChangeComponent implements OnInit {
     return result;
   }
 
-
   update() {
     // @ts-ignore
     this.auxUser?.value.image = this.base64Output;
@@ -107,7 +104,6 @@ export class RoleChangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
 }

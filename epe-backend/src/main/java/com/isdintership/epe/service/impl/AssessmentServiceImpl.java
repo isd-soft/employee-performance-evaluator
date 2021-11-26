@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
     private final EmailServiceImpl emailService;
+    private final AssessmentInformationRepository assessmentInformationRepository;
 
     @Override
     @Transactional
@@ -94,9 +96,24 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessmentRepository.save(assessment);
 
-//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+
+        AssessmentInformation assessmentInformation = getAssessmentInformation(assessmentTemplateDto, assessment);
+        assessmentInformationRepository.save(assessmentInformation);
 
         return AssessmentDto.fromAssessment(assessment);
+    }
+
+    private AssessmentInformation getAssessmentInformation(AssessmentTemplateDto assessmentTemplateDto, Assessment assessment) {
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setStatus(assessment.getStatus());
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
+                .orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(creationUser);
+        assessmentInformation.setPerformedTime(assessment.getStartDate());
+        return assessmentInformation;
     }
 
     @Override
@@ -204,6 +221,8 @@ class AssessmentServiceImpl implements AssessmentService {
 
         if (assessmentDto.isFirstPhase()) {
             assessment.setStatus(Status.SECOND_PHASE);
+
+
         }
         if (assessmentDto.isSecondPhase()) {
             assessment.setEvaluatorFullName(assessmentDto.getEvaluatorFullName());
@@ -212,7 +231,21 @@ class AssessmentServiceImpl implements AssessmentService {
             assessment.setStatus(Status.FINISHED);
         }
 
+        AssessmentInformation assessmentInformation = getAssessmentInformation(assessment, assessmentDto);
+        assessmentInformationRepository.save(assessmentInformation);
+
         return AssessmentDto.fromAssessment(assessment);
+    }
+
+    private AssessmentInformation getAssessmentInformation(Assessment assessment, AssessmentDto assessmentDto) {
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setStatus(assessment.getStatus());
+        User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(user);
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        assessmentInformation.setPerformedTime(LocalDateTime.now());
+        return assessmentInformation;
     }
 
     private void calculateOverallScore(Assessment assessment, AssessmentDto assessmentDto) {
@@ -327,13 +360,6 @@ class AssessmentServiceImpl implements AssessmentService {
         return departmentGoal;
     }
 
-    /*@Override
-    @Transactional
-    public AssessmentDto continueAssessment(String userId, AssessmentDto assessmentDto) {
-
-        return null;
-
-    }*/
 
     @Override
     @Transactional

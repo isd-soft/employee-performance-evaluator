@@ -39,7 +39,7 @@ export class AssessmentService {
   startAssessment(userId: string, assessmentTemplateId: string) {
     let startAssessmentUrl = " api-server/api/users/" +  userId + "/assessments"
 
-    this.http.post(startAssessmentUrl, {id: assessmentTemplateId}).subscribe(
+    this.http.post(startAssessmentUrl, {id: assessmentTemplateId, createdUserById: this.jwtUser?.id}).subscribe(
       data => {
         this.notificationService.success("Success",'',{
           timeOut: 3000,

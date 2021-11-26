@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {UserviewsServices} from "../userview-services/users-view.service";
 import {User} from "../userview-models/User";
 import {MatPaginator} from '@angular/material/paginator';
@@ -16,9 +16,9 @@ import {NewUser} from "../userview-models/NewUser";
 
 import {RoleService} from "../../../role-change/role-change-service/role.service";
 import {JobItem} from "../../home/home-models/job-item.interface";
-import {Role} from "../../../role-change/role-change-model/role.interface";
 import {CreateUserService} from "../userview-services/create-user.service";
 import {DatePipe} from "@angular/common";
+import { UserDeleteComponent } from '../user-delete/user-delete.component';
 
 @Component({
   selector: 'app-usersview',
@@ -27,7 +27,8 @@ import {DatePipe} from "@angular/common";
   encapsulation: ViewEncapsulation.None
 })
 
-export class UsersView implements AfterViewInit {
+export class UsersView {
+
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job','assessment_status', 'buttons'];
   // @ts-ignore
   dataSource: MatTableDataSource<User>;
@@ -85,26 +86,36 @@ export class UsersView implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    // this.reloadData();
+  refreshAllResources() {
+    this.getUsers();
+    this.getRoles();
+    this.getAssignedUsers();
   }
 
-  ngOnInit(){
-
-    this.userviewsServices.getAssignedUsers().subscribe(data =>{
-      this.assignedUsers = data as User[];
-    })
-
+  getUsers() {
     this.userviewsServices.getUserList().subscribe(data => {
       this.users = data as User[];
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
 
+  getRoles() {
     this.roleService.getJobList().subscribe(data =>
       this.jobList = data as JobItem[]
     );
+  }
+
+  getAssignedUsers() {
+    this.userviewsServices.getAssignedUsers().subscribe(data =>{
+      this.assignedUsers = data as User[];
+    })
+  }
+
+  ngOnInit(){
+
+    this.refreshAllResources();
 
     this.newUser = this.formBuilder.group({
       email: [],
@@ -126,22 +137,14 @@ export class UsersView implements AfterViewInit {
 
   edit(userId : number) {
     this.dialog.open(RoleChangeComponent, {width: '45%', data : this.users[userId]});
-    this.dialog.afterAllClosed;
+    this.refreshAllResources();
   }
 
-  delete(user : string) {
-    this.userviewsServices.deleteUser(user);
-    this.reloadComponent();
-  }
-  reloadComponent() {
-    // @ts-ignore
-    let currentUrl = this.router.url;
-    // @ts-ignore
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    // @ts-ignore
-    this.router.onSameUrlNavigation = 'reload';
-    // @ts-ignore
-    this.router.navigate([currentUrl]);
+  delete(id: string) {
+    const dialogRef = this.dialog.open( UserDeleteComponent, {data: id} );
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshAllResources();
+    });
   }
 
   startAssessment(id: string) {
@@ -166,13 +169,12 @@ export class UsersView implements AfterViewInit {
   }
 
   createUser() {
-    console.log(this.newUser?.value)
     let datePipe = new DatePipe('en-US');
     // @ts-ignore
     this.newUser?.value.birthDate = datePipe.transform(this.newUser?.value.birthDate, 'dd-MM-yyyy') as string;
     // @ts-ignore
     this.newUser?.value.employmentDate = datePipe.transform(this.newUser?.value.employmentDate, 'dd-MM-yyyy') as string;
-    console.log(this.newUser?.value);
     this.createService.createUser(this.newUser?.value);
+    this.refreshAllResources();
   }
 }

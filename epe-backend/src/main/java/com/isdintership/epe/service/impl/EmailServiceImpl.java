@@ -7,6 +7,7 @@ import com.isdintership.epe.service.EmailService;
 import com.isdintership.epe.entity.User;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,6 +25,7 @@ class EmailServiceImpl implements EmailService {
 
     @Override
     @Transactional
+    @Async
     public void sendEmail(User user, String title, String description){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(user.getEmail());
