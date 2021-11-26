@@ -48,6 +48,10 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { AssessmentsAssignedComponent } from './components/assessments/assessments-assigned-component/assessments-assigned.component';
 import { TeamsComponent } from './components/teams/team-component/teams.component';
 import { LineFeedComponent } from './components/linefeed/line-feed-components/line-feed.component';
+import { AssessmentsViewComponent } from './components/assessments/assessments-view/assessments-view.component';
+import { AssessmentsEvaluationComponent } from './components/assessments/assessments-evaluation/assessments-evaluation.component';
+import { TeamViewComponent } from './components/teams/team-view/team-view.component';
+import { TeamDeleteComponent } from './components/teams/team-delete/team-delete.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,12 @@ import { LineFeedComponent } from './components/linefeed/line-feed-components/li
     AssessmentComponent,
     PasswordComponent,
     RoleChangeComponent,
+    AssessmentsAssignedComponent,
+    TeamViewComponent,
+    TeamDeleteComponent,
+    AssessmentsViewComponent,
+    AssessmentsEvaluationComponent,
+    TeamViewComponent
     AssessmentsAssignedComponent,
     LineFeedComponent
   ],

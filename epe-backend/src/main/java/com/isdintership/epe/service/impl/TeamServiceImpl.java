@@ -115,7 +115,7 @@ class TeamServiceImpl implements TeamService {
         }
 
         if (teamDto.getMembers() != null) {
-            teamDto.getMembers().clear();
+            team.getMembers().clear();
             List<UserDto> membersViews = teamDto.getMembers();
 
             for (UserDto memberView : membersViews) {

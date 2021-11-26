@@ -50,6 +50,10 @@
               <mat-icon>open_in_new</mat-icon>
             </button>
 
+            <button mat-button (click)="edit(team.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
             <button mat-button (click)="delete(team.id)">
               <mat-icon>delete</mat-icon>
             </button>
@@ -97,11 +101,6 @@
           </mat-form-field>
           <button class="new-team-submit" [disabled]="createTeamForm.form.invalid" (click)="createTeam()" mat-raised-button>Create Team</button>
       </form>
-      <div class="error-message">
-          <span *ngIf="errorMessage">
-              {{errorMessage}}
-          </span>
-      </div>
   </div>
   </mat-tab>
 </mat-tab-group>

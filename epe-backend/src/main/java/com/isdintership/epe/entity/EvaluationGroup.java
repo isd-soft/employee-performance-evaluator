@@ -31,7 +31,7 @@ public class EvaluationGroup extends BaseEntity {
     private List<EvaluationField> evaluationFields = new ArrayList<>();
 
     @Column(name = "overall_score")
-    private Float overallScore;
+    private Integer overallScore;
 
     @Override
     public boolean equals(Object o) {
@@ -46,10 +46,11 @@ public class EvaluationGroup extends BaseEntity {
     public EvaluationGroup() {
     }
 
-    public EvaluationGroup(Assessment assessment, String title, List<EvaluationField> evaluationFields) {
+    public EvaluationGroup(Assessment assessment, String title, List<EvaluationField> evaluationFields, Integer overallScore) {
         this.assessment = assessment;
         this.title = title;
         this.evaluationFields = evaluationFields;
+        this.overallScore = overallScore;
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isdintership.epe.entity.Assessment;
-import com.isdintership.epe.entity.StatusEnum;
+import com.isdintership.epe.entity.Status;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ public class AssessmentTemplateDto {
     private String title;
     private String description;
     private String jobTitle;
-    private StatusEnum status;
+    private Status status;
     private Boolean isTemplate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
@@ -31,7 +31,7 @@ public class AssessmentTemplateDto {
     }
 
     public AssessmentTemplateDto(String id, String title, String description, String jobTitle,
-                                 StatusEnum status, Boolean isTemplate, LocalDateTime creationDate,
+                                 Status status, Boolean isTemplate, LocalDateTime creationDate,
                                  List<EvaluationGroupDto> evaluationGroupDto) {
         this.id = id;
         this.title = title;

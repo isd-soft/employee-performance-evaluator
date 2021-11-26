@@ -11,11 +11,11 @@ import java.util.List;
 @Data
 public class EvaluationGroupDto {
     private String id;
-    private Float overallScore;
+    private Integer overallScore;
     private String title;
     private String assessmentId;
     @JsonProperty("evaluationFields")
-    private List<EvaluationFieldDto> evaluationFieldDtos;
+    private List<EvaluationFieldDto> evaluationFields;
 
 
     public static EvaluationGroupDto fromEvaluationGroup(EvaluationGroup group){
@@ -28,7 +28,7 @@ public class EvaluationGroupDto {
         for (EvaluationField field : group.getEvaluationFields()){
             fieldsDto.add(EvaluationFieldDto.fromEvaluationField(field));
         }
-        evaluationGroupDto.setEvaluationFieldDtos(fieldsDto);
+        evaluationGroupDto.setEvaluationFields(fieldsDto);
 
         return evaluationGroupDto;
     }

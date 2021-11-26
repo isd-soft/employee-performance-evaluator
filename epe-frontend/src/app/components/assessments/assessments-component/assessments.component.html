@@ -40,7 +40,7 @@
               *matCellDef="let row"
               (click)="$event.stopPropagation()"
           >
-            <button mat-button>
+            <button mat-button (click)="openDialog(dataSource.filteredData.indexOf(row))">
               <mat-icon>open_in_new</mat-icon>
             </button>
           </td>

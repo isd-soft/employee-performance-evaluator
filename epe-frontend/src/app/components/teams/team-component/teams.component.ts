@@ -1,16 +1,18 @@
+import { TeamView } from './../teams-model/team-view.interface';
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from "@angular/material/dialog";
-import { TeamView } from '../teams-model/team-view.interface';
 import { TeamsService } from '../teams-service/teams.service';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { FormControl, Validators } from '@angular/forms';
 import { UserView } from '../teams-model/user-view.interface';
 import { UserService } from '../user-service/user.service';
 import { CreateTeamRequest } from '../teams-model/create-team-request.interface';
 import { TeamEditComponent } from '../team-edit/team-edit.component';
+import { TeamViewComponent } from '../team-view/team-view.component';
+import { TeamDeleteComponent } from '../team-delete/team-delete.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-teams',
@@ -24,9 +26,9 @@ export class TeamsComponent {
   dataSource: MatTableDataSource<TeamView>;
   teams?: TeamView[];
 
-  newTeamName?: string;
+  newTeamName?: string = '';
   teamNameFormControl = new FormControl('', [Validators.required]);
-  newTeamLeaderId?: string;
+  newTeamLeaderId?: string = '';
   teamLeaderFormControl = new FormControl();
   users?: UserView[];
   errorMessage?: string;
@@ -36,7 +38,10 @@ export class TeamsComponent {
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private teamService: TeamsService, public dialog: MatDialog, private userService: UserService){
+  constructor(private teamService: TeamsService, 
+              public dialog: MatDialog, 
+              private userService: UserService,
+              private toastr: ToastrService){
     this.reloadAll();
   }
 
@@ -93,26 +98,34 @@ export class TeamsComponent {
       this.teamService.createTeam(newTeam).subscribe(data => {
       }, error => {
          if(error.status == 201) {
-          // this.router.navigate(['/teams']);
-         } 
-         this.errorMessage = error.error.title;})
+          this.toastr.success('new team created !', '', {
+            timeOut: 2000,
+            progressBar: true
+          });
+         } else {
+          this.toastr.error('something went wrong ..','', {
+            timeOut: 2000,
+            progressBar: true
+          });
+         }})
     }
   }
 
   onView(id: string) {
-    this.dialog.open( TeamEditComponent, {data: id} );
+    this.dialog.open( TeamViewComponent, {data: id} );
   }
 
-  // edit(user : string) {
-  //   console.log('edit');
-  //   // this.dialog.open(RoleChangeComponent, {height:'100%',width:'70%', data : user});
-  //   // this.dialog.afterAllClosed.
-  // }
+  edit(id: string) {
+    const dialogRef = this.dialog.open( TeamEditComponent, {data: id});
+    dialogRef.afterClosed().subscribe(result => {
+      this.reloadTeams();
+    });
+  }
 
   delete(id: string) {
-    this.teamService.deleteTeam(id).subscribe(data => {}, error => {
-      if(error.status == 200)
-        this.reloadTeams();
+    const dialogRef = this.dialog.open( TeamDeleteComponent, {data: id} );
+    dialogRef.afterClosed().subscribe(result => {
+      this.reloadTeams();
     });
   }
 }

@@ -12,11 +12,22 @@ import javax.persistence.*;
 public class PersonalGoal extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assessment_id")
     private Assessment assessment;
 
-    @Column(name = "context", nullable = false)
-    private String context;
+    @Column(name = "goal_s_part", nullable = false)
+    private String goalSPart;
+
+    @Column(name = "goal_m_part", nullable = false)
+    private String goalMPart;
+
+    @Column(name = "goal_a_part", nullable = false)
+    private String goalAPart;
+
+    @Column(name = "goal_r_part", nullable = false)
+    private String goalRPart;
+
+    @Column(name = "goal_t_part", nullable = false)
+    private String goalTPart;
 
     @Override
     public boolean equals(Object o) {
@@ -31,8 +42,13 @@ public class PersonalGoal extends BaseEntity {
     public PersonalGoal() {
     }
 
-    public PersonalGoal(Assessment assessment, String context) {
+    public PersonalGoal(Assessment assessment, String goalSPart, String goalMPart,
+                        String goalAPart, String goalRPart, String goalTPart) {
         this.assessment = assessment;
-        this.context = context;
+        this.goalSPart = goalSPart;
+        this.goalMPart = goalMPart;
+        this.goalAPart = goalAPart;
+        this.goalRPart = goalRPart;
+        this.goalTPart = goalTPart;
     }
 }

@@ -38,7 +38,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         assessmentTemplate.setTitle(assessmentTemplateDto.getTitle());
         assessmentTemplate.setDescription(assessmentTemplateDto.getDescription());
         assessmentTemplate.setJob(job);
-        assessmentTemplate.setStatus(StatusEnum.FIRST_PHASE);
+        assessmentTemplate.setStatus(Status.FIRST_PHASE);
         assessmentTemplate.setIsTemplate(true);
         assessmentTemplate.setCreationDate(LocalDateTime.now());
 
@@ -52,7 +52,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
             List<EvaluationField> evaluationFields = new ArrayList<>();
 
-            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFieldDtos()) {
+            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFields()) {
 
                 EvaluationField field = new EvaluationField();
 
@@ -137,7 +137,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
             group.getEvaluationFields().clear();
 
-            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFieldDtos()) {
+            for (EvaluationFieldDto fieldDto : groupDto.getEvaluationFields()) {
 
                 EvaluationField field = new EvaluationField();
 

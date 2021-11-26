@@ -7,6 +7,8 @@ import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {AssessmentInformation} from "../../linefeed/line-feed-models/AssessmentInformation";
+import {AssessmentsViewComponent} from "../assessments-view/assessments-view.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-assessments',
@@ -29,7 +31,8 @@ export class AssessmentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private assessmentsService: AssessmentsService,
-              private jwtService: JwtService) {
+              private jwtService: JwtService,
+              public dialog: MatDialog) {
 
     this.jwtUser = jwtService.getJwtUser();
   }
@@ -56,6 +59,16 @@ export class AssessmentsComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+
+  }
+
+  openDialog(id: number) {
+    this.dialog.open(AssessmentsViewComponent, {
+      height: '90%',
+      width: '90%',
+      data : this.assessments[id],
+      autoFocus: false
+    });
   }
 
 }
