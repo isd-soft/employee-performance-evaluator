@@ -42,7 +42,7 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String register(RegistrationRequest request) {
+    public UserDto register(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail.isPresent()) {
             throw new UserExistsException("User with email " + request.getEmail()
@@ -78,7 +78,7 @@ class UserServiceImpl implements UserService {
         log.info("Saving user {}", request.getEmail());
         userRepository.save(user);
 
-        return "Registration successful";
+        return UserDto.fromUser(user);
 
     }
 
