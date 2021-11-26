@@ -7,6 +7,8 @@ import {AssessmentsService} from "../assessments-services/assessments.service";
 import {FeedbackView} from "../assessments-models/feedback-view.interface";
 import {EvaluationFieldView} from "../assessments-models/evaluation-field-view.interface";
 import {EvaluationGroupView} from "../assessments-models/evaluation-group-view.interface";
+import {JwtService} from "../../../decoder/decoder-service/jwt.service";
+import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 
 @Component({
   selector: 'app-assessments-evaluation',
@@ -18,12 +20,14 @@ export class AssessmentsEvaluationComponent implements OnInit {
   assessment!: AssessmentView;
   assessmentForm!: FormGroup;
   scores!: number[];
+  jwtUser!: JwtUser;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
               public dialog: MatDialog,
               private formBuilder: FormBuilder,
               private notificationService: ToastrService,
-              private assessmentService: AssessmentsService){
+              private assessmentService: AssessmentsService,
+              private jwtService: JwtService){
 
   }
 
@@ -31,11 +35,12 @@ export class AssessmentsEvaluationComponent implements OnInit {
     this.assessment = this.data as AssessmentView;
     this.scores = [1, 2, 3, 4, 5];
 
-    console.log(this.assessment);
+    this.jwtUser = this.jwtService.getJwtUser();
 
     this.assessmentForm = this.formBuilder.group({
       title: [this.assessment.title],
       jobTitle: [this.assessment.jobTitle],
+      evaluatorFullName: [this.jwtUser.firstname + ' ' + this.jwtUser.lastname],
       description: [this.assessment.description],
       status: [this.assessment.status],
       userId: [this.assessment.userId],
@@ -55,13 +60,9 @@ export class AssessmentsEvaluationComponent implements OnInit {
         ),
       feedbacks: this.formBuilder.array
         (
-          this.assessment.feedbacks.length != 0
-            ? this.assessment.feedbacks.map(feedback => this.createFeedback(feedback))
-            : [this.addFeedback()]
+          [this.addFeedback()]
         )
     });
-
-    console.log(this.assessmentForm);
   }
 
   createGroup(group: EvaluationGroupView): FormGroup {
@@ -79,7 +80,8 @@ export class AssessmentsEvaluationComponent implements OnInit {
     return this.formBuilder.group({
       title: [field.title],
       comment: [field.comment],
-      firstScore: []
+      firstScore: [field.firstScore],
+      secondScore: [field.secondScore],
     });
   }
 
@@ -114,7 +116,7 @@ export class AssessmentsEvaluationComponent implements OnInit {
   addFeedback(): FormGroup {
     return this.formBuilder.group({
       context: [],
-      authorFullName: []
+      authorFullName: [this.jwtUser.firstname + ' ' + this.jwtUser.lastname]
     })
   }
 
@@ -158,13 +160,9 @@ export class AssessmentsEvaluationComponent implements OnInit {
 
     if (this.assessmentForm.valid) {
 
-      if (this.feedbackArray.controls[0].value.context) {
-        this.feedbackArray.controls.splice(0, 1);
-      }
-
+      console.log(this.assessmentForm.value);
       this.assessmentService.evaluateAssessment(this.assessment.id,
         this.assessmentForm.value);
-
     } else {
       this.notificationService.error('Form should not have empty fields',
         '', {

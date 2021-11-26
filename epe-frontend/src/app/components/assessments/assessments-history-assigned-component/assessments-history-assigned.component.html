@@ -8,14 +8,14 @@
 
     <!-- Evaluated user name Column -->
     <ng-container matColumnDef="evaluatedUser">
-      <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Evaluated employee </th>
-      <td mat-cell class="title-position" *matCellDef="let row"> {{row.evaluatedUserFullName}} </td>
+      <th mat-header-cell class="name-column" *matHeaderCellDef mat-sort-header> Evaluated employee </th>
+      <td mat-cell class="name-column" *matCellDef="let row"> {{row.evaluatedUserFullName}} </td>
     </ng-container>
 
     <!-- Position Column -->
     <ng-container matColumnDef="jobTitle">
-      <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Position </th>
-      <td mat-cell class="title-position" *matCellDef="let row"> {{row.jobTitle}} </td>
+      <th mat-header-cell class="position-column" *matHeaderCellDef mat-sort-header> Position </th>
+      <td mat-cell class="position-column" *matCellDef="let row"> {{row.jobTitle}} </td>
     </ng-container>
 
     <!-- Title Column -->
@@ -24,12 +24,17 @@
       <td mat-cell class="title-column" *matCellDef="let row"> {{row.title}} </td>
     </ng-container>
 
-    <!-- Start date Column-->
+    <!-- Status Column-->
     <ng-container matColumnDef="status">
-      <th mat-header-cell class="start-date-column" *matHeaderCellDef mat-sort-header> Status </th>
-      <td mat-cell class="start-date-column" *matCellDef="let row"> {{row.status | titlecase | replaceUnderscore}} </td>
+      <th mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell class="status-column" *matCellDef="let row"> {{row.status | titlecase | replaceUnderscore}} </td>
     </ng-container>
 
+    <!-- End date Column-->
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell class="end-date-column" *matHeaderCellDef mat-sort-header> End date </th>
+      <td mat-cell class="end-date-column" *matCellDef="let row"> {{row.endDate}} </td>
+    </ng-container>
 
     <ng-container matColumnDef="buttons">
       <th mat-header-cell class="buttons-column" *matHeaderCellDef>&nbsp;&nbsp;&nbsp;View</th>
@@ -38,7 +43,6 @@
           *matCellDef="let row"
           (click)="$event.stopPropagation()"
       >
-
         <button mat-button (click)="openDialog(dataSource.filteredData.indexOf(row))">
           <mat-icon>open_in_new</mat-icon>
         </button>
@@ -50,7 +54,7 @@
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No assessments found</td>
+      <td class="mat-cell" colspan="5">You have no assigned assessments history</td>
     </tr>
   </table>
 

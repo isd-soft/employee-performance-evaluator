@@ -102,9 +102,21 @@ mat-card {
   display: inline-block;
   vertical-align: middle;
   width: 12%;
-  height: 1%;
+  margin-left: 1%;
+  /*border: 1px solid #000;*/
   font-size: 20px;
   text-align: center;
+}
+
+.evaluation-field-assigned-user-score {
+  display: inline-block;
+  vertical-align: middle;
+  width: 12%;
+  height: 1%;
+  /*border: 1px solid #000;*/
+  font-size: 20px;
+  text-align: center;
+  margin-left: 3.5%;
 }
 
 .evaluation-field-assigned-user-score {
@@ -223,6 +235,7 @@ mat-form-field, mat-form-field label {
   display: inline-block;
   vertical-align: middle;
   width: 100%;
+  margin-bottom: 2%;
 }
 
 .feedback-author-header {
@@ -259,4 +272,27 @@ mat-form-field, mat-form-field label {
   vertical-align: middle;
   width: 65%;
   background: #e5e5e5;
+}
+
+.group-score {
+  font-size: 25px;
+  padding: 2% 0;
+  margin-left: 71%;
+}
+
+.group-score-title {
+  display: inline-block;
+  padding-right: 8%;
+}
+
+.assessment-score {
+  font-size: 30px;
+  padding-bottom: 2%;
+  margin-left: 65%;
+}
+
+.assessment-score-title {
+  display: inline-block;
+  font-size: 24px;
+  padding-right: 6%;
 }

@@ -6,17 +6,17 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
-import {AssessmentsViewComponent} from "../assessments-view/assessments-view.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AssessmentsViewComponent} from "../assessments-view/assessments-view.component";
 
 @Component({
-  selector: 'app-assessments-assigned',
-  templateUrl: './assessments-assigned.component.html',
-  styleUrls: ['./assessments-assigned.component.css']
+  selector: 'app-assessments-history',
+  templateUrl: './assessments-history.component.html',
+  styleUrls: ['./assessments-history.component.css']
 })
-export class AssessmentsAssignedComponent implements OnInit, AfterViewInit {
+export class AssessmentsHistoryComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['evaluatedUser', 'jobTitle', 'title', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'position', 'endDate', 'status', 'buttons'];
   dataSource!: MatTableDataSource<AssessmentView>;
 
   assessments!: AssessmentView[];
@@ -27,7 +27,7 @@ export class AssessmentsAssignedComponent implements OnInit, AfterViewInit {
 
   constructor(private assessmentsService: AssessmentsService,
               private jwtService: JwtService,
-              private dialog: MatDialog) {
+              public dialog: MatDialog) {
 
     this.jwtUser = jwtService.getJwtUser();
   }
@@ -36,7 +36,7 @@ export class AssessmentsAssignedComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.assessmentsService.getAllAssignedAssessmentsByStatus(this.jwtUser.id, 'ACTIVE').subscribe(
+    this.assessmentsService.getAllAssessmentsByUserIdAndStatus(this.jwtUser.id, 'INACTIVE').subscribe(
       data => {
         this.assessments = data as AssessmentView[];
         this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);
