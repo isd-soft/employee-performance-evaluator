@@ -49,7 +49,7 @@ const routes: Routes = [
   {
     path: 'teams',
     component: TeamsComponent,
-    canActivate: [AdminGuard, SysadminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'team-edit',
