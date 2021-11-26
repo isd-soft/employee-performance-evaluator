@@ -3,7 +3,7 @@ package com.isdintership.epe.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.isdintership.epe.entity.Assessment;
-import com.isdintership.epe.entity.StatusEnum;
+import com.isdintership.epe.entity.Status;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,8 +18,8 @@ public class AssessmentDto {
     private String title;
     private String description;
     private String jobTitle;
-    private Float overallScore;
-    private StatusEnum status;
+    private Integer overallScore;
+    private Status status;
     private Boolean isTemplate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startDate;
@@ -72,5 +72,13 @@ public class AssessmentDto {
         assessmentDto.setFeedbacks(feedbackDtos);
 
         return assessmentDto;
+    }
+
+    public boolean isFirstPhase() {
+        return this.getStatus() == Status.FIRST_PHASE;
+    }
+
+    public boolean isSecondPhase() {
+        return this.getStatus() == Status.SECOND_PHASE;
     }
 }
