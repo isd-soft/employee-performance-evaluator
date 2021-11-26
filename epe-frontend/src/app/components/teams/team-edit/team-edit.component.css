@@ -1,26 +1,47 @@
-.center {
+.edit-container {
+    height: 70vh;
+    width: 60vw;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.edit-container::-webkit-scrollbar { 
+    display: none;
+}
+
+.edit-element {
+    padding: 10px;
+    border-bottom: 1px dotted #CCCCCC;
+    border-top: 1px dotted #CCCCCC;
+}
+
+.edit-element-header {
+    padding: 10px;
+}
+
+.edit-element-container {
+    padding: 5px;
     text-align: center;
-    margin-top: 10%;
 }
 
-.header {
-    font-size: 35px;
-    font-weight: 700;
+.edit-text {
+    height: 30px;
+    font-size: 18px;
 }
 
-.edit-team-input {
-    width: 80%;
+.full-size {
+    width: 100%;
 }
 
-.edit-team-submit {
-    margin: 20px;
-    width: 70%;
+.half-size {
+    width: 75%;
     color: #FFFFFF;
+    border-radius: 5px;
     background-color: #000000;
-    border-radius: 25px;
 }
 
-.error-message {
-    color: #FF0000;
-    text-align: center;
+.small-remove {
+    color: #CCCCCC;
+    font-size: 15px;
 }

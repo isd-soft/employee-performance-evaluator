@@ -51,7 +51,7 @@ mat-form-field {
 
 .raise:hover,
 .raise:focus {
-  /*transform: translateY(-0.1em);*/
+  transition-duration: 0.4s;
   transform: scale(1.4);
   cursor: pointer;
 }

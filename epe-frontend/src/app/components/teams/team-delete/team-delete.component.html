@@ -1,0 +1,13 @@
+<div *ngIf="getTeam">    
+    <mat-card>
+        <mat-card-title-group>
+            <mat-card-title>
+                Are you sure you want to delete "{{getTeam.name}}" team ?
+            </mat-card-title>
+        </mat-card-title-group>
+        <hr class="fifty-percent">
+        <mat-card-content>
+            <button class="full-size-red" mat-raised-button (click)="deleteTeam()">Yes</button>
+        </mat-card-content>
+    </mat-card>
+</div>

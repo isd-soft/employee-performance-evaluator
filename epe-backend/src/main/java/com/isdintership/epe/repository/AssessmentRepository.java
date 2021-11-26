@@ -1,7 +1,7 @@
 package com.isdintership.epe.repository;
 
 import com.isdintership.epe.entity.Assessment;
-import com.isdintership.epe.entity.StatusEnum;
+import com.isdintership.epe.entity.Status;
 import com.isdintership.epe.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,11 +16,11 @@ public interface AssessmentRepository extends JpaRepository<Assessment, String> 
 
     List<Assessment> findByUser(User user);
 
-    List<Assessment> findByUserAndStatus(User user, StatusEnum status);
+    List<Assessment> findByUserAndStatus(User user, Status status);
 
-    Optional<Assessment> findByUserAndStatusIn(User user, List<StatusEnum> status);
+    Optional<Assessment> findByUserAndStatusIn(User user, List<Status> statuses);
 
-    List<Assessment> findByUserAndStatusIsNot(User user, StatusEnum status);
+    List<Assessment> findByUserAndStatusIsNot(User user, Status status);
 
     List<Assessment> findAllByIsTemplate(Boolean isTemplate);
 

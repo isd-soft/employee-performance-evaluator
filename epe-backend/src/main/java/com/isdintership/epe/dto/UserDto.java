@@ -3,7 +3,7 @@ package com.isdintership.epe.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.isdintership.epe.entity.Assessment;
-import com.isdintership.epe.entity.StatusEnum;
+import com.isdintership.epe.entity.Status;
 import com.isdintership.epe.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -51,7 +51,7 @@ public class UserDto {
 
         min.ifPresent(assessment -> {
             var status = assessment.getStatus();
-            if ((status.equals(StatusEnum.CANCELED) || status.equals(StatusEnum.FINISHED))){
+            if ((status.equals(Status.CANCELED) || status.equals(Status.FINISHED))){
                 userView.setStatus("");
             } else userView.setStatus(status.toString());
         });

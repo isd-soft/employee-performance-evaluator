@@ -58,7 +58,8 @@ export class AssessmentsTemplatesComponent implements OnInit, AfterViewInit {
     this.dialog.open(AssessmentTemplateViewComponent, {
       height: '90%',
       width: '90%',
-      data : this.assessmentsTemplates[id]
+      data : this.assessmentsTemplates[id],
+      autoFocus: false
     });
   }
 

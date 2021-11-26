@@ -7,6 +7,7 @@ import lombok.Data;
 public class FeedbackDto {
     private String id;
     private String authorId;
+    private String authorFullName;
     private String context;
     private String assessmentId;
 
@@ -16,6 +17,7 @@ public class FeedbackDto {
 
         feedbackDto.setId(feedback.getId());
         feedbackDto.setAuthorId(feedback.getAuthorId());
+        feedbackDto.setAuthorFullName(feedback.getAuthorFullName());
         feedbackDto.setContext(feedback.getContext());
         feedbackDto.setAssessmentId(feedback.getAssessment().getId());
 
