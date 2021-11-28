@@ -76,6 +76,17 @@
     </mat-form-field>
   </div>
 
+  <div *ngIf="currentRole == requiredRole && currentUserId != user.id">
+    <mat-form-field appearance="fill">
+      <mat-label>Buddy</mat-label>
+      <mat-select value="user.buddyId" required formControlName="buddyId">
+        <mat-option *ngFor="let buddy of buddies" [value]="buddy.id">
+          {{ buddy.firstname }} {{buddy.lastname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
 
 
   <div class="centralize" style="margin-top: 1%; padding-right: 13%">
