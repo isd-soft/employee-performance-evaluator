@@ -1,5 +1,6 @@
 package com.isdintership.epe.controller;
 
+import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +12,7 @@ import javax.annotation.security.RolesAllowed;
 
 import java.util.List;
 
-import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_ADMIN;
-import static com.isdintership.epe.entity.RoleEnum.Fields.ROLE_SYSADMIN;
+import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 
 @RestController
 @RequestMapping(value = "/api/teams")
@@ -30,15 +30,21 @@ public class TeamController {
     }
 
     @GetMapping(value = "/{id}")
-    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN, ROLE_USER})
     public ResponseEntity<TeamDto> getTeam(@PathVariable(name = "id") String id) {
         return new ResponseEntity<>(teamService.getTeam(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "")
-    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
+    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN, ROLE_USER})
     public ResponseEntity<List<TeamDto>> getAllTeams() {
         return new ResponseEntity<>(teamService.getAllTeams(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}/members")
+    @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
+    public ResponseEntity<List<UserDto>> getTeamMembers(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(teamService.getTeamMembers(id));
     }
 
     @PutMapping(value = "/{id}")

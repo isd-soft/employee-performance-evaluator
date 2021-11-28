@@ -156,6 +156,19 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public List<UserDto> getAllBuddies(String id) {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            if (!user.getId().equals(id)) {
+                userDtos.add(UserDto.fromUser(user));
+            }
+        }
+        return userDtos;
+    }
+
+    @Override
+    @Transactional
     public UserDto getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));

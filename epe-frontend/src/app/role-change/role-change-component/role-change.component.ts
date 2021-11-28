@@ -18,6 +18,7 @@ import {JwtUser} from "../../decoder/decoder-model/jwt-user.interface";
 export class RoleChangeComponent implements OnInit {
 
   user!: User
+  buddies!: User[]
 
   auxUser!: FormGroup;
 

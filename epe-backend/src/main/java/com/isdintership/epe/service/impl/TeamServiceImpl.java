@@ -145,4 +145,20 @@ class TeamServiceImpl implements TeamService {
 
     }
 
+    @Override
+    @Transactional
+    public List<UserDto> getTeamMembers(String id) {
+        List<Team> leaderTeams = new ArrayList<>();
+        leaderTeams.addAll(teamRepository.findAllByTeamLeaderId(id));
+        List<User> listOfMemmbers = new ArrayList<>();
+        for (Team team : leaderTeams) {
+            listOfMemmbers.addAll(team.getMembers());
+        }
+        List<UserDto> listToReturn = new ArrayList<>();
+        for (User user : listOfMemmbers) {
+            listToReturn.add(UserDto.fromUser(user));
+        }
+        return listToReturn;
+    }
+
 }

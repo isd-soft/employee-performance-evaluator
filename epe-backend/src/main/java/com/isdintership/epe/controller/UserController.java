@@ -1,6 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.*;
+import com.isdintership.epe.entity.User;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class UserController {
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/{id}/buddies")
+    public ResponseEntity<List<UserDto>> getAllBuddies(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(userService.getAllBuddies(id));
     }
 
     @PostMapping

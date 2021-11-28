@@ -13,14 +13,18 @@ import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 export class UserviewsServices {
 
   url: string = 'api-server/api/users';
+  url2: string = 'api-server/api/teams';
 
   jwtUser?: JwtUser;
-  role? : string
+  role? : string;
+  id? : string;
 
   constructor(private http: HttpClient, private jwtService: JwtService) {
     this.jwtUser = this.jwtService.getJwtUser();
-    if(this.jwtUser)
+    if(this.jwtUser) {
       this.role = this.jwtUser.role;
+      this.id = this.jwtUser.id;
+    }
   }
 
   getUserList() {
@@ -36,13 +40,18 @@ export class UserviewsServices {
     return this.http.delete(this.url + '/' + userId).subscribe();
   }
 
-  getRole() {
-    return this.role;
+  getTeams() {
+    return this.http.get(this.url2);
+  }
+
+  getTeamMembers() {
+    return this.http.get(this.url2 + '/' + this.id + '/members')
   }
 
   getAssessmentTemplates() {
     return this.http.get("api-server/api/assessments-templates");
   }
+
 
   errorHandler(error: HttpErrorResponse){
     return observableThrowError(error);
