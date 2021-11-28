@@ -1,3 +1,7 @@
+p {
+  font-size: 15px;
+}
+
 mat-card, .mat-card-content {
   font-size: 15px;
 }

@@ -6,7 +6,7 @@
   min-height: 98vh;
   border-radius: 10px;
   margin: 0.5% 0.5%;
-  padding: 0 4%;
+  padding: 0 2%;
 }
 
 .mat-cell, .mat-header-cell, .mat-paginator {
@@ -19,8 +19,9 @@
   color: black;
 }
 
-table, mat-paginator {
+.table {
   width: 100%;
+  padding: 0 2%;
 }
 
 
@@ -31,6 +32,14 @@ table, mat-paginator {
 
 .column-title, .column-position, .column-creation-date {
   width: 29.333%;
+}
+
+.column-view {
+  width: 12%;
+}
+
+table {
+  width: 100%;
 }
 
 mat-paginator {
