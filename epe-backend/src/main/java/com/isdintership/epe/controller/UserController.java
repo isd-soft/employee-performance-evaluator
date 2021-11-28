@@ -63,7 +63,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<UserDto> deleteUser(@PathVariable("id") String id) {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 

@@ -285,12 +285,21 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String deleteUser(String id) {
-        userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + " was not found"));
+    public UserDto deleteUser(String id) {
+
+        UserDto userDto = UserDto.fromUser(userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " was not found")));
         userRepository.removeById(id);
 
-        return ("User with id " + id + " was deleted");
+
+        List<User> users = userRepository.findByBuddyId(id);
+
+        for (User user : users) {
+            user.setBuddyId(null);
+        }
+
+        //return ("User with id " + id + " was deleted");
+        return userDto;
     }
 
     @Override
