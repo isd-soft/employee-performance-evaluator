@@ -1,4 +1,9 @@
 <mat-card class="template-view">
+
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+
   <mat-card-title>{{ assessment.title }}</mat-card-title>
   <mat-card-subtitle>{{ assessment.jobTitle }}</mat-card-subtitle>
   <mat-card-content>
