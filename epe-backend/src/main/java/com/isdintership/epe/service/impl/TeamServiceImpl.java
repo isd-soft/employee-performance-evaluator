@@ -158,6 +158,7 @@ class TeamServiceImpl implements TeamService {
         for (User user : listOfMemmbers) {
             listToReturn.add(UserDto.fromUser(user));
         }
+        
         return listToReturn;
     }
 

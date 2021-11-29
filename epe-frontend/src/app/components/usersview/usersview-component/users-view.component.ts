@@ -50,6 +50,8 @@ export class UsersView {
 
   userDto?: NewUser;
 
+  userToExport?: NewUser;
+
   jobList?: JobItem[];
 
   teamList?: TeamView[];
@@ -218,5 +220,13 @@ export class UsersView {
 
   createNewUser() {
     this.dialog.open(CreateUserComponent, {width: '50%'});
+  }
+
+  exportToPdf(userId : string | undefined) {
+    this.userviewsServices.exportToPdf(userId).subscribe();
+  }
+
+  exportToExcel(userId : string | undefined) {
+    this.userviewsServices.exportToExcel(userId).subscribe();
   }
 }
