@@ -49,6 +49,10 @@ export class UserviewsServices {
     return this.http.get(this.url2 + '/' + this.id + '/members')
   }
 
+  getTeamLeader() {
+    return this.http.get(this.url2 + '/' + this.id + '/leader')
+  }
+
   getAssessmentTemplates() {
     return this.http.get("api-server/api/assessments-templates");
   }

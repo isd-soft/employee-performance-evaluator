@@ -192,6 +192,7 @@
   <mat-tab label="My team">
     <mat-form-field appearance="standard" class="filter-field">
 
+
       <mat-label>Filter</mat-label>
       <input
         matInput
@@ -290,6 +291,7 @@
 
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
+    <h4 *ngIf="teamLeader != null && teamLeader.id != this.id">Team leader: <b>{{teamLeader.firstname}} {{teamLeader.lastname}}</b></h4>
   </mat-tab>
   </div>
 </mat-tab-group>

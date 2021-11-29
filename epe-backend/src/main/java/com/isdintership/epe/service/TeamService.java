@@ -18,4 +18,6 @@ public interface TeamService {
     String deleteTeam(String id);
 
     List<UserDto> getTeamMembers(String id);
+
+    UserDto getTeamLeader(String id);
 }

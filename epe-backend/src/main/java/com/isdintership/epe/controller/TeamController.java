@@ -47,6 +47,12 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeamMembers(id));
     }
 
+    @GetMapping(value = "/{id}/leader")
+    @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
+    public ResponseEntity<UserDto> getTeamLeader(@PathVariable(name = "id")String id) {
+        return ResponseEntity.ok(teamService.getTeamLeader(id));
+    }
+
     @PutMapping(value = "/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
     public ResponseEntity<TeamDto> updateTeam(

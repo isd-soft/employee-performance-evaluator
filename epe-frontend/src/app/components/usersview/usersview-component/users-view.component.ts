@@ -50,6 +50,8 @@ export class UsersView {
 
   userDto?: NewUser;
 
+  teamLeader?: NewUser;
+
   userToExport?: NewUser;
 
   jobList?: JobItem[];
@@ -95,7 +97,8 @@ export class UsersView {
       bio: 'new user'
     }
 
-
+    this.userviewsServices.getTeamLeader().subscribe(data =>
+      this.teamLeader = data as NewUser);
 
   }
 
@@ -106,6 +109,8 @@ export class UsersView {
       this.dataSource2.paginator = this.paginator2;
       this.dataSource2.sort = this.sort2;
     });
+
+
 
   }
 
