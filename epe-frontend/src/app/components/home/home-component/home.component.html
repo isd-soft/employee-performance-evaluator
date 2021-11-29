@@ -80,6 +80,10 @@
                   *ngIf="firstnameFormControl.hasError('required')">
                   Firstname is required
                 </mat-error>
+                <mat-error
+                *ngIf="firstnameFormControl.errors?.pattern">
+                Please insert a correct firstname
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="register-input" appearance="fill">
@@ -94,6 +98,10 @@
                   *ngIf="lastnameFormControl.hasError('required')">
                   Lastname is required
                 </mat-error>
+                <mat-error
+                *ngIf="lastnameFormControl.errors?.pattern">
+                Please insert a correct lastname
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="register-input" appearance="fill">
@@ -122,6 +130,10 @@
                   *ngIf="phoneFormControl.hasError('required')">
                   Phone number is required
                 </mat-error>
+                <mat-error
+                *ngIf="phoneFormControl.errors?.pattern">
+                Phone number must be 9-15 digits long
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="register-input" appearance="fill">
@@ -159,6 +171,9 @@
                 <mat-error *ngIf="passwordFormControl.hasError('required')">
                     Please enter your password
                 </mat-error>
+                <mat-error *ngIf="passwordFormControl.errors?.pattern">
+                  Your password must be between 12 and 30 characters long, must contain at least one uppercase letter, one lowercase letter, one number and one special character
+              </mat-error>
               </mat-form-field>
 
               <mat-form-field class="register-input" appearance="fill">
@@ -172,6 +187,9 @@
                 <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
                     Please enter your password
                 </mat-error>
+                <mat-error *ngIf="confirmPasswordFormControl.errors?.pattern">
+                  Your password must be between 12 and 30 characters long, must contain at least one uppercase letter, one lowercase letter, one number and one special character
+              </mat-error>
               </mat-form-field>
 
             <button class="register-submit" (click)="register()" mat-raised-button>Register</button>

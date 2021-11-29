@@ -29,15 +29,15 @@ export class HomeComponent {
 
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  firstnameFormControl = new FormControl('', [Validators.required]);
-  lastnameFormControl = new FormControl('', [Validators.required]);
+  firstnameFormControl = new FormControl('', [Validators.required, Validators.pattern("^[A-Z][A-Za-z '-]{2,19}$")]);
+  lastnameFormControl = new FormControl('', [Validators.required, Validators.pattern("^[A-Z][A-Za-z '-]{2,19}$")]);
   birthdateFormControl = new FormControl('', [Validators.required]);
-  phoneFormControl = new FormControl('', [Validators.required]);
+  phoneFormControl = new FormControl('', [Validators.required, Validators.pattern("^[+]*[0-9]{9,15}$")]);
   jobFormControl = new FormControl();
   jobList?: JobItem[];
   employmentdateFormControl = new FormControl('', [Validators.required]);
-  passwordFormControl = new FormControl('', [Validators.required]);
-  confirmPasswordFormControl = new FormControl('', [Validators.required]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,30}$")]);
+  confirmPasswordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,30}$")]);
 
   registerUser: RegisterRequest = {
     email: '',
@@ -47,7 +47,7 @@ export class HomeComponent {
     employmentDate: '',
     phoneNumber: '',
     job: '',
-    bio: 'new user',
+    bio: '',
     password: ''
   };
 
