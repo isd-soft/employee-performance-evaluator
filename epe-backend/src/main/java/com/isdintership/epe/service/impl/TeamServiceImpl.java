@@ -145,4 +145,59 @@ class TeamServiceImpl implements TeamService {
 
     }
 
+    @Override
+    @Transactional
+    public List<UserDto> getTeamMembers(String id) {
+        List<Team> leaderTeams = new ArrayList<>();
+        leaderTeams.addAll(teamRepository.findAllByTeamLeaderId(id));
+        List<User> listOfMemmbers = new ArrayList<>();
+        for (Team team : leaderTeams) {
+            listOfMemmbers.addAll(team.getMembers());
+        }
+        List<UserDto> listToReturn = new ArrayList<>();
+        for (User user : listOfMemmbers) {
+            listToReturn.add(UserDto.fromUser(user));
+        }
+        List<Team> teams = teamRepository.findAll();
+        for (Team team : teams) {
+            List<User> users = team.getMembers();
+            for (User user : users) {
+                List <User> auxList = users;
+                boolean flag = false;
+                if (user.getId().equals(id)) {
+                    flag = true;
+                }
+                if (flag == true) {
+                    for (User auxUser : auxList) {
+                        if (!auxUser.getId().equals(id)) {
+                            listToReturn.add(UserDto.fromUser(auxUser));
+                        }
+                    }
+                }
+            }
+        }
+        return listToReturn;
+    }
+
+    @Override
+    @Transactional
+    public UserDto getTeamLeader(String id) {
+        List<Team> allTeams = teamRepository.findAll();
+        UserDto teamLeader = null;
+        boolean flag = false;
+        for (Team team : allTeams) {
+            List<User> teamMembers = team.getMembers();
+            for (User user : teamMembers) {
+                if (user.getId().equals(id)) {
+                    teamLeader = UserDto.fromUser(team.getTeamLeader());
+                    flag = true;
+                }
+            }
+        }
+        if (flag) {
+            return teamLeader;
+        } else {
+            return null;
+        }
+    }
 }

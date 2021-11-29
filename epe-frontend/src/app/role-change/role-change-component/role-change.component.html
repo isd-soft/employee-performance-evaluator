@@ -21,7 +21,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
-    <input matInput required  readonly [value]="user?.email" formControlName="email">
+    <input type="email" matInput required  readonly [value]="user?.email" formControlName="email">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -75,6 +75,20 @@
       </mat-select>
     </mat-form-field>
   </div>
+
+  <div *ngIf="currentRole == requiredRole && currentUserId != user.id">
+    <mat-form-field appearance="fill">
+      <mat-label>Buddy</mat-label>
+      <mat-select value="user.buddyId" required formControlName="buddyId">
+        <mat-option *ngFor="let buddy of buddies" [value]="buddy.id">
+          {{ buddy.firstname }} {{buddy.lastname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+
   <div class="centralize" style="margin-top: 1%; padding-right: 13%">
     <button mat-raised-button color="primary" style="margin-right: 1%"
             type="button"

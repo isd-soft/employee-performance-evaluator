@@ -10,4 +10,5 @@ export interface User{
     job: string
     bio: string
     role: string
+    buddyId: string
 }
