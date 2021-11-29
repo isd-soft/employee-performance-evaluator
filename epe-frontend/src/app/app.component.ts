@@ -21,18 +21,18 @@ export class AppComponent {
       this.jwtUser = this.jwtService.getJwtUser();
 
       if(this.jwtUser) {
-        if(this.jwtUser.role == 'ROLE_SYSADMIN') {
+        if(this.jwtUser.role === 'ROLE_SYSADMIN') {
           this.isSysAdmin = true;
           this.isAdmin = true;
           this.isUser = true;
         }
 
-        if(this.jwtUser.role == 'ROLE_ADMIN') {
+        if(this.jwtUser.role === 'ROLE_ADMIN') {
           this.isSysAdmin = false;
           this.isAdmin = true;
           this.isUser = true;
         }
-        if(this.jwtUser.role == 'ROLE_USER') {
+        if(this.jwtUser.role === 'ROLE_USER') {
           this.isSysAdmin = false;
           this.isAdmin = false;
           this.isUser = true;
