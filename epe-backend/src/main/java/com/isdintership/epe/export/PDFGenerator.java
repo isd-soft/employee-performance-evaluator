@@ -1,115 +1,163 @@
 package com.isdintership.epe.export;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.util.stream.Stream;
-
+import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.lowagie.text.*;
+import com.lowagie.text.Font;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.io.IOException;
+import java.util.List;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
 public class PDFGenerator {
-    private static Logger logger = LoggerFactory.getLogger(PDFGenerator.class);
 
-    public static ByteArrayInputStream userPDFReport (User user) {
-        Document document = new Document();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        try {
+    public void exportUserToPdf(HttpServletResponse response, UserDto user) throws IOException {
+        Document document = new Document(PageSize.A4);
+        PdfWriter.getInstance(document, response.getOutputStream());
+        document.open();
 
-            PdfWriter.getInstance(document, out);
-            document.open();
+        Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        fontTitle.setSize(18);
+        Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
+        fontParagraph.setSize(12);
 
-            // Add Text to PDF file ->
-            Font font = FontFactory.getFont(FontFactory.COURIER, 14,
-                    BaseColor.BLACK);
-            Paragraph para = new Paragraph("Employee Table", font);
-            para.setAlignment(Element.ALIGN_CENTER);
-            document.add(para);
-            document.add(Chunk.NEWLINE);
+        Paragraph titleParagraph = new Paragraph(user.getFirstname() + " " + user.getLastname(), fontTitle);
+        titleParagraph.setAlignment(Paragraph.ALIGN_CENTER);
 
-            PdfPTable table = new PdfPTable(3);
-            // Add PDF Table Header ->
-            Stream.of("Email", "First Name", "Last Name", "Birth date", "Employment date", "Phone number",
-                      "Job", "Bio").forEach(headerTitle ->
-            {
-                PdfPCell header = new PdfPCell();
-                Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-                header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                header.setHorizontalAlignment(Element.ALIGN_CENTER);
-                header.setBorderWidth(2);
-                header.setPhrase(new Phrase(headerTitle, headFont));
-                table.addCell(header);
-            });
 
-            PdfPCell emailCell = new PdfPCell(new Phrase(String.valueOf(user.getEmail())));
-            emailCell.setPaddingLeft(4);
-            emailCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            emailCell.setHorizontalAlignment(Element.ALIGN_LEFT);
-            table.addCell(emailCell);
+        Paragraph emptyRow = new Paragraph("                     ");
+        emptyRow.setAlignment(Paragraph.ALIGN_CENTER);
 
-            PdfPCell firstNameCell = new PdfPCell(new Phrase(String.valueOf(user.getFirstname())));
-            firstNameCell.setPaddingLeft(4);
-            firstNameCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            firstNameCell.setHorizontalAlignment(Element.ALIGN_LEFT);
-            table.addCell(firstNameCell);
+        Paragraph emailParagraphKey = new Paragraph("Email:                              ", fontParagraph);
+        emailParagraphKey.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph emailParagraphValue = new Paragraph(user.getEmail(), fontTitle);
+        emailParagraphValue.setAlignment(Paragraph.ALIGN_CENTER);
+        emailParagraphKey.add(emailParagraphValue);
 
-            PdfPCell lastNameCell = new PdfPCell(new Phrase(String.valueOf(user.getLastname())));
-            lastNameCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            lastNameCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            lastNameCell.setPaddingRight(4);
-            table.addCell(lastNameCell);
+        Paragraph phoneNumberParagraphKey = new Paragraph("Phone number:               ", fontParagraph);
+        phoneNumberParagraphKey.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph phoneNumberParagraphValue = new Paragraph(user.getPhoneNumber(), fontTitle);
+        phoneNumberParagraphValue.setAlignment(Paragraph.ALIGN_CENTER);
+        phoneNumberParagraphKey.add(phoneNumberParagraphValue);
 
-            PdfPCell birthDateCell = new PdfPCell(new Phrase(String.valueOf(user.getBirthDate())));
-            birthDateCell.setPaddingLeft(4);
-            birthDateCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            birthDateCell.setHorizontalAlignment(Element.ALIGN_LEFT);
-            table.addCell(birthDateCell);
+        Paragraph birthDateParagraphKey = new Paragraph("Birth date:                       ", fontParagraph);
+        birthDateParagraphKey.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph birthDateParagraphValue = new Paragraph(String.valueOf(user.getBirthDate()), fontTitle);
+        birthDateParagraphValue.setAlignment(Paragraph.ALIGN_CENTER);
+        birthDateParagraphKey.add(birthDateParagraphValue);
 
-            PdfPCell employmentDateCell = new PdfPCell(new Phrase(String.valueOf(user.getBirthDate())));
-            employmentDateCell.setPaddingLeft(4);
-            employmentDateCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            employmentDateCell.setHorizontalAlignment(Element.ALIGN_LEFT);
-            table.addCell(employmentDateCell);
+        Paragraph employmentDateParagraphKey = new Paragraph("Employment date:           ", fontParagraph);
+        employmentDateParagraphKey.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph employmentDateParagraphValue = new Paragraph(String.valueOf(user.getEmploymentDate()), fontTitle);
+        employmentDateParagraphValue.setAlignment(Paragraph.ALIGN_CENTER);
+        employmentDateParagraphKey.add(employmentDateParagraphValue);
 
-            PdfPCell phoneNumberCell = new PdfPCell(new Phrase(String.valueOf(user.getPhoneNumber())));
-            phoneNumberCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            phoneNumberCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            phoneNumberCell.setPaddingRight(4);
-            table.addCell(phoneNumberCell);
+        Paragraph jobParagraphKey = new Paragraph("Job:                                 ", fontParagraph);
+        jobParagraphKey.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph jobParagraphValue = new Paragraph(String.valueOf(user.getJob()), fontTitle);
+        jobParagraphValue.setAlignment(Paragraph.ALIGN_CENTER);
+        jobParagraphKey.add(jobParagraphValue);
 
-            PdfPCell jobCell = new PdfPCell(new Phrase(String.valueOf(user.getJob().getJobTitle())));
-            jobCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            jobCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            jobCell.setPaddingRight(4);
-            table.addCell(jobCell);
+        Paragraph bioParagraphKey = new Paragraph("Bio:                                  ", fontParagraph);
+        jobParagraphKey.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph bioParagraphValue = new Paragraph(user.getBio(), fontTitle);
+        bioParagraphValue.setAlignment(Paragraph.ALIGN_CENTER);
+        bioParagraphKey.add(bioParagraphValue);
 
-            PdfPCell bioCell = new PdfPCell(new Phrase(String.valueOf(user.getBio())));
-            bioCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            bioCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            bioCell.setPaddingRight(4);
-            table.addCell(bioCell);
 
-            document.add(table);
 
-            document.close();
-        } catch (DocumentException e) {
-            logger.error(e.toString());
-        }
-
-        return new ByteArrayInputStream(out.toByteArray());
+        document.add(titleParagraph);
+        document.add(emptyRow);
+        document.add(emptyRow);
+        document.add(emailParagraphKey);
+        document.add(emptyRow);
+        document.add(phoneNumberParagraphKey);
+        document.add(emptyRow);
+        document.add(birthDateParagraphKey);
+        document.add(emptyRow);
+        document.add(employmentDateParagraphKey);
+        document.add(emptyRow);
+        document.add(jobParagraphKey);
+        document.add(emptyRow);
+        document.add(bioParagraphKey);
+        document.add(emptyRow);
+        document.close();
     }
 
+    public void exportAllUsersToPdf(HttpServletResponse response, List<User> users) throws IOException {
+        Document document = new Document(PageSize.A2);
+        PdfWriter.getInstance(document, response.getOutputStream());
+
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font.setSize(18);
+        font.setColor(Color.BLUE);
+
+        Paragraph p = new Paragraph("List of Users", font);
+        p.setAlignment(Paragraph.ALIGN_CENTER);
+
+        document.add(p);
+
+        PdfPTable table = new PdfPTable(8);
+        table.setWidthPercentage(100f);
+        table.setWidths(new float[] {2.0f, 2.0f, 2.0f, 2.0f, 1.5f, 1.5f, 1.5f, 3.5f});
+        table.setSpacingBefore(10);
+
+        PdfPCell cell = new PdfPCell();
+        cell.setBackgroundColor(Color.BLUE);
+        cell.setPadding(5);
+
+        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA);
+        titleFont.setColor(Color.WHITE);
+
+        cell.setPhrase(new Phrase("First name", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Last name", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Email", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Phone number", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Birth date", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Employment date", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Job", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Bio", titleFont));
+        table.addCell(cell);
+
+        for (User user : users) {
+            table.addCell(user.getFirstname());
+            table.addCell(user.getLastname());
+            table.addCell(user.getEmail());
+            table.addCell(user.getPhoneNumber());
+            table.addCell(String.valueOf(user.getBirthDate()));
+            table.addCell(String.valueOf(user.getEmploymentDate()));
+            table.addCell(user.getJob().getJobTitle());
+            table.addCell(user.getBio());
+        }
+
+        document.add(table);
+
+        document.close();
+    }
 }

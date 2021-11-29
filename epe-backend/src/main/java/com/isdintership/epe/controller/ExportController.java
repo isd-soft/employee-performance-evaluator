@@ -6,10 +6,8 @@ import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.ExportService;
 import com.isdintership.epe.export.ExcelExporter;
-import com.isdintership.epe.service.PDFGeneratorService;
+import com.isdintership.epe.export.PDFGenerator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,21 +24,10 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 @RequiredArgsConstructor
 public class ExportController {
 
-    private final ExportService exportService;
     private final UserRepository userRepository;
+    private final PDFGenerator pdfGenerator;
 
-    private final PDFGeneratorService pdfGeneratorService;
 
-
-//    @GetMapping("/pdf/generate")
-//    public void generatePdf(HttpServletResponse response) throws IOException {
-//        response.setContentType("application/pdf");
-//        String headerKey = "Content-Disposition";
-//        String headerValue = "attachment; filename=test.pdf";
-//        response.setHeader(headerKey, headerValue);
-//        response.flushBuffer();
-//        this.pdfGeneratorService.export(response);
-//    }
 
     @GetMapping("/pdf/users/{id}")
     @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
@@ -54,7 +41,7 @@ public class ExportController {
         String headerValue = "attachment; filename=test.pdf";
         response.setHeader(headerKey, headerValue);
         response.flushBuffer();
-        this.pdfGeneratorService.exportUserToPdf(response,UserDto.fromUser(user));
+        this.pdfGenerator.exportUserToPdf(response,UserDto.fromUser(user));
     }
 
     @GetMapping("/pdf/users")
@@ -67,7 +54,7 @@ public class ExportController {
         String headerValue = "attachment; filename=users.pdf";
         response.setHeader(headerKey, headerValue);
         response.flushBuffer();
-        this.pdfGeneratorService.exportAllUsersToPdf(response,users);
+        this.pdfGenerator.exportAllUsersToPdf(response,users);
     }
 
     @GetMapping("/{id}/excel")

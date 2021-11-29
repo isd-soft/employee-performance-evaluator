@@ -3,7 +3,6 @@ package com.isdintership.epe.service.impl;
 import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.entity.User;
 import com.isdintership.epe.exception.UserNotFoundException;
-import com.isdintership.epe.export.PdfExporter;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.ExportService;
 import lombok.RequiredArgsConstructor;
@@ -29,17 +28,6 @@ class ExportServiceImpl implements ExportService {
     public UserDto exportToPdf(String id, HttpServletResponse response) throws IOException {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User with" + id + " was not found"));
-        response.setContentType("application/pdf");
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String currentDateTime = String.valueOf(localDateTime);
-
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + user.getFirstname()+ "_" + user.getLastname() + "_"  + currentDateTime + ".pdf";
-        response.setHeader(headerKey, headerValue);
-
-        PdfExporter exporter = new PdfExporter(user);
-
-        exporter.export(response);
         return UserDto.fromUser(user);
     }
 }
