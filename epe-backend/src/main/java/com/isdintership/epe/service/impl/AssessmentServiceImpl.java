@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -40,19 +37,16 @@ class AssessmentServiceImpl implements AssessmentService {
                 new UserNotFoundException("User with id " + userId + " was not found"));
 
         String assessmentTemplateId = assessmentTemplateDto.getId();
-
         Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(assessmentTemplateId, true)
                 .orElseThrow(() ->
                         new AssessmentTemplateNotFoundException("Assessment template with id " + assessmentTemplateId + " was not found"));
 
         List<Assessment> existingAssessment = assessmentRepository.findByUserAndStatusIn
                 (user, List.of(Status.FIRST_PHASE, Status.SECOND_PHASE));
-
         if (!existingAssessment.isEmpty()) {
             throw new AssessmentExistsException
                     ("User already has unfinished assessment " + existingAssessment.get(0).getTitle());
         }
-
         if (user.getJob() != assessmentTemplate.getJob()) {
             throw new BadCredentialsException
                     ("Job position " + assessmentTemplate.getJob().getJobTitle() +
@@ -61,7 +55,6 @@ class AssessmentServiceImpl implements AssessmentService {
         }
 
         Assessment assessment = new Assessment();
-
         assessment.setUser(user);
         assessment.setEvaluatedUserFullName(user.getFirstname() + " " + user.getLastname());
         assessment.setTitle(assessmentTemplate.getTitle());
@@ -96,13 +89,18 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessmentRepository.save(assessment);
 
-//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
-
         AssessmentInformation assessmentInformation = getAssessmentInformation(assessmentTemplateDto, assessment);
         assessmentInformationRepository.save(assessmentInformation);
 
-        return AssessmentDto.fromAssessment(assessment);
+        AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessment);
+        emailService.sendEmail(assessmentDto);
+
+
+
+        return assessmentDto;
     }
+
+
 
     private AssessmentInformation getAssessmentInformation(AssessmentTemplateDto assessmentTemplateDto, Assessment assessment) {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
@@ -223,7 +221,6 @@ class AssessmentServiceImpl implements AssessmentService {
         if (assessmentDto.isFirstPhase()) {
             assessment.setStatus(Status.SECOND_PHASE);
 
-
         }
         if (assessmentDto.isSecondPhase()) {
             assessment.setEvaluatorFullName(assessmentDto.getEvaluatorFullName());
@@ -235,6 +232,7 @@ class AssessmentServiceImpl implements AssessmentService {
         AssessmentInformation assessmentInformation = getAssessmentInformation(assessment, assessmentDto);
         assessmentInformationRepository.save(assessmentInformation);
 
+        emailService.sendEmail(AssessmentDto.fromAssessment(assessment));
         return AssessmentDto.fromAssessment(assessment);
     }
 
