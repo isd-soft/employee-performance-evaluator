@@ -47,7 +47,7 @@ export class HomeComponent {
     employmentDate: '',
     phoneNumber: '',
     job: '',
-    bio: 'user registered on ' + new Date() as string,
+    bio: 'here goes your bio',
     password: ''
   };
 
