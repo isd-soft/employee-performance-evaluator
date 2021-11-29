@@ -11,6 +11,7 @@
       />
     </mat-form-field>
 
+
     <div class="mat-elevation-z9 table">
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
@@ -75,7 +76,7 @@
             Assessment Status
           </th>
           <td mat-cell *matCellDef="let row">
-            <div *ngIf="(row.status == '' && containsUserId(row.id)) || (row.status == '' && jwtUser.role === 'ROLE_ADMIN')  ">
+            <div *ngIf="(row.status == '' && containsUserId(row.id)) || (row.status == '' && jwtUser.role === 'ROLE_ADMIN')|| (row.status == '' && jwtUser.role === 'ROLE_SYSADMIN')  ">
               <button mat-button (click)="startAssessment(row.id)">
                 Add
                 <mat-icon>add_box</mat-icon>
@@ -106,8 +107,8 @@
               <mat-icon>download</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button (click)="exportToPdf(row.id)" mat-menu-item>Export to pdf</button>
-              <button (click)="exportToExcel(row.id)" mat-menu-item>Export to excel</button>
+              <button (click)="exportToPdf(row)" mat-menu-item>Export to pdf</button>
+              <button (click)="exportToExcel(row)" mat-menu-item>Export to excel</button>
             </mat-menu>
           </div>
         </mat-cell>
@@ -122,10 +123,20 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
     </div>
-    <div *ngIf="role == requiredRole">
+    <div *ngIf="role == requiredRole" style = "float: left">
       <button mat-button (click)="createNewUser()">
         <mat-icon>add_circle</mat-icon>
       </button>
+    </div>
+
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>cloud_download</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="exportAllToPdf()" mat-menu-item>Export all to pdf</button>
+        <button (click)="exportAllToExcel()" mat-menu-item>Export all to excel</button>
+      </mat-menu>
     </div>
 
   </mat-tab>

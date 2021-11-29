@@ -230,11 +230,19 @@ export class UsersView {
     this.dialog.open(CreateUserComponent, {width: '50%'});
   }
 
-  exportToPdf(userId : string | undefined) {
-    this.userviewsServices.exportToPdf(userId);
+  exportToPdf(user : NewUser | undefined) {
+    this.userviewsServices.exportToPdf(user);
   }
 
-  exportToExcel(userId : string | undefined) {
-    this.userviewsServices.exportToExcel(userId);
+  exportToExcel(user : NewUser | undefined) {
+    this.userviewsServices.exportToExcel(user);
+  }
+
+  exportAllToPdf() {
+    this.userviewsServices.exportAllToPdf();
+  }
+
+  exportAllToExcel() {
+    this.userviewsServices.exportAllToExcel();
   }
 }
