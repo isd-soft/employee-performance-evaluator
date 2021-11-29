@@ -35,9 +35,8 @@ class EmailServiceImpl implements EmailService {
         Set<User> users = getNotificatedUser(assessmentDto.getUserId());
         User user = userRepository.getById(userId);
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-
         users.forEach( person -> {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(person.getEmail());
             mailMessage.setFrom("employeeperformanceevaluator@gmail.com");
             //Sets the subject and the text of the email
@@ -48,23 +47,27 @@ class EmailServiceImpl implements EmailService {
                     "has changed its status changed to " + assessmentDto.getStatus().toString() + "\n\n" +
                     "Assessment: " + assessmentDto.getTitle() + "\n" +
                     "Description: " + assessmentDto.getDescription() + "\n\n" +
-                    "Good luck!");
+                    "May the force be with you!");
             javaMailSender.send(mailMessage);
         });
     }
 
     @Override
     public void sendRemainder(User user) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setFrom("employeeperformanceevaluator@gmail.com");
-        mailMessage.setSubject("Employee Evaluation Starting Soon");
-        mailMessage.setText(
-                "Hello, " + user.getFirstname() + ",\n" +
-                "Just letting you know that your early evaluation starts soon.\n" +
-                "Good luck! :)");
+        Set<User> userSet = getNotificatedUser(user.getId());
+        userSet.forEach(person -> {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(person.getEmail());
+            mailMessage.setFrom("employeeperformanceevaluator@gmail.com");
+            mailMessage.setSubject("Employee Evaluation Starting Soon");
+            mailMessage.setText(
+                    "Hello, " + person.getFirstname() + ",\n" +
+                    "The assessment on the user " + user.getFirstname() + " " + user.getLastname() +
+                    "will start soon \n" +
+                    "Have a good day!");
 
-        javaMailSender.send(mailMessage);
+            javaMailSender.send(mailMessage);
+        });
     }
 
     private Set<User> getNotificatedUser(String userId){
