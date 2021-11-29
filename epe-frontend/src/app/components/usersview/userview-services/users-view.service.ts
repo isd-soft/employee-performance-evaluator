@@ -71,7 +71,11 @@ export class UserviewsServices {
   }
 
   exportToExcel(userId : string | undefined) {
-    return this.http.get(this.url3 + '/' + userId + '/excel');
+    return this.http.get(this.url3 + '/' + userId + '/excel',{responseType: 'arraybuffer'}).subscribe(xlsx => {
+      const blob = new Blob([xlsx], {type: 'application/octet-stream'});
+      const fileName = 'test.xlsx';
+      saveAs(blob,fileName);
+    });
   }
 
   errorHandler(error: HttpErrorResponse){

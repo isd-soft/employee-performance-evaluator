@@ -235,6 +235,6 @@ export class UsersView {
   }
 
   exportToExcel(userId : string | undefined) {
-    this.userviewsServices.exportToExcel(userId).subscribe();
+    this.userviewsServices.exportToExcel(userId);
   }
 }
