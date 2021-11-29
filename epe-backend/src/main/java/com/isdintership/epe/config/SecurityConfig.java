@@ -24,9 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN_ENDPOINT = "/api/admin/**";
     private static final String AUTHENTICATION_ENDPOINT = "/api/auth/**";
-    private static final String SWAGGER_ENDPOINT = "/v2/api-docs";
-    private static final String SWAGGER_ENDPOINT_2 = "/swagger-ui";
-    private static final String SWAGGER_ENDPOINT_3 = "/swagger-ui.html";
+    private static final String[] SWAGGER_ENDPOINTS = {"/swagger-resources/**", "/swagger-ui/",
+            "/swagger-ui/**", "/v2/api-docs", "/webjars/**"};
     private static final String SPRING_ACTUATOR = "/api/actuator/**";
 
     @Autowired
@@ -54,13 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTHENTICATION_ENDPOINT).permitAll()
-                .antMatchers(        "/swagger-resources/**",
-                        "/swagger-ui/",
-                        "/swagger-ui/**",
-                        "/v2/api-docs",
-                        "/webjars/**").permitAll()
-                .antMatchers(SWAGGER_ENDPOINT_2).permitAll()
-                .antMatchers(SWAGGER_ENDPOINT_3).permitAll()
+                .antMatchers(SWAGGER_ENDPOINTS).permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
                 .antMatchers(SPRING_ACTUATOR).hasRole("ADMIN")
                 .antMatchers(SPRING_ACTUATOR).hasRole("SYSADMIN")
