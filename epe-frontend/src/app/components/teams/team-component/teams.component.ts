@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamView } from './../teams-model/team-view.interface';
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
@@ -13,6 +14,7 @@ import { TeamEditComponent } from '../team-edit/team-edit.component';
 import { TeamViewComponent } from '../team-view/team-view.component';
 import { TeamDeleteComponent } from '../team-delete/team-delete.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-teams',
@@ -37,10 +39,14 @@ export class TeamsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
+  // @ts-ignore
+  @ViewChild('tabs') tabGroup: MatTabGroup;
 
   constructor(private teamService: TeamsService, 
               public dialog: MatDialog, 
               private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router,
               private toastr: ToastrService){
     this.reloadAll();
   }
@@ -102,6 +108,8 @@ export class TeamsComponent {
             timeOut: 2000,
             progressBar: true
           });
+          // @ts-ignore
+          this.tabGroup.selectedIndex = this.tabGroup.selectedIndex-1;
          } else {
           this.toastr.error('something went wrong ..','', {
             timeOut: 2000,

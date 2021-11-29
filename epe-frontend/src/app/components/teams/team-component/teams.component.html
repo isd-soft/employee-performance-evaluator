@@ -1,4 +1,4 @@
-<mat-tab-group (selectedTabChange)="reloadAll()" mat-align-tabs="center">
+<mat-tab-group #tabs (selectedTabChange)="reloadAll()" mat-align-tabs="center">
   <mat-tab label="Show all teams">
 
     <div class="table">
@@ -98,9 +98,6 @@
           <mat-form-field class="new-team-input" appearance="fill">
               <mat-label>Team Leader</mat-label>
               <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="newTeamLeaderId">
-                <mat-select-trigger>
-                  {{teamLeaderFormControl.value ? teamLeaderFormControl.value : ''}}
-                </mat-select-trigger>
                 <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstname}} {{user.lastname}}</mat-option>
               </mat-select>
           </mat-form-field>

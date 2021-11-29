@@ -47,7 +47,7 @@ export class HomeComponent {
     employmentDate: '',
     phoneNumber: '',
     job: '',
-    bio: '',
+    bio: 'user registered on ' + new Date() as string,
     password: ''
   };
 
@@ -80,8 +80,15 @@ export class HomeComponent {
       this.homeService.login(this.loginUser).subscribe(data => {
         let response = data as LoginResponse;
         if(response.token) {
-          this.jwtService.storeJWT(response.token);
-          this.router.navigate(['/dashboard']);
+          this.toastr.success('Login succesful !', '', {
+            timeOut: 3000,
+            progressBar: true,
+            enableHtml: true
+          });
+          setTimeout(()=> {
+            this.jwtService.storeJWT(response.token);
+            this.router.navigate(['/dashboard']);
+           }, 500);
         }
        }, error => {
          this.toastr.error('Something went wrong .. </br> Please check your credentials','', {
@@ -104,24 +111,22 @@ export class HomeComponent {
 
 
       this.homeService.register(this.registerUser).subscribe(data => {
+        this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
+          timeOut: 3000,
+          progressBar: true,
+          enableHtml: true
+        });
+        setTimeout(()=> {
+         this.requestLoginPage();
+        }, 1000);
       }, error => {
-         if(error.status == 200) {
-           this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
-             timeOut: 3000,
-             progressBar: true,
-             enableHtml: true
-           });
-           setTimeout(()=> {
-            this.requestLoginPage();
-           }, 4000);
-         } else {
           this.errorMessage = error.error.title;
            this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
             timeOut: 3000,
             progressBar: true,
             enableHtml: true
            });
-         }});
+         });
     } else {
       this.toastr.error('Passwords do not match !','', {
         timeOut: 3000,
