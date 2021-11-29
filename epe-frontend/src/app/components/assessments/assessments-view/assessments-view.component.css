@@ -301,3 +301,17 @@ mat-form-field, mat-form-field label {
   font-size: 24px;
   padding-right: 6%;
 }
+
+.close-button {
+  float: right;
+  background: #e5e5e5;
+}
+
+.close-icon {
+  border-radius: 50%;
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+  transition-duration: 0.4s;
+}

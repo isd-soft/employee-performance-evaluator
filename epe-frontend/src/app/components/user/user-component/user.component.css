@@ -88,3 +88,18 @@ body{
 .me-2 {
   margin-right: .5rem!important;
 }
+
+.close-button {
+  float: right;
+  background: #e5e5e5;
+  margin-bottom: 0.5%;
+}
+
+.close-icon {
+  border-radius: 50%;
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+  transition-duration: 0.4s;
+}
