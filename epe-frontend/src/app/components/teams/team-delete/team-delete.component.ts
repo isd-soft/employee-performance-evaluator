@@ -26,8 +26,4 @@ export class TeamDeleteComponent {
         this.dialogRef.close();
   }
 
-  cancel() {
-    this.dialogRef.close();
-  } 
-
 }
