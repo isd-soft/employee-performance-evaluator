@@ -110,7 +110,8 @@ const routes: Routes = [
   },
   {
     path: 'feed',
-    component: LineFeedComponent
+    component: LineFeedComponent,
+    canActivate: [DashboardGuard]
   },
   {
     path: 'assessments-templates',

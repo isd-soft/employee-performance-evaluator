@@ -57,6 +57,7 @@ import { UserDeleteComponent } from './components/usersview/user-delete/user-del
 import { AssessmentsHistoryComponent } from './components/assessments/assessments-history-component/assessments-history.component';
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
         MatListModule,
         MatSidenavModule,
         MatDatepickerModule,
+        MatBadgeModule
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,

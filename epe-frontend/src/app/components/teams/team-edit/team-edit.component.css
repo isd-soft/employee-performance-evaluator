@@ -45,3 +45,7 @@
     color: #CCCCCC;
     font-size: 15px;
 }
+
+.close-icon {
+    float: right;
+}

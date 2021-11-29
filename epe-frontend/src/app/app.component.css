@@ -13,3 +13,16 @@
   right: 0;
   background: #eee;
 }
+
+/* .container-sidenav {
+  width: 20%;
+  height: 100vh;
+  position: absolute;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container-sidenav::-webkit-scrollbar { 
+  display: none;
+} */
