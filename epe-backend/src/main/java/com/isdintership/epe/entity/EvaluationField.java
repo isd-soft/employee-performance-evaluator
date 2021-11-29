@@ -23,9 +23,6 @@ public class EvaluationField extends BaseEntity {
     @Column(name = "second_score")
     private Integer secondScore;
 
-    @Column(name = "overall_score")
-    private Integer overallScore;
-
     @Column(name = "comment")
     private String comment;
 
@@ -44,12 +41,11 @@ public class EvaluationField extends BaseEntity {
 
     public EvaluationField(String title, EvaluationGroup evaluationGroup,
                            Integer firstScore, Integer secondScore,
-                           Integer overallScore, String comment) {
+                           String comment) {
         this.title = title;
         this.evaluationGroup = evaluationGroup;
         this.firstScore = firstScore;
         this.secondScore = secondScore;
-        this.overallScore = overallScore;
         this.comment = comment;
     }
 
@@ -60,7 +56,6 @@ public class EvaluationField extends BaseEntity {
                 ", title='" + title + '\'' +
                 ", firstScore=" + firstScore +
                 ", secondScore=" + secondScore +
-                ", overallScore=" + overallScore +
                 ", comment='" + comment + '\'' +
                 '}';
     }

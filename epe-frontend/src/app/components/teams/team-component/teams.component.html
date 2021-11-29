@@ -1,101 +1,103 @@
-<mat-tab-group (selectedTabChange)="reloadAll()" mat-align-tabs="center">
+<mat-tab-group #tabs (selectedTabChange)="reloadAll()" mat-align-tabs="center">
   <mat-tab label="Show all teams">
-    <mat-form-field appearance="standard" class="filter-field">
 
-      <mat-label>Filter</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="Ex. R Team"
-        #input
-      />
-    </mat-form-field>
+    <div class="table">
 
-    <div class="mat-elevation-z9 table">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <mat-form-field appearance="standard" class="filter-field">
 
-        <ng-container matColumnDef="name">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-            class="table-column"
-          >
-            Team Name
-          </th>
-          <td mat-cell class="table-column" *matCellDef="let team">{{ team.name }}</td>
-        </ng-container>
+        <mat-label>Filter</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Ex. R Team"
+          #input
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z9">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="name">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="table-column"
+            >
+              Team Name
+            </th>
+            <td mat-cell class="table-column" *matCellDef="let team">{{ team.name }}</td>
+          </ng-container>
 
 
-        <ng-container matColumnDef="teamLeader">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-            class="table-column"
-          >
-            Team Leader
-          </th>
-          <td mat-cell class="table-column" *matCellDef="let team">{{ team.teamLeader.firstname }} {{ team.teamLeader.lastname }}</td>
-        </ng-container>
+          <ng-container matColumnDef="teamLeader">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="table-column"
+            >
+              Team Leader
+            </th>
+            <td mat-cell class="table-column" *matCellDef="let team">{{ team.teamLeader.firstname }} {{ team.teamLeader.lastname }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="buttons">
-          <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;Action</th>
-          <td mat-cell
-              class = "table-buttons"
-              *matCellDef="let team"
-              (click)="$event.stopPropagation()"
-          >
-            <button mat-button (click)="onView(team.id)">
-              <mat-icon>open_in_new</mat-icon>
-            </button>
+          <ng-container matColumnDef="buttons">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;Action</th>
+            <td mat-cell
+                class = "table-buttons"
+                *matCellDef="let team"
+                (click)="$event.stopPropagation()"
+            >
+              <button mat-button (click)="onView(team.id)">
+                <mat-icon>open_in_new</mat-icon>
+              </button>
 
-            <button mat-button (click)="edit(team.id)">
-              <mat-icon>edit</mat-icon>
-            </button>
+              <button mat-button (click)="edit(team.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
 
-            <button mat-button (click)="delete(team.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+              <button mat-button (click)="delete(team.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
 
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page of users"
-      ></mat-paginator>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
+      </div>
+
     </div>
 
   </mat-tab>
   <mat-tab label="Create new team">
     <div class="center">
-        
+
       <span class="header"> Create New Team ! </span>
       <form #createTeamForm="ngForm">
           <mat-form-field class="new-team-input" appearance="fill">
               <mat-label>Team Name</mat-label>
-              <input 
-                type="text" 
-                matInput 
-                [formControl]="teamNameFormControl" 
+              <input
+                type="text"
+                matInput
+                [formControl]="teamNameFormControl"
                 placeholder="Ex. C++ Developers"
                 [(ngModel)]="newTeamName">
-              <mat-error 
+              <mat-error
                 *ngIf="teamNameFormControl.hasError('required')">
                 New team name is required
               </mat-error>
           </mat-form-field>
-          
+
           <mat-form-field class="new-team-input" appearance="fill">
               <mat-label>Team Leader</mat-label>
               <mat-select [formControl]="teamLeaderFormControl" [(ngModel)]="newTeamLeaderId">
-                <mat-select-trigger>
-                  {{teamLeaderFormControl.value ? teamLeaderFormControl.value : ''}}
-                </mat-select-trigger>
                 <mat-option *ngFor="let user of users" [value]="user.id">{{user.firstname}} {{user.lastname}}</mat-option>
               </mat-select>
           </mat-form-field>

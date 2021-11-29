@@ -33,6 +33,7 @@ export class AssessmentsEvaluationComponent implements OnInit {
 
   ngOnInit(): void {
     this.assessment = this.data as AssessmentView;
+    console.log(this.assessment);
     this.scores = [1, 2, 3, 4, 5];
 
     this.jwtUser = this.jwtService.getJwtUser();
@@ -160,6 +161,18 @@ export class AssessmentsEvaluationComponent implements OnInit {
   onSubmit() {
 
     if (this.assessmentForm.valid) {
+
+      if (this.personalGoalArray.length != 0 && !this.personalGoalArray.controls[0].get('goalSPart')?.value) {
+        this.personalGoalArray.removeAt(0);
+      }
+
+      if (this.departmentGoalArray.length != 0 && !this.departmentGoalArray.controls[0].get('goalSPart')?.value) {
+        this.departmentGoalArray.removeAt(0);
+      }
+
+      if (!this.feedbackArray.controls[0].get('context')?.value) {
+        this.feedbackArray.removeAt(0);
+      }
 
       console.log(this.assessmentForm.value);
       this.assessmentService.evaluateAssessment(this.assessment.id,

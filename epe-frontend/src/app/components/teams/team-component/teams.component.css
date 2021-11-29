@@ -6,57 +6,58 @@
     min-height: 98vh;
     border-radius: 10px;
     margin: 0.5% 0.5%;
-    padding: 0 4%;
+    padding: 0 2%;
   }
-  
+
   .mat-cell, .mat-header-cell, .mat-paginator {
     font-size: 15px;
   }
-  
+
   .mat-tab-label{
     font-size: 18px;
     font-weight: 600;
     color: black;
   }
-  
+
   .filter-field {
     margin: 0 15px;
   }
-  
-  table {
+
+  .table {
     width: 100%;
+    padding: 0 2%;
   }
-  
+
   .mat-form-field {
     font-size: 14px;
     width: 97%;
   }
-  
+
   .filter-field {
     margin: 0 15px;
   }
-  
+
   table {
     width: 100%;
   }
-  
+
   .mat-form-field {
     font-size: 14px;
     width: 97%;
   }
-  
+
   .first-table {
     margin-bottom: 25px;
   }
-  
+
   .table-column {
     width: 30%;
   }
-  
+
   .table-buttons {
     width: 30%;
   }
-  
+
   mat-paginator {
     padding-bottom: 15px;
   }

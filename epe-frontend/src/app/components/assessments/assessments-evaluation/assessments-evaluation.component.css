@@ -1,3 +1,7 @@
+p {
+  font-size: 16px;
+}
+
 mat-card, .mat-card-content {
   font-size: 15px;
 }
@@ -30,7 +34,19 @@ mat-card, .mat-card-content {
 }
 
 .evaluation-groups-title {
+  display: inline-block;
   margin: 2% 0;
+  width: 68%;
+}
+
+.user-score-title {
+  display: inline-block;
+  width: 15%;
+}
+
+.score-title {
+  display: inline-block;
+  width: 15%;
 }
 
 .evaluation-groups {
@@ -45,7 +61,7 @@ mat-card, .mat-card-content {
 
 
 .evaluation-group {
-  width: 30%;
+  width: 32.5%;
 }
 
 .evaluation-fields {
@@ -70,20 +86,24 @@ mat-card, .mat-card-content {
 
 .evaluation-field-title {
   display: inline-block;
-  vertical-align: middle;
-  width: 27.5%;
+  width: 30%;
 }
 
 .evaluation-field-comment {
   display: inline-block;
-  vertical-align: middle;
-  width: 50%;
+  width: 40%;
+}
+
+.evaluation-field-user-score {
+  display: inline-block;
+  font-size: 20px;
+  width: 12%;
 }
 
 .evaluation-field-score {
   display: inline-block;
-  vertical-align: middle;
-  padding-left: 1%;
+  font-size: 20px;
+  width: 12%;
 }
 
 .smart-goals-header {
@@ -188,5 +208,20 @@ mat-form-field, mat-form-field label {
 }
 
 .submit-button {
+  border: 2px solid black;
   margin: 3% 0;
+}
+
+.close-button {
+  float: right;
+  background: #e5e5e5;
+}
+
+.close-icon {
+  border-radius: 50%;
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+  transition-duration: 0.4s;
 }

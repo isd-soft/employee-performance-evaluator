@@ -96,7 +96,7 @@ class AssessmentServiceImpl implements AssessmentService {
 
         assessmentRepository.save(assessment);
 
-        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
+//        emailService.sendEmail(user, assessment.getTitle(), assessment.getDescription());
 
         AssessmentInformation assessmentInformation = getAssessmentInformation(assessmentTemplateDto, assessment);
         assessmentInformationRepository.save(assessmentInformation);
@@ -208,6 +208,7 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto) {
+        System.out.println(assessmentDto);
 
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new UserNotFoundException("User with id " + userId + " was not found"));
@@ -226,7 +227,7 @@ class AssessmentServiceImpl implements AssessmentService {
         }
         if (assessmentDto.isSecondPhase()) {
             assessment.setEvaluatorFullName(assessmentDto.getEvaluatorFullName());
-            calculateOverallScore(assessment, assessmentDto);
+            calculateOverallScore(assessment);
             assessment.setEndDate(LocalDateTime.now());
             assessment.setStatus(Status.FINISHED);
         }
@@ -248,43 +249,29 @@ class AssessmentServiceImpl implements AssessmentService {
         return assessmentInformation;
     }
 
-    private void calculateOverallScore(Assessment assessment, AssessmentDto assessmentDto) {
+    private void calculateOverallScore(Assessment assessment) {
 
         List<EvaluationGroup> evaluationGroups = assessment.getEvaluationGroups();
-        List<EvaluationGroupDto> evaluationGroupDtos = assessmentDto.getEvaluationGroups();
-        int groupsSum = 0;
-
-        for (int i = 0; i < evaluationGroups.size(); i++) {
-            calculateOverallScoreGroup(evaluationGroups.get(i), evaluationGroupDtos.get(i));
-            groupsSum += evaluationGroups.get(i).getOverallScore();
+        float groupsSum = 0;
+        for (EvaluationGroup evaluationGroup : evaluationGroups) {
+            calculateOverallScoreGroup(evaluationGroup);
+            groupsSum += evaluationGroup.getOverallScore();
         }
-        assessment.setOverallScore(getAvgInteger(groupsSum, assessment.getEvaluationGroups().size()));
+        assessment.setOverallScore(getAvg(groupsSum, evaluationGroups.size()));
     }
 
-    private void calculateOverallScoreGroup(EvaluationGroup evaluationGroup, EvaluationGroupDto evaluationGroupDto) {
+    private void calculateOverallScoreGroup(EvaluationGroup evaluationGroup) {
 
         List<EvaluationField> evaluationFields = evaluationGroup.getEvaluationFields();
-        List<EvaluationFieldDto> evaluationFieldDtos = evaluationGroupDto.getEvaluationFields();
         int fieldsSum = 0;
-
-        for (int i = 0; i < evaluationFields.size(); i++) {
-
-            EvaluationFieldDto evaluationFieldDto = evaluationFieldDtos.get(i);
-            evaluationFields.get(i).setOverallScore(
-                    getOverallScoreField(evaluationFieldDto.getFirstScore(),
-                                         evaluationFieldDto.getSecondScore()));
-            fieldsSum += evaluationFields.get(i).getOverallScore();
+        for (EvaluationField field : evaluationFields) {
+            fieldsSum += field.getSecondScore();
         }
-        evaluationGroup.setOverallScore(
-                getAvgInteger(fieldsSum, evaluationGroup.getEvaluationFields().size()));
+        evaluationGroup.setOverallScore(getAvg(fieldsSum, evaluationFields.size()));
     }
 
-    private int getAvgInteger(double sum, int count) {
-        return (int) Math.round(sum / count);
-    }
-
-    private int getOverallScoreField(int firstValue, int secondValue) {
-        return getAvgInteger(firstValue + secondValue, 2);
+    private float getAvg(float sum, float count) {
+        return (sum / count);
     }
 
     private void processEvaluationGroups(Assessment assessment, AssessmentDto assessmentDto){
@@ -313,10 +300,16 @@ class AssessmentServiceImpl implements AssessmentService {
 
     private void processFeedback(String userId, AssessmentDto assessmentDto, User user, Assessment assessment, List<Feedback> feedbacks) {
 
-        Feedback feedback = getFeedback(userId, assessmentDto, user, feedbacks);
-        feedback.setAssessment(assessment);
-        feedbacks.add(feedback);
+        if (isFeedbackPresent(assessmentDto)) {
+            Feedback feedback = getFeedback(userId, assessmentDto, user, feedbacks);
+            feedback.setAssessment(assessment);
+            feedbacks.add(feedback);
+        }
 
+    }
+
+    private boolean isFeedbackPresent(AssessmentDto assessmentDto) {
+        return assessmentDto.getFeedbacks().size() != 0;
     }
 
     private Feedback getFeedback(String userId, AssessmentDto assessmentDto, User user, List<Feedback> feedbacks) {
@@ -414,7 +407,6 @@ class AssessmentServiceImpl implements AssessmentService {
                     field.setComment(evaluationFieldDto.getComment());
                     field.setFirstScore(evaluationFieldDto.getFirstScore());
                     field.setSecondScore(evaluationFieldDto.getSecondScore());
-                    field.setOverallScore(evaluationFieldDto.getOverallScore());
 
                     group.getEvaluationFields().add(field);
                 }

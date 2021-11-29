@@ -4,9 +4,12 @@
       <mat-card-title class="title-text"> Assessment: <b>{{a.assessmentTitle}}</b></mat-card-title>
       <mat-card-subtitle>{{a.performedTime}}</mat-card-subtitle>
     </mat-card-title-group>
-    <mat-card-content class="text-size" *ngIf="a.status==='FIRST_PHASE'">
+    <mat-card-content class="text-size">
       The assessment for the user <b>{{a.performedOnUser}}</b> with the title
-      <b>{{a.assessmentTitle}}</b> has been initialized by the user <b>{{a.performedByUser}}</b>
+      <b>{{a.assessmentTitle}}</b> has been
+      <span *ngIf="a.status == 'FIRST_PHASE'">initialized</span>
+      <span *ngIf="a.status == 'SECOND_PHASE' || a.status == 'FINISHED'">evaluated</span>
+      by the user <b>{{a.performedByUser}}</b>
       and is set to <b>{{a.status}}</b>
     </mat-card-content>
 

@@ -11,3 +11,9 @@
     border-radius: 5px;
     background-color: #000000;
 }
+
+.close-icon {
+    float: right;
+    top:-24px;
+    right:-24px;
+}

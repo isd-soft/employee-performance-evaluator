@@ -36,7 +36,7 @@ export class AssessmentsHistoryAssignedComponent implements OnInit, AfterViewIni
   }
 
   ngAfterViewInit() {
-    this.assessmentsService.getAllAssignedAssessmentsByStatus(this.jwtUser.id, 'INACTIVE').subscribe(
+    this.assessmentsService.getAllAssignedAssessmentsByUserIdAndStatus(this.jwtUser.id, 'INACTIVE').subscribe(
       data => {
         this.assessments = data as AssessmentView[];
         this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);

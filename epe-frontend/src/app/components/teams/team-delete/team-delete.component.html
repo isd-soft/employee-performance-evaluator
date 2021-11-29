@@ -1,5 +1,8 @@
-<div *ngIf="getTeam">    
+<div *ngIf="getTeam">
     <mat-card>
+        <button mat-button class="close-icon" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+        </button>    
         <mat-card-title-group>
             <mat-card-title>
                 Are you sure you want to delete "{{getTeam.name}}" team ?
@@ -8,9 +11,6 @@
         <hr class="fifty-percent">
         <mat-card-content>
             <button class="full-size-red" mat-raised-button (click)="deleteTeam()">Yes</button>
-        </mat-card-content>
-        <mat-card-content>
-            <button class="full-size-cancel" mat-raised-button (click)="cancel()">Cancel</button>
         </mat-card-content>
     </mat-card>
 </div>

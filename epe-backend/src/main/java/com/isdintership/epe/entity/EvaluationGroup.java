@@ -30,8 +30,8 @@ public class EvaluationGroup extends BaseEntity {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<EvaluationField> evaluationFields = new ArrayList<>();
 
-    @Column(name = "overall_score")
-    private Integer overallScore;
+    @Column(name = "overall_score", columnDefinition = "NUMERIC(5,2)")
+    private Float overallScore;
 
     @Override
     public boolean equals(Object o) {
@@ -46,7 +46,7 @@ public class EvaluationGroup extends BaseEntity {
     public EvaluationGroup() {
     }
 
-    public EvaluationGroup(Assessment assessment, String title, List<EvaluationField> evaluationFields, Integer overallScore) {
+    public EvaluationGroup(Assessment assessment, String title, List<EvaluationField> evaluationFields, Float overallScore) {
         this.assessment = assessment;
         this.title = title;
         this.evaluationFields = evaluationFields;

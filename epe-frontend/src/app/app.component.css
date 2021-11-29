@@ -1,4 +1,6 @@
-.img-logo{
+.img-logo {
+  display: block;
+  margin: auto;
   max-width: 194px;
   max-height: 100%;
 }

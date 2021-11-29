@@ -29,15 +29,15 @@ export class HomeComponent {
 
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  firstnameFormControl = new FormControl('', [Validators.required]);
-  lastnameFormControl = new FormControl('', [Validators.required]);
+  firstnameFormControl = new FormControl('', [Validators.required, Validators.pattern("^[A-Z][A-Za-z '-]{2,19}$")]);
+  lastnameFormControl = new FormControl('', [Validators.required, Validators.pattern("^[A-Z][A-Za-z '-]{2,19}$")]);
   birthdateFormControl = new FormControl('', [Validators.required]);
-  phoneFormControl = new FormControl('', [Validators.required]);
+  phoneFormControl = new FormControl('', [Validators.required, Validators.pattern("^[+]*[0-9]{9,15}$")]);
   jobFormControl = new FormControl();
   jobList?: JobItem[];
   employmentdateFormControl = new FormControl('', [Validators.required]);
-  passwordFormControl = new FormControl('', [Validators.required]);
-  confirmPasswordFormControl = new FormControl('', [Validators.required]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,30}$")]);
+  confirmPasswordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,30}$")]);
 
   registerUser: RegisterRequest = {
     email: '',
@@ -47,7 +47,7 @@ export class HomeComponent {
     employmentDate: '',
     phoneNumber: '',
     job: '',
-    bio: 'new user',
+    bio: 'here goes your bio',
     password: ''
   };
 
@@ -80,8 +80,15 @@ export class HomeComponent {
       this.homeService.login(this.loginUser).subscribe(data => {
         let response = data as LoginResponse;
         if(response.token) {
-          this.jwtService.storeJWT(response.token);
-          this.router.navigate(['/dashboard']);
+          this.toastr.success('Login succesful !', '', {
+            timeOut: 3000,
+            progressBar: true,
+            enableHtml: true
+          });
+          setTimeout(()=> {
+            this.jwtService.storeJWT(response.token);
+            this.router.navigate(['/dashboard']);
+           }, 500);
         }
        }, error => {
          this.toastr.error('Something went wrong .. </br> Please check your credentials','', {
@@ -104,24 +111,22 @@ export class HomeComponent {
 
 
       this.homeService.register(this.registerUser).subscribe(data => {
+        this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
+          timeOut: 3000,
+          progressBar: true,
+          enableHtml: true
+        });
+        setTimeout(()=> {
+         this.requestLoginPage();
+        }, 1000);
       }, error => {
-         if(error.status == 200) {
-           this.toastr.success('Your account had been created ! </br> You will be redirected to login page', '', {
-             timeOut: 3000,
-             progressBar: true,
-             enableHtml: true
-           });
-           setTimeout(()=> {
-            this.requestLoginPage();
-           }, 4000);
-         } else {
           this.errorMessage = error.error.title;
            this.toastr.error('Something went wrong .. </br> Please try again in a few seconds','', {
             timeOut: 3000,
             progressBar: true,
             enableHtml: true
            });
-         }});
+         });
     } else {
       this.toastr.error('Passwords do not match !','', {
         timeOut: 3000,
