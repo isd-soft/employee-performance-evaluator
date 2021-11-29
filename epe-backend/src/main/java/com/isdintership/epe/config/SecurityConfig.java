@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String SWAGGER_ENDPOINT = "/v2/api-docs";
     private static final String SWAGGER_ENDPOINT_2 = "/swagger-ui/";
     private static final String SWAGGER_ENDPOINT_3 = "/swagger-ui.html";
+    private static final String SPRING_ACTUATOR = "/api/actuator/**";
 
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider, ExceptionHandlerFilter exceptionHandlerFilter,
@@ -57,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(SWAGGER_ENDPOINT_2).permitAll()
                 .antMatchers(SWAGGER_ENDPOINT_3).permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
+                .antMatchers(SPRING_ACTUATOR).hasRole("ADMIN")
+                .antMatchers(SPRING_ACTUATOR).hasRole("SYSADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(exceptionHandlerFilter, ChannelProcessingFilter.class)
