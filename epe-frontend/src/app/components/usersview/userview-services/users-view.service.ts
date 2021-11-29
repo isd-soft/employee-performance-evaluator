@@ -22,6 +22,7 @@ export class UserviewsServices {
   url3: string = 'api-server/api/export';
   url4: string = 'api-server/api/export/pdf/generate';
   url5: string = 'api-server/api/export/pdf/users';
+  url6: string = 'api-server/api/export/excel/users';
 
   jwtUser?: JwtUser;
   role? : string;
@@ -90,11 +91,26 @@ export class UserviewsServices {
   }
 
   exportAllToPdf() {
+    return this.http.get(this.url5,{responseType: 'arraybuffer'}).subscribe(pdf => {
+      const blob = new Blob([pdf],{type: 'application/pdf'});
 
+      let datePipe = new DatePipe('en-US');
+      // @ts-ignore
+      let currentDate = datePipe.transform(Date.now(), 'dd-MM-yyyy') as string;
+      const fileName = 'users_' + currentDate +'.pdf';
+      saveAs(blob,fileName);
+    });
   }
 
   exportAllToExcel() {
-
+    return this.http.get(this.url6,{responseType: 'arraybuffer'}).subscribe(xlsx => {
+      const blob = new Blob([xlsx], {type: 'application/octet-stream'});
+      let datePipe = new DatePipe('en-US');
+      // @ts-ignore
+      let currentDate = datePipe.transform(Date.now(), 'dd-MM-yyyy') as string;
+      const fileName = 'users_' + currentDate +'.xlsx';
+      saveAs(blob,fileName);
+    });
   }
 
   errorHandler(error: HttpErrorResponse){

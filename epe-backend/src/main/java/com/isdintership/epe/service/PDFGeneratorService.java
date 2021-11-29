@@ -3,12 +3,16 @@ package com.isdintership.epe.service;
 import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.entity.User;
 import com.lowagie.text.*;
+import com.lowagie.text.Font;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -114,19 +118,67 @@ public class PDFGeneratorService {
     }
 
     public void exportAllUsersToPdf(HttpServletResponse response, List<User> users) throws IOException {
-        Document document = new Document(PageSize.A4);
+        Document document = new Document(PageSize.A2);
         PdfWriter.getInstance(document, response.getOutputStream());
+
         document.open();
+        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font.setSize(18);
+        font.setColor(Color.BLUE);
 
-        Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        fontTitle.setSize(18);
-        Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
-        fontParagraph.setSize(12);
+        Paragraph p = new Paragraph("List of Users", font);
+        p.setAlignment(Paragraph.ALIGN_CENTER);
 
-        Paragraph titleParagraph = new Paragraph("All users", fontTitle);
-        titleParagraph.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(p);
 
+        PdfPTable table = new PdfPTable(8);
+        table.setWidthPercentage(100f);
+        table.setWidths(new float[] {2.0f, 2.0f, 2.0f, 2.0f, 1.5f, 1.5f, 1.5f, 3.5f});
+        table.setSpacingBefore(10);
 
+        PdfPCell cell = new PdfPCell();
+        cell.setBackgroundColor(Color.BLUE);
+        cell.setPadding(5);
+
+        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA);
+        titleFont.setColor(Color.WHITE);
+
+        cell.setPhrase(new Phrase("First name", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Last name", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Email", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Phone number", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Birth date", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Employment date", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Job", titleFont));
+        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Bio", titleFont));
+        table.addCell(cell);
+
+        for (User user : users) {
+            table.addCell(user.getFirstname());
+            table.addCell(user.getLastname());
+            table.addCell(user.getEmail());
+            table.addCell(user.getPhoneNumber());
+            table.addCell(String.valueOf(user.getBirthDate()));
+            table.addCell(String.valueOf(user.getEmploymentDate()));
+            table.addCell(user.getJob().getJobTitle());
+            table.addCell(user.getBio());
+        }
+
+        document.add(table);
 
         document.close();
     }

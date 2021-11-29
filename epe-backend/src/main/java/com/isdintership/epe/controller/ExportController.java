@@ -64,7 +64,7 @@ public class ExportController {
         List<User> users = userRepository.findAll();
         response.setContentType("application/pdf");
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=test.pdf";
+        String headerValue = "attachment; filename=users.pdf";
         response.setHeader(headerKey, headerValue);
         response.flushBuffer();
         this.pdfGeneratorService.exportAllUsersToPdf(response,users);
@@ -87,6 +87,23 @@ public class ExportController {
         ExcelExporter excelExporter = new ExcelExporter(UserDto.fromUser(user));
 
         excelExporter.export(response);
+    }
+
+    @GetMapping("/excel/users")
+    @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
+    @Transactional
+    public void exportAllUsersToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users.xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<User> users = userRepository.findAll();
+
+        ExcelExporter excelExporter = new ExcelExporter();
+
+        excelExporter.exportAllUsersToExcel(response,users);
     }
 
 }
