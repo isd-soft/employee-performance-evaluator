@@ -101,15 +101,14 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-          <div *ngIf="role == requiredRole && row.id != jwtUser.id">
-            <button mat-button (click)="exportToPdf(row.id)">
-              <mat-icon>picture_as_pdf</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="role == requiredRole && row.id != jwtUser.id">
-            <button mat-button (click)="exportToExcel(row.id)">
+          <div>
+            <button mat-button [matMenuTriggerFor]="menu">
               <mat-icon>download</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+              <button (click)="exportToPdf(row.id)" mat-menu-item>Export to pdf</button>
+              <button (click)="exportToExcel(row.id)" mat-menu-item>Export to excel</button>
+            </mat-menu>
           </div>
         </mat-cell>
       </ng-container>

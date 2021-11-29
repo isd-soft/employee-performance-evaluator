@@ -58,6 +58,7 @@ import { AssessmentsHistoryComponent } from './components/assessments/assessment
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 import { CreateUserComponent } from './create-user/create-component/create-user.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { CreateUserComponent } from './create-user/create-component/create-user.
         MatListModule,
         MatSidenavModule,
         MatDatepickerModule,
+        MatMenuModule,
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,

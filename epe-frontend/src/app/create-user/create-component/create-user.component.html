@@ -3,11 +3,11 @@
 </button>
 <mat-label><h2>Create new user</h2></mat-label>
 
-<form action="" [formGroup]="newUser" style="margin-top: 3%; padding-left: 15%; padding-right: 12%">
+<form action="" [formGroup]="newUser" style="margin-top: 3%">
 
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
-    <input matInput required formControlName="email">
+    <input type="email" matInput required formControlName="email">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -52,6 +52,12 @@
             (click)="createUser()"
             class="">
       Submit
+    </button>
+    <button mat-button mat-raised-button color="warn" style="margin-left: 1%"
+            type="button"
+            [mat-dialog-close]="true"
+            class="">
+      Cancel
     </button>
   </div>
 </form>

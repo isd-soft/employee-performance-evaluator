@@ -1,8 +1,7 @@
-package com.isdintership.epe.service.impl;
+package com.isdintership.epe.export;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.List;
 import java.util.stream.Stream;
 
 import com.isdintership.epe.entity.User;
@@ -20,7 +19,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import org.springframework.transaction.annotation.Transactional;
 
 public class PDFGenerator {
     private static Logger logger = LoggerFactory.getLogger(PDFGenerator.class);

@@ -3,18 +3,16 @@ package com.isdintership.epe.service.impl;
 import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.entity.User;
 import com.isdintership.epe.exception.UserNotFoundException;
+import com.isdintership.epe.export.PdfExporter;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.ExportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 

@@ -2,15 +2,10 @@ package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.entity.User;
-import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.ExportService;
-import com.isdintership.epe.service.impl.ExcelExporter;
-import com.isdintership.epe.service.impl.PDFGenerator;
+import com.isdintership.epe.export.ExcelExporter;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.compress.utils.IOUtils;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpHeaders;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
