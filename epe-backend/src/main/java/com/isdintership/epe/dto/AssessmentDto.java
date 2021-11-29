@@ -20,7 +20,7 @@ public class AssessmentDto {
     private String title;
     private String description;
     private String jobTitle;
-    private Integer overallScore;
+    private Float overallScore;
     private Status status;
     private Boolean isTemplate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

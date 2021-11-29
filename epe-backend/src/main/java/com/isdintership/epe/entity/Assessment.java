@@ -35,8 +35,8 @@ public class Assessment extends BaseEntity {
     @ManyToOne
     private Job job;
 
-    @Column(name = "overall_score")
-    private Integer overallScore;
+    @Column(name = "overall_score", columnDefinition = "NUMERIC(5,2)")
+    private Float overallScore;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -107,7 +107,7 @@ public class Assessment extends BaseEntity {
     }
 
     public Assessment(User user, String title, String evaluatedUserFullName, String description,
-                      Job job, Integer overallScore, Status status, Boolean isTemplate,
+                      Job job, Float overallScore, Status status, Boolean isTemplate,
                       LocalDateTime startDate, LocalDateTime endDate, LocalDateTime creationDate,
                       List<EvaluationGroup> evaluationGroups, List<PersonalGoal> personalGoals,
                       List<DepartmentGoal> departmentGoals, List<Feedback> feedbacks) {
