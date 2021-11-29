@@ -5,12 +5,11 @@ import com.isdintership.epe.entity.User;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.ExportService;
 import com.isdintership.epe.export.ExcelExporter;
+import com.isdintership.epe.service.PDFGeneratorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
@@ -28,15 +27,27 @@ public class ExportController {
     private final ExportService exportService;
     private final UserRepository userRepository;
 
+    private final PDFGeneratorService pdfGeneratorService;
+
     @GetMapping("/{id}/pdf")
     @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
     public ResponseEntity<UserDto> exportToPdf(@PathVariable(name = "id") String id, HttpServletResponse response) throws IOException {
         return ResponseEntity.ok(exportService.exportToPdf(id,response));
     }
 
+    @GetMapping("/pdf/generate")
+    public void generatePdf(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=\"test.pdf\"";
+        response.setHeader(headerKey, headerValue);
+        response.flushBuffer();
+        this.pdfGeneratorService.export(response);
+    }
 
     @GetMapping("/{id}/excel")
     @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
+    @ResponseBody
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
 
@@ -47,8 +58,6 @@ public class ExportController {
         List<User> listUsers = userRepository.findAll();
 
         ExcelExporter excelExporter = new ExcelExporter(listUsers);
-
-        System.out.println("sout");
 
         excelExporter.export(response);
     }

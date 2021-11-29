@@ -16,6 +16,10 @@ mat-card img{
   justify-content: center;
 }
 
+.twenty-percent {
+  width: 20%;
+}
+
 .img-logo{
   max-width: 194px;
   max-height: 100%;

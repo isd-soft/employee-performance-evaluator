@@ -43,7 +43,6 @@ public class ExcelExporter {
         createCell(row, 3, "Phone number", style);
         createCell(row, 4, "Bio", style);
 
-        System.out.println("sout2");
 
     }
 
@@ -58,7 +57,6 @@ public class ExcelExporter {
             cell.setCellValue((String) value);
         }
         cell.setCellStyle(style);
-        System.out.println("sout3");
     }
 
     private void writeDataLines() {
@@ -78,7 +76,6 @@ public class ExcelExporter {
             createCell(row, columnCount++, user.getLastname(), style);
             createCell(row, columnCount++, user.getPhoneNumber(), style);
             createCell(row, columnCount++, user.getBio(), style);
-            System.out.println("sout5555");
         }
     }
 
@@ -89,8 +86,6 @@ public class ExcelExporter {
         ServletOutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
         workbook.close();
-
-        System.out.println("sout4");
 
         outputStream.close();
 

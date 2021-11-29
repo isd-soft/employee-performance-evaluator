@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ExportServiceImpl implements ExportService {
+class ExportServiceImpl implements ExportService {
 
     private final UserRepository userRepository;
 

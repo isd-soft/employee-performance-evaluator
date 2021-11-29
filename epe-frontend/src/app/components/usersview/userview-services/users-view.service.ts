@@ -6,6 +6,9 @@ import {User} from "../userview-models/User";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 
+// @ts-ignore
+import {saveAs} from 'file-saver/dist/FileSaver';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +18,7 @@ export class UserviewsServices {
   url: string = 'api-server/api/users';
   url2: string = 'api-server/api/teams';
   url3: string = 'api-server/api/export';
+  url4: string = 'api-server/api/export/pdf/generate';
 
   jwtUser?: JwtUser;
   role? : string;
@@ -58,7 +62,12 @@ export class UserviewsServices {
   }
 
   exportToPdf(userId : string | undefined) {
-    return this.http.get(this.url3 + '/' + userId + '/pdf');
+    //return this.http.get(this.url3 + '/' + userId + '/pdf/generate');
+    return this.http.get(this.url4,{responseType: 'arraybuffer'}).subscribe( pdf => {
+      const blob = new Blob([pdf],{type: 'application/pdf'});
+      const fileName = 'test.pdf';
+      saveAs(blob,fileName);
+    });
   }
 
   exportToExcel(userId : string | undefined) {

@@ -24,6 +24,9 @@ import {ShortUser} from "../../teams/teams-model/short-user.interface";
 import {Router} from "@angular/router";
 import {CreateUserComponent} from "../../../create-user/create-component/create-user.component";
 
+// @ts-ignore
+import {saveAs} from 'file-saver/dist/FileSaver';
+
 @Component({
   selector: 'app-usersview',
   templateUrl: './users-view.component.html',
@@ -228,7 +231,7 @@ export class UsersView {
   }
 
   exportToPdf(userId : string | undefined) {
-    this.userviewsServices.exportToPdf(userId).subscribe();
+    this.userviewsServices.exportToPdf(userId);
   }
 
   exportToExcel(userId : string | undefined) {
