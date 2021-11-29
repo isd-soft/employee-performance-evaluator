@@ -58,6 +58,8 @@ import { AssessmentsHistoryComponent } from './components/assessments/assessment
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 import {MatBadgeModule} from '@angular/material/badge';
+import { AdminStatsComponent } from './components/admin-stats/admin-stats-component/admin-stats.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -99,7 +101,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     TeamViewComponent,
     AssessmentsAssignedComponent,
     LineFeedComponent,
-    AdminBoardComponent
+    AdminBoardComponent,
+    AdminStatsComponent
   ],
     imports: [
         BrowserModule,
@@ -125,7 +128,8 @@ import {MatBadgeModule} from '@angular/material/badge';
         MatListModule,
         MatSidenavModule,
         MatDatepickerModule,
-        MatBadgeModule
+        MatBadgeModule,
+        NgApexchartsModule,
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,

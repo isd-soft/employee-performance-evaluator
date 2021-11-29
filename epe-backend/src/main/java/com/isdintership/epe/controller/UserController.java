@@ -83,7 +83,8 @@ public class UserController {
 
     @GetMapping("/{id}/assignedUsers")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    public ResponseEntity<List<AssignedUserDto>> getAllAssignedUsers(@PathVariable("id") String id) {
+    public ResponseEntity<List<AssignedUserDto>>
+    getAllAssignedUsers(@PathVariable("id") String id) {
         return ResponseEntity.ok(userService.getAssignedUsers(id));
     }
 

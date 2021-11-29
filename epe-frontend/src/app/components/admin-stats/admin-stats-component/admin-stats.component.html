@@ -1,0 +1,100 @@
+<div class="content">
+
+  <div class="header">
+      <div class="title">
+        Monitoring Dashboard
+      </div>
+      <div class="specifications">
+        <div class="specification">
+          <i class="material-icons header-icon">laptop_chromebook</i> Server: <span class="bold">{{serverStatus}}</span>
+        </div>
+        <div class="specification">
+          <i class="material-icons header-icon">storage</i>DB: <span class="bold">{{DBName}}</span> -
+          <span class="bold">{{DBStatus}}</span>
+        </div>
+        <div class="specification">
+          <i class="material-icons header-icon">album</i>Disk usage:
+          <span class="bold">{{diskUsage | number:'3.0-2'}}</span>
+          of <span class="bold">{{diskTotalSpace | number:'3.0-2'}}</span> Gb
+        </div>
+        <div class="specification">
+          <i class="material-icons header-icon">memory</i>Processors: <span class="bold">{{processorsCount}}</span>
+        </div>
+        <div class="specification">
+          <i class="material-icons header-icon">watch_later</i>Up Time: <span class="bold">{{uptime * 1000 | date:'H:mm:ss' : 'UTC'}}</span>
+        </div>
+
+      </div>
+      <div class="refresh-button">
+        <button class="button" (click)="reload()">
+          <i class="material-icons refresh-icon">refresh</i>
+        </button>
+
+      </div>
+  </div>
+
+  <div class="container">
+
+    <div class="column">
+
+      <div class="response-statuses">
+        <div class="row">
+          <div class="response-200">
+            <i class="material-icons">done</i>200 Response
+            <br>
+            <span class="response-count">{{count200}}</span>
+          </div>
+          <div class="response-404">
+            <i class="material-icons">dnd_forwardslash</i>404 Response
+            <br>
+            <span class="response-count">{{count404}}</span>
+          </div>
+          <div class="response-400">
+            <i class="material-icons">priority_high</i>400 Response
+            <br>
+            <span class="response-count">{{count400}}</span>
+          </div>
+          <div class="response-500">
+            <i class="material-icons">bug_report</i>500 Response
+            <br>
+            <span class="response-count">{{count500}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="response-charts">
+        <div class="row">
+          <div class="chart-1">
+            <apx-chart
+              [title]="chartOptions.title"
+              [colors]="chartOptions.colors"
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [labels]="chartOptions.labels"
+              [responsive]="chartOptions.responsive"
+            ></apx-chart>
+          </div>
+          <div class="chart-2">
+            <apx-chart
+              [title]="chartOptions2.title"
+              [series]="chartOptions2.series"
+              [chart]="chartOptions2.chart"
+              [dataLabels]="chartOptions2.dataLabels"
+              [plotOptions]="chartOptions2.plotOptions"
+              [yaxis]="chartOptions2.yaxis"
+              [legend]="chartOptions2.legend"
+              [fill]="chartOptions2.fill"
+              [stroke]="chartOptions2.stroke"
+              [tooltip]="chartOptions2.tooltip"
+              [xaxis]="chartOptions2.xaxis"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
