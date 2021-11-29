@@ -38,7 +38,7 @@ export class AssessmentsService {
       .pipe(catchError(this.errorHandler));
   }
 
-  getAllAssignedAssessmentsByStatus(userId: string, status: string) {
+  getAllAssignedAssessmentsByUserIdAndStatus(userId: string, status: string) {
     return this.http.get(this.assessmentsUrl + 'users/' + userId + '/assigned-assessments?status=' + status)
       .pipe(catchError(this.errorHandler));
   }

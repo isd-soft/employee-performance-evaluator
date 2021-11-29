@@ -13,17 +13,17 @@
       <p>{{ assessment.description }}</p>
 
       <p class="bold evaluation-groups-title">Evaluation groups</p>
-
+      <p class="bold user-score-title" *ngIf="assessment.status == 'SECOND_PHASE'">Employee score</p>
+      <p class="bold score-title" *ngIf="assessment.status == 'SECOND_PHASE'">My score</p>
 
       <div formArrayName="evaluationGroups">
-
-
         <div class="evaluation-groups"
              *ngFor="let evaluationGroup of evaluationGroupArray.controls; let i = index;"
              [formGroupName]="i"
         >
           <p class="evaluation-group">{{evaluationGroup.value.title}}</p>
           <p class="evaluation-group-comments">Comments</p>
+
 
           <div formArrayName="evaluationFields">
 
@@ -36,14 +36,21 @@
                 <p class="evaluation-field-comment">
                   {{evaluationField.value.comment}}
                 </p>
+                <p class="evaluation-field-user-score"
+                   *ngIf="assessment.status == 'SECOND_PHASE'"
+                >
+                  {{evaluationField.value.firstScore}}
+                </p>
                 <p class="evaluation-field-score">
                   <mat-form-field appearance="fill"
-                                  *ngIf="assessment.status == 'FIRST_PHASE'">
+                                  *ngIf="assessment.status == 'FIRST_PHASE'"
+                  >
                     <mat-label>Score</mat-label>
                     <mat-select required
-                                formControlName="firstScore">
+                                formControlName="firstScore"
+                    >
                       <mat-option *ngFor="let score of scores" value="{{ score }}">
-                        {{ score }}
+                        <span class="first-score-input">{{ score }}</span>
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -260,7 +267,6 @@
           <mat-form-field appearance="fill" class="feedback-input-field">
             <mat-label>Your feedback</mat-label>
             <textarea matInput
-                      required
                       formControlName="context"
                       cdkTextareaAutosize
                       cdkAutosizeMinRows="4"

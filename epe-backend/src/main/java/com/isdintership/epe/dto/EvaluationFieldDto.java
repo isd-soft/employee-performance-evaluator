@@ -10,7 +10,6 @@ public class EvaluationFieldDto {
     private String comment;
     private Integer firstScore;
     private Integer secondScore;
-    private Integer overallScore;
     private String evaluationGroupId;
 
     public static EvaluationFieldDto fromEvaluationField(EvaluationField field){
@@ -21,7 +20,6 @@ public class EvaluationFieldDto {
         fieldDto.setComment(field.getComment());
         fieldDto.setFirstScore(field.getFirstScore());
         fieldDto.setSecondScore(field.getSecondScore());
-        fieldDto.setOverallScore(field.getOverallScore());
         fieldDto.setEvaluationGroupId(field.getEvaluationGroup().getId());
 
         return fieldDto;
