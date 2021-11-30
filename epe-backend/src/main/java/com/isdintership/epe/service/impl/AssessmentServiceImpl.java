@@ -26,7 +26,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
-    private final EmailServiceImpl emailService;
+//    private final EmailServiceImpl emailService;
     private final AssessmentInformationRepository assessmentInformationRepository;
 
     @Override
@@ -493,6 +493,26 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentRepository.removeById(id);
 
         return AssessmentDto.fromAssessment(assessment);
+    }
+
+    @Override
+    @Transactional
+    public NewAssessmentsThisYearDto countAllNewAssessmentsThisYear() {
+        NewAssessmentsThisYearDto newAssessments = new NewAssessmentsThisYearDto();
+        for (int i = 0; i < 12; i++) {
+            LocalDateTime fromDate = LocalDateTime.of(LocalDateTime.now().getYear(), i + 1, 1, 0, 0);
+            newAssessments.getMonths().add(i, assessmentRepository.countAllByStartDateBetween(fromDate, fromDate.plusMonths(1)));
+        }
+
+        return newAssessments;
+    }
+
+    @Override
+    @Transactional
+    public AssessmentDto countAll() {
+        AssessmentDto assessmentDto = new AssessmentDto();
+        assessmentDto.setCount(assessmentRepository.count());
+        return assessmentDto;
     }
 
 }

@@ -47,8 +47,17 @@ public class AssessmentController {
 
     @GetMapping("assessments")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    public ResponseEntity<List<AssessmentDto>> getAllAssessments() {
-        return new ResponseEntity<>(assessmentService.getAllAssessments(), HttpStatus.OK);
+    public ResponseEntity<?> getAllAssessments
+            (@RequestParam(name = "count", required = false) String count) {
+        if (count != null) {
+            if (count.equals("all")) {
+                return ResponseEntity.ok(assessmentService.countAll());
+            }
+            if (count.equals("current-year")) {
+                return ResponseEntity.ok(assessmentService.countAllNewAssessmentsThisYear());
+            }
+        }
+        return ResponseEntity.ok(assessmentService.getAllAssessments());
     }
 
     @GetMapping("/users/{id}/assigned-assessments")

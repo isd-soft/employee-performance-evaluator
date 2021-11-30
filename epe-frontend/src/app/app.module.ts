@@ -57,6 +57,8 @@ import { AssessmentsHistoryComponent } from './components/assessments/assessment
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 import {MatBadgeModule} from '@angular/material/badge';
+import { AdminStatsComponent } from './components/admin-stats/admin-stats-component/admin-stats.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 import { CreateUserComponent } from './create-user/create-component/create-user.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
@@ -101,9 +103,9 @@ import { CancelAssessmentComponent } from './components/cancel-assessment/cancel
     TeamViewComponent,
     AssessmentsAssignedComponent,
     LineFeedComponent,
+    AdminStatsComponent,
     AdminBoardComponent,
     CreateUserComponent,
-    AdminBoardComponent,
     CancelAssessmentComponent
   ],
     imports: [
@@ -131,7 +133,8 @@ import { CancelAssessmentComponent } from './components/cancel-assessment/cancel
         MatSidenavModule,
         MatDatepickerModule,
         MatMenuModule,
-        MatBadgeModule
+        MatBadgeModule,
+        NgApexchartsModule,
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,
