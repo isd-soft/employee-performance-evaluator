@@ -15,11 +15,11 @@ export interface AssessmentView {
   endDate: string,
   status: string,
   overallScore: number,
+  cancellationReason: string,
   evaluationGroups: EvaluationGroupView[],
   personalGoals: PersonalGoalView[],
   departmentGoals: DepartmentGoalView[],
   feedbacks: FeedbackView[],
-
-  userId: string
-
+  userId: string,
+  startedById: string
 }

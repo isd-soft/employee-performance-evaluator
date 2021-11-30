@@ -1,9 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AssessmentView} from "../assessments-models/assessment-view.interface";
 import {AssessmentsEvaluationComponent} from "../assessments-evaluation/assessments-evaluation.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
+import {UserComponent} from "../../user/user-component/user.component";
+import {CancelAssessmentComponent} from "../../cancel-assessment/cancel-assessment-component/cancel-assessment.component";
 
 @Component({
   selector: 'app-assessments-view',
@@ -15,7 +17,8 @@ export class AssessmentsViewComponent implements OnInit {
   assessment!: AssessmentView;
   jwtUser!: JwtUser;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any,
+  constructor(public dialogRef: MatDialogRef<CancelAssessmentComponent>,
+              @Inject(MAT_DIALOG_DATA) private data: any,
               public dialog: MatDialog,
               private jwtService: JwtService) {
     this.assessment = data as AssessmentView;
@@ -36,6 +39,14 @@ export class AssessmentsViewComponent implements OnInit {
       data : this.assessment,
       autoFocus: false
     });
+  }
+
+  openCancelDialog(assessmentView: AssessmentView){
+    const dialogRef = this.dialog.open(CancelAssessmentComponent, {
+      data: assessmentView,
+      width: '350px',
+    });
+    this.dialogRef.close();
   }
 
 }

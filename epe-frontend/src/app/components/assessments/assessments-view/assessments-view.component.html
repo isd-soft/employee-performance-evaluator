@@ -245,12 +245,24 @@
     <button
       mat-button
       *ngIf="(assessment.status == 'FIRST_PHASE' &&
-       assessment.userId == userId) ||
-       (assessment.status == 'SECOND_PHASE' && assessment.userId != userId)"
+        assessment.userId == userId) ||
+       (assessment.status == 'SECOND_PHASE' && assessment.userId != userId) ||
+       (assessment.status == 'FIRST_PHASE' && jwtUser.role === 'ROLE_ADMIN' ) ||
+       (assessment.status == 'FIRST_PHASE' && jwtUser.role === 'ROLE_SYSADMIN')"
       class="raise"
       (click)="openEvaluationDialog()"
     >
       Start evaluation
+    </button>
+
+    <button
+      mat-button
+      *ngIf="(assessment.status == 'FIRST_PHASE' || assessment.status == 'SECOND_PHASE' && jwtUser.role === 'ROLE_ADMIN' ) ||
+              (assessment.status == 'FIRST_PHASE'|| assessment.status == 'SECOND_PHASE' && jwtUser.role === 'ROLE_SYSADMIN')"
+      class="raise"
+      (click)="openCancelDialog(assessment)"
+    >
+      Cancel Evaluation
     </button>
   </mat-card-actions>
 </mat-card>

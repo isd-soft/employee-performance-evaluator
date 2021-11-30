@@ -63,7 +63,7 @@ class UserServiceImpl implements UserService {
                 new JobNotFoundException("Job with name " + request.getJob() + " not found"));
         user.setJob(jobUser);
 
-        File imageSourceFile = new File("../epe-backend/userDefaultImage.png");
+        File imageSourceFile = new File("./epe-backend/userDefaultImage.png");
 
         try {
             user.setImageBytes(encodeImageFromFile(imageSourceFile));
@@ -384,41 +384,19 @@ class UserServiceImpl implements UserService {
         return roleView;
     }
 
-//    @Override
-//    @Transactional
-//    public ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException{
-//        //File file = imageEditView.getFile();
-//        String imagePath = imageEditView.getImagePath();
-//        String encodedImage = "";
-//        /*try {
-//            encodedImage = encodeImage(imagePath);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }*/
-//        byte[] data = encodeImage(imagePath);
-//        User user = userRepository.findById(id).orElseThrow(() ->
-//                new UserNotFoundException("User with " + id + " was not found"));
-//        Image image = new Image();
-//        image.setImageBytes(data);
-//        image.setUser(user);
-//        //image.setUser_id(id);
-//        System.out.println(Arrays.toString(data));
-//        System.out.println(user.getId());
-//        imageRepository.save(image);
-//        return imageEditView;
-//    }
-public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
-    FileInputStream imageStream = new FileInputStream(imageFolder);
 
-    byte[] data = imageStream.readAllBytes();
+    public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
+        FileInputStream imageStream = new FileInputStream(imageFolder);
 
-    String imageString = Base64.getEncoder().encodeToString(data);
+        byte[] data = imageStream.readAllBytes();
 
-    byte[] finalData = imageString.getBytes();
-    imageStream.close();
+        String imageString = Base64.getEncoder().encodeToString(data);
 
-    return finalData;
-}
+        byte[] finalData = imageString.getBytes();
+        imageStream.close();
+
+        return finalData;
+    }
 
 
     public static byte[] encodeImageFromFilePath(String imagePath) throws IOException {

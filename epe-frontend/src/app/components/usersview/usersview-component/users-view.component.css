@@ -47,6 +47,11 @@
   width: 12%;
 }
 
+.add-button{
+  width: 22%;
+  text-align: right;
+}
+
 mat-paginator {
   padding-bottom: 15px;
 }

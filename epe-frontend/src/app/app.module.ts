@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
@@ -59,6 +58,7 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
 import {MatBadgeModule} from '@angular/material/badge';
 import { CreateUserComponent } from './create-user/create-component/create-user.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
 
 
 @NgModule({
@@ -101,7 +101,9 @@ import {MatMenuModule} from "@angular/material/menu";
     AssessmentsAssignedComponent,
     LineFeedComponent,
     AdminBoardComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    AdminBoardComponent,
+    CancelAssessmentComponent
   ],
     imports: [
         BrowserModule,

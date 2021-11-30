@@ -1,6 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.AssessmentTemplateDto;
+import com.isdintership.epe.entity.Role;
 import com.isdintership.epe.entity.Status;
 import com.isdintership.epe.dto.*;
 import com.isdintership.epe.service.AssessmentInformationService;
@@ -75,6 +76,7 @@ public class AssessmentController {
         return new ResponseEntity<>(assessmentService.updateAssessment(id, assessmentDto), HttpStatus.OK);
 
     }
+
 
     @PutMapping("users/{userId}/assessments/{assessmentId}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})

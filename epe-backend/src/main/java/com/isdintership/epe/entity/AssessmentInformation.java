@@ -22,7 +22,7 @@ public class AssessmentInformation extends BaseEntity{
     @OneToOne
     private User performedByUser;
     private LocalDateTime performedTime;
-
+    private String reason;
     public AssessmentInformation(){
 
     }

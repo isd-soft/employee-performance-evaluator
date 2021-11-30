@@ -20,6 +20,7 @@ public class AssessmentInformationDto {
     private String performedByUser;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime performedTime;
+    private String reason;
 
 
     public AssessmentInformationDto(AssessmentInformation assessmentInformation){
@@ -28,6 +29,6 @@ public class AssessmentInformationDto {
         this.performedOnUser = assessmentInformation.getPerformedOnUser().getFirstname() + " " + assessmentInformation.getPerformedOnUser().getLastname();
         this.status = assessmentInformation.getStatus();
         this.performedTime = assessmentInformation.getPerformedTime();
-
+        this.reason = assessmentInformation.getReason();
     }
 }

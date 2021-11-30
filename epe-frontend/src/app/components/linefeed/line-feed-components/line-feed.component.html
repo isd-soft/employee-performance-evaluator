@@ -1,30 +1,36 @@
 <div class="align-center">
-  <mat-card class="example-card" *ngFor="let a of assessmentsInformation" style="padding: 2%">
+  <mat-card class="example-card" *ngFor="let assessment of assessmentsInformation" style="padding: 2%">
     <mat-card-title-group>
-      <mat-card-title class="title-text"> Assessment: <b>{{a.assessmentTitle}}</b></mat-card-title>
-      <mat-card-subtitle>{{a.performedTime}}</mat-card-subtitle>
+      <mat-card-title class="title-text">
+        <b>
+          {{assessment.assessmentTitle}}
+        </b>
+      </mat-card-title>
+      <mat-card-subtitle>{{assessment.performedTime}}
+      </mat-card-subtitle>
     </mat-card-title-group>
-    <mat-card-content class="text-size">
-      The assessment for the user <b>{{a.performedOnUser}}</b> with the title
-      <b>{{a.assessmentTitle}}</b> has been
-      
-      <span [ngSwitch]="a.status">
-        <span *ngSwitchCase="'FIRST_PHASE'"> initialized </span>
-        <span *ngSwitchCase="'SECOND_PHASE'"> evaluated </span>
-        <span *ngSwitchCase="'FINISHED'"> evaluated </span>
-      </span>
+      <mat-card-content class="text-size">
+        The assessment for the user <b>{{assessment.performedOnUser}}</b> with the title
+        <b>{{assessment.assessmentTitle}}</b> has been
 
-      by the user <b>{{a.performedByUser}}</b> and is set to 
-      
-      <span [ngSwitch]="a.status">
-        <span *ngSwitchCase="'FIRST_PHASE'" class="label label-info" > FIRST PHASE </span>
-        <span *ngSwitchCase="'SECOND_PHASE'" class="label label-primary"> SECOND PHASE </span>
-        <span *ngSwitchCase="'FINISHED'" class="label label-success"> FINISHED </span>
-        <span *ngSwitchCase="'CANCELED'" class="label label-danger"> CANCELED </span>
-      </span>
+        <span [ngSwitch]="assessment.status">
+          <span *ngSwitchCase="'FIRST_PHASE'"> initialized </span>
+          <span *ngSwitchCase="'SECOND_PHASE'"> evaluated </span>
+          <span *ngSwitchCase="'FINISHED'"> evaluated </span>
+          <span *ngSwitchCase="'CANCELED'"> canceled </span>
+        </span>
 
-    </mat-card-content>
-
-  </mat-card>
+        by the user <b>{{assessment.performedByUser}}</b> and is set to
+        <span [ngSwitch]="assessment.status" >
+            <span *ngSwitchCase="'FIRST_PHASE'" class="label label-info" > FIRST PHASE </span>
+            <span *ngSwitchCase="'SECOND_PHASE'" class="label label-primary"> SECOND PHASE </span>
+            <span *ngSwitchCase="'FINISHED'" class="label label-success"> FINISHED </span>
+            <span *ngSwitchCase="'CANCELED'" class="label label-danger"> CANCELED </span>
+          </span>
+        <span *ngIf="assessment.status === 'CANCELED'">
+          Cancellation reason: {{assessment.reason}}
+        </span>
+      </mat-card-content>
+    </mat-card>
   <br>
 </div>
