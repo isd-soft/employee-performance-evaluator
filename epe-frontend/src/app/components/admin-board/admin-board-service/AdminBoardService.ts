@@ -23,4 +23,10 @@ export class AdminBoardService {
     return this.http.get("api-server/api/assessments");
   }
 
+  deleteAssessment(assessmentId: string){
+    this.http.request('delete', "api-server/api/assessments/" + assessmentId ,
+      {body: {"startedById": this.jwtService.getJwtUser().id}}).subscribe();
+
+  }
+
 }

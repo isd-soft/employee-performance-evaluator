@@ -88,3 +88,11 @@ mat-paginator {
   color: #FF0000;
   text-align: center;
 }
+
+.end-date-column, .start-date-column, .status-column {
+  width: 17%;
+}
+
+.buttons-column {
+  width: 12%;
+}

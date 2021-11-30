@@ -15,5 +15,5 @@ public interface AssessmentService {
     List<AssessmentDto> getAllAssignedAssessmentsByStatus(String userId, String status);
     AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto);
     AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto);
-    AssessmentDto deleteAssessment(String id);
+    AssessmentDto deleteAssessment(String id, AssessmentDto assessmentDto);
 }

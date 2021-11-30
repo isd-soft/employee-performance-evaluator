@@ -10,6 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {AssessmentsViewComponent} from "../../assessments/assessments-view/assessments-view.component";
 import {MatDialog} from "@angular/material/dialog";
 import { MatTableModule } from '@angular/material/table'
+import {DeleteAssessmentWarningComponent} from "../delete-assessment-warning/delete-assessment-warning.component";
 
 @Component({
   selector: 'app-admin-board',
@@ -65,5 +66,10 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
       data : this.assessments[id],
       autoFocus: false
     });
+  }
+
+  delete(assessmentId: string) {
+    this.dialog.open(DeleteAssessmentWarningComponent, {data: assessmentId})
+    // this.adminBoardService.deleteAssessment
   }
 }

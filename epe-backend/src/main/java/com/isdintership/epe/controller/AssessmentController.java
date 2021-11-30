@@ -1,8 +1,6 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.AssessmentTemplateDto;
-import com.isdintership.epe.entity.Role;
-import com.isdintership.epe.entity.Status;
 import com.isdintership.epe.dto.*;
 import com.isdintership.epe.service.AssessmentInformationService;
 import com.isdintership.epe.service.AssessmentService;
@@ -91,9 +89,9 @@ public class AssessmentController {
 
     @DeleteMapping("assessments/{id}")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-    public ResponseEntity<AssessmentDto> deleteAssessment (@PathVariable(name = "id") String id) {
+    public ResponseEntity<AssessmentDto> deleteAssessment (@PathVariable(name = "id") String id, @RequestBody AssessmentDto assessmentDto) {
 
-        return new ResponseEntity<>(assessmentService.deleteAssessment(id), HttpStatus.OK);
+        return new ResponseEntity<>(assessmentService.deleteAssessment(id, assessmentDto), HttpStatus.OK);
 
     }
 

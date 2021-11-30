@@ -18,6 +18,7 @@
           <span *ngSwitchCase="'SECOND_PHASE'"> evaluated </span>
           <span *ngSwitchCase="'FINISHED'"> evaluated </span>
           <span *ngSwitchCase="'CANCELED'"> canceled </span>
+          <span *ngSwitchCase="'DELETED'"> deleted </span>
         </span>
 
         by the user <b>{{assessment.performedByUser}}</b> and is set to
@@ -25,7 +26,8 @@
             <span *ngSwitchCase="'FIRST_PHASE'" class="label label-info" > FIRST PHASE </span>
             <span *ngSwitchCase="'SECOND_PHASE'" class="label label-primary"> SECOND PHASE </span>
             <span *ngSwitchCase="'FINISHED'" class="label label-success"> FINISHED </span>
-            <span *ngSwitchCase="'CANCELED'" class="label label-danger"> CANCELED </span>
+            <span *ngSwitchCase="'CANCELED'" class="label label-warning"> CANCELED </span>
+            <span *ngSwitchCase="'DELETED'" class="label label-danger"> DELETED </span>
           </span>
         <span *ngIf="assessment.status === 'CANCELED'">
           Cancellation reason: {{assessment.reason}}

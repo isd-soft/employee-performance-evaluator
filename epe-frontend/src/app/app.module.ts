@@ -60,6 +60,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { CreateUserComponent } from './create-user/create-component/create-user.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
+import { DeleteAssessmentWarningComponent} from "./components/admin-board/delete-assessment-warning/delete-assessment-warning.component";
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { CancelAssessmentComponent } from './components/cancel-assessment/cancel
     AdminBoardComponent,
     CreateUserComponent,
     AdminBoardComponent,
-    CancelAssessmentComponent
+    CancelAssessmentComponent,
+    DeleteAssessmentWarningComponent
   ],
     imports: [
         BrowserModule,

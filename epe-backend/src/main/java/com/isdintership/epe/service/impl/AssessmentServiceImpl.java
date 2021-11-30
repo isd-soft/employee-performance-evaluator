@@ -485,10 +485,19 @@ class AssessmentServiceImpl implements AssessmentService {
 
     @Override
     @Transactional
-    public AssessmentDto deleteAssessment(String id) {
+    public AssessmentDto deleteAssessment(String id, AssessmentDto assessmentDto) {
 
         Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
                 new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
+
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setStatus(Status.DELETED);
+        assessmentInformation.setPerformedTime(LocalDateTime.now());
+        User startedByUser = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(startedByUser);
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        assessmentInformationRepository.save(assessmentInformation);
 
         assessmentRepository.removeById(id);
 

@@ -179,7 +179,7 @@ export class UsersView {
   }
 
   onView(user : string) {
-    console.log(this.teamMembers)
+    // console.log(this.teamMembers)
     this.dialog.open( UserComponent, {data: user} );
   }
 
