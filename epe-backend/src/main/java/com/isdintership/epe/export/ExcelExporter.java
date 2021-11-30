@@ -178,7 +178,7 @@ public class ExcelExporter {
     @Transactional
     public void exportAssessmentToExcel(HttpServletResponse response,
                                         AssessmentDto assessment,
-                                        UserDto user) throws IOException {
+                                        UserDto evaluatedUser) throws IOException {
         sheet = workbook.createSheet("Users");
 
         Row row = sheet.createRow(0);
@@ -200,7 +200,7 @@ public class ExcelExporter {
 
         row = sheet.createRow(rowNum++);
 
-        createCell(row, 4, user.getJob(), valueStyle);
+        createCell(row, 4, evaluatedUser.getJob(), valueStyle);
 
 
 

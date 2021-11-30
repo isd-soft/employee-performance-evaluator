@@ -118,14 +118,14 @@ public class ExportController {
                                         HttpServletResponse response) throws IOException {
         AssessmentDto assessment = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() ->
                 new AssessmentNotFoundException("Assessment with " + id + " was not founed")));
-        UserDto user = UserDto.fromUser(userRepository.findById(id).orElseThrow(() ->
+        UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessment.getUserId()).orElseThrow(() ->
                 new UserNotFoundException("User with " + id + " was not found")));
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=users.xlsx";
         response.setHeader(headerKey, headerValue);
         ExcelExporter excelExporter = new ExcelExporter();
-        excelExporter.exportAssessmentToExcel(response,assessment,user);
+        excelExporter.exportAssessmentToExcel(response,assessment,evaluatedUser);
     }
 
 }
