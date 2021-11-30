@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './components/logout/logout-component/logout.component';
@@ -57,6 +56,7 @@ import { UserDeleteComponent } from './components/usersview/user-delete/user-del
 import { AssessmentsHistoryComponent } from './components/assessments/assessments-history-component/assessments-history.component';
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
+import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +98,8 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
     TeamViewComponent,
     AssessmentsAssignedComponent,
     LineFeedComponent,
-    AdminBoardComponent
+    AdminBoardComponent,
+    CancelAssessmentComponent
   ],
     imports: [
         BrowserModule,

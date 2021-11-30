@@ -489,4 +489,13 @@ class AssessmentServiceImpl implements AssessmentService {
         return AssessmentDto.fromAssessment(assessment);
     }
 
+//    @Override
+//    public AssessmentDto cancelAssessment(String assessmentId) {
+//        Assessment assessment = assessmentRepository.findById(assessmentId)
+//                                    .orElseThrow(AssessmentNotFoundException::new);
+//        assessment.setStatus(Status.CANCELED);
+//        assessmentRepository.save(assessment);
+//        return AssessmentDto.fromAssessment(assessment);
+//    }
+
 }

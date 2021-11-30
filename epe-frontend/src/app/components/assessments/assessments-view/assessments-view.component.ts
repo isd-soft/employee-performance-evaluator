@@ -4,6 +4,8 @@ import {AssessmentView} from "../assessments-models/assessment-view.interface";
 import {AssessmentsEvaluationComponent} from "../assessments-evaluation/assessments-evaluation.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
+import {UserComponent} from "../../user/user-component/user.component";
+import {CancelAssessmentComponent} from "../../cancel-assessment/cancel-assessment-component/cancel-assessment.component";
 
 @Component({
   selector: 'app-assessments-view',
@@ -36,6 +38,14 @@ export class AssessmentsViewComponent implements OnInit {
       data : this.assessment,
       autoFocus: false
     });
+  }
+
+  openCancelDialog(id: string){
+    const dialogRef = this.dialog.open(CancelAssessmentComponent, {
+      data: id,
+      width: '250px',
+    });
+
   }
 
 }
