@@ -24,6 +24,7 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
 
   jwtUser: User;
 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -65,5 +66,13 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
       data : this.assessments[id],
       autoFocus: false
     });
+  }
+
+  exportAssessmentToPdf(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToPdf(assessment);
+  }
+
+  exportAssessmentToExcel(assessment: AssessmentView | undefined) {
+    console.log('excel');
   }
 }

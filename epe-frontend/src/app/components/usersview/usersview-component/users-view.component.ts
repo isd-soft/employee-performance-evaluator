@@ -73,6 +73,7 @@ export class UsersView {
   // @ts-ignore
   @ViewChild(MatSort) sort2: MatSort;
 
+
   constructor(private userviewsServices: UserviewsServices,
               public dialog: MatDialog,
               private jwtService: JwtService,

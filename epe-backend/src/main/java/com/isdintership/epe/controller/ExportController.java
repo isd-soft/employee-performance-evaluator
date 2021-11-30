@@ -1,8 +1,12 @@
 package com.isdintership.epe.controller;
 
+import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.UserDto;
+import com.isdintership.epe.entity.Role;
 import com.isdintership.epe.entity.User;
+import com.isdintership.epe.exception.AssessmentNotFoundException;
 import com.isdintership.epe.exception.UserNotFoundException;
+import com.isdintership.epe.repository.AssessmentRepository;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.ExportService;
 import com.isdintership.epe.export.ExcelExporter;
@@ -25,6 +29,7 @@ import static com.isdintership.epe.entity.RoleEnum.Fields.*;
 public class ExportController {
 
     private final UserRepository userRepository;
+    private final AssessmentRepository assessmentRepository;
     private final PDFGenerator pdfGenerator;
 
 
@@ -91,6 +96,23 @@ public class ExportController {
         ExcelExporter excelExporter = new ExcelExporter();
 
         excelExporter.exportAllUsersToExcel(response,users);
+    }
+
+    @GetMapping(value = "/{id}/assessment")
+    @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
+    @Transactional
+    public void exportAssessmentToPdf(@PathVariable(name = "id") String id,
+                                      HttpServletResponse response) throws IOException{
+        AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() ->
+                new AssessmentNotFoundException("Assessment with " + id + " was not founed")));
+        UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessmentDto.getUserId()).orElseThrow(() ->
+                new UserNotFoundException("Evaluated user with " + id + " was not founed")));
+        response.setContentType("application/pdf");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users.pdf";
+        response.setHeader(headerKey, headerValue);
+        response.flushBuffer();
+        this.pdfGenerator.exportAssessmentToPdf(response,assessmentDto,evaluatedUser);
     }
 
 }
