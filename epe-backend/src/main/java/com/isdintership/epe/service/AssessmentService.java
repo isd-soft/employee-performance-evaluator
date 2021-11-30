@@ -16,5 +16,4 @@ public interface AssessmentService {
     AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto);
     AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto);
     AssessmentDto deleteAssessment(String id);
-//    AssessmentDto cancelAssessment(String assessmentId);
 }

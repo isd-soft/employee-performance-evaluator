@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class JobAnniversaryCheckerImpl implements JobAnniversaryChecker {
+class JobAnniversaryCheckerImpl implements JobAnniversaryChecker {
 
     private final UserRepository userRepository;
     private final EmailService emailService;

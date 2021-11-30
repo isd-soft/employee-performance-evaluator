@@ -381,6 +381,10 @@ class AssessmentServiceImpl implements AssessmentService {
         assessment.setJob(job);
         assessment.setOverallScore(assessmentDto.getOverallScore());
         assessment.setStatus(assessmentDto.getStatus());
+        if (assessmentDto.getStatus().equals(Status.CANCELED)){
+            AssessmentInformation assessmentInformation = getAssessmentInformation(assessment, assessmentDto);
+            assessmentInformationRepository.save(assessmentInformation);
+        }
         assessment.setIsTemplate(assessmentDto.getIsTemplate());
         assessment.setStartDate(assessmentDto.getStartDate());
         assessment.setEndDate(assessmentDto.getEndDate());
@@ -488,14 +492,5 @@ class AssessmentServiceImpl implements AssessmentService {
 
         return AssessmentDto.fromAssessment(assessment);
     }
-
-//    @Override
-//    public AssessmentDto cancelAssessment(String assessmentId) {
-//        Assessment assessment = assessmentRepository.findById(assessmentId)
-//                                    .orElseThrow(AssessmentNotFoundException::new);
-//        assessment.setStatus(Status.CANCELED);
-//        assessmentRepository.save(assessment);
-//        return AssessmentDto.fromAssessment(assessment);
-//    }
 
 }

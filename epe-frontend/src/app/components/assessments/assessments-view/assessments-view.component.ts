@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AssessmentView} from "../assessments-models/assessment-view.interface";
 import {AssessmentsEvaluationComponent} from "../assessments-evaluation/assessments-evaluation.component";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
@@ -17,7 +17,8 @@ export class AssessmentsViewComponent implements OnInit {
   assessment!: AssessmentView;
   jwtUser!: JwtUser;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any,
+  constructor(public dialogRef: MatDialogRef<CancelAssessmentComponent>,
+              @Inject(MAT_DIALOG_DATA) private data: any,
               public dialog: MatDialog,
               private jwtService: JwtService) {
     this.assessment = data as AssessmentView;
@@ -40,12 +41,12 @@ export class AssessmentsViewComponent implements OnInit {
     });
   }
 
-  openCancelDialog(id: string){
+  openCancelDialog(assessmentView: AssessmentView){
     const dialogRef = this.dialog.open(CancelAssessmentComponent, {
-      data: id,
-      width: '250px',
+      data: assessmentView,
+      width: '350px',
     });
-
+    this.dialogRef.close();
   }
 
 }

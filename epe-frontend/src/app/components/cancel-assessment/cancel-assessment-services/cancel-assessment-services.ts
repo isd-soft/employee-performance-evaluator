@@ -16,10 +16,13 @@ export class CancelAssessmentServices{
 
   }
 
-  cancelAssessment(assessmentId: string){
-    // console.log(this.http.get<AssessmentView>("api-server/api/assessments/" + assessmentId));
+  cancelAssessment(assessmentView: AssessmentView){
+    console.log(assessmentView)
+    assessmentView.status = "CANCELED";
+    assessmentView.startedById = this.jwtService.getJwtUser().id;
+    // console.log(this.http.get<AssessmentView>("api-server/api/assessments/" + assessmentView));
     // console.log(this.assessment)
-    this.http.put("api-server/api/assessments/" + assessmentId, {status: "CANCELED"} )
-    console.log(assessmentId)
+    this.http.put("api-server/api/assessments/" + assessmentView.id, assessmentView ).subscribe()
+    // console.log(assessmentView)
   }
 }

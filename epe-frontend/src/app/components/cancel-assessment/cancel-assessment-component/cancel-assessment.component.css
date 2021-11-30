@@ -1,0 +1,23 @@
+p{
+  font-size: 20px;
+}
+
+.icon{
+  padding-left: 2%;
+  transform: scale(2);
+}
+
+.parent-element {
+  display: flex;
+  align-items: center;
+}
+
+.buttons{
+  padding-top: 5%;
+  text-align: center;
+}
+.align-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

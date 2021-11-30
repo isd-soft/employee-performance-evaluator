@@ -102,7 +102,7 @@ import { CancelAssessmentComponent } from './components/cancel-assessment/cancel
     AssessmentsAssignedComponent,
     LineFeedComponent,
     AdminBoardComponent,
-    CreateUserComponent
+    CreateUserComponent,
     AdminBoardComponent,
     CancelAssessmentComponent
   ],

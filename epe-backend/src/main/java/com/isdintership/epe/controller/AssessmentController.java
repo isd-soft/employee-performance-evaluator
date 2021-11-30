@@ -77,10 +77,6 @@ public class AssessmentController {
 
     }
 
-//    @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN})
-//    public ResponseEntity<AssessmentDto> cancelAssessment(@PathVariable String assessmentId){
-//        return ResponseEntity.ok(assessmentService.cancelAssessment(assessmentId));
-//    }
 
     @PutMapping("users/{userId}/assessments/{assessmentId}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})

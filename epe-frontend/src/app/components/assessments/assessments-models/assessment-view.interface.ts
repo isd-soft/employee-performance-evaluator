@@ -19,7 +19,6 @@ export interface AssessmentView {
   personalGoals: PersonalGoalView[],
   departmentGoals: DepartmentGoalView[],
   feedbacks: FeedbackView[],
-
-  userId: string
-
+  userId: string,
+  startedById: string
 }
