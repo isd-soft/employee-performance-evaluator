@@ -21,5 +21,6 @@ export interface AssessmentView {
   feedbacks: FeedbackView[],
 
   userId: string
+  count: number;
 
 }

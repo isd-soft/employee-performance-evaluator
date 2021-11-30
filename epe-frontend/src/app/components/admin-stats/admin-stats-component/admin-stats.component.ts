@@ -1,8 +1,13 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AdminStatsService} from "../admin-stats-service/admin-stats.service";
 import {ResponseActuatorHealth} from "../admin-models/response-actuator-health.interface";
 import {ResponseMetric} from "../admin-models/response-metric.interface";
-
+import {Router} from "@angular/router";
+import {MatTableDataSource} from "@angular/material/table";
+import {ResponseHttpTraces} from "../admin-models/response-http-traces.interface";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {HttpTrace} from "../admin-models/http-trace.interface";
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
@@ -18,18 +23,66 @@ import {
   ApexStroke,
   ApexLegend
 } from "ng-apexcharts";
-import {Router} from "@angular/router";
+import {ChartOptions} from "chart.js";
+import {AssessmentView} from "../../assessments/assessments-models/assessment-view.interface";
+import {UserView} from "../../users/user-models/user-view.interface";
+import {NewUsersCount} from "../admin-models/new-users-count.interface";
+import {NewAssessmentsCount} from "../admin-models/new-assessments-count.interface";
 
-export type ChartOptions = {
+export type ResponsesChartOptions1 = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
 };
 
-export type ChartOptions2 = {
+export type ResponsesChartOptions2 = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  fill: ApexFill;
+  tooltip: ApexTooltip;
+  stroke: ApexStroke;
+  legend: ApexLegend;
+};
+
+export type AssessmentsChartOptions1 = {
+  series: ApexNonAxisChartSeries;
+  colors: string[];
+  chart: ApexChart;
+  labels: string[];
+  plotOptions: ApexPlotOptions;
+}
+
+export type UsersChartOptions1 = {
+  series: ApexNonAxisChartSeries;
+  colors: string[];
+  chart: ApexChart;
+  labels: string[];
+  plotOptions: ApexPlotOptions;
+}
+
+export type UsersChartOptions2 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  colors: string[];
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  fill: ApexFill;
+  tooltip: ApexTooltip;
+  stroke: ApexStroke;
+  legend: ApexLegend;
+};
+
+export type AssessmentsChartOptions2 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  colors: string[];
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   yaxis: ApexYAxis;
@@ -43,7 +96,8 @@ export type ChartOptions2 = {
 @Component({
   selector: 'app-admin-stats',
   templateUrl: './admin-stats.component.html',
-  styleUrls: ['./admin-stats.component.css']
+  styleUrls: ['./admin-stats.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminStatsComponent implements AfterViewInit {
 
@@ -59,10 +113,35 @@ export class AdminStatsComponent implements AfterViewInit {
   processorsCount!: number;
   uptime!: number;
 
-  @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions!: Partial<ChartOptions> | any;
-  @ViewChild("chart2") chart2!: ChartComponent;
-  public chartOptions2!: Partial<ChartOptions> | any;
+  assessmentsCount!: number;
+  usersCount!: number;
+  newUsersCount!: NewUsersCount;
+  newAssessmentsCount!: NewAssessmentsCount;
+
+  @ViewChild("chart") responsesChart1!: ChartComponent;
+  public responsesChartOptions1!: Partial<ResponsesChartOptions1> | any;
+  @ViewChild("chart") responsesChart2!: ChartComponent;
+  public responsesChartOptions2!: Partial<ResponsesChartOptions2> | any;
+
+  @ViewChild("chart") assessmentsChart1!: ChartComponent;
+  public assessmentsChartOptions1!: Partial<AssessmentsChartOptions1> | any;
+  @ViewChild("chart") assessmentsChart2!: ChartComponent;
+  public assessmentsChartOptions2!: Partial<AssessmentsChartOptions2> | any;
+
+  @ViewChild("chart") usersChart1!: ChartComponent;
+  public usersChartOptions1!: Partial<UsersChartOptions1> | any;
+  @ViewChild("chart") usersChart2!: ChartComponent;
+  public usersChartOptions2!: Partial<UsersChartOptions2> | any;
+
+  displayedColumns: string[] = ['timestamp', 'method', 'timeTaken', 'status', 'uri'];
+  dataSource!: MatTableDataSource<HttpTrace>;
+  httpTraceResponse!: ResponseHttpTraces;
+  @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
+    this.dataSource.paginator = value;
+  }
+  @ViewChild(MatSort) set sort(value: MatSort) {
+    this.dataSource.sort = value;
+  }
 
   constructor(private adminStatsService: AdminStatsService,
               private router: Router) {
@@ -114,12 +193,12 @@ export class AdminStatsComponent implements AfterViewInit {
           this.count500 = measurement.value;
         }
       });
-      this.setChartOptions();
-      this.setChartOptions2();
+      this.setResponsesChartOptions1();
+      this.setResponsesChartOptions2();
     }, error => {
       this.count500 = 0;
-      this.setChartOptions();
-      this.setChartOptions2();
+      this.setResponsesChartOptions1();
+      this.setResponsesChartOptions2();
     });
 
 
@@ -164,15 +243,65 @@ export class AdminStatsComponent implements AfterViewInit {
       });
     }, error => {
       this.uptime = 0;
-    })
+    });
+
+    this.adminStatsService.getHttpTraces().subscribe(response => {
+      this.httpTraceResponse = response as ResponseHttpTraces;
+      this.httpTraceResponse.traces.forEach(trace => {
+        trace.method = trace.request.method;
+        trace.uri = trace.request.uri;
+        trace.status = trace.response.status;
+      })
+      this.dataSource = new MatTableDataSource<HttpTrace>(this.httpTraceResponse.traces);
+      setTimeout(() => this.dataSource.paginator = this.paginator);
+      this.dataSource.sort = this.sort;
+    });
+
+    this.adminStatsService.getAssessmentsCount().subscribe(response => {
+      let assessmentView = response as AssessmentView;
+      this.assessmentsCount = assessmentView.count;
+      console.log(this.assessmentsCount);
+      this.setAssessmentsChartOptions1();
+    }, error => {
+      this.assessmentsCount = 0;
+      this.setAssessmentsChartOptions1();
+    });
+
+    this.adminStatsService.getUsersCount().subscribe(response => {
+      let userView = response as UserView;
+      this.usersCount = userView.count;
+      console.log(this.usersCount);
+      this.setUsersChartOptions1();
+    }, error => {
+      this.usersCount = 0;
+      console.log(this.usersCount);
+      this.setUsersChartOptions1();
+    });
+
+    this.adminStatsService.getNewUsersThisYearCount().subscribe(response => {
+      this.newUsersCount = response as NewUsersCount;
+      this.setUsersChartOptions2();
+    }, error => {
+      this.newUsersCount.months = [0,0,0,0,0,0,0,0,0,0,0,0];
+      this.setUsersChartOptions2();
+    });
+
+    this.adminStatsService.getNewAssessmentsThisYearCount().subscribe(response => {
+      this.newAssessmentsCount = response as NewAssessmentsCount;
+      console.log(this.newAssessmentsCount);
+      this.setAssessmentsChartOptions2();
+    }, error => {
+      this.newAssessmentsCount.months = [0,0,0,0,0,0,0,0,0,0,0,0];
+      this.setAssessmentsChartOptions2();
+    });
   }
 
   ngAfterViewInit(): void {
 
   }
 
-  setChartOptions(): void {
-    this.chartOptions = {
+  setResponsesChartOptions1(): void {
+    this.responsesChartOptions1 = {
       title: {
         text: "HTTP RESPONSES"
       },
@@ -189,8 +318,8 @@ export class AdminStatsComponent implements AfterViewInit {
     };
   }
 
-  setChartOptions2(): void {
-    this.chartOptions2 = {
+  setResponsesChartOptions2(): void {
+    this.responsesChartOptions2 = {
       title: {
         text: "HTTP RESPONSES"
       },
@@ -198,7 +327,6 @@ export class AdminStatsComponent implements AfterViewInit {
         {
           name: "Statuses",
           data: [this.count200, this.count400, this.count404, this.count500],
-          colors: ["#42d14b", "#1d5dda", "#FF8C00", "#DC143C"],
         }
       ],
       chart: {
@@ -244,6 +372,209 @@ export class AdminStatsComponent implements AfterViewInit {
         }
       }
     };
+  }
+
+  setAssessmentsChartOptions1(): void {
+    this.assessmentsChartOptions1 = {
+      series: [this.assessmentsCount],
+      chart: {
+        height: 350,
+        type: "radialBar"
+      },
+      plotOptions: {
+        radialBar: {
+          track: {
+            opacity: 1
+          },
+          dataLabels: {
+            name: {
+              offsetY: -10
+            },
+            value: {
+              fontSize: '26px',
+              fontWeight: 700,
+              formatter: function(val: any) {
+                return val;
+              }
+            }
+          }
+        }
+      },
+      colors: ["#1d5dda"],
+      labels: ["ASSESSMENTS"]
+    }
+  }
+
+  setUsersChartOptions1(): void {
+    this.usersChartOptions1 = {
+      series: [this.usersCount],
+      chart: {
+        height: 350,
+        type: "radialBar"
+      },
+      plotOptions: {
+        radialBar: {
+          track: {
+            opacity: 1
+          },
+          dataLabels: {
+            name: {
+              offsetY: -10
+            },
+            value: {
+              fontSize: '26px',
+              fontWeight: 700,
+              formatter: function(val: any) {
+                return val;
+              }
+            }
+          }
+        }
+      },
+      colors: ["#42d14b"],
+      labels: ["USERS"]
+    }
+  }
+
+  setUsersChartOptions2(): void {
+    this.usersChartOptions2 = {
+      title: {
+        text: "New users this year"
+      },
+      series: [
+        {
+          name: "Users",
+          data: this.newUsersCount.months,
+        }
+      ],
+      colors: ["#42d14b"],
+      chart: {
+        type: "bar",
+        height: 350,
+        width: 700
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          endingShape: "rounded"
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"]
+      },
+      xaxis: {
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ]
+      },
+      yaxis: {
+        title: {
+          text: "users"
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function(val: any) {
+            return val;
+          }
+        }
+      }
+    };
+  }
+
+  setAssessmentsChartOptions2(): void {
+    this.assessmentsChartOptions2 = {
+      title: {
+        text: "New assessments this year"
+      },
+      series: [
+        {
+          name: "Assessments",
+          data: this.newAssessmentsCount.months,
+        }
+      ],
+      colors: ["#1d5dda"],
+      chart: {
+        type: "bar",
+        height: 350,
+        width: 700
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          endingShape: "rounded"
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"]
+      },
+      xaxis: {
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ]
+      },
+      yaxis: {
+        title: {
+          text: "assessments"
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function(val: any) {
+            return val;
+          }
+        }
+      }
+    };
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   reload() {

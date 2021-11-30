@@ -34,4 +34,7 @@ public interface UserService {
     List<AssignedUserDto> getAssignedUsers(String id);
 
     UserDto updateUserAsAdmin(UserDto userDto, String id);
+
+    UserDto countAll();
+    NewUsersThisYearDto countNewUsersThisYear();
 }

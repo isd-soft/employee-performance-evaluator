@@ -29,6 +29,7 @@ public class AssessmentDto {
     private LocalDateTime endDate;
     private String userId;
     private String startedById;
+    private Long count;
 
     private List<EvaluationGroupDto> evaluationGroups;
     private List<PersonalGoalDto> personalGoals;
