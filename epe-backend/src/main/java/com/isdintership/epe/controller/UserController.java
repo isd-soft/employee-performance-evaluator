@@ -1,6 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.*;
+import com.isdintership.epe.entity.Team;
 import com.isdintership.epe.entity.User;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,11 @@ public class UserController {
     @GetMapping("/{id}/buddies")
     public ResponseEntity<List<UserDto>> getAllBuddies(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(userService.getAllBuddies(id));
+    }
+
+    @GetMapping("/{id}/team")
+    public ResponseEntity<List<TeamDto>> getTeam(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(userService.getTeamByUserId(id));
     }
 
     @PostMapping

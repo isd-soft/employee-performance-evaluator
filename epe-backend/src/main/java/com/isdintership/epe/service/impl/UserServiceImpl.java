@@ -3,11 +3,7 @@ package com.isdintership.epe.service.impl;
 
 import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
-import com.isdintership.epe.exception.JobNotFoundException;
-import com.isdintership.epe.exception.UserExistsException;
-import com.isdintership.epe.exception.UserNotFoundException;
-
-import com.isdintership.epe.exception.RoleNotFoundException;
+import com.isdintership.epe.exception.*;
 
 import com.isdintership.epe.repository.*;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
@@ -326,6 +322,29 @@ class UserServiceImpl implements UserService {
         return assignedUsersDtos;
     }
 
+    @Override
+    @Transactional
+    public List<TeamDto> getTeamByUserId(String id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
+
+        List<TeamDto> teamDtoList = new ArrayList();
+
+        List<Team> teamList = teamRepository.findAllByTeamLeaderId(id);
+        for (Team team: teamList) {
+            teamDtoList.add(TeamDto.fromTeam(team));
+        }
+
+        if(user.getTeam() != null) {
+            Team team = teamRepository.findById(user.getTeam().getId()).orElseThrow(() ->
+                    new TeamNotFoundException("Team for user with id " + id + " was not found"));
+
+            teamDtoList.add(TeamDto.fromTeam(team));
+        }
+
+        return teamDtoList;
+    }
 
     @Override
     @Transactional

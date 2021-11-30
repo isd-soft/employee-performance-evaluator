@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 export class ProfileService {
 
   profileUrl = 'api-server/api/users';
+
   jwtUser: JwtUser
 
   constructor(private http: HttpClient,
@@ -22,6 +23,10 @@ export class ProfileService {
   getMyProfile() {
       return this.http.get(this.profileUrl + '/' + this.jwtUser.id)
       .pipe(catchError(this.errorHandler));
+  }
+
+  getMyTeams() {
+    return this.http.get(this.profileUrl + '/' + this.jwtUser.id + '/team')
   }
 
   errorHandler(error: HttpErrorResponse){

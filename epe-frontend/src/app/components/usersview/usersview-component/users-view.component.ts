@@ -1,4 +1,6 @@
-import { Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import { ShortUser } from './../../teams/teams-model/short-user.interface';
+import { ActivatedRoute } from '@angular/router';
+import { Component, ViewChild, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import {UserviewsServices} from "../userview-services/users-view.service";
 import {User} from "../userview-models/User";
 import {MatPaginator} from '@angular/material/paginator';
@@ -20,9 +22,7 @@ import {CreateUserService} from "../userview-services/create-user.service";
 import {DatePipe} from "@angular/common";
 import { UserDeleteComponent } from '../user-delete/user-delete.component';
 import {TeamView} from "../../teams/teams-model/team-view.interface";
-import {ShortUser} from "../../teams/teams-model/short-user.interface";
-import {Router} from "@angular/router";
-import {CreateUserComponent} from "../../../create-user/create-component/create-user.component";
+import {CreateUserComponent} from "../../../create-user/create-component/create-user.component";;
 
 // @ts-ignore
 import {saveAs} from 'file-saver/dist/FileSaver';
@@ -34,40 +34,35 @@ import {saveAs} from 'file-saver/dist/FileSaver';
   encapsulation: ViewEncapsulation.None
 })
 
-export class UsersView {
+export class UsersView implements OnDestroy, OnInit {
 
-  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job','assessment_status', 'buttons'];
-  // @ts-ignore
-  dataSource: MatTableDataSource<User>;
-  // @ts-ignore
-  dataSource2: MatTableDataSource<ShortUser>;
-  users!: User[];
-  jwtUser?: JwtUser;
-  assessmentTemplates? : AssessmentTemplate[];
-  assignedUsers?: User[]
-  role?: string;
   id?: string;
+  role?: string;
+  jwtUser?: JwtUser;
   requiredRole : string = "ROLE_SYSADMIN";
 
   newUser?: FormGroup;
-
   userDto?: NewUser;
-
   teamLeader?: NewUser;
-
   userToExport?: NewUser;
-
-  jobList?: JobItem[];
-
   teamList?: TeamView[];
-
   teamMembers?: ShortUser[];
 
+  users!: User[];
+  assignedUsers?: User[];
+  jobList?: JobItem[];
+  assessmentTemplates? : AssessmentTemplate[];
+
+  // @ts-ignore
+  dataSource: MatTableDataSource<User>;
+  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'job','assessment_status', 'buttons'];
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
   @ViewChild(MatSort) sort: MatSort;
 
+  // @ts-ignore
+  dataSource2: MatTableDataSource<ShortUser>;
   // @ts-ignore
   @ViewChild(MatPaginator) paginator2: MatPaginator;
   // @ts-ignore
@@ -76,19 +71,66 @@ export class UsersView {
   constructor(private userviewsServices: UserviewsServices,
               public dialog: MatDialog,
               private jwtService: JwtService,
+              private activatedRoute: ActivatedRoute,
               private roleService: RoleService,
               private formBuilder: FormBuilder,
-              private createService: CreateUserService,
-              private router: Router){
+              private createService: CreateUserService) {
+
+    this.refreshAllResources();
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(data => {
+      this.teamMembers = data.members;
+      this.dataSource2 = new MatTableDataSource(this.teamMembers);
+      this.dataSource2.paginator = this.paginator2;
+      this.dataSource2.sort = this.sort2;
+    });
+    this.refreshAllResources();
+  }
+
+  ngOnDestroy(): void {
+    this.users = [];
+    this.jobList = [];
+    this.jwtUser = undefined;
+    this.assignedUsers = [];
+    this.teamLeader = undefined;
+    this.teamMembers = [];
+  }
+
+  refreshAllResources() {
+    this.getUsers();
+    this.getRoles();
+    this.createEmptyUser();
+    this.createNewUserForm();
+    this.getCurrentUserDetails();
+    this.getAssignedUsers();
+    this.getTeamDetails();
+
+    return new Promise<void>((resolve, reject) => {resolve(); });
+  }
+
+  getCurrentUserDetails() {
     this.jwtUser = this.jwtService.getJwtUser();
     if (this.jwtUser) {
-      this.role = this.jwtUser.role;
       this.id = this.jwtUser.id;
+      this.role = this.jwtUser.role;
     }
+  }
 
+  getTeamDetails() {
+    this.getTeamLeader();
+  }
 
-    // @ts-ignore
+  getTeamLeader() {
+    this.userviewsServices.getTeamLeader().subscribe(data => {
+      this.teamLeader = data as NewUser;
+    });
+  }
+
+  createEmptyUser() {
     this.userDto = {
+      id: '',
       email: '',
       firstname: '',
       lastname: '',
@@ -99,22 +141,6 @@ export class UsersView {
       password: '1234321',
       bio: 'new user'
     }
-
-    this.userviewsServices.getTeamLeader().subscribe(data =>
-      this.teamLeader = data as NewUser);
-
-  }
-
-  getTeamMembers() {
-    this.userviewsServices.getTeamMembers().subscribe(data => {
-      this.teamMembers = data as ShortUser[]
-      this.dataSource2 = new MatTableDataSource(this.teamMembers);
-      this.dataSource2.paginator = this.paginator2;
-      this.dataSource2.sort = this.sort2;
-    });
-
-
-
   }
 
   applyFilter(event: Event) {
@@ -125,17 +151,6 @@ export class UsersView {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-
-    // if (this.dataSource2.paginator) {
-    //   this.dataSource2.paginator.firstPage();
-    // }
-  }
-
-  refreshAllResources() {
-    this.getUsers();
-    this.getRoles();
-    this.getAssignedUsers();
-    this.getTeamMembers();
   }
 
   getUsers() {
@@ -155,15 +170,10 @@ export class UsersView {
 
   getAssignedUsers() {
     this.userviewsServices.getAssignedUsers().subscribe(data =>{
-      this.assignedUsers = data as User[];
-    })
+      this.assignedUsers = data as User[]; })
   }
 
-
-  ngOnInit(){
-
-    this.refreshAllResources();
-
+  createNewUserForm() {
     this.newUser = this.formBuilder.group({
       email: [],
       firstname: [],
@@ -175,35 +185,31 @@ export class UsersView {
       password: [this.userDto?.password],
       bio: [this.userDto?.bio]
     })
-
   }
 
   onView(user : string) {
-    console.log(this.teamMembers)
     this.dialog.open( UserComponent, {data: user} );
   }
 
   edit(userId : number) {
-    this.dialog.open(RoleChangeComponent, {width: '45%', data : this.users[userId]});
-    this.refreshAllResources();
+    const dialogRef = this.dialog.open(RoleChangeComponent, {width: '45%', data : this.users[userId]});
+    dialogRef.afterClosed().subscribe(result => { this.refreshAllResources(); });
   }
 
   delete(id: string) {
     const dialogRef = this.dialog.open( UserDeleteComponent, {data: id} );
-    dialogRef.afterClosed().subscribe(result => {
-      this.refreshAllResources();
-    });
+    dialogRef.afterClosed().subscribe(result => { this.refreshAllResources(); });
+  }
+
+  createNewUser() {
+    const dialogRef = this.dialog.open(CreateUserComponent, {width: '50%'});
+    dialogRef.afterClosed().subscribe(result => { this.refreshAllResources(); });
   }
 
   startAssessment(id: string) {
     this.userviewsServices.getAssessmentTemplates().subscribe(assessmentTemplate => {
-      this.assessmentTemplates = assessmentTemplate as AssessmentTemplate[]
-    })
+      this.assessmentTemplates = assessmentTemplate as AssessmentTemplate[]; });
     this.dialog.open(AssessmentComponent, {data: id})
-
-    // this.dialog.open(AssessmentComponent, {data: id,});
-
-    // this.dialog.closeAll();
   }
 
   containsUserId(userId: string){
@@ -223,11 +229,6 @@ export class UsersView {
     // @ts-ignore
     this.newUser?.value.employmentDate = datePipe.transform(this.newUser?.value.employmentDate, 'dd-MM-yyyy') as string;
     this.createService.createUser(this.newUser?.value);
-    this.refreshAllResources();
-  }
-
-  createNewUser() {
-    this.dialog.open(CreateUserComponent, {width: '50%'});
   }
 
   exportToPdf(user : NewUser | undefined) {
