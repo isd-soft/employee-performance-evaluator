@@ -1,5 +1,6 @@
 package com.isdintership.epe.export;
 
+import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.entity.User;
 
@@ -161,7 +162,8 @@ public class ExcelExporter {
     }
 
     @Transactional
-    public void exportAllUsersToExcel(HttpServletResponse response,List<User> users) throws IOException {
+    public void exportAllUsersToExcel(HttpServletResponse response,
+                                      List<User> users) throws IOException {
         writeHeaderLine();
         writeDataLines(users);
 
@@ -171,5 +173,46 @@ public class ExcelExporter {
 
         outputStream.close();
 
+    }
+
+    @Transactional
+    public void exportAssessmentToExcel(HttpServletResponse response,
+                                        AssessmentDto assessment,
+                                        UserDto user) throws IOException {
+        sheet = workbook.createSheet("Users");
+
+        Row row = sheet.createRow(0);
+        int rowNum = 1;
+
+        CellStyle titleStyle = workbook.createCellStyle();
+        XSSFFont titleFont = workbook.createFont();
+        titleFont.setBold(true);
+        titleFont.setFontHeight(16);
+        titleStyle.setFont(titleFont);
+
+        CellStyle valueStyle = workbook.createCellStyle();
+        XSSFFont valueFont = workbook.createFont();
+        valueFont.setBold(false);
+        valueFont.setFontHeight(16);
+        valueStyle.setFont(valueFont);
+
+        createCell(row, 4, assessment.getTitle(), titleStyle);
+
+        row = sheet.createRow(rowNum++);
+
+        createCell(row, 4, user.getJob(), valueStyle);
+
+
+
+
+
+
+
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        workbook.write(outputStream);
+        workbook.close();
+
+        outputStream.close();
     }
 }

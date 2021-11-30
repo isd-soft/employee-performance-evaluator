@@ -73,6 +73,6 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
   }
 
   exportAssessmentToExcel(assessment: AssessmentView | undefined) {
-    console.log('excel');
+    this.adminBoardService.exportAssessmentToExcel(assessment);
   }
 }

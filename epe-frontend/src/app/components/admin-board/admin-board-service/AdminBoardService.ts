@@ -28,7 +28,7 @@ export class AdminBoardService {
   }
 
   exportAssessmentToPdf(assessment: AssessmentView | undefined) {
-    return this.http.get('api-server/api/export/' + assessment?.id + '/assessment',{responseType: 'arraybuffer'}).subscribe(pdf => {
+    return this.http.get('api-server/api/export/' + assessment?.id + '/assessment/pdf',{responseType: 'arraybuffer'}).subscribe(pdf => {
       const blob = new Blob([pdf],{type: 'application/pdf'});
 
       let datePipe = new DatePipe('en-US');
@@ -38,5 +38,17 @@ export class AdminBoardService {
       saveAs(blob,fileName);
     });
   }
+
+  exportAssessmentToExcel(assessment: AssessmentView | undefined) {
+    return this.http.get('api-server/api/export/' + assessment?.id + '/assessment/excel',{responseType: 'arraybuffer'}).subscribe(xlsx => {
+      const blob = new Blob([xlsx], {type: 'application/octet-stream'});
+      let datePipe = new DatePipe('en-US');
+      // @ts-ignore
+      let currentDate = datePipe.transform(Date.now(), 'dd-MM-yyyy') as string;
+      const fileName = assessment?.evaluatedUserFullName + '_' + currentDate +'.xlsx';
+      saveAs(blob,fileName);
+    });
+  }
+
 
 }

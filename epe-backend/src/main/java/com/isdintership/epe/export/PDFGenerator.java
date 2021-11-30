@@ -235,7 +235,7 @@ public class PDFGenerator {
 
         PdfPCell cell = new PdfPCell();
         cell.setPadding(5);
-        cell.setBorderWidth(0f);
+        cell.setBorderWidth(2f);
 
         cell.setPhrase(new Phrase("Evaluation groups",titleFont));
         titleTable.addCell(cell);
@@ -279,7 +279,7 @@ public class PDFGenerator {
 
             PdfPCell evaluationCell = new PdfPCell();
             evaluationCell.setPadding(35);
-            evaluationCell.setBorderWidth(0f);
+            evaluationCell.setBorderWidth(2f);
 
             evaluationCell.setPhrase(new Phrase(evaluationGroup.getTitle(),titleFont));
             evaluationFields.addCell(evaluationCell);
@@ -315,12 +315,17 @@ public class PDFGenerator {
 
         PdfPTable finalScoreTable = new PdfPTable(4);
         finalScoreTable.setWidthPercentage(100f);
-        finalScoreTable.setWidths(new float[] {2.5f,3.0f, 3.0f, 1.5f});
+        finalScoreTable.setWidths(new float[] {2.5f,3.5f, 2.0f, 2.0f});
         finalScoreTable.setSpacingBefore(10);
 
         PdfPCell finalScoreCell = new PdfPCell();
         finalScoreCell.setPadding(5);
-        finalScoreCell.setBorderWidth(0f);
+        finalScoreCell.setBorderWidth(2f);
+
+        PdfPCell finalScoreValueCell = new PdfPCell();
+        finalScoreValueCell.setPadding(5);
+        finalScoreValueCell.setPaddingLeft(35);
+        finalScoreValueCell.setBorderWidth(2f);
 
         finalScoreCell.setPhrase(new Phrase());
         finalScoreTable.addCell(finalScoreCell);
@@ -328,8 +333,8 @@ public class PDFGenerator {
         finalScoreTable.addCell(finalScoreCell);
         finalScoreCell.setPhrase(new Phrase("Total assessment score",titleFont));
         finalScoreTable.addCell(finalScoreCell);
-        finalScoreCell.setPhrase(new Phrase(String.valueOf(assessment.getOverallScore()),valueFont));
-        finalScoreTable.addCell(finalScoreCell);
+        finalScoreValueCell.setPhrase(new Phrase(String.valueOf(assessment.getOverallScore()),valueFont));
+        finalScoreTable.addCell(finalScoreValueCell);
 
         document.add(finalScoreTable);
 
@@ -352,7 +357,7 @@ public class PDFGenerator {
             personalGoalCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             personalGoalCell.setFixedHeight(50);
             personalGoalCell.setHorizontalAlignment(1);
-            personalGoalCell.setBorderWidth(0f);
+            personalGoalCell.setBorderWidth(2f);
 
             PdfPCell emptyRowCell = new PdfPCell();
             emptyRowCell.setPaddingTop(5);
@@ -440,7 +445,7 @@ public class PDFGenerator {
             departmentGoalCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             departmentGoalCell.setFixedHeight(50);
             departmentGoalCell.setHorizontalAlignment(1);
-            departmentGoalCell.setBorderWidth(0f);
+            departmentGoalCell.setBorderWidth(2f);
 
             PdfPCell emptyRowCell = new PdfPCell();
             emptyRowCell.setPaddingTop(5);
@@ -517,9 +522,9 @@ public class PDFGenerator {
         document.add(emptyRow);
         document.add(feedbacks);
 
-        PdfPTable feedbacksTable = new PdfPTable(3);
+        PdfPTable feedbacksTable = new PdfPTable(2);
         feedbacksTable.setWidthPercentage(100f);
-        feedbacksTable.setWidths(new float[]{1.0f, 3.0f, 6.0f});
+        feedbacksTable.setWidths(new float[]{4.0f, 6.0f});
         feedbacksTable.setSpacingBefore(10);
 
         PdfPCell feedbackTitleCell = new PdfPCell();
@@ -527,11 +532,9 @@ public class PDFGenerator {
         feedbackTitleCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         feedbackTitleCell.setFixedHeight(80);
         feedbackTitleCell.setHorizontalAlignment(1);
-        feedbackTitleCell.setBorderWidth(0f);
+        feedbackTitleCell.setBorderWidth(2f);
         feedbackTitleCell.setBackgroundColor(Color.WHITE);
 
-        feedbackTitleCell.setPhrase(new Phrase(""));
-        feedbacksTable.addCell(feedbackTitleCell);
         feedbackTitleCell.setPhrase(new Phrase("Author",titleFont));
         feedbacksTable.addCell(feedbackTitleCell);
         feedbackTitleCell.setPhrase(new Phrase("Feedback",titleFont));
@@ -540,10 +543,11 @@ public class PDFGenerator {
         for (FeedbackDto feedback : assessment.getFeedbacks()) {
             PdfPCell feedbackValueCell = new PdfPCell();
             feedbackValueCell.setPadding(5);
+            feedbackValueCell.setPaddingLeft(35);
             feedbackValueCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             feedbackValueCell.setFixedHeight(80);
             feedbackValueCell.setHorizontalAlignment(0);
-            feedbackValueCell.setBorderWidth(0f);
+            feedbackValueCell.setBorderWidth(2f);
             feedbackValueCell.setBackgroundColor(Color.LIGHT_GRAY);
 
             PdfPCell emptyRowCell = new PdfPCell();
@@ -553,16 +557,12 @@ public class PDFGenerator {
             emptyRowCell.setBackgroundColor(Color.WHITE);
             emptyRowCell.setPhrase(new Phrase(""));
 
-            feedbackTitleCell.setPhrase(new Phrase(""));
-            feedbacksTable.addCell(feedbackTitleCell);
-
             feedbackTitleCell.setPhrase(new Phrase(feedback.getAuthorFullName(),titleFont));
             feedbacksTable.addCell(feedbackTitleCell);
 
             feedbackValueCell.setPhrase(new Phrase(feedback.getContext(),valueFont));
             feedbacksTable.addCell(feedbackValueCell);
 
-            feedbacksTable.addCell(emptyRowCell);
             feedbacksTable.addCell(emptyRowCell);
             feedbacksTable.addCell(emptyRowCell);
         }
