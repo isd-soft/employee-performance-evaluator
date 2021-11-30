@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +27,18 @@ public class JobAnniversaryCheckerImpl implements JobAnniversaryChecker {
     @Override
     @Transactional
     @Scheduled(cron = "0 0 0 * * SUN")
+//    @Scheduled(fixedDelay = 50000L)
     public void checkJobAnniversary() {
         userRepository.findAll()
                 .forEach(user -> {
-                    long daysRemaining = ChronoUnit.DAYS.between(
+                    long yearsRemaining = ChronoUnit.YEARS.between(
                             user.getEmploymentDate(),
                             LocalDate.now()
+                    );
+                    long  daysRemaining = 365L - ChronoUnit.DAYS.between(
+                            user.getEmploymentDate().plusYears(yearsRemaining),
+                            LocalDate.now()
+
                     );
                     if (daysRemaining >= 26 && daysRemaining <= 33)
                         emailService.sendRemainder(user);
