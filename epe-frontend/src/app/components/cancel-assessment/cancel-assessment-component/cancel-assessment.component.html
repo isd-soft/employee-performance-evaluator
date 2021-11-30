@@ -4,11 +4,14 @@
       <mat-icon color="warn" class="icon">warning</mat-icon>
     <p style="padding-left: 12%">      Are you sure you want to cancel this assessment?
     </p>
-
     </div>
+    <mat-form-field appearance="fill" class="align-center" style="padding-top: 5%">
+      <mat-label>Cancellation reason</mat-label>
+      <input matInput [(ngModel)]="cancelReason">
+    </mat-form-field>
   </div>
   <div mat-dialog-actions  class="buttons align-center">
     <button mat-raised-button (click)="cancel()">Cancel</button>
-    <button mat-raised-button color="warn"(click)="setAssessmentToCancel(assessmentView)">Yes</button>
+    <button mat-raised-button color="warn"(click)="setAssessmentToCancel(assessmentView, cancelReason)">Yes</button>
   </div>
 </mat-card>

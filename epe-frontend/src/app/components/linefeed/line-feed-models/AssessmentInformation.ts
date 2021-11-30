@@ -4,4 +4,5 @@ export interface AssessmentInformation {
   performedOnUser: string,
   performedByUser: string,
   performedTime: Date
+  reason: string
 }

@@ -16,9 +16,10 @@ export class CancelAssessmentServices{
 
   }
 
-  cancelAssessment(assessmentView: AssessmentView){
+  cancelAssessment(assessmentView: AssessmentView, cancelReason: string){
     console.log(assessmentView)
     assessmentView.status = "CANCELED";
+    assessmentView.cancellationReason = cancelReason
     assessmentView.startedById = this.jwtService.getJwtUser().id;
     // console.log(this.http.get<AssessmentView>("api-server/api/assessments/" + assessmentView));
     // console.log(this.assessment)

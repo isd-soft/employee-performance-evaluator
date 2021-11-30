@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./cancel-assessment.component.css']
 })
 export class CancelAssessmentComponent implements OnInit {
+  cancelReason!: string;
 
   constructor(public dialogRef: MatDialogRef<CancelAssessmentComponent>,
               @Inject(MAT_DIALOG_DATA) public assessmentView: AssessmentView,
@@ -19,8 +20,8 @@ export class CancelAssessmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setAssessmentToCancel(assessementView: AssessmentView) {
-    this.cancelAssessmentService.cancelAssessment(assessementView);
+  setAssessmentToCancel(assessementView: AssessmentView, cancelReason: string) {
+    this.cancelAssessmentService.cancelAssessment(assessementView, cancelReason);
     this.dialogRef.close();
   }
 

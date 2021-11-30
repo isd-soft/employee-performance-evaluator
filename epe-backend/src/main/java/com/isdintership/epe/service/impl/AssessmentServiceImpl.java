@@ -238,6 +238,7 @@ class AssessmentServiceImpl implements AssessmentService {
 
     private AssessmentInformation getAssessmentInformation(Assessment assessment, AssessmentDto assessmentDto) {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setReason(assessmentDto.getCancellationReason());
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
         assessmentInformation.setStatus(assessment.getStatus());
         User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
@@ -381,6 +382,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessment.setJob(job);
         assessment.setOverallScore(assessmentDto.getOverallScore());
         assessment.setStatus(assessmentDto.getStatus());
+//        assessment.setCancellationReason(assessmentDto.getCancellationReason());
         if (assessmentDto.getStatus().equals(Status.CANCELED)){
             AssessmentInformation assessmentInformation = getAssessmentInformation(assessment, assessmentDto);
             assessmentInformationRepository.save(assessmentInformation);
