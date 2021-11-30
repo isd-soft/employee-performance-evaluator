@@ -117,7 +117,12 @@ export class HomeComponent {
           enableHtml: true
         });
         setTimeout(()=> {
-         this.requestLoginPage();
+          this.loginUser = {
+            email: this.registerUser.email,
+            password: this.registerUser.password
+          };
+  
+          this.login();
         }, 1000);
       }, error => {
           this.errorMessage = error.error.title;

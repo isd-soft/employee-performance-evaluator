@@ -23,7 +23,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { ProfileComponent } from './components/profile/profile-component/profile.component';
 import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
 import { UsersComponent } from './components/users/user-component/users.component';
-import { UserCreateComponent } from './components/users/user-create/user-create.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { AssessmentsComponent } from './components/assessments/assessments-component/assessments.component';
@@ -63,6 +62,7 @@ import { CreateUserComponent } from './create-user/create-component/create-user.
 import {MatMenuModule} from "@angular/material/menu";
 import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +76,6 @@ import { CancelAssessmentComponent } from './components/cancel-assessment/cancel
     TeamEditComponent,
     UsersComponent,
     UserEditComponent,
-    UserCreateComponent,
     AssessmentsComponent,
     ReplaceUnderscorePipe,
     AssessmentsTemplatesComponent,

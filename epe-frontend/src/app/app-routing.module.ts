@@ -32,6 +32,7 @@ import {SysadminGuard} from "./guards/sysadmin/sysadmin.guard";
 import {LineFeedComponent} from "./components/linefeed/line-feed-components/line-feed.component";
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 import {AdminStatsComponent} from "./components/admin-stats/admin-stats-component/admin-stats.component";
+import { MyTeamResolverService } from './components/usersview/userview-services/my-team-resolver.service';
 
 
 const routes: Routes = [
@@ -98,6 +99,7 @@ const routes: Routes = [
   {
     path: 'usersview',
     component: UsersView,
+    resolve: { members: MyTeamResolverService }
   },
   {
     path: 'assessments',

@@ -37,10 +37,18 @@
         <mat-divider></mat-divider>
 
         <mat-list-item style="font-size: 16px;margin-top: 15px; margin-bottom: 15px;">
-          <div class="twenty-percent">Employment Date</div>
+          <div class="twenty-percent">Employment Date:</div>
           <p style="font-size: x-large;">{{ myProfile?.employmentDate}}</p>
         </mat-list-item>
+
+        <mat-list-item *ngFor="let team of myTeams" style="font-size: 16px;margin-top: 15px; margin-bottom: 15px;">
+          <div class="twenty-percent">Team:</div>
+          <p style="font-size: x-large;"> 
+            <span style="cursor: pointer" (click)="viewTeam(team.id)"> {{team.name}} </span> </p>
+        </mat-list-item>
+
         </mat-list>
+        
 
     </mat-card-content>
 

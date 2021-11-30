@@ -1,4 +1,3 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { TeamView } from './../teams-model/team-view.interface';
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
@@ -23,9 +22,9 @@ import { MatTabGroup } from '@angular/material/tabs';
 })
 export class TeamsComponent {
 
-  displayedColumns: string[] = ['name', 'teamLeader', 'buttons'];
   // @ts-ignore
   dataSource: MatTableDataSource<TeamView>;
+  displayedColumns: string[] = ['name', 'teamLeader', 'buttons'];
   teams?: TeamView[];
 
   newTeamName?: string = '';
@@ -45,8 +44,6 @@ export class TeamsComponent {
   constructor(private teamService: TeamsService, 
               public dialog: MatDialog, 
               private userService: UserService,
-              private route: ActivatedRoute,
-              private router: Router,
               private toastr: ToastrService){
     this.reloadAll();
   }

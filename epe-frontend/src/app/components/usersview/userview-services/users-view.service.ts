@@ -1,7 +1,8 @@
+import { ShortUser } from './../../teams/teams-model/short-user.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError as observableThrowError } from 'rxjs';
+import { Observable, throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay, share } from 'rxjs/operators';
 import {User} from "../userview-models/User";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
@@ -55,6 +56,10 @@ export class UserviewsServices {
 
   getTeamMembers() {
     return this.http.get(this.url2 + '/' + this.id + '/members')
+  }
+
+  getTeamMembersArray(): Observable<ShortUser[]> {
+    return this.http.get<ShortUser[]>(this.url2 + '/' + this.id + '/members').pipe(share(), delay(1000));
   }
 
   getTeamLeader() {
