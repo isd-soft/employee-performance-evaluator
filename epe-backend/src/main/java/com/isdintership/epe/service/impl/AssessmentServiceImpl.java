@@ -26,7 +26,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
-//    private final EmailServiceImpl emailService;
+    private final EmailServiceImpl emailService;
     private final AssessmentInformationRepository assessmentInformationRepository;
 
     @Override
