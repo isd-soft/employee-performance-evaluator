@@ -28,6 +28,7 @@ import {AssessmentView} from "../../assessments/assessments-models/assessment-vi
 import {UserView} from "../../users/user-models/user-view.interface";
 import {NewUsersCount} from "../admin-models/new-users-count.interface";
 import {NewAssessmentsCount} from "../admin-models/new-assessments-count.interface";
+import {Count} from "../admin-models/count.interface";
 
 export type ResponsesChartOptions1 = {
   series: ApexNonAxisChartSeries;
@@ -49,14 +50,6 @@ export type ResponsesChartOptions2 = {
   legend: ApexLegend;
 };
 
-export type AssessmentsChartOptions1 = {
-  series: ApexNonAxisChartSeries;
-  colors: string[];
-  chart: ApexChart;
-  labels: string[];
-  plotOptions: ApexPlotOptions;
-}
-
 export type UsersChartOptions1 = {
   series: ApexNonAxisChartSeries;
   colors: string[];
@@ -65,21 +58,8 @@ export type UsersChartOptions1 = {
   plotOptions: ApexPlotOptions;
 }
 
-export type UsersChartOptions2 = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  colors: string[];
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  yaxis: ApexYAxis;
-  xaxis: ApexXAxis;
-  fill: ApexFill;
-  tooltip: ApexTooltip;
-  stroke: ApexStroke;
-  legend: ApexLegend;
-};
 
-export type AssessmentsChartOptions2 = {
+export type UsersChartOptions2 = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   colors: string[];
@@ -115,6 +95,8 @@ export class AdminStatsComponent implements AfterViewInit {
 
   assessmentsCount!: number;
   usersCount!: number;
+  buddiesCount!: number;
+  teamLeadersCount!: number;
   newUsersCount!: NewUsersCount;
   newAssessmentsCount!: NewAssessmentsCount;
 
@@ -124,14 +106,20 @@ export class AdminStatsComponent implements AfterViewInit {
   public responsesChartOptions2!: Partial<ResponsesChartOptions2> | any;
 
   @ViewChild("chart") assessmentsChart1!: ChartComponent;
-  public assessmentsChartOptions1!: Partial<AssessmentsChartOptions1> | any;
+  public assessmentsChartOptions1!: Partial<UsersChartOptions1> | any;
   @ViewChild("chart") assessmentsChart2!: ChartComponent;
-  public assessmentsChartOptions2!: Partial<AssessmentsChartOptions2> | any;
+  public assessmentsChartOptions2!: Partial<UsersChartOptions2> | any;
 
   @ViewChild("chart") usersChart1!: ChartComponent;
   public usersChartOptions1!: Partial<UsersChartOptions1> | any;
   @ViewChild("chart") usersChart2!: ChartComponent;
   public usersChartOptions2!: Partial<UsersChartOptions2> | any;
+
+  @ViewChild("chart") buddiesChart!: ChartComponent;
+  public buddiesChartOptions!: Partial<UsersChartOptions1> | any;
+
+  @ViewChild("chart") teamLeadersChart!: ChartComponent;
+  public teamLeadersChartOptions!: Partial<UsersChartOptions1> | any;
 
   displayedColumns: string[] = ['timestamp', 'method', 'timeTaken', 'status', 'uri'];
   dataSource!: MatTableDataSource<HttpTrace>;
@@ -269,9 +257,8 @@ export class AdminStatsComponent implements AfterViewInit {
     });
 
     this.adminStatsService.getAssessmentsCount().subscribe(response => {
-      let assessmentView = response as AssessmentView;
-      this.assessmentsCount = assessmentView.count;
-      console.log(this.assessmentsCount);
+      let countResponse = response as Count;
+      this.assessmentsCount = countResponse.count;
       this.setAssessmentsChartOptions1();
     }, error => {
       this.assessmentsCount = 0;
@@ -279,13 +266,11 @@ export class AdminStatsComponent implements AfterViewInit {
     });
 
     this.adminStatsService.getUsersCount().subscribe(response => {
-      let userView = response as UserView;
-      this.usersCount = userView.count;
-      console.log(this.usersCount);
+      let countResponse = response as Count;
+      this.usersCount = countResponse.count;
       this.setUsersChartOptions1();
     }, error => {
       this.usersCount = 0;
-      console.log(this.usersCount);
       this.setUsersChartOptions1();
     });
 
@@ -299,12 +284,30 @@ export class AdminStatsComponent implements AfterViewInit {
 
     this.adminStatsService.getNewAssessmentsThisYearCount().subscribe(response => {
       this.newAssessmentsCount = response as NewAssessmentsCount;
-      console.log(this.newAssessmentsCount);
       this.setAssessmentsChartOptions2();
     }, error => {
       this.newAssessmentsCount.months = [0,0,0,0,0,0,0,0,0,0,0,0];
       this.setAssessmentsChartOptions2();
     });
+
+    this.adminStatsService.getBuddiesCount().subscribe(response => {
+      let countResponse = response as Count;
+      this.buddiesCount = countResponse.count;
+      this.setBuddiesChartOptions();
+    }, error => {
+      this.buddiesCount = 0;
+      this.setBuddiesChartOptions();
+    });
+
+    this.adminStatsService.getTeamLeadersCount().subscribe(response => {
+      let countResponse = response as Count;
+      console.log(countResponse);
+      this.teamLeadersCount = countResponse.count;
+      this.setTeamLeadersChartOptions();
+    }, error => {
+      this.teamLeadersCount = 0;
+      this.setTeamLeadersChartOptions();
+    })
   }
 
   ngAfterViewInit(): void {
@@ -411,7 +414,7 @@ export class AdminStatsComponent implements AfterViewInit {
           }
         }
       },
-      colors: ["#1d5dda"],
+      colors: ["#7a5195"],
       labels: ["ASSESSMENTS"]
     }
   }
@@ -442,7 +445,7 @@ export class AdminStatsComponent implements AfterViewInit {
           }
         }
       },
-      colors: ["#42d14b"],
+      colors: ["#003f5c"],
       labels: ["USERS"]
     }
   }
@@ -458,7 +461,7 @@ export class AdminStatsComponent implements AfterViewInit {
           data: this.newUsersCount.months,
         }
       ],
-      colors: ["#42d14b"],
+      colors: ["#003f5c"],
       chart: {
         type: "bar",
         height: 350,
@@ -513,6 +516,68 @@ export class AdminStatsComponent implements AfterViewInit {
     };
   }
 
+  setBuddiesChartOptions(): void {
+    this.buddiesChartOptions = {
+      series: [this.buddiesCount],
+      chart: {
+        height: 350,
+        type: "radialBar"
+      },
+      plotOptions: {
+        radialBar: {
+          track: {
+            opacity: 1
+          },
+          dataLabels: {
+            name: {
+              offsetY: -10
+            },
+            value: {
+              fontSize: '26px',
+              fontWeight: 700,
+              formatter: function(val: any) {
+                return val;
+              }
+            }
+          }
+        }
+      },
+      colors: ["#ef5675"],
+      labels: ["BUDDIES"]
+    }
+  }
+
+  setTeamLeadersChartOptions(): void {
+    this.teamLeadersChartOptions = {
+      series: [this.teamLeadersCount],
+      chart: {
+        height: 350,
+        type: "radialBar"
+      },
+      plotOptions: {
+        radialBar: {
+          track: {
+            opacity: 1
+          },
+          dataLabels: {
+            name: {
+              offsetY: -10
+            },
+            value: {
+              fontSize: '26px',
+              fontWeight: 700,
+              formatter: function(val: any) {
+                return val;
+              }
+            }
+          }
+        }
+      },
+      colors: ["#ffa600"],
+      labels: ["TEAM LEADERS"]
+    }
+  }
+
   setAssessmentsChartOptions2(): void {
     this.assessmentsChartOptions2 = {
       title: {
@@ -524,7 +589,7 @@ export class AdminStatsComponent implements AfterViewInit {
           data: this.newAssessmentsCount.months,
         }
       ],
-      colors: ["#1d5dda"],
+      colors: ["#7a5195"],
       chart: {
         type: "bar",
         height: 350,

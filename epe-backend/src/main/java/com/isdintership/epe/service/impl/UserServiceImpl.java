@@ -283,11 +283,14 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto countAll() {
-        UserDto userDto = new UserDto();
-        userDto.setCount(userRepository.count());
+    public CountDto countAll() {
+        return new CountDto(userRepository.count());
+    }
 
-        return userDto;
+    @Override
+    @Transactional
+    public CountDto countAllBuddies() {
+        return new CountDto(userRepository.countAllByBuddyIdNotNull());
     }
 
     @Override

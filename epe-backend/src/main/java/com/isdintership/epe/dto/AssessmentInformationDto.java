@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 public class AssessmentInformationDto {
 
     private String assessmentTitle;
+    private String assessmentId;
+    private String evaluatedUserId;
     private Status status;
     private String performedOnUser;
     private String performedByUser;
@@ -25,6 +27,8 @@ public class AssessmentInformationDto {
 
     public AssessmentInformationDto(AssessmentInformation assessmentInformation){
         this.assessmentTitle = assessmentInformation.getAssessmentTitle();
+        this.assessmentId = assessmentInformation.getAssessmentId();
+        this.evaluatedUserId = assessmentInformation.getEvaluatedUserId();
         this.performedByUser = assessmentInformation.getPerformedByUser().getFirstname() + " " +assessmentInformation.getPerformedByUser().getLastname();
         this.performedOnUser = assessmentInformation.getPerformedOnUser().getFirstname() + " " + assessmentInformation.getPerformedOnUser().getLastname();
         this.status = assessmentInformation.getStatus();

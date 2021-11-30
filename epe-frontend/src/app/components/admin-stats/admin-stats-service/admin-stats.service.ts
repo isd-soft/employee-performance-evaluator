@@ -9,6 +9,7 @@ export class AdminStatsService{
   actuatorUrl: string = 'http://localhost:8075/api/actuator/';
   assessmentsUrl: string = 'http://localhost:8075/api/assessments';
   usersUrl: string = 'http://localhost:8075/api/users';
+  teamsUrl: string = 'http://localhost:8075/api/teams';
   constructor(private httpClient: HttpClient) { }
 
   getResponseStatusesCount200(){ return this.httpClient.get(this.actuatorUrl + 'metrics/http.server.requests?tag=status:200');}
@@ -23,4 +24,6 @@ export class AdminStatsService{
   getNewAssessmentsThisYearCount(){ return this.httpClient.get(this.assessmentsUrl + '?count=current-year');}
   getUsersCount(){ return this.httpClient.get(this.usersUrl + '?count=all');}
   getNewUsersThisYearCount(){ return this.httpClient.get(this.usersUrl + '?count=current-year');}
+  getBuddiesCount(){ return this.httpClient.get(this.usersUrl + '?count=buddies');}
+  getTeamLeadersCount(){ return this.httpClient.get(this.teamsUrl + '?count=leaders');}
 }

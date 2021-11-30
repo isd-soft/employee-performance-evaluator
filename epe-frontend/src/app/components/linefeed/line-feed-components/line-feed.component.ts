@@ -16,7 +16,8 @@ export class LineFeedComponent implements OnInit {
   ngOnInit(): void {
 
     this.linefeedService.getAssessmentInformation().subscribe(data =>{
-      this.assessmentsInformation = data as AssessmentInformation[]
+      this.assessmentsInformation = data as AssessmentInformation[];
+      console.log(this.assessmentsInformation);
     })
 
   }

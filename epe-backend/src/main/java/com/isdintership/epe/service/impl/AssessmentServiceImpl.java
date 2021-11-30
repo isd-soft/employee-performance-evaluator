@@ -9,7 +9,6 @@ import com.isdintership.epe.service.AssessmentService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.jni.Local;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
@@ -93,18 +92,15 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessment);
-        emailService.sendEmail(assessmentDto);
-
-
-
+//        emailService.sendEmail(assessmentDto);
         return assessmentDto;
     }
-
-
 
     private AssessmentInformation getAssessmentInformation(AssessmentTemplateDto assessmentTemplateDto, Assessment assessment) {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setAssessmentId(assessment.getId());
+        assessmentInformation.setEvaluatedUserId(assessment.getUser().getId());
         assessmentInformation.setStatus(assessment.getStatus());
         assessmentInformation.setPerformedOnUser(assessment.getUser());
         User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
@@ -161,7 +157,7 @@ class AssessmentServiceImpl implements AssessmentService {
             assessmentRepository.findByUserAndStatus(user, Status.valueOf(status))
                     .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
         } catch (IllegalArgumentException e) {
-            throw new AssessmentStatusNotFound("Assessment status " + status + " was not found");
+            throw new StatusNotFoundException("Assessment status " + status + " was not found");
         }
 
         return assessmentDtos;
@@ -191,7 +187,7 @@ class AssessmentServiceImpl implements AssessmentService {
         } else if (status.equals("INACTIVE")) {
             statuses = List.of(Status.CANCELED, Status.FINISHED);
         } else {
-            throw new AssessmentStatusNotFound("Status not found. Should be ACTIVE or INACTIVE");
+            throw new StatusNotFoundException("Status not found. Should be ACTIVE or INACTIVE");
         }
 
         List<User> assignedUsers = userRepository.findByBuddyId(userId);
@@ -240,6 +236,7 @@ class AssessmentServiceImpl implements AssessmentService {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setReason(assessmentDto.getCancellationReason());
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setAssessmentId(assessment.getId());
         assessmentInformation.setStatus(assessment.getStatus());
         User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
         assessmentInformation.setPerformedByUser(user);
@@ -509,10 +506,8 @@ class AssessmentServiceImpl implements AssessmentService {
 
     @Override
     @Transactional
-    public AssessmentDto countAll() {
-        AssessmentDto assessmentDto = new AssessmentDto();
-        assessmentDto.setCount(assessmentRepository.count());
-        return assessmentDto;
+    public CountDto countAll() {
+        return new CountDto(assessmentRepository.count());
     }
 
 }
