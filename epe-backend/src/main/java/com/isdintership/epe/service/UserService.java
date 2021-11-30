@@ -3,8 +3,6 @@ package com.isdintership.epe.service;
 import com.isdintership.epe.dto.LoginRequest;
 import com.isdintership.epe.dto.RegistrationRequest;
 import com.isdintership.epe.dto.*;
-import com.isdintership.epe.entity.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +20,7 @@ public interface UserService {
 
     UserDto updateUser(UserDto userDto, String id) throws IOException;
 
-    String deleteUser(String id);
+    UserDto deleteUser(String id);
 
     List<JobsDto> getJobTitles();
 
@@ -34,4 +32,6 @@ public interface UserService {
     List<AssignedUserDto> getAssignedUsers(String id);
 
     UserDto updateUserAsAdmin(UserDto userDto, String id);
+
+    List<UserDto> getAllBuddies(String id);
 }

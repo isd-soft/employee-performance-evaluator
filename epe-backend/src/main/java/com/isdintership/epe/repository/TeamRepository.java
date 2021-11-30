@@ -16,4 +16,5 @@ public interface TeamRepository extends JpaRepository<Team, String> {
     Optional<Team> findByName(String name);
     List<Team> findAll();
     void deleteById(String id);
+    List<Team> findAllByTeamLeaderId(String id);
 }

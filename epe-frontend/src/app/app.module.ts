@@ -57,6 +57,9 @@ import { UserDeleteComponent } from './components/usersview/user-delete/user-del
 import { AssessmentsHistoryComponent } from './components/assessments/assessments-history-component/assessments-history.component';
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
+import {MatBadgeModule} from '@angular/material/badge';
+import { CreateUserComponent } from './create-user/create-component/create-user.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -98,7 +101,8 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
     TeamViewComponent,
     AssessmentsAssignedComponent,
     LineFeedComponent,
-    AdminBoardComponent
+    AdminBoardComponent,
+    CreateUserComponent
   ],
     imports: [
         BrowserModule,
@@ -124,6 +128,8 @@ import {AdminBoardComponent} from "./components/admin-board/admin-board-componen
         MatListModule,
         MatSidenavModule,
         MatDatepickerModule,
+        MatMenuModule,
+        MatBadgeModule
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,
