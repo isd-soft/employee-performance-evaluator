@@ -93,6 +93,10 @@ export class RoleService {
       .pipe(catchError(this.errorHandler));
   }
 
+  getBuddies(userId : string | undefined) {
+    return this.http.get(this.url2 + '/' + userId + '/buddies')
+  }
+
   getRole() {
     return this.role;
   }

@@ -5,11 +5,12 @@ import { Component, Inject } from '@angular/core';
 import { UserView } from '../teams-model/user-view.interface';
 import { TeamsService } from '../teams-service/teams.service';
 import { UserService } from '../user-service/user.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ShortUser } from '../teams-model/short-user.interface';
 import { ShortUserSelected } from '../teams-model/short-user-selected';
+import { TeamsComponent } from '../team-component/teams.component';
 
 @Component({
   selector: 'app-team-edit',
@@ -33,6 +34,7 @@ export class TeamEditComponent {
   users?: UserView[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public teamID: string,
+              public dialogRef: MatDialogRef<TeamsComponent>,
               private userService: UserService,
               private teamService: TeamsService,
               private toastr: ToastrService) {
@@ -90,7 +92,8 @@ export class TeamEditComponent {
         this.toastr.success('team details updated !', '', {
           timeOut: 2000,
           progressBar: true
-        });;
+        });
+        this.dialogRef.close();
       }, error => {
         this.toastr.error('something went wrong ..','', {
           timeOut: 2000,

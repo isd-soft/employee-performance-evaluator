@@ -18,6 +18,7 @@ import {JwtUser} from "../../decoder/decoder-model/jwt-user.interface";
 export class RoleChangeComponent implements OnInit {
 
   user!: User
+  buddies!: User[]
 
   auxUser!: FormGroup;
 
@@ -53,8 +54,12 @@ export class RoleChangeComponent implements OnInit {
       job: [this.user?.job],
       employmentDate: [this.user?.employmentDate],
       bio: [this.user?.bio],
-      role: [this.user?.role]
+      role: [this.user?.role],
+      buddyId: [this.user?.buddyId]
     });
+
+    this.roleService.getBuddies(this.user.id).subscribe(data =>
+      this.buddies = data as User[]);
 
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser) {

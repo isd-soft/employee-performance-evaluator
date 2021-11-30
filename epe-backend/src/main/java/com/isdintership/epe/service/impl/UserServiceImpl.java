@@ -156,6 +156,19 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public List<UserDto> getAllBuddies(String id) {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            if (!user.getId().equals(id)) {
+                userDtos.add(UserDto.fromUser(user));
+            }
+        }
+        return userDtos;
+    }
+
+    @Override
+    @Transactional
     public UserDto getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
@@ -272,12 +285,21 @@ class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String deleteUser(String id) {
-        userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + " was not found"));
+    public UserDto deleteUser(String id) {
+
+        UserDto userDto = UserDto.fromUser(userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with id " + id + " was not found")));
         userRepository.removeById(id);
 
-        return ("User with id " + id + " was deleted");
+
+        List<User> users = userRepository.findByBuddyId(id);
+
+        for (User user : users) {
+            user.setBuddyId(null);
+        }
+
+        //return ("User with id " + id + " was deleted");
+        return userDto;
     }
 
     @Override

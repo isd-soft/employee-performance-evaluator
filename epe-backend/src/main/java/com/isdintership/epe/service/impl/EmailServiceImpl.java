@@ -83,7 +83,7 @@ class EmailServiceImpl implements EmailService {
             userSet.add(user.getTeam().getTeamLeader());
         }
 
-        System.out.println(userSet);
+//        System.out.println(userSet);
         return userSet;
     }
 }
