@@ -127,7 +127,14 @@
               <!-- Status Column -->
               <ng-container matColumnDef="status">
                 <th mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell class="status-column" *matCellDef="let row"> {{row.status}} </td>
+                <td mat-cell class="status-column" *matCellDef="let row">
+                  <span [ngSwitch]="row.status" >
+                    <span *ngSwitchCase="200" class="label label-200" >{{row.status}}</span>
+                    <span *ngSwitchCase="400" class="label label-400">{{row.status}}</span>
+                    <span *ngSwitchCase="404" class="label label-404">{{row.status}}</span>
+                    <span *ngSwitchCase="500" class="label label-500">{{row.status}}</span>
+                  </span>
+                </td>
               </ng-container>
 
               <!-- URI Column -->

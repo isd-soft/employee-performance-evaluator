@@ -106,14 +106,14 @@
   background: #FF8C00;
 }
 
+.response-500 {
+  background: #DC143C
+}
+
 .material-icons {
   position: relative;
   top: 5px;
   right: 5px;
-}
-
-.response-500 {
-  background: #DC143C
 }
 
 .response-count {
@@ -177,4 +177,20 @@
 
 .database-info .column .row {
   justify-content: space-between;
+}
+
+.label-200 {
+  background: rgb(66, 209, 75)
+}
+
+.label-400 {
+  background: #FF8C00;
+}
+
+.label-404 {
+  background: rgb(29, 93, 218)
+}
+
+.label-500 {
+  background: #DC143C
 }
