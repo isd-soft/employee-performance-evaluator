@@ -1,18 +1,19 @@
 package com.isdintership.epe.export;
 
-import com.isdintership.epe.dto.AssessmentDto;
-import com.isdintership.epe.dto.UserDto;
+import com.isdintership.epe.dto.*;
+import com.isdintership.epe.entity.EvaluationField;
 import com.isdintership.epe.entity.User;
 
+import java.awt.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.Element;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -186,28 +187,162 @@ public class ExcelExporter {
 
         CellStyle titleStyle = workbook.createCellStyle();
         XSSFFont titleFont = workbook.createFont();
+        titleStyle.setWrapText(true);
         titleFont.setBold(true);
         titleFont.setFontHeight(16);
         titleStyle.setFont(titleFont);
 
+        CellStyle smartTitleStyle = workbook.createCellStyle();
+        XSSFFont smartTitleFont = workbook.createFont();
+        smartTitleStyle.setAlignment(HorizontalAlignment.CENTER);
+        smartTitleStyle.setWrapText(true);
+        smartTitleFont.setBold(true);
+        smartTitleFont.setFontHeight(16);
+        smartTitleStyle.setFont(smartTitleFont);
+
         CellStyle valueStyle = workbook.createCellStyle();
         XSSFFont valueFont = workbook.createFont();
+        valueStyle.setWrapText(true);
         valueFont.setBold(false);
         valueFont.setFontHeight(16);
         valueStyle.setFont(valueFont);
 
-        createCell(row, 4, assessment.getTitle(), titleStyle);
+        CellStyle goalStyle = workbook.createCellStyle();
+        XSSFFont goalFont = workbook.createFont();
+        goalStyle.setWrapText(true);
+//        goalStyle.setFillBackgroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+        goalFont.setBold(false);
+        goalFont.setFontHeight(16);
+        goalStyle.setFont(goalFont);
+
+
+
+        createCell(row, 3, assessment.getTitle(), titleStyle);
 
         row = sheet.createRow(rowNum++);
 
-        createCell(row, 4, evaluatedUser.getJob(), valueStyle);
+        createCell(row, 3, evaluatedUser.getJob(), valueStyle);
+
+        row = sheet.createRow(rowNum++);
+
+        createCell(row, 1, "Start date", titleStyle);
+        createCell(row, 2, String.valueOf(LocalDate.from(assessment.getStartDate())),valueStyle);
+
+        row = sheet.createRow(rowNum++);
+
+        createCell(row, 1, "End date", titleStyle);
+        createCell(row, 2, String.valueOf(LocalDate.from(assessment.getEndDate())),valueStyle);
+
+        row = sheet.createRow(rowNum++);
+
+        createCell(row, 1, "Evaluated user", titleStyle);
+        createCell(row, 2, assessment.getEvaluatedUserFullName(),valueStyle);
+
+        row = sheet.createRow(rowNum++);
+
+        createCell(row, 1, "Evaluator", titleStyle);
+        createCell(row, 2, assessment.getEvaluatorFullName(),valueStyle);
 
 
+        row = sheet.createRow(rowNum += 3);
 
+        createCell(row, 1, "Evaluation groups", titleStyle);
+        createCell(row, 2, "", titleStyle);
+        createCell(row, 3, "First score", titleStyle);
+        createCell(row, 4, "Second score", titleStyle);
 
+        row = sheet.createRow(rowNum += 2);
 
+        for (EvaluationGroupDto evaluationGroup : assessment.getEvaluationGroups()) {
+            createCell(row, 1, evaluationGroup.getTitle(), titleStyle);
+            createCell(row, 2, "Comments", titleStyle);
+            createCell(row, 3, "", titleStyle);
+            createCell(row, 4, "", titleStyle);
+            row = sheet.createRow(rowNum += 2);
+            for(EvaluationFieldDto evaluationField : evaluationGroup.getEvaluationFields()) {
+                createCell(row, 1, evaluationField.getTitle(), valueStyle);
+                createCell(row, 2, evaluationField.getComment(), valueStyle);
+                createCell(row, 3, evaluationField.getFirstScore(), valueStyle);
+                createCell(row, 4, evaluationField.getSecondScore(), valueStyle);
+                row = sheet.createRow(rowNum += 2);
+            }
+            createCell(row, 3, "Total group score", titleStyle);
+            createCell(row, 4, String.valueOf(evaluationGroup.getOverallScore()), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+        }
+        createCell(row, 3, "Total assessment score", titleStyle);
+        createCell(row, 4, String.valueOf(assessment.getOverallScore()), valueStyle);
+        row = sheet.createRow(rowNum += 4);
 
+        createCell(row, 1, "Personal smart goals", titleStyle);
+        row = sheet.createRow(rowNum += 2);
 
+        for (PersonalGoalDto personalGoal : assessment.getPersonalGoals()) {
+            createCell(row, 1, "S", smartTitleStyle);
+            createCell(row, 2, personalGoal.getGoalSPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "M", smartTitleStyle);
+            createCell(row, 2, personalGoal.getGoalMPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "A", smartTitleStyle);
+            createCell(row, 2, personalGoal.getGoalAPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "R", smartTitleStyle);
+            createCell(row, 2, personalGoal.getGoalRPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "T", smartTitleStyle);
+            createCell(row, 2, personalGoal.getGoalTPart(), valueStyle);
+            row = sheet.createRow(rowNum += 3);
+        }
+
+        row = sheet.createRow(rowNum += 2);
+        createCell(row, 1, "Department smart goals", titleStyle);
+        row = sheet.createRow(rowNum += 2);
+
+        for (DepartmentGoalDto departmentGoal : assessment.getDepartmentGoals()) {
+            createCell(row, 1, "S", smartTitleStyle);
+            createCell(row, 2, departmentGoal.getGoalSPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "M", smartTitleStyle);
+            createCell(row, 2, departmentGoal.getGoalMPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "A", smartTitleStyle);
+            createCell(row, 2, departmentGoal.getGoalAPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "R", smartTitleStyle);
+            createCell(row, 2, departmentGoal.getGoalRPart(), valueStyle);
+            row = sheet.createRow(rowNum += 2);
+
+            createCell(row, 1, "T", smartTitleStyle);
+            createCell(row, 2, departmentGoal.getGoalTPart(), valueStyle);
+            row = sheet.createRow(rowNum += 3);
+        }
+
+        row = sheet.createRow(rowNum += 2);
+        createCell(row, 1, "Feedbacks", titleStyle);
+        row = sheet.createRow(rowNum += 2);
+
+        createCell(row, 1, "Author", titleStyle);
+        createCell(row, 2, "Feedback", titleStyle);
+        row = sheet.createRow(rowNum++);
+
+        for (FeedbackDto feedback : assessment.getFeedbacks()) {
+            createCell(row, 1, feedback.getAuthorFullName(), valueStyle);
+            createCell(row, 2, feedback.getContext(), valueStyle);
+            row = sheet.createRow(rowNum++);
+        }
+
+        row = sheet.createRow(rowNum += 3);
+        createCell(row, 1, "Description", titleStyle);
+        row = sheet.createRow(rowNum += 2);
+        createCell(row, 1, assessment.getDescription(), valueStyle);
 
         ServletOutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
