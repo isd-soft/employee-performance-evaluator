@@ -136,11 +136,22 @@ export class AdminStatsComponent implements AfterViewInit {
   displayedColumns: string[] = ['timestamp', 'method', 'timeTaken', 'status', 'uri'];
   dataSource!: MatTableDataSource<HttpTrace>;
   httpTraceResponse!: ResponseHttpTraces;
-  @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
-    this.dataSource.paginator = value;
+  private paginator!: MatPaginator;
+  private sort!: MatSort;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
   }
-  @ViewChild(MatSort) set sort(value: MatSort) {
-    this.dataSource.sort = value;
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   constructor(private adminStatsService: AdminStatsService,
