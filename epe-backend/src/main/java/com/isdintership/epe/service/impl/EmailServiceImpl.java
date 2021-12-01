@@ -20,6 +20,7 @@ import java.util.Set;
 
 /**
  * Implements the EmailsService interface.
+ * The class manages all the request related to email sending
  * @author Adrian Girlea
  * */
 @Service

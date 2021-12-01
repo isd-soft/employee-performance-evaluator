@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+/**
+ * This class manages all the API requests related to AssessmentTemplates objects
+ * */
 @Service
 @RequiredArgsConstructor
 class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
@@ -26,6 +30,13 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
     private final JobRepository jobRepository;
     private final AssessmentRepository assessmentRepository;
 
+    /**
+     * Creates an AssessmentTemplate entity object and saves it
+     * @param assessmentTemplateDto contains all the information required to create an AssessmentTemplate
+     * @return an AssessmentTemplateDto object
+     * @throws JobNotFoundException if the job position in assessment template doesn't exist
+     * @author Maxim Gribencicov
+     * */
     @Override
     @Transactional
     public AssessmentTemplateDto createAssessmentTemplate(AssessmentTemplateDto assessmentTemplateDto) {
@@ -76,6 +87,13 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
     }
 
+    /**
+     * Returns an AssessmentTemplateDto object based on the id
+     * @param id the id of the AssessmentTemplate
+     * @throws AssessmentTemplateNotFoundException if the assessment template doesn't exist
+     * @return an AssessmentTemplateDto object
+     * @author Maxim Gribencicov
+     * */
     @Override
     @Transactional
     public AssessmentTemplateDto getAssessmentTemplate(String id) {
@@ -86,6 +104,11 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         return AssessmentTemplateDto.fromAssessment(assessment);
     }
 
+    /**
+     * Returns all the existing assessments templates dto object
+     * @return A list of AssessmentTemplateDto
+     * @author Maxim Gribencicov
+     * */
     @Override
     @Transactional
     public List<AssessmentTemplateDto> getAllAssessmentTemplates() {
@@ -99,6 +122,16 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         return assessmentTemplateDtos;
     }
 
+    /**
+     * Update an already existing AssessmentTemplate entity object
+     * @param id the id of the Assessment Template entity object
+     * @param assessmentTemplateDto Dto object that contains all the information that needs updated
+     * @return updated AssesmentTemplatedDto object
+     * @throws AssessmentTemplateNotFoundException if the assessmentTemplate doesn't exist
+     * @throws AssessmentTemplateExistsException if an assessmentTemplate with given parameters already exists
+     * @throws JobNotFoundException if the job doesn't exist
+     * @author Maxim Gribencicov
+     * */
     @Override
     @Transactional
     public AssessmentTemplateDto updateAssessmentTemplate
@@ -157,6 +190,13 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
     }
 
+    /**
+     * Deletes an AssessmentTemplate entity object
+     * @param id the id of the AssessmentTemplate entity object
+     * @return the AssessmentTemplateDto of the deleted AssessmentTemplate
+     * @throws AssessmentTemplateNotFoundException if AssessmentTemplate entity does not exist
+     * @author Maxim Gribencicov
+     * */
     @Override
     @Transactional
     public AssessmentTemplateDto deleteAssessmentTemplate(String id) {

@@ -181,7 +181,7 @@ class AssessmentServiceImpl implements AssessmentService {
      * ACTIVE (FIRST_PHASE and SECOND_PHASE) or INACTIVE (CANCELED and FINISHED)
      * @param id the id the user
      * @param status the status of the assessment
-     * @throws AssessmentStatusNotFound if status doesn't exists
+     * @throws StatusNotFoundException if status doesn't exists
      * @author Maxim Gribencicov
      * @return List of AssessmentDto objects
      * */
@@ -234,7 +234,7 @@ class AssessmentServiceImpl implements AssessmentService {
      * Method that returns all the assessments assigned to a user based on its status
      * @param userId the id the user
      * @param status the status of the assessment
-     * @throws AssessmentStatusNotFound if status doesn't exist
+     * @throws StatusNotFoundException if status doesn't exist
      * @return List of AssessmentDto objects if such exists
      * @author Maxim Gribencicov
      * */
@@ -261,6 +261,14 @@ class AssessmentServiceImpl implements AssessmentService {
         return assessmentDtos;
     }
 
+
+    /**
+     * Adds feedback to the user's assessment
+     * @param userId the user's id
+     * @param assessmentId the assessment's id
+     * @param feedbackDto the feedback about the user
+     * @author Maxim Gribencicov
+     * */
     @Override
     @Transactional
     public FeedbackDto addFeedback(String userId, String assessmentId, FeedbackDto feedbackDto) {
@@ -435,6 +443,12 @@ class AssessmentServiceImpl implements AssessmentService {
 
     }
 
+    /**
+     * Deletes feedback for a user inside a assessment if exists
+     * @param userId the id of the user
+     * @param assessment the assessment for which the assessment takes place
+     * @author Maxim Gribencicov
+     * */
     private void removeFeedbackIfExists(String userId, Assessment assessment) {
         Feedback existingFeedback = null;
         for (Feedback feedback: assessment.getFeedbacks()) {
