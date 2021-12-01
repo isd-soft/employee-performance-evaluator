@@ -11,4 +11,5 @@ export interface UserView {
     team: string
     buddyId: string
     token: string
+    count: number
 }

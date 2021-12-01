@@ -467,32 +467,55 @@ class AssessmentServiceImpl implements AssessmentService {
             for (FeedbackDto feedbackDto : assessmentDto.getFeedbacks()) {
 
                 Feedback feedback = new Feedback();
-
                 feedback.setAssessment(assessment);
-
+                feedback.setAuthorId(feedbackDto.getAuthorId());
                 feedback.setAuthorFullName(feedbackDto.getAuthorFullName());
                 feedback.setContext(feedbackDto.getContext());
-
                 assessment.getFeedbacks().add(feedback);
-
             }
-
         }
-
         return AssessmentDto.fromAssessment(assessment);
-
     }
 
     @Override
     @Transactional
-    public AssessmentDto deleteAssessment(String id) {
+    public AssessmentDto deleteAssessment(String id, AssessmentDto assessmentDto) {
 
         Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
                 new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
 
+        AssessmentInformation assessmentInformation = new AssessmentInformation();
+        assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setStatus(Status.DELETED);
+        assessmentInformation.setPerformedTime(LocalDateTime.now());
+        User startedByUser = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
+        assessmentInformation.setPerformedByUser(startedByUser);
+        assessmentInformation.setPerformedOnUser(assessment.getUser());
+        assessmentInformationRepository.save(assessmentInformation);
+
         assessmentRepository.removeById(id);
 
         return AssessmentDto.fromAssessment(assessment);
+    }
+
+    @Override
+    @Transactional
+    public NewAssessmentsThisYearDto countAllNewAssessmentsThisYear() {
+        NewAssessmentsThisYearDto newAssessments = new NewAssessmentsThisYearDto();
+        for (int i = 0; i < 12; i++) {
+            LocalDateTime fromDate = LocalDateTime.of(LocalDateTime.now().getYear(), i + 1, 1, 0, 0);
+            newAssessments.getMonths().add(i, assessmentRepository.countAllByStartDateBetween(fromDate, fromDate.plusMonths(1)));
+        }
+
+        return newAssessments;
+    }
+
+    @Override
+    @Transactional
+    public AssessmentDto countAll() {
+        AssessmentDto assessmentDto = new AssessmentDto();
+        assessmentDto.setCount(assessmentRepository.count());
+        return assessmentDto;
     }
 
 }

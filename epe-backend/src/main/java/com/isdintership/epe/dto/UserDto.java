@@ -31,6 +31,7 @@ public class UserDto {
     private String image;
     private String status = "";
     private String role;
+    private Long count;
 
     public static UserDto fromUser(User user) {
         UserDto userView = new UserDto();

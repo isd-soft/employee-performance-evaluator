@@ -10,6 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {AssessmentsViewComponent} from "../../assessments/assessments-view/assessments-view.component";
 import {MatDialog} from "@angular/material/dialog";
 import { MatTableModule } from '@angular/material/table'
+import {DeleteAssessmentWarningComponent} from "../delete-assessment-warning/delete-assessment-warning.component";
 
 @Component({
   selector: 'app-admin-board',
@@ -20,9 +21,10 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
 
   dataSource!: MatTableDataSource<AssessmentView>;
   assessments!: AssessmentView[];
-  displayedColumns: string[] = ['title', 'jobPosition', 'startDate', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'evaluatedUser', 'startDate', 'status', 'buttons'];
 
   jwtUser: User;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -65,5 +67,18 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
       data : this.assessments[id],
       autoFocus: false
     });
+  }
+
+  exportAssessmentToPdf(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToPdf(assessment);
+  }
+
+  exportAssessmentToExcel(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToExcel(assessment);
+  }
+
+  delete(assessmentId: string) {
+    this.dialog.open(DeleteAssessmentWarningComponent, {data: assessmentId})
+    // this.adminBoardService.deleteAssessment
   }
 }

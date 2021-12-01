@@ -36,4 +36,7 @@ public interface UserService {
     UserDto updateUserAsAdmin(UserDto userDto, String id);
 
     List<UserDto> getAllBuddies(String id);
+
+    UserDto countAll();
+    NewUsersThisYearDto countNewUsersThisYear();
 }

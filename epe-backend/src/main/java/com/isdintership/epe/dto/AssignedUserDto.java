@@ -6,7 +6,6 @@ import lombok.Data;
 
 
 @Data
-
 public class AssignedUserDto {
     private String id;
     private String email;

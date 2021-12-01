@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,8 @@ class UserServiceImpl implements UserService {
 
         user.setBio(request.getBio());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        user.setRegistrationDate(LocalDateTime.now());
 
         Role roleUser = roleRepository.findByRole(RoleEnum.ROLE_USER);
         user.setRole(roleUser);
@@ -276,6 +279,27 @@ class UserServiceImpl implements UserService {
             user.setRole(role);
         }
         return userDto;
+    }
+
+    @Override
+    @Transactional
+    public UserDto countAll() {
+        UserDto userDto = new UserDto();
+        userDto.setCount(userRepository.count());
+
+        return userDto;
+    }
+
+    @Override
+    @Transactional
+    public NewUsersThisYearDto countNewUsersThisYear() {
+        NewUsersThisYearDto newUsers = new NewUsersThisYearDto();
+        for (int i = 0; i < 12; i++) {
+            LocalDateTime fromDate = LocalDateTime.of(LocalDateTime.now().getYear(), i + 1, 1, 0, 0);
+            newUsers.getMonths().add(i, userRepository.countAllByRegistrationDateBetween(fromDate, fromDate.plusMonths(1)));
+        }
+
+        return newUsers;
     }
 
 

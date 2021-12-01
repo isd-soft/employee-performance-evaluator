@@ -21,5 +21,7 @@ export interface AssessmentView {
   departmentGoals: DepartmentGoalView[],
   feedbacks: FeedbackView[],
   userId: string,
-  startedById: string
+  startedById: string,
+  count: number
+
 }

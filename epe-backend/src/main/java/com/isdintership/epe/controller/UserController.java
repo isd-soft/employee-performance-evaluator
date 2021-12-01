@@ -27,7 +27,17 @@ public class UserController {
 
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    public ResponseEntity<List<UserDto>> getAllUsers() {
+    public ResponseEntity<?> getAllUsers(
+            @RequestParam(name = "count", required = false) String count) {
+        if (count != null) {
+            if (count.equals("all")) {
+                return ResponseEntity.ok(userService.countAll());
+            }
+            if (count.equals("current-year")) {
+                return ResponseEntity.ok(userService.countNewUsersThisYear());
+            }
+        }
+
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
@@ -95,7 +105,8 @@ public class UserController {
 
     @GetMapping("/{id}/assignedUsers")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    public ResponseEntity<List<AssignedUserDto>> getAllAssignedUsers(@PathVariable("id") String id) {
+    public ResponseEntity<List<AssignedUserDto>>
+    getAllAssignedUsers(@PathVariable("id") String id) {
         return ResponseEntity.ok(userService.getAssignedUsers(id));
     }
 

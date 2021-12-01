@@ -1,0 +1,222 @@
+<mat-tab-group mat-align-tabs="center" class="content" dynamicHeight>
+
+  <mat-tab label="System monitoring">
+    <ng-template matTabContent>
+      <div class="header">
+        <div class="title">
+          Monitoring Dashboard
+        </div>
+        <div class="specifications">
+          <div class="specification">
+            <i class="material-icons header-icon">laptop_chromebook</i> Server: <span class="bold">{{serverStatus}}</span>
+          </div>
+          <div class="specification">
+            <i class="material-icons header-icon">storage</i>DB: <span class="bold">{{DBName}}</span> -
+            <span class="bold">{{DBStatus}}</span>
+          </div>
+          <div class="specification">
+            <i class="material-icons header-icon">album</i>Disk usage:
+            <span class="bold">{{diskUsage | number:'3.0-2'}}</span>
+            of <span class="bold">{{diskTotalSpace | number:'3.0-2'}}</span> Gb
+          </div>
+          <div class="specification">
+            <i class="material-icons header-icon">memory</i>Processors: <span class="bold">{{processorsCount}}</span>
+          </div>
+          <div class="specification">
+            <i class="material-icons header-icon">watch_later</i>Up Time: <span class="bold">{{uptime * 1000 | date:'H:mm:ss' : 'UTC'}}</span>
+          </div>
+
+        </div>
+        <div class="refresh-button">
+          <button class="button" (click)="reload()">
+            <i class="material-icons refresh-icon">refresh</i>
+          </button>
+
+        </div>
+      </div>
+
+      <div class="container">
+
+        <div class="column">
+
+          <div class="response-statuses">
+            <div class="row">
+              <div class="response-200">
+                <i class="material-icons">done</i>200 Response
+                <br>
+                <span class="response-count">{{count200}}</span>
+              </div>
+              <div class="response-404">
+                <i class="material-icons">dnd_forwardslash</i>404 Response
+                <br>
+                <span class="response-count">{{count404}}</span>
+              </div>
+              <div class="response-400">
+                <i class="material-icons">priority_high</i>400 Response
+                <br>
+                <span class="response-count">{{count400}}</span>
+              </div>
+              <div class="response-500">
+                <i class="material-icons">bug_report</i>500 Response
+                <br>
+                <span class="response-count">{{count500}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="response-charts">
+            <div class="row">
+              <div class="chart-1">
+                <apx-chart
+                  [title]="responsesChartOptions1.title"
+                  [colors]="responsesChartOptions1.colors"
+                  [series]="responsesChartOptions1.series"
+                  [chart]="responsesChartOptions1.chart"
+                  [labels]="responsesChartOptions1.labels"
+                  [responsive]="responsesChartOptions1.responsive"
+                ></apx-chart>
+              </div>
+              <div class="chart-2">
+                <apx-chart
+                  [title]="responsesChartOptions2.title"
+                  [series]="responsesChartOptions2.series"
+                  [chart]="responsesChartOptions2.chart"
+                  [dataLabels]="responsesChartOptions2.dataLabels"
+                  [plotOptions]="responsesChartOptions2.plotOptions"
+                  [yaxis]="responsesChartOptions2.yaxis"
+                  [legend]="responsesChartOptions2.legend"
+                  [fill]="responsesChartOptions2.fill"
+                  [stroke]="responsesChartOptions2.stroke"
+                  [tooltip]="responsesChartOptions2.tooltip"
+                  [xaxis]="responsesChartOptions2.xaxis"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table">
+          <mat-form-field appearance="standard" class="filter-field">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. GET" #input>
+          </mat-form-field>
+
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <!-- Time Stamp Column -->
+              <ng-container matColumnDef="timestamp">
+                <th mat-header-cell class="time-stamp-column" *matHeaderCellDef mat-sort-header> Time Stamp </th>
+                <td mat-cell class="time-stamp-column" *matCellDef="let row"> {{row.timestamp | date: 'MMM d, y, H:mm:ss'}} </td>
+              </ng-container>
+
+              <!-- Method Column -->
+              <ng-container matColumnDef="method">
+                <th mat-header-cell class="method-column" *matHeaderCellDef mat-sort-header> Method </th>
+                <td mat-cell class="method-column" *matCellDef="let row">
+                  {{row.method}}
+                </td>
+              </ng-container>
+
+              <!-- Time taken Column-->
+              <ng-container matColumnDef="timeTaken">
+                <th mat-header-cell class="time-taken-column" *matHeaderCellDef mat-sort-header> Time taken (ms) </th>
+                <td mat-cell class="time-taken-column" *matCellDef="let row"> {{row.timeTaken}} </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell class="status-column" *matCellDef="let row"> {{row.status}} </td>
+              </ng-container>
+
+              <!-- URI Column -->
+              <ng-container matColumnDef="uri" class="uri-column">
+                <th mat-header-cell class="uri-column" *matHeaderCellDef mat-sort-header> URI </th>
+                <td mat-cell class="uri-column" *matCellDef="let row"> {{row.uri}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="5">No responses found</td>
+              </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 5, 25, 100]" aria-label="Select page of responses"></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Overview">
+    <ng-template matTabContent>
+      <div class="database-info">
+          <div class="column">
+            <div class="row">
+
+              <div class="users">
+                <apx-chart
+                  [series]="usersChartOptions1.series"
+                  [colors]="usersChartOptions1.colors"
+                  [chart]="usersChartOptions1.chart"
+                  [plotOptions]="usersChartOptions1.plotOptions"
+                  [labels]="usersChartOptions1.labels"
+                ></apx-chart>
+              </div>
+              <div class="assessments">
+                <apx-chart
+                  [series]="assessmentsChartOptions1.series"
+                  [colors]="assessmentsChartOptions1.colors"
+                  [chart]="assessmentsChartOptions1.chart"
+                  [plotOptions]="assessmentsChartOptions1.plotOptions"
+                  [labels]="assessmentsChartOptions1.labels"
+                ></apx-chart>
+              </div>
+
+            </div>
+            <div class="row">
+
+              <div class="users-last-year">
+                <apx-chart
+                  [title]="usersChartOptions2.title"
+                  [series]="usersChartOptions2.series"
+                  [chart]="usersChartOptions2.chart"
+                  [colors]="usersChartOptions2.colors"
+                  [dataLabels]="usersChartOptions2.dataLabels"
+                  [plotOptions]="usersChartOptions2.plotOptions"
+                  [yaxis]="usersChartOptions2.yaxis"
+                  [legend]="usersChartOptions2.legend"
+                  [fill]="usersChartOptions2.fill"
+                  [stroke]="usersChartOptions2.stroke"
+                  [tooltip]="usersChartOptions2.tooltip"
+                  [xaxis]="usersChartOptions2.xaxis"
+                ></apx-chart>
+              </div>
+            </div>
+            <div class="row">
+              <div class="assessments-last-year">
+                <apx-chart
+                  [title]="assessmentsChartOptions2.title"
+                  [series]="assessmentsChartOptions2.series"
+                  [chart]="assessmentsChartOptions2.chart"
+                  [colors]="assessmentsChartOptions2.colors"
+                  [dataLabels]="assessmentsChartOptions2.dataLabels"
+                  [plotOptions]="assessmentsChartOptions2.plotOptions"
+                  [yaxis]="assessmentsChartOptions2.yaxis"
+                  [legend]="assessmentsChartOptions2.legend"
+                  [fill]="assessmentsChartOptions2.fill"
+                  [stroke]="assessmentsChartOptions2.stroke"
+                  [tooltip]="assessmentsChartOptions2.tooltip"
+                  [xaxis]="assessmentsChartOptions2.xaxis"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
