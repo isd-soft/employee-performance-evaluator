@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MyProfile } from './../profile-models/my-profile.interface';
 import { ProfileService } from './../profile-service/profile.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,11 +15,32 @@ import { TeamViewComponent } from '../../teams/team-view/team-view.component';
 })
 export class ProfileComponent implements OnInit {
 
+  refreshed = false;
   myProfile?: MyProfile;
   myTeams?: TeamView[];
+  contor = 0;
 
   constructor(private profileService: ProfileService,
+              private router: Router,
               private dialog: MatDialog) {
+    
+    this.refreshAll();
+
+    // if(!localStorage.getItem('MY_PROFILE_RELOADED')) {
+    //   window.location.reload();
+    //   localStorage.setItem('MY_PROFILE_RELOADED', 'true');
+    // }
+
+  }
+
+  reload() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/my-profile']);
+  }
+
+  refreshAll() {
+    this.refreshed = true;
     this.profileService.getMyProfile().subscribe(data => {
       this.myProfile = data as MyProfile;
     });
@@ -29,9 +51,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getMyProfile().subscribe(data => {
-      this.myProfile = data as MyProfile;
-    });
+    this.refreshAll();
   }
 
   edit() {

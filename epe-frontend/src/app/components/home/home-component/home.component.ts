@@ -36,8 +36,8 @@ export class HomeComponent {
   jobFormControl = new FormControl();
   jobList?: JobItem[];
   employmentdateFormControl = new FormControl('', [Validators.required]);
-  passwordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,30}$")]);
-  confirmPasswordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,30}$")]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$")]);
+  confirmPasswordFormControl = new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$")]);
 
   registerUser: RegisterRequest = {
     email: '',

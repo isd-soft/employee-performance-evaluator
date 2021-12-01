@@ -12,6 +12,11 @@ export class LogoutComponent {
   constructor(private jwtService: JwtService,
               private router: Router) {
     this.jwtService.removeJWT();
+    this.removeAllFromLocalStorage();
     this.router.navigate(['/home']);
+  }
+
+  removeAllFromLocalStorage() {
+    localStorage.removeItem('MY_PROFILE_RELOADED');
   }
 }

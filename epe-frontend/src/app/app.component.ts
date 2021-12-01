@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {JwtService} from "./decoder/decoder-service/jwt.service";
 import {JwtUser} from "./decoder/decoder-model/jwt-user.interface";
 import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
   isAdmin?: boolean = false;
   isSysAdmin?: boolean = false;
 
-  constructor(private jwtService: JwtService) {
+  constructor(private jwtService: JwtService, private router: Router) {
 
     interval(100).subscribe(x => {
       this.jwtUser = this.jwtService.getJwtUser();
@@ -40,4 +41,9 @@ export class AppComponent {
       }
     });
   }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+ }
 }
