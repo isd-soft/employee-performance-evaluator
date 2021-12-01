@@ -32,8 +32,6 @@ public class ExportController {
     private final AssessmentRepository assessmentRepository;
     private final PDFGenerator pdfGenerator;
 
-
-
     @GetMapping("/pdf/users/{id}")
     @RolesAllowed({ROLE_USER, ROLE_ADMIN, ROLE_SYSADMIN})
     @Transactional

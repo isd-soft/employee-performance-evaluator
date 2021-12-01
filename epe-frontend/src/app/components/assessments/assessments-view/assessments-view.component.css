@@ -94,7 +94,7 @@ p {
 
 .raise:hover{
   transition-duration: 0.4s;
-  transform: scale(1.4);
+  transform: scale(1.1);
   cursor: pointer;
 }
 
