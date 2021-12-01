@@ -48,6 +48,16 @@
           <button mat-button (click)="openDialog(dataSource.filteredData.indexOf(row))">
             <mat-icon>open_in_new</mat-icon>
           </button>
+
+          <button *ngIf="(row.status == 'FINISHED')" mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>download</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button (click)="exportAssessmentToPdf(row)"  mat-menu-item>Export to pdf</button>
+            <button (click)="exportAssessmentToExcel(row)" mat-menu-item>Export to excel</button>
+          </mat-menu>
+          
         </td>
       </ng-container>
 
