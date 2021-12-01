@@ -1,5 +1,5 @@
 import { TeamView } from './../teams-model/team-view.interface';
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -20,12 +20,14 @@ import { MatTabGroup } from '@angular/material/tabs';
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.css']
 })
-export class TeamsComponent {
+export class TeamsComponent implements OnInit {
 
   // @ts-ignore
   dataSource: MatTableDataSource<TeamView>;
   displayedColumns: string[] = ['name', 'teamLeader', 'buttons'];
   teams?: TeamView[];
+
+  date = new Date();
 
   newTeamName?: string = '';
   teamNameFormControl = new FormControl('', [Validators.required]);
@@ -45,6 +47,10 @@ export class TeamsComponent {
               public dialog: MatDialog, 
               private userService: UserService,
               private toastr: ToastrService){
+    this.reloadAll();
+  }
+
+  ngOnInit(): void {
     this.reloadAll();
   }
 

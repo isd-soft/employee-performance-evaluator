@@ -29,6 +29,7 @@ public class SimpleCORSFilter implements Filter {
         AllowedMethods.addAll(Arrays.asList("POST", "PUT", "GET", "DELETE", "OPTIONS"));
 
         res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+//        res.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
         if (req.getMethod().equals("OPTIONS")) {
             String reqOrigin;
@@ -53,7 +54,9 @@ public class SimpleCORSFilter implements Filter {
             res.setHeader("Access-Control-Max-Age", "3600");
             res.setHeader("Access-Control-Allow-Credentials", "true");
             res.setHeader("Access-Control-Allow-Headers",
-                    "cache-control,if-modified-since,pragma,Content-Type,Authorization");
+                    "cache-control, if-modified-since, pragma, Content-Type, Authorization, "
+                            + "Access-Control-Allow-Headers, X-Requested-With, Expires");
+
 
             //Checks if Allow-Method and Allow-Origin got set. 200 OK if both are set.
             if (!res.getHeader("Access-Control-Allow-Methods").equals("") && !res.getHeader("Access-Control-Allow-Origin").equals("")) {

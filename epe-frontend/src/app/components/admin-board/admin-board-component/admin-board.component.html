@@ -18,9 +18,9 @@
           </ng-container>
 
           <!-- Position Column -->
-          <ng-container matColumnDef="jobPosition">
-            <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Position </th>
-            <td mat-cell class="title-position" *matCellDef="let row"> {{row.jobTitle}} </td>
+          <ng-container matColumnDef="evaluatedUser">
+            <th mat-header-cell class="title-position" *matHeaderCellDef mat-sort-header> Evaluated employee </th>
+            <td mat-cell class="title-position" *matCellDef="let row"> {{row.evaluatedUserFullName}} </td>
           </ng-container>
 
           <!-- Start date Column-->
@@ -45,10 +45,24 @@
               <button mat-button (click)="openDialog(dataSource.filteredData.indexOf(row))">
                 <mat-icon>open_in_new</mat-icon>
               </button>
+
               <button mat-button (click)="delete(row.id)">
                 <mat-icon>delete</mat-icon>
               </button>
+
+<!--              <div>-->
+                <button *ngIf="(row.status == 'FINISHED')" mat-button [matMenuTriggerFor]="menu">
+                  <mat-icon>download</mat-icon>
+                </button>
+<!--              </div>-->
+
+              <mat-menu #menu="matMenu">
+                <button (click)="exportAssessmentToPdf(row)"  mat-menu-item>Export to pdf</button>
+                <button (click)="exportAssessmentToExcel(row)" mat-menu-item>Export to excel</button>
+              </mat-menu>
+
             </td>
+
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -152,8 +152,7 @@ mat-form-field {
   margin-left: 1.5%;
 }
 
-.raise:hover,
-.raise:focus {
+.raise:hover {
   transition-duration: 0.4s;
   transform: scale(1.4);
   cursor: pointer;
@@ -224,4 +223,23 @@ mat-form-field, mat-form-field label {
 .close-icon:hover {
   transform: rotate(90deg);
   transition-duration: 0.4s;
+}
+
+.alert-message {
+  background: rgba(243,33,28,0.52);
+  font-size: 14px;
+  width: 90.5%;
+  margin-left: 5%;
+  margin-bottom: 2%;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+.red-highlight {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.existing-feedback-message {
+  font-size: 16px;
 }

@@ -50,14 +50,6 @@ table {
   margin-bottom: 25px;
 }
 
-.table-column {
-  width: 30%;
-}
-
-.table-buttons {
-  width: 30%;
-}
-
 mat-paginator {
   padding-bottom: 15px;
 }
@@ -89,10 +81,30 @@ mat-paginator {
   text-align: center;
 }
 
-.end-date-column, .start-date-column, .status-column {
+/*.end-date-column, .start-date-column, .status-column {
   width: 17%;
 }
 
 .buttons-column {
   width: 12%;
+}*/
+
+.title-column {
+  width: 30%;
+}
+
+.title-position {
+  width: 20%;
+}
+
+.start-date-column {
+  width: 20%;
+}
+
+.status-column {
+  width: 15%;
+}
+
+.buttons-column {
+  width: 15%;
 }

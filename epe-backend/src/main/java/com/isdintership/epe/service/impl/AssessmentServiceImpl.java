@@ -9,6 +9,7 @@ import com.isdintership.epe.service.AssessmentService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.jni.Local;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
@@ -108,10 +109,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessment);
-        emailService.sendEmail(assessmentDto);
-
-
-
+//        emailService.sendEmail(assessmentDto);
         return assessmentDto;
     }
 
@@ -127,6 +125,10 @@ class AssessmentServiceImpl implements AssessmentService {
     private AssessmentInformation getAssessmentInformation(AssessmentTemplateDto assessmentTemplateDto, Assessment assessment) {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setAssessmentId(assessment.getId());
+        assessmentInformation.setEvaluatedUserFullName(assessment.getUser().getFirstname() + " "
+                + assessment.getUser().getLastname());
+        assessmentInformation.setEvaluatedUserId(assessment.getUser().getId());
         assessmentInformation.setStatus(assessment.getStatus());
         assessmentInformation.setPerformedOnUser(assessment.getUser());
         User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
@@ -201,12 +203,11 @@ class AssessmentServiceImpl implements AssessmentService {
                     .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
             return assessmentDtos;
         }
-        // else throw new AssessmentStatusNotFound("Assessment status " + status + " was not found");
         try {
             assessmentRepository.findByUserAndStatus(user, Status.valueOf(status))
                     .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
         } catch (IllegalArgumentException e) {
-            throw new AssessmentStatusNotFound("Assessment status " + status + " was not found");
+            throw new StatusNotFoundException("Assessment status " + status + " was not found");
         }
 
         return assessmentDtos;
@@ -249,16 +250,38 @@ class AssessmentServiceImpl implements AssessmentService {
         } else if (status.equals("INACTIVE")) {
             statuses = List.of(Status.CANCELED, Status.FINISHED);
         } else {
-            throw new AssessmentStatusNotFound("Status not found. Should be ACTIVE or INACTIVE");
+            throw new StatusNotFoundException("Status not found. Should be ACTIVE or INACTIVE");
         }
 
         List<User> assignedUsers = userRepository.findByBuddyId(userId);
-        Optional<Team> team = teamRepository.findByTeamLeaderId(userId);
-        team.ifPresent(value -> assignedUsers.addAll(value.getMembers()));
+        teamRepository.findByTeamLeaderId(userId).forEach(team -> assignedUsers.addAll(team.getMembers()));
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
         assessmentRepository.findByUserInAndStatusIn(assignedUsers, statuses)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
         return assessmentDtos;
+    }
+
+    @Override
+    @Transactional
+    public FeedbackDto addFeedback(String userId, String assessmentId, FeedbackDto feedbackDto) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new UserNotFoundException("User with id " + userId + " was not found"));
+        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() ->
+                new AssessmentNotFoundException("Assessment with id " + assessmentId + " was not found"));
+        if (assessment.getUser() != user) {
+            throw new AssessmentNotFoundException("Assessment " + assessment.getTitle()
+                    + " was not found for user " + user.getFirstname()
+                    + " " + user.getLastname());
+        }
+
+        Feedback feedback = new Feedback();
+        feedback.setAuthorId(feedbackDto.getAuthorId());
+        feedback.setAuthorFullName(feedbackDto.getAuthorFullName());
+        feedback.setContext(feedbackDto.getContext());
+        feedback.setAssessment(assessment);
+        assessment.getFeedbacks().add(feedback);
+
+        return FeedbackDto.fromFeedback(feedback);
     }
 
 
@@ -274,8 +297,6 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto) {
-        System.out.println(assessmentDto);
-
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new UserNotFoundException("User with id " + userId + " was not found"));
         Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() ->
@@ -315,7 +336,10 @@ class AssessmentServiceImpl implements AssessmentService {
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setReason(assessmentDto.getCancellationReason());
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
+        assessmentInformation.setAssessmentId(assessment.getId());
         assessmentInformation.setStatus(assessment.getStatus());
+        assessmentInformation.setEvaluatedUserId(assessment.getUser().getId());
+        assessmentInformation.setEvaluatedUserFullName(assessment.getUser().getFirstname() + " " + assessment.getUser().getLastname());
         User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
         assessmentInformation.setPerformedByUser(user);
         assessmentInformation.setPerformedOnUser(assessment.getUser());
@@ -402,11 +426,25 @@ class AssessmentServiceImpl implements AssessmentService {
     private void processFeedback(String userId, AssessmentDto assessmentDto, User user, Assessment assessment, List<Feedback> feedbacks) {
 
         if (isFeedbackPresent(assessmentDto)) {
+
+            removeFeedbackIfExists(userId, assessment);
             Feedback feedback = getFeedback(userId, assessmentDto, user, feedbacks);
             feedback.setAssessment(assessment);
             feedbacks.add(feedback);
         }
 
+    }
+
+    private void removeFeedbackIfExists(String userId, Assessment assessment) {
+        Feedback existingFeedback = null;
+        for (Feedback feedback: assessment.getFeedbacks()) {
+            if (feedback.getAuthorId().equals(userId)) {
+                existingFeedback = feedback;
+            }
+        }
+        if (existingFeedback != null) {
+            assessment.getFeedbacks().remove(existingFeedback);
+        }
     }
 
     /**
@@ -618,8 +656,8 @@ class AssessmentServiceImpl implements AssessmentService {
 
                 Feedback feedback = new Feedback();
                 feedback.setAssessment(assessment);
-                feedback.setAuthorId(feedbackDto.getAuthorId());
                 feedback.setAuthorFullName(feedbackDto.getAuthorFullName());
+                feedback.setAuthorId(feedbackDto.getAuthorId());
                 feedback.setContext(feedbackDto.getContext());
                 assessment.getFeedbacks().add(feedback);
             }
@@ -680,10 +718,8 @@ class AssessmentServiceImpl implements AssessmentService {
      * */
     @Override
     @Transactional
-    public AssessmentDto countAll() {
-        AssessmentDto assessmentDto = new AssessmentDto();
-        assessmentDto.setCount(assessmentRepository.count());
-        return assessmentDto;
+    public CountDto countAll() {
+        return new CountDto(assessmentRepository.count());
     }
 
 }

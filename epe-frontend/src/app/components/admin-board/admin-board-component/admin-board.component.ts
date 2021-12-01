@@ -21,9 +21,10 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
 
   dataSource!: MatTableDataSource<AssessmentView>;
   assessments!: AssessmentView[];
-  displayedColumns: string[] = ['title', 'jobPosition', 'startDate', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'evaluatedUser', 'startDate', 'status', 'buttons'];
 
   jwtUser: User;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -66,6 +67,14 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
       data : this.assessments[id],
       autoFocus: false
     });
+  }
+
+  exportAssessmentToPdf(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToPdf(assessment);
+  }
+
+  exportAssessmentToExcel(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToExcel(assessment);
   }
 
   delete(assessmentId: string) {

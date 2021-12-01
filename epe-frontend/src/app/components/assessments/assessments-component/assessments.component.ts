@@ -19,7 +19,7 @@ import {AssessmentView} from "../assessments-models/assessment-view.interface";
 
 export class AssessmentsComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['title', 'jobPosition', 'startDate', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'evaluatedUser', 'startDate', 'status', 'buttons'];
   dataSource!: MatTableDataSource<AssessmentView>;
   assessments!: AssessmentView[];
   jwtUser : JwtUser;

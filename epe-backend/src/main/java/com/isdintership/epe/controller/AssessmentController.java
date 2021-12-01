@@ -84,6 +84,16 @@ public class AssessmentController {
 
     }
 
+    @PostMapping("users/{userId}/assessments/{assessmentId}/feedbacks")
+    @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
+    public ResponseEntity<FeedbackDto> addFeedback
+            (@PathVariable(name = "userId") String userId,
+             @PathVariable(name = "assessmentId") String assessmentId,
+             @RequestBody FeedbackDto feedbackDto) {
+
+        return new ResponseEntity<>(assessmentService.addFeedback
+                (userId, assessmentId, feedbackDto), HttpStatus.OK);
+    }
 
     @PutMapping("users/{userId}/assessments/{assessmentId}")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})

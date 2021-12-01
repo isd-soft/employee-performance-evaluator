@@ -127,7 +127,15 @@
               <!-- Status Column -->
               <ng-container matColumnDef="status">
                 <th mat-header-cell class="status-column" *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell class="status-column" *matCellDef="let row"> {{row.status}} </td>
+                <td mat-cell class="status-column" *matCellDef="let row">
+                  <span [ngSwitch]="row.status" >
+                    <span *ngSwitchCase="200" class="label label-200" >{{row.status}}</span>
+                    <span *ngSwitchCase="201" class="label label-200" >{{row.status}}</span>
+                    <span *ngSwitchCase="400" class="label label-400">{{row.status}}</span>
+                    <span *ngSwitchCase="404" class="label label-404">{{row.status}}</span>
+                    <span *ngSwitchCase="500" class="label label-500">{{row.status}}</span>
+                  </span>
+                </td>
               </ng-container>
 
               <!-- URI Column -->
@@ -145,7 +153,7 @@
               </tr>
             </table>
 
-            <mat-paginator [pageSizeOptions]="[10, 5, 25, 100]" aria-label="Select page of responses"></mat-paginator>
+            <mat-paginator #atPaginator [pageSizeOptions]="[10, 5, 25, 100]" aria-label="Select page of responses"></mat-paginator>
           </div>
         </div>
       </div>
@@ -176,7 +184,24 @@
                   [labels]="assessmentsChartOptions1.labels"
                 ></apx-chart>
               </div>
-
+              <div class="buddies">
+                <apx-chart
+                  [series]="buddiesChartOptions.series"
+                  [colors]="buddiesChartOptions.colors"
+                  [chart]="buddiesChartOptions.chart"
+                  [plotOptions]="buddiesChartOptions.plotOptions"
+                  [labels]="buddiesChartOptions.labels"
+                ></apx-chart>
+              </div>
+              <div class="teamleaders">
+                <apx-chart
+                  [series]="teamLeadersChartOptions.series"
+                  [colors]="teamLeadersChartOptions.colors"
+                  [chart]="teamLeadersChartOptions.chart"
+                  [plotOptions]="teamLeadersChartOptions.plotOptions"
+                  [labels]="teamLeadersChartOptions.labels"
+                ></apx-chart>
+              </div>
             </div>
             <div class="row">
 
@@ -196,8 +221,6 @@
                   [xaxis]="usersChartOptions2.xaxis"
                 ></apx-chart>
               </div>
-            </div>
-            <div class="row">
               <div class="assessments-last-year">
                 <apx-chart
                   [title]="assessmentsChartOptions2.title"
