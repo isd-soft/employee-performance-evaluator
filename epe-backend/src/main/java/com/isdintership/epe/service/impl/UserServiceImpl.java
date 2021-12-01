@@ -340,9 +340,7 @@ class UserServiceImpl implements UserService {
                 new UserNotFoundException("User with id " + id + " was not found"));
 
         List<User> assignedUsers = userRepository.findByBuddyId(id);
-        Optional<Team> team = teamRepository.findByTeamLeaderId(id);
-        team.ifPresent(value -> assignedUsers.addAll(value.getMembers()));
-
+        teamRepository.findByTeamLeaderId(id).forEach(team -> assignedUsers.addAll(team.getMembers()));
         List<AssignedUserDto> assignedUsersDtos = new ArrayList<>();
         assignedUsers.forEach(user -> assignedUsersDtos.add(AssignedUserDto.fromUser(user)));
 

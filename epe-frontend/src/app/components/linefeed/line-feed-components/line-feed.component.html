@@ -30,6 +30,16 @@
         <span *ngIf="assessment.status === 'CANCELED'">
           Cancellation reason: {{assessment.reason}}
         </span>
+
+        <div class="leave-feedback" *ngIf="(assessment.status == 'SECOND_PHASE' || assessment.status == 'FIRST_PHASE')
+                                           && (assessment.currentStatus == 'SECOND_PHASE'
+                                               || assessment.currentStatus == 'FIRST_PHASE')
+                                           && assessment.evaluatedUserId != userId
+                                           && assessment.feedbackAuthorsIds.indexOf(userId) == -1">
+          <button mat-button class="raise" (click)="openDialog(assessmentsInformation.indexOf(assessment))">
+            Leave feedback
+          </button>
+        </div>
       </mat-card-content>
     </mat-card>
   <br>

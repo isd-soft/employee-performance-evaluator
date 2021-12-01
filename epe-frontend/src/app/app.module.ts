@@ -61,6 +61,7 @@ import {NgApexchartsModule} from "ng-apexcharts";
 import { CreateUserComponent } from './create-user/create-component/create-user.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
+import { LeaveFeedbackComponent } from './components/linefeed/leave-feedback/leave-feedback.component';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { CancelAssessmentComponent } from './components/cancel-assessment/cancel
     AdminStatsComponent,
     AdminBoardComponent,
     CreateUserComponent,
-    CancelAssessmentComponent
+    CancelAssessmentComponent,
+    LeaveFeedbackComponent
   ],
     imports: [
         BrowserModule,

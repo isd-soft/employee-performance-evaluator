@@ -48,7 +48,7 @@ class EmailServiceImpl implements EmailService {
                     "Assessment: " + assessmentDto.getTitle() + "\n" +
                     "Description: " + assessmentDto.getDescription() + "\n\n" +
                     "May the force be with you!");
-            javaMailSender.send(mailMessage);
+//            javaMailSender.send(mailMessage);
         });
     }
 
@@ -66,7 +66,7 @@ class EmailServiceImpl implements EmailService {
                     "will start soon \n" +
                     "Have a good day!");
 
-            javaMailSender.send(mailMessage);
+//            javaMailSender.send(mailMessage);
         });
     }
 

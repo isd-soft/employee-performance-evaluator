@@ -263,7 +263,16 @@
         <div *ngFor="let feedback of feedbackArray.controls; let i = index;"
              [formGroupName]="i"
         >
-
+          <div class="alert-message"
+               *ngIf="isFeedbackExist"
+          >
+            <span class="red-highlight">Alert!</span>
+            You have already posted feedback for this assessment.
+            Feedback message: <span class="existing-feedback-message">{{existingFeedbackContext}}</span>
+            <br>
+            Leave field empty if you want to save existing feedback or write new one.
+            Writing new feedback will remove the old one.
+          </div>
           <mat-form-field appearance="fill" class="feedback-input-field">
             <mat-label>Your feedback</mat-label>
             <textarea matInput

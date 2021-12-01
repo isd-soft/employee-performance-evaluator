@@ -21,6 +21,8 @@ export class AssessmentsEvaluationComponent implements OnInit {
   assessmentForm!: FormGroup;
   scores!: number[];
   jwtUser!: JwtUser;
+  isFeedbackExist!: boolean;
+  existingFeedbackContext!: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
               public dialog: MatDialog,
@@ -33,10 +35,14 @@ export class AssessmentsEvaluationComponent implements OnInit {
 
   ngOnInit(): void {
     this.assessment = this.data as AssessmentView;
-    console.log(this.assessment);
     this.scores = [1, 2, 3, 4, 5];
-
     this.jwtUser = this.jwtService.getJwtUser();
+    this.assessment.feedbacks.forEach(feedback => {
+      if (feedback.authorId == this.jwtUser.id) {
+        this.isFeedbackExist = true;
+        this.existingFeedbackContext = feedback.context;
+      }
+    })
 
     this.assessmentForm = this.formBuilder.group({
       title: [this.assessment.title],
@@ -161,7 +167,6 @@ export class AssessmentsEvaluationComponent implements OnInit {
   onSubmit() {
 
     if (this.assessmentForm.valid) {
-
       if (this.personalGoalArray.length != 0 && !this.personalGoalArray.controls[0].get('goalSPart')?.value) {
         this.personalGoalArray.removeAt(0);
       }

@@ -257,8 +257,8 @@
 
     <button
       mat-button
-      *ngIf="(assessment.status == 'FIRST_PHASE' || assessment.status == 'SECOND_PHASE' && jwtUser.role === 'ROLE_ADMIN' ) ||
-              (assessment.status == 'FIRST_PHASE'|| assessment.status == 'SECOND_PHASE' && jwtUser.role === 'ROLE_SYSADMIN')"
+      *ngIf="((assessment.status == 'FIRST_PHASE' || assessment.status == 'SECOND_PHASE') && jwtUser.role === 'ROLE_ADMIN' ) ||
+              ((assessment.status == 'FIRST_PHASE'|| assessment.status == 'SECOND_PHASE') && jwtUser.role === 'ROLE_SYSADMIN')"
       class="raise"
       (click)="openCancelDialog(assessment)"
     >
