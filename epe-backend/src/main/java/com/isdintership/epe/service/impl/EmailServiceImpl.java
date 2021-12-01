@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Implements the EmailsService interface.
+ * @author Adrian Girlea
+ * */
 @Service
 @RequiredArgsConstructor
 class EmailServiceImpl implements EmailService {
@@ -26,7 +30,13 @@ class EmailServiceImpl implements EmailService {
     private final UserRepository userRepository;
 
 
-
+    /**
+     * Method that sends a notification email to all the user received from
+     *   {@link #getNotificatedUser(String)}
+     * @param assessmentDto object receive when creating an assessment or updating the state of an already existing assessment,
+     *                      includes information sent to the user.
+     * @author Adrian Girlea
+     * */
     @Override
     @Transactional
     @Async
@@ -52,6 +62,11 @@ class EmailServiceImpl implements EmailService {
         });
     }
 
+    /**
+     * Method that send a notification email to a user one month prior to his job employment anniversary
+     * @param user the user that will receive the email
+     * @author Adrian Girlea
+     * */
     @Override
     public void sendRemainder(User user) {
         Set<User> userSet = getNotificatedUser(user.getId());
@@ -70,6 +85,12 @@ class EmailServiceImpl implements EmailService {
         });
     }
 
+    /**
+     * Helper method that returns all the users that should get and email notification based on the user id
+     * @param userId the id the user
+     * @return a set of user that are either admins/sysadmins or are related to the user (teamlead/buddy)
+     * @author Adrian Girlea
+     * */
     private Set<User> getNotificatedUser(String userId){
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         Set<User> userSet =
@@ -82,8 +103,6 @@ class EmailServiceImpl implements EmailService {
         }if (user.getTeam()!=null){
             userSet.add(user.getTeam().getTeamLeader());
         }
-
-//        System.out.println(userSet);
         return userSet;
     }
 }
