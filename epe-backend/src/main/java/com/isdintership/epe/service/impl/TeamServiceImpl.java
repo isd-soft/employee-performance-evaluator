@@ -19,13 +19,38 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+/**
+ * {@code TeamServiceImpl} is a service class that implements the {@code TeamService} interface.
+ *
+ * <p> This class handles all requests to the team table
+ * @author Maxim Gribencicov
+ * @author Andrei Chetrean
+ * @since 1.0
+ */
 @Service
 @RequiredArgsConstructor
 class TeamServiceImpl implements TeamService {
 
+    /**
+     * {@code JpaRepository} that handles the access to the user table
+     */
     private final UserRepository userRepository;
+
+    /**
+     * {@code JpaRepository} that handles the access to the team table
+     */
     private final TeamRepository teamRepository;
 
+
+    /**
+     * creates a new team record and updates the users' team id in the data source
+     * @param teamDto {@code TeamDto} object that will be inserted in the data source,
+     *                if a team with same name doesn't already exist
+     * @return a success message if new record created
+     * @throws {@code TeamExistException} if a team with same name already exists
+     * @throws {@code UserNotFoundException} if a user with the provided id doesn't exist in the data source
+     * @since 1.0
+     */
     @Override
     @Transactional
     public String createTeam(TeamDto teamDto) {
@@ -62,6 +87,13 @@ class TeamServiceImpl implements TeamService {
         return "Team " + teamDto.getName() + " was created successfully";
     }
 
+    /**
+     * returns a {@code TeamDto} object containing the details of the team with the provided id
+     * @param id the ID of the requested team
+     * @return the details of the requested team
+     * @throws {@code TeamNotFoundException} if a team with the requested id doesn't exist
+     * @since 1.0
+     */
     @Override
     @Transactional
     public TeamDto getTeam(String id) {
@@ -73,6 +105,11 @@ class TeamServiceImpl implements TeamService {
 
     }
 
+    /**
+     * returns all the records from the data source as a list of {@code TeamDto} objects
+     * @return a list of teams
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<TeamDto> getAllTeams() {
@@ -86,6 +123,18 @@ class TeamServiceImpl implements TeamService {
         return teamDtos;
     }
 
+    /**
+     * updates the record of the team with the provided id
+     * @param id the ID of team that shall be updated
+     * @param teamDto the {@code TeamDto} containing the details of the new team
+     * @return the details of the updated team
+     * @throws {@code InvalidTeamNameException} if the new team name is null or empty
+     * @throws {@code TeamNotFoundException} if a team with the provided ID doesn't exist
+     * @throws {@code TeamExistException} if the new team name matches another team name from the database
+     * @throws {@code UserNotFoundException} if a user from the team user list with the provided id
+     * doesn't exist in the database
+     * @since 1.0
+     */
     @Override
     @Transactional
     public TeamDto updateTeam(TeamDto teamDto, String id) {
@@ -131,6 +180,13 @@ class TeamServiceImpl implements TeamService {
 
     }
 
+    /**
+     * removes the team record from the data source
+     * @param id the ID of team that shall be deleted
+     * @return a success message, if team record was removed
+     * @throws {@code TeamNotFoundException} if a team with the provided ID doesn't exist
+     * @since 1.0
+     */
     @Override
     @Transactional
     public String deleteTeam(String id) {
@@ -144,6 +200,13 @@ class TeamServiceImpl implements TeamService {
 
     }
 
+    /**
+     * returns a list of {@code UserDto} objects, that belong to a team where the team leader has
+     * the provided ID
+     * @param id the team leader ID
+     * @return a list of users that have a team leader with the provided ID
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<UserDto> getTeamMembers(String id) {
@@ -178,6 +241,12 @@ class TeamServiceImpl implements TeamService {
         return listToReturn;
     }
 
+    /**
+     * returns a {@code UserDto} with the details of a team leader of the user with the provided ID
+     * @param id the user ID
+     * @return the details of the team leader, if the user has one
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto getTeamLeader(String id) {

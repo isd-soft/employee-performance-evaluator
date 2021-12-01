@@ -20,20 +20,17 @@ public interface UserService {
 
     List<TeamDto> getTeamByUserId(String id);
 
-    UserDto updateUser(UserDto userDto, String id) throws IOException;
-
     UserDto deleteUser(String id);
 
     List<JobsDto> getJobTitles();
 
     PasswordView changePassword(PasswordView passwordView, String id);
-    //    UserView findByEmail(String email);
+
     RoleView changeGroup(RoleView roleView, String id);
-    //ImageEditView uploadImage(ImageEditView imageEditView, String id) throws IOException;
 
     List<AssignedUserDto> getAssignedUsers(String id);
 
-    UserDto updateUserAsAdmin(UserDto userDto, String id);
+    UserDto updateUser(UserDto userDto, String id);
 
     List<UserDto> getAllBuddies(String id);
 
