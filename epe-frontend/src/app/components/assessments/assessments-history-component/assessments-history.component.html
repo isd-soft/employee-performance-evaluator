@@ -15,10 +15,10 @@
       </ng-container>
 
       <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell class="end-date-column" *matHeaderCellDef mat-sort-header> Position </th>
+      <ng-container matColumnDef="evaluatedUser">
+        <th mat-header-cell class="end-date-column" *matHeaderCellDef mat-sort-header> Evaluated employee </th>
         <td mat-cell class="end-date-column" *matCellDef="let row">
-          {{row.jobTitle}}
+          {{row.evaluatedUserFullName}}
         </td>
       </ng-container>
 

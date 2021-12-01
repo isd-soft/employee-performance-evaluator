@@ -16,7 +16,7 @@ import {AssessmentsViewComponent} from "../assessments-view/assessments-view.com
 })
 export class AssessmentsHistoryComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['title', 'position', 'endDate', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'evaluatedUser', 'endDate', 'status', 'buttons'];
   dataSource!: MatTableDataSource<AssessmentView>;
 
   assessments!: AssessmentView[];

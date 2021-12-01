@@ -21,7 +21,7 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
 
   dataSource!: MatTableDataSource<AssessmentView>;
   assessments!: AssessmentView[];
-  displayedColumns: string[] = ['title', 'jobPosition', 'startDate', 'status', 'buttons'];
+  displayedColumns: string[] = ['title', 'evaluatedUser', 'startDate', 'status', 'buttons'];
 
   jwtUser: User;
 
