@@ -2,6 +2,7 @@ package com.isdintership.epe.service;
 
 import com.isdintership.epe.dto.AssessmentDto;
 import com.isdintership.epe.dto.AssessmentTemplateDto;
+import com.isdintership.epe.dto.NewAssessmentsThisYearDto;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface AssessmentService {
     AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto);
     AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto);
     AssessmentDto deleteAssessment(String id, AssessmentDto assessmentDto);
+    AssessmentDto deleteAssessment(String id);
+    NewAssessmentsThisYearDto countAllNewAssessmentsThisYear();
+    AssessmentDto countAll();
 }

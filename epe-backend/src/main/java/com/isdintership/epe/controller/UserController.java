@@ -1,6 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.*;
+import com.isdintership.epe.entity.Team;
 import com.isdintership.epe.entity.User;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -26,13 +27,28 @@ public class UserController {
 
     @GetMapping
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    public ResponseEntity<List<UserDto>> getAllUsers() {
+    public ResponseEntity<?> getAllUsers(
+            @RequestParam(name = "count", required = false) String count) {
+        if (count != null) {
+            if (count.equals("all")) {
+                return ResponseEntity.ok(userService.countAll());
+            }
+            if (count.equals("current-year")) {
+                return ResponseEntity.ok(userService.countNewUsersThisYear());
+            }
+        }
+
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{id}/buddies")
     public ResponseEntity<List<UserDto>> getAllBuddies(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(userService.getAllBuddies(id));
+    }
+
+    @GetMapping("/{id}/team")
+    public ResponseEntity<List<TeamDto>> getTeam(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(userService.getTeamByUserId(id));
     }
 
     @PostMapping
@@ -89,7 +105,8 @@ public class UserController {
 
     @GetMapping("/{id}/assignedUsers")
     @RolesAllowed({ROLE_ADMIN, ROLE_USER, ROLE_SYSADMIN})
-    public ResponseEntity<List<AssignedUserDto>> getAllAssignedUsers(@PathVariable("id") String id) {
+    public ResponseEntity<List<AssignedUserDto>>
+    getAllAssignedUsers(@PathVariable("id") String id) {
         return ResponseEntity.ok(userService.getAssignedUsers(id));
     }
 

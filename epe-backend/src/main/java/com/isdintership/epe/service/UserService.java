@@ -18,6 +18,8 @@ public interface UserService {
 
     UserDto getUserById(String id);
 
+    List<TeamDto> getTeamByUserId(String id);
+
     UserDto updateUser(UserDto userDto, String id) throws IOException;
 
     UserDto deleteUser(String id);
@@ -34,4 +36,7 @@ public interface UserService {
     UserDto updateUserAsAdmin(UserDto userDto, String id);
 
     List<UserDto> getAllBuddies(String id);
+
+    UserDto countAll();
+    NewUsersThisYearDto countNewUsersThisYear();
 }

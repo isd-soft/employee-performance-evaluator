@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,9 @@ public class User extends BaseEntity {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
 
     @OneToMany(
             fetch = FetchType.LAZY,

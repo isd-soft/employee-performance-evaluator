@@ -6,6 +6,7 @@ import com.isdintership.epe.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public interface AssessmentRepository extends JpaRepository<Assessment, String> 
     Optional<Assessment> findByTitleAndUser(String title, User user);
     Optional<Assessment> findByIdAndIsTemplate(String id, Boolean isTemplate);
     List<Assessment> findByUserInAndStatusIn(List<User> users, List<Status> statuses);
+    Long countAllByStartDateBetween(LocalDateTime fromDate, LocalDateTime toDate);
 
     void removeById(String id);
 }

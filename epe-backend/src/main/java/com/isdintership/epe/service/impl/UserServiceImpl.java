@@ -3,11 +3,7 @@ package com.isdintership.epe.service.impl;
 
 import com.isdintership.epe.dto.*;
 import com.isdintership.epe.entity.*;
-import com.isdintership.epe.exception.JobNotFoundException;
-import com.isdintership.epe.exception.UserExistsException;
-import com.isdintership.epe.exception.UserNotFoundException;
-
-import com.isdintership.epe.exception.RoleNotFoundException;
+import com.isdintership.epe.exception.*;
 
 import com.isdintership.epe.repository.*;
 import com.isdintership.epe.security.jwt.JwtTokenProvider;
@@ -22,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -59,6 +56,8 @@ class UserServiceImpl implements UserService {
 
         user.setBio(request.getBio());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        user.setRegistrationDate(LocalDateTime.now());
 
         Role roleUser = roleRepository.findByRole(RoleEnum.ROLE_USER);
         user.setRole(roleUser);
@@ -282,6 +281,27 @@ class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    @Override
+    @Transactional
+    public UserDto countAll() {
+        UserDto userDto = new UserDto();
+        userDto.setCount(userRepository.count());
+
+        return userDto;
+    }
+
+    @Override
+    @Transactional
+    public NewUsersThisYearDto countNewUsersThisYear() {
+        NewUsersThisYearDto newUsers = new NewUsersThisYearDto();
+        for (int i = 0; i < 12; i++) {
+            LocalDateTime fromDate = LocalDateTime.of(LocalDateTime.now().getYear(), i + 1, 1, 0, 0);
+            newUsers.getMonths().add(i, userRepository.countAllByRegistrationDateBetween(fromDate, fromDate.plusMonths(1)));
+        }
+
+        return newUsers;
+    }
+
 
     @Override
     @Transactional
@@ -326,6 +346,29 @@ class UserServiceImpl implements UserService {
         return assignedUsersDtos;
     }
 
+    @Override
+    @Transactional
+    public List<TeamDto> getTeamByUserId(String id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
+
+        List<TeamDto> teamDtoList = new ArrayList();
+
+        List<Team> teamList = teamRepository.findAllByTeamLeaderId(id);
+        for (Team team: teamList) {
+            teamDtoList.add(TeamDto.fromTeam(team));
+        }
+
+        if(user.getTeam() != null) {
+            Team team = teamRepository.findById(user.getTeam().getId()).orElseThrow(() ->
+                    new TeamNotFoundException("Team for user with id " + id + " was not found"));
+
+            teamDtoList.add(TeamDto.fromTeam(team));
+        }
+
+        return teamDtoList;
+    }
 
     @Override
     @Transactional

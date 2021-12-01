@@ -13,13 +13,14 @@ export class TokenInterceptor implements HttpInterceptor {
       if (authHeader)
         request = request.clone({
           setHeaders: {
-            'Authorization': 'Bearer ' + authHeader
+            'Authorization': 'Bearer ' + authHeader,
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
           }
         });
       return next.handle(request).pipe(
         map(event => {
-          if (event instanceof HttpResponse) {
-            // console.log(event)
+          if (event instanceof HttpResponse) {3
           }
           return event;
         }),

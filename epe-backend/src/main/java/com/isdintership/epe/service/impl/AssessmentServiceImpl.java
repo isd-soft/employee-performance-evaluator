@@ -504,4 +504,24 @@ class AssessmentServiceImpl implements AssessmentService {
         return AssessmentDto.fromAssessment(assessment);
     }
 
+    @Override
+    @Transactional
+    public NewAssessmentsThisYearDto countAllNewAssessmentsThisYear() {
+        NewAssessmentsThisYearDto newAssessments = new NewAssessmentsThisYearDto();
+        for (int i = 0; i < 12; i++) {
+            LocalDateTime fromDate = LocalDateTime.of(LocalDateTime.now().getYear(), i + 1, 1, 0, 0);
+            newAssessments.getMonths().add(i, assessmentRepository.countAllByStartDateBetween(fromDate, fromDate.plusMonths(1)));
+        }
+
+        return newAssessments;
+    }
+
+    @Override
+    @Transactional
+    public AssessmentDto countAll() {
+        AssessmentDto assessmentDto = new AssessmentDto();
+        assessmentDto.setCount(assessmentRepository.count());
+        return assessmentDto;
+    }
+
 }

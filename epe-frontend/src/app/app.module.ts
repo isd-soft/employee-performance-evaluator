@@ -57,6 +57,8 @@ import { AssessmentsHistoryComponent } from './components/assessments/assessment
 import { AssessmentsHistoryAssignedComponent } from './components/assessments/assessments-history-assigned-component/assessments-history-assigned.component';
 import {AdminBoardComponent} from "./components/admin-board/admin-board-component/admin-board.component";
 import {MatBadgeModule} from '@angular/material/badge';
+import { AdminStatsComponent } from './components/admin-stats/admin-stats-component/admin-stats.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 import { CreateUserComponent } from './create-user/create-component/create-user.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CancelAssessmentComponent } from './components/cancel-assessment/cancel-assessment-component/cancel-assessment.component';
@@ -75,7 +77,6 @@ import { DeleteAssessmentWarningComponent} from "./components/admin-board/delete
     TeamEditComponent,
     UsersComponent,
     UserEditComponent,
-    UserCreateComponent,
     AssessmentsComponent,
     ReplaceUnderscorePipe,
     AssessmentsTemplatesComponent,
@@ -102,11 +103,13 @@ import { DeleteAssessmentWarningComponent} from "./components/admin-board/delete
     TeamViewComponent,
     AssessmentsAssignedComponent,
     LineFeedComponent,
+    AdminStatsComponent,
     AdminBoardComponent,
     CreateUserComponent,
     AdminBoardComponent,
     CancelAssessmentComponent,
-    DeleteAssessmentWarningComponent
+    DeleteAssessmentWarningComponent,
+    CancelAssessmentComponent
   ],
     imports: [
         BrowserModule,
@@ -133,7 +136,8 @@ import { DeleteAssessmentWarningComponent} from "./components/admin-board/delete
         MatSidenavModule,
         MatDatepickerModule,
         MatMenuModule,
-        MatBadgeModule
+        MatBadgeModule,
+        NgApexchartsModule,
         // MatPaginator,
         // MatSort,
         // MatTableDataSource,
