@@ -22,21 +22,73 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * {@code UserServiceImpl} is a service class that implements the {@code UserService} interface.
+ *
+ * <p> This class manages all the requests related to users, authentication and registration
+ *
+ * @author Maxim Gribencicov
+ * @author Andrei Chetrean
+ * @author Adrian Girlea
+ * @author Nicolae Morari
+ * @author Colin Timofei
+ * @since 1.0
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
 class UserServiceImpl implements UserService {
 
+    /**
+     * {@code JpaRepository} that handles the access to the user table
+     */
     private final UserRepository userRepository;
+
+    /**
+     * {@code JpaRepository} that handles the access to the team table
+     */
     private final TeamRepository teamRepository;
+
+    /**
+     * {@code JpaRepository} that handles the access to the job table
+     */
     private final JobRepository jobRepository;
+
+    /**
+     * {@code JpaRepository} that handles the assessment to the user table
+     */
     private final AssessmentRepository assessmentRepository;
+
+    /**
+     * {@code JpaRepository} that handles the access to the role table
+     */
     private final RoleRepository roleRepository;
+
+    /**
+     * instance of {@code PasswordEncoder} that uses the BCrypt strong hashing function
+     */
     private final BCryptPasswordEncoder passwordEncoder;
+
+    /**
+     * instance of {@code JwtTokenProvider} that handles JWT creation, validation and decoding
+     */
     private final JwtTokenProvider jwtTokenProvider;
+
+    /**
+     * instance of {@code AuthenticationManager} that manages the authentication modules that an application uses
+     */
     private final AuthenticationManager authenticationManager;
 
+
+    /**
+     * creates a user record in the data source using the details provided in the {@code RegistrationRequest}
+     * object and generates a JWT token for the new user, if no errors
+     * @param request {@code RegistrationRequest} object containing all the new user details
+     * @return new user details and the generated token
+     * @throws {@code UserExistsException} if a user with the provided email already exists
+     * @throws {@code JobNotFoundException} if a job with the provided job name doesn't exist in the database
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto register(RegistrationRequest request) {
@@ -81,7 +133,15 @@ class UserServiceImpl implements UserService {
 
     }
 
-
+    /**
+     * checks if a user with provided email and password exists in the data source and returns
+     * all user details and a new JWT token
+     * @param signInRequest {@code LoginRequest} object containing all the new user details
+     * @return a {@code UserDto} with user details
+     * @throws {@code AuthenticationException} if the provided details are not valid
+     * @throws {@code UserNotFoundException} if a user with the provided details doesn't exist in the database
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto login(LoginRequest signInRequest) {
@@ -100,6 +160,15 @@ class UserServiceImpl implements UserService {
         return response;
     }
 
+    /**
+     * creates a new record in the data source, without generating a token for the new user
+     * @param request {@code LoginRequest} object containing user's email and password
+     * @return a {@code UserDto} with user details and the new generated token
+     * @throws {@code UserExistsException} if a user with the provided email already exists
+     * @throws {@code JobNotFoundException} if a job with the provided job name doesn't exist in the database
+     * @throws {@code IOException} if an I/O exception occurs while inserting the image in the data source
+     * @since 1.0
+     */
     @Override
     public UserDto createUser(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
@@ -139,8 +208,11 @@ class UserServiceImpl implements UserService {
         return (UserDto.fromUser(userRepository.save(user)));
     }
 
-
-
+    /**
+     * returns a list containing all users from the data source
+     * @return a list of {@code UserDto} objects, created from user records
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<UserDto> getAllUsers() {
@@ -153,6 +225,12 @@ class UserServiceImpl implements UserService {
         return userDtos;
     }
 
+    /**
+     * returns a list of users that do not have the same ID as the provided one
+     * @param id {@code String} that will be used as user's ID
+     * @return a list of {@code UserDto} that can be set as current user's buddy
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<UserDto> getAllBuddies(String id) {
@@ -166,6 +244,13 @@ class UserServiceImpl implements UserService {
         return userDtos;
     }
 
+    /**
+     * retrieves all the details of the user with the provided ID and returns them as a {@code UserDto} object
+     * @param id {@code String} that will be used as user's ID
+     * @return all user details where the ID matches the provided one
+     * @throws {@code UserNotFoundException} if a user with the provided ID was not found
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto getUserById(String id) {
@@ -174,8 +259,18 @@ class UserServiceImpl implements UserService {
         return UserDto.fromUser(user);
     }
 
-
-
+    /**
+     * updates user record with ID that matches the provided one
+     * new user details are stored in the {@code userDto} object
+     * @param id {@code String} that will be used as user's ID
+     * @param userDto {@code UserDto} that contains new user details
+     * @return updated user details
+     * @throws {@code UserNotFoundException} if a user with the provided ID was not found
+     * @throws {@code UserNotFoundException} if a user with provided buddy ID was not found
+     * @throws {@code JobNotFoundException} if a job with the provided name was not found in the job table
+     * @throws {@code RoleNotFoundException} if the provided role doesn't match any record from data source
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto updateUser(UserDto userDto, String id) {
@@ -220,55 +315,6 @@ class UserServiceImpl implements UserService {
             user.setImageBytes(encodeImageFromString(userDto.getImage()));
         }
 
-        return userDto;
-    }
-
-    @Override
-    @Transactional
-    public UserDto updateUserAsAdmin(UserDto userDto, String id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + "was not found"));
-
-        if (userDto.getBuddyId() != null) {
-            userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
-                    new UserNotFoundException("Buddy with id " + id + " was not found"));
-            user.setBuddyId(userDto.getBuddyId());
-        }
-
-        if (userDto.getEmail() != null) {
-            user.setEmail(userDto.getEmail());
-        }
-        if (userDto.getFirstname() != null) {
-            user.setFirstname(userDto.getFirstname());
-        }
-        if (userDto.getLastname() != null) {
-            user.setLastname(userDto.getLastname());
-        }
-        if (String.valueOf(userDto.getBirthDate()) != null) {
-            user.setBirthDate(userDto.getBirthDate());
-        }
-        if (String.valueOf(userDto.getEmploymentDate()) != null) {
-            user.setEmploymentDate(userDto.getEmploymentDate());
-        }
-        if (userDto.getPhoneNumber() != null) {
-            user.setPhoneNumber(userDto.getPhoneNumber());
-        }
-        if (userDto.getJob() != null) {
-            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
-                    new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
-
-            user.setJob(job);
-        }
-        if (userDto.getBio() != null) {
-            user.setBio(userDto.getBio());
-        }
-
-        if (userDto.getImage() != null) {
-            user.setImageBytes(encodeImageFromString(userDto.getImage()));
-        }
-
-
-
         if (userDto.getRole() != null) {
             Map<String,Integer> roles = new HashMap<>();
             roles.put("User",1);
@@ -281,6 +327,11 @@ class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    /**
+     * returns the number of users in the data source
+     * @return a {@code UserDto} object that contains the number of users in database
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto countAll() {
@@ -290,6 +341,11 @@ class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    /**
+     * returns a list with the number of user registered each month, only current year
+     * @return a {@code NewUsersThisYearDto} object with the number of registered users
+     * @since 1.0
+     */
     @Override
     @Transactional
     public NewUsersThisYearDto countNewUsersThisYear() {
@@ -302,7 +358,12 @@ class UserServiceImpl implements UserService {
         return newUsers;
     }
 
-
+    /**
+     * deletes a user from the data source, if a record with the provided ID exists
+     * @return a {@code UserDto} object with deleted user details
+     * @throws {@code UserNotFoundException} if a user with the provided ID doesn't exist in the database
+     * @since 1.0
+     */
     @Override
     @Transactional
     public UserDto deleteUser(String id) {
@@ -318,10 +379,14 @@ class UserServiceImpl implements UserService {
             user.setBuddyId(null);
         }
 
-        //return ("User with id " + id + " was deleted");
         return userDto;
     }
 
+    /**
+     * returns a list of job names from the data source
+     * @return a list of {@code JobsDto} objects
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<JobsDto> getJobTitles() {
@@ -330,6 +395,13 @@ class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * returns a list of users where the user with provided ID is the team leader or buddy
+     * @param id user's ID
+     * @return a list of {@code AssignedUserDto} where the user with provided ID is team leader or buddy
+     * @throws {@code UserNotFoundException} if a user with the provided ID was not found
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<AssignedUserDto> getAssignedUsers(String id) {
@@ -346,6 +418,14 @@ class UserServiceImpl implements UserService {
         return assignedUsersDtos;
     }
 
+    /**
+     * returns a list of teams where the user with the provided ID is team leader
+     * @param id {@code String} containing team leader's ID
+     * @return a list of {@code TeamDto} containing each team details where the user with the provided ID is team leader
+     * @throws {@code UserNotFoundException} if a user with the provided ID was not found
+     * @throws {@code TeamNotFoundException} if the user's team ID doesn't match any team id in teams table
+     * @since 1.0
+     */
     @Override
     @Transactional
     public List<TeamDto> getTeamByUserId(String id) {
@@ -370,6 +450,17 @@ class UserServiceImpl implements UserService {
         return teamDtoList;
     }
 
+    /**
+     * changes the password for the user with the provided ID
+     * @param id user's ID
+     * @param passwordView {@code PasswordView} containing old and new password
+     * @return a {@code PasswordView} if the password was changed
+     * @throws {@code UserNotFoundException} if a user with the provided ID was not found
+     * @throws {@code BadCredentialsException} if the provided old password doesn't match the one from database
+     * @throws {@code BadCredentialsException} if the new password doesn't match the new confirmed password
+     * @throws {@code BadCredentialsException} if the old and new password match
+     * @since 1.0
+     */
     @Override
     @Transactional
     public PasswordView changePassword(PasswordView passwordView, String id) {
@@ -393,6 +484,15 @@ class UserServiceImpl implements UserService {
         return passwordView;
     }
 
+    /**
+     * changes user's role with the provided one
+     * @param id user's ID
+     * @param roleView {@code RoleView} containing the new role ID
+     * @return user's role id, if it was changed
+     * @throws {@code UserNotFoundException} if a user with the provided ID was not found
+     * @throws {@code RoleNotFoundException} if a role with the provided ID doesn't exist in the data source
+     * @since 1.0
+     */
     @Override
     @Transactional
     public RoleView changeGroup(RoleView roleView, String id) {
@@ -408,23 +508,15 @@ class UserServiceImpl implements UserService {
         return roleView;
     }
 
-
-    public static byte[] encodeImageFromFile(File imageFolder) throws IOException {
-        FileInputStream imageStream = new FileInputStream(imageFolder);
-
-        byte[] data = imageStream.readAllBytes();
-
-        String imageString = Base64.getEncoder().encodeToString(data);
-
-        byte[] finalData = imageString.getBytes();
-        imageStream.close();
-
-        return finalData;
-    }
-
-
-    public static byte[] encodeImageFromFilePath(String imagePath) throws IOException {
-        FileInputStream imageStream = new FileInputStream(imagePath);
+    /**
+     * encodes the provided file using Base64
+     * @param image a {@code File} that should be an image
+     * @return encoded image file
+     * @throws {@code IOException} if any I/O exception occurred during image reading or encoding
+     * @since 1.0
+     */
+    private static byte[] encodeImageFromFile(File image) throws IOException {
+        FileInputStream imageStream = new FileInputStream(image);
 
         byte[] data = imageStream.readAllBytes();
 
@@ -436,7 +528,13 @@ class UserServiceImpl implements UserService {
         return finalData;
     }
 
-    public static byte[] encodeImageFromString(String imageBase64Encode) {
+    /**
+     * transforms the provided string into a char array
+     * @param imageBase64Encode a string that shall be transformed
+     * @return a byte array created from the provided string
+     * @since 1.0
+     */
+    private static byte[] encodeImageFromString(String imageBase64Encode) {
         byte[] finalData = imageBase64Encode.getBytes();
         return finalData;
     }

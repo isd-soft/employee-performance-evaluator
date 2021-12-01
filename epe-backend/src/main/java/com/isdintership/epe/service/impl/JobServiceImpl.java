@@ -13,9 +13,8 @@ import java.util.stream.Collectors;
 
 /**
  * {@code JobServiceImpl} is a service class that implements the {@code JobService} interface.
- * It has only one field, named {@code jobRepository} of type {@code JobRepository}
  *
- * <p> This class provides a few methods to manipulate the records in the data source
+ * <p> This class provides a few methods to manipulate the job records in the data source
  *
  * @author  Adrian Girlea
  * @since   1.0
@@ -25,15 +24,16 @@ import java.util.stream.Collectors;
 class JobServiceImpl implements JobService {
 
     /**
-     * {@code jobRepository} is an instance of {@code JobRepository}
-     * that controls the access to the database, job table
+     * instance of {@code JobRepository},
+     * which is a {@code JpaRepository} and controls access to the database
      */
     private final JobRepository jobRepository;
 
 
     /**
-     * This method retrieves all records from the job table and
-     * returns them as a list of {@code JobDto}
+     * returns all records from data source as a list of {@code JobDto} objects
+     * @return a list of {@code JobDto}
+     * @since 1.0
      */
     @Override
     public List<JobDto> getAllJobs() {
@@ -43,6 +43,12 @@ class JobServiceImpl implements JobService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * inserts a new record in the data source
+     * @param jobDto a {@code JobDto} object that will be inserted into the data source
+     * @return a success message confirming the new record was created
+     * @since 1.0
+     */
     @Override
     public String addJob(JobDto jobDto) {
         jobRepository.save(new Job(jobDto.getTitle()));
