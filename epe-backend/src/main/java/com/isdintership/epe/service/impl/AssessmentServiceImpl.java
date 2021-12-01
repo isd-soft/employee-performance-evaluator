@@ -467,20 +467,14 @@ class AssessmentServiceImpl implements AssessmentService {
             for (FeedbackDto feedbackDto : assessmentDto.getFeedbacks()) {
 
                 Feedback feedback = new Feedback();
-
                 feedback.setAssessment(assessment);
-
+                feedback.setAuthorId(feedbackDto.getAuthorId());
                 feedback.setAuthorFullName(feedbackDto.getAuthorFullName());
                 feedback.setContext(feedbackDto.getContext());
-
                 assessment.getFeedbacks().add(feedback);
-
             }
-
         }
-
         return AssessmentDto.fromAssessment(assessment);
-
     }
 
     @Override
