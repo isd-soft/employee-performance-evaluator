@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -15,6 +17,9 @@ import java.time.LocalDateTime;
 public class AssessmentInformation extends BaseEntity{
 
     private String assessmentTitle;
+    private String assessmentId;
+    private String evaluatedUserId;
+    private String evaluatedUserFullName;
     @Enumerated(EnumType.STRING)
     private Status status;
     @OneToOne
@@ -23,6 +28,7 @@ public class AssessmentInformation extends BaseEntity{
     private User performedByUser;
     private LocalDateTime performedTime;
     private String reason;
+
     public AssessmentInformation(){
 
     }

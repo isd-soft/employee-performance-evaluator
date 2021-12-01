@@ -1,5 +1,6 @@
 package com.isdintership.epe.service;
 
+import com.isdintership.epe.dto.CountDto;
 import com.isdintership.epe.dto.TeamDto;
 import com.isdintership.epe.dto.UserDto;
 
@@ -20,4 +21,6 @@ public interface TeamService {
     List<UserDto> getTeamMembers(String id);
 
     UserDto getTeamLeader(String id);
+
+    CountDto countTeamLeaders();
 }

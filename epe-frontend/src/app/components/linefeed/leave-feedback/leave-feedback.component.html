@@ -1,0 +1,35 @@
+<mat-card class="template-view">
+
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+
+  <mat-card-title>{{assessment.assessmentTitle}}</mat-card-title>
+  <mat-card-content>
+    <span class="bold">Evaluated user: </span><span class="highlight">{{assessment.evaluatedUserFullName}}</span>
+    <form action="" [formGroup]="feedbackForm">
+      <div class="highlight author-full-name">{{jwtUser.firstname + ' ' + jwtUser.lastname + ' :'}}</div>
+      <mat-form-field appearance="fill" class="feedback-input-field">
+        <mat-label>Your feedback</mat-label>
+        <textarea matInput
+                  formControlName="context"
+                  required
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="5"
+                  cdkAutosizeMaxRows="10">
+            </textarea>
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button
+          mat-button
+          class="raise submit-button"
+          (click) = "onSubmit()"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>
+
