@@ -1,6 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.UserDto;
+import com.isdintership.epe.exception.StatusNotFoundException;
 import com.isdintership.epe.service.TeamService;
 import com.isdintership.epe.dto.TeamDto;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,15 @@ public class TeamController {
 
     @GetMapping(value = "")
     @RolesAllowed({ROLE_ADMIN, ROLE_SYSADMIN, ROLE_USER})
-    public ResponseEntity<List<TeamDto>> getAllTeams() {
+    public ResponseEntity<?> getAllTeams(@RequestParam(name = "count", required = false) String count) {
+
+        if (count != null) {
+            if (count.equals("leaders")) {
+                return ResponseEntity.ok(teamService.countTeamLeaders());
+            }
+            throw new StatusNotFoundException("Count " + count + " was not found");
+        }
+
         return new ResponseEntity<>(teamService.getAllTeams(), HttpStatus.OK);
     }
 

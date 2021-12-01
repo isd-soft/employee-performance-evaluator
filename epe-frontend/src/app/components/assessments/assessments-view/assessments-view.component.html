@@ -213,18 +213,14 @@
     </div>
 
 
-    <div *ngIf="assessment.feedbacks.length != 0">
-      <p *ngIf="assessment.status != 'FIRST_PHASE'"
-         class="bold smart-goals-header feedback-header">Feedbacks</p>
+    <div *ngIf="assessment.feedbacks.length != 0 && assessment.status != 'FIRST_PHASE'">
+      <p class="bold smart-goals-header feedback-header">Feedbacks</p>
 
-      <div *ngIf="assessment.status != 'FIRST_PHASE'"
-           class="feedback-author-header bold">Author</div>
+      <div class="feedback-author-header bold">Author</div>
 
-      <div *ngIf="assessment.status != 'FIRST_PHASE'"
-           class="feedback-text-header bold">Feedback</div>
+      <div class="feedback-text-header bold">Feedback</div>
 
-      <div *ngIf="assessment.status != 'FIRST_PHASE'"
-           class="feedbacks">
+      <div class="feedbacks">
         <div *ngFor="let feedback of assessment.feedbacks" class="feedback">
 
           <div class="feedback-author bold">

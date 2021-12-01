@@ -1,8 +1,7 @@
 package com.isdintership.epe.controller;
 
 import com.isdintership.epe.dto.*;
-import com.isdintership.epe.entity.Team;
-import com.isdintership.epe.entity.User;
+import com.isdintership.epe.exception.StatusNotFoundException;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,9 +32,14 @@ public class UserController {
             if (count.equals("all")) {
                 return ResponseEntity.ok(userService.countAll());
             }
+            if (count.equals("buddies")) {
+                return ResponseEntity.ok(userService.countAllBuddies());
+            }
             if (count.equals("current-year")) {
                 return ResponseEntity.ok(userService.countNewUsersThisYear());
             }
+
+            throw new StatusNotFoundException("Status " + count + " was not found");
         }
 
         return ResponseEntity.ok(userService.getAllUsers());

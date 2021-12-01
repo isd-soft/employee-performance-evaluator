@@ -1,6 +1,7 @@
 package com.isdintership.epe.service.impl;
 
 
+import com.isdintership.epe.dto.CountDto;
 import com.isdintership.epe.dto.UserDto;
 import com.isdintership.epe.exception.InvalidTeamNameException;
 import com.isdintership.epe.service.TeamService;
@@ -16,9 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * {@code TeamServiceImpl} is a service class that implements the {@code TeamService} interface.
@@ -268,5 +267,17 @@ class TeamServiceImpl implements TeamService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    @Transactional
+    public CountDto countTeamLeaders() {
+        List<Team> allTeams = teamRepository.findAll();
+        Set<User> teamLeaders = new HashSet<>();
+        for (Team team : allTeams) {
+            teamLeaders.add(team.getTeamLeader());
+        }
+
+        return new CountDto((long) teamLeaders.size());
     }
 }

@@ -34,6 +34,7 @@ public interface UserService {
 
     List<UserDto> getAllBuddies(String id);
 
-    UserDto countAll();
+    CountDto countAll();
+    CountDto countAllBuddies();
     NewUsersThisYearDto countNewUsersThisYear();
 }

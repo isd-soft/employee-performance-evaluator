@@ -20,4 +20,5 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> removeById(String id);
     List<User> findByRoleIdIn(List<Integer> roles);
     Long countAllByRegistrationDateBetween(LocalDateTime fromDate, LocalDateTime toDate);
+    Long countAllByBuddyIdNotNull();
 }

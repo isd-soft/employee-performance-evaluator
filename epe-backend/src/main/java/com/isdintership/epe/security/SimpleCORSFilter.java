@@ -1,5 +1,7 @@
 package com.isdintership.epe.security;
 
+import com.isdintership.epe.config.AppConfig;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -13,7 +15,10 @@ import java.util.Arrays;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@RequiredArgsConstructor
 public class SimpleCORSFilter implements Filter {
+
+    private final AppConfig appConfig;
 
     ArrayList<String> AllowedOrigins = new ArrayList<>();
     ArrayList<String> AllowedMethods = new ArrayList<>();
@@ -25,10 +30,11 @@ public class SimpleCORSFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
 
-        AllowedOrigins.add("http://localhost:4200");
+        AllowedOrigins.add(appConfig.getFrontendUrl());
         AllowedMethods.addAll(Arrays.asList("POST", "PUT", "GET", "DELETE", "OPTIONS"));
 
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        res.setHeader("Access-Control-Allow-Origin", appConfig.getFrontendUrl());
+//        res.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
         if (req.getMethod().equals("OPTIONS")) {
             String reqOrigin;
@@ -53,7 +59,9 @@ public class SimpleCORSFilter implements Filter {
             res.setHeader("Access-Control-Max-Age", "3600");
             res.setHeader("Access-Control-Allow-Credentials", "true");
             res.setHeader("Access-Control-Allow-Headers",
-                    "cache-control,if-modified-since,pragma,Content-Type,Authorization");
+                    "cache-control, if-modified-since, pragma, Content-Type, Authorization, "
+                            + "Access-Control-Allow-Headers, X-Requested-With, Expires");
+
 
             //Checks if Allow-Method and Allow-Origin got set. 200 OK if both are set.
             if (!res.getHeader("Access-Control-Allow-Methods").equals("") && !res.getHeader("Access-Control-Allow-Origin").equals("")) {

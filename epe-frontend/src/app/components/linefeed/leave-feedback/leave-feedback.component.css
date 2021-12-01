@@ -1,0 +1,67 @@
+.mat-card {
+  height: 100%;
+}
+
+.mat-card-content {
+  margin-top: 2.5%;
+}
+
+.mat-card .mat-card-content {
+  font-size: 15px;
+}
+
+.mat-card-title {
+  font-size: 28px;
+}
+
+.mat-card-subtitle {
+  font-size: 18px;
+}
+
+.close-button {
+  float: right;
+  background: #e5e5e5;
+}
+
+.close-icon {
+  border-radius: 50%;
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+  transition-duration: 0.4s;
+}
+
+.bold {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.highlight {
+  font-size: 20px;
+}
+
+.author-full-name {
+  margin-top: 7%;
+  margin-bottom: 1%;
+}
+
+.feedback-input-field {
+  width: 100%;
+}
+
+.submit-button {
+  border: 2px solid black;
+  margin-bottom: 3%;
+  margin-top: 1%;
+}
+
+.submit-button:hover {
+  transition-duration: 0.4s;
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+.mat-card-actions {
+  text-align: center;
+}

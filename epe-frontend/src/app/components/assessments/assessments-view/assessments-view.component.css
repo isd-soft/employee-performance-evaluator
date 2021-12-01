@@ -2,7 +2,7 @@ p {
   font-size: 16px;
 }
 
-mat-card .mat-card-content {
+.mat-card .mat-card-content {
   font-size: 15px;
 }
 
@@ -92,8 +92,7 @@ mat-card .mat-card-content {
   width: 39.5%;
 }
 
-.raise:hover,
-.raise:focus {
+.raise:hover{
   transition-duration: 0.4s;
   transform: scale(1.4);
   cursor: pointer;

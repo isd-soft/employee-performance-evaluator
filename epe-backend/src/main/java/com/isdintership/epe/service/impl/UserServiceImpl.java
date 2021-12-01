@@ -334,11 +334,14 @@ class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public UserDto countAll() {
-        UserDto userDto = new UserDto();
-        userDto.setCount(userRepository.count());
+    public CountDto countAll() {
+        return new CountDto(userRepository.count());
+    }
 
-        return userDto;
+    @Override
+    @Transactional
+    public CountDto countAllBuddies() {
+        return new CountDto(userRepository.countAllByBuddyIdNotNull());
     }
 
     /**
@@ -409,9 +412,7 @@ class UserServiceImpl implements UserService {
                 new UserNotFoundException("User with id " + id + " was not found"));
 
         List<User> assignedUsers = userRepository.findByBuddyId(id);
-        Optional<Team> team = teamRepository.findByTeamLeaderId(id);
-        team.ifPresent(value -> assignedUsers.addAll(value.getMembers()));
-
+        teamRepository.findByTeamLeaderId(id).forEach(team -> assignedUsers.addAll(team.getMembers()));
         List<AssignedUserDto> assignedUsersDtos = new ArrayList<>();
         assignedUsers.forEach(user -> assignedUsersDtos.add(AssignedUserDto.fromUser(user)));
 

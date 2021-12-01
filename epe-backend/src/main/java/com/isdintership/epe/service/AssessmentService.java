@@ -1,8 +1,6 @@
 package com.isdintership.epe.service;
 
-import com.isdintership.epe.dto.AssessmentDto;
-import com.isdintership.epe.dto.AssessmentTemplateDto;
-import com.isdintership.epe.dto.NewAssessmentsThisYearDto;
+import com.isdintership.epe.dto.*;
 
 import java.util.List;
 
@@ -14,9 +12,10 @@ public interface AssessmentService {
     List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, String status);
     List<AssessmentDto> getAllAssessments();
     List<AssessmentDto> getAllAssignedAssessmentsByStatus(String userId, String status);
+    FeedbackDto addFeedback(String userId, String assessmentId, FeedbackDto feedbackDto);
     AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto);
     AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto);
     AssessmentDto deleteAssessment(String id, AssessmentDto assessmentDto);
     NewAssessmentsThisYearDto countAllNewAssessmentsThisYear();
-    AssessmentDto countAll();
+    CountDto countAll();
 }
