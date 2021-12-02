@@ -95,6 +95,15 @@
           <button mat-button (click)="onView(row.id)">
             <mat-icon>person</mat-icon>
           </button>
+          <div>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>download</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button (click)="exportToPdf(row)" mat-menu-item>Export to pdf</button>
+              <button (click)="exportToExcel(row)" mat-menu-item>Export to excel</button>
+            </mat-menu>
+          </div>
           <div *ngIf="role == requiredRole && row.id != jwtUser.id">
             <button mat-button (click)="edit(dataSource.filteredData.indexOf(row))">
               <mat-icon>edit</mat-icon>
@@ -105,15 +114,7 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-          <div>
-            <button mat-button [matMenuTriggerFor]="menu">
-              <mat-icon>download</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button (click)="exportToPdf(row)" mat-menu-item>Export to pdf</button>
-              <button (click)="exportToExcel(row)" mat-menu-item>Export to excel</button>
-            </mat-menu>
-          </div>
+
         </mat-cell>
       </ng-container>
 

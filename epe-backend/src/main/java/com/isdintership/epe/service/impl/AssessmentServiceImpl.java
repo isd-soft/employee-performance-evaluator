@@ -49,21 +49,32 @@ class AssessmentServiceImpl implements AssessmentService {
     @Transactional
     public AssessmentDto startAssessment(String userId, AssessmentTemplateDto assessmentTemplateDto) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with id " + userId + " was not found"));
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> {
+                    log.error("User with id " + userId + " was not found");
+                    return new UserNotFoundException("User with id " + userId + " was not found");
+                });
 
         String assessmentTemplateId = assessmentTemplateDto.getId();
-        Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(assessmentTemplateId, true)
-                .orElseThrow(() ->
-                        new AssessmentTemplateNotFoundException("Assessment template with id " + assessmentTemplateId + " was not found"));
+        Assessment assessmentTemplate = assessmentRepository
+                .findByIdAndIsTemplate(assessmentTemplateId, true)
+                .orElseThrow(() -> {
+                    log.error("Assessment template with id " + assessmentTemplateId + " was not found");
+                    return new AssessmentTemplateNotFoundException("Assessment template with id " + assessmentTemplateId + " was not found");
+                });
 
         List<Assessment> existingAssessment = assessmentRepository.findByUserAndStatusIn
                 (user, List.of(Status.FIRST_PHASE, Status.SECOND_PHASE));
         if (!existingAssessment.isEmpty()) {
+            log.error("User already has unfinished assessment " + existingAssessment.get(0).getTitle());
             throw new AssessmentExistsException
                     ("User already has unfinished assessment " + existingAssessment.get(0).getTitle());
         }
         if (user.getJob() != assessmentTemplate.getJob()) {
+            log.error("Job position " + assessmentTemplate.getJob().getJobTitle() +
+                    " from assessment template doesn't correspond to user job position " +
+                    user.getJob().getJobTitle());
             throw new BadCredentialsException
                     ("Job position " + assessmentTemplate.getJob().getJobTitle() +
                             " from assessment template doesn't correspond to user job position " +
@@ -110,6 +121,7 @@ class AssessmentServiceImpl implements AssessmentService {
 
         AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessment);
 //        emailService.sendEmail(assessmentDto);
+        log.info("Started assessment with id {}", assessment.getId());
         return assessmentDto;
     }
 
@@ -131,10 +143,16 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformation.setEvaluatedUserId(assessment.getUser().getId());
         assessmentInformation.setStatus(assessment.getStatus());
         assessmentInformation.setPerformedOnUser(assessment.getUser());
-        User creationUser = userRepository.findById(assessmentTemplateDto.getCreatedUserById())
-                .orElseThrow(UserNotFoundException::new);
+        User creationUser = userRepository
+                .findById(assessmentTemplateDto.getCreatedUserById())
+                .orElseThrow(() -> {
+                    log.error("User with id {} does not exist", assessmentTemplateDto.getCreatedUserById());
+                    return new UserNotFoundException("User with id" +  assessmentTemplateDto.getCreatedUserById() +" does not exist");
+
+                });
         assessmentInformation.setPerformedByUser(creationUser);
         assessmentInformation.setPerformedTime(assessment.getStartDate());
+        log.info("Getting information about assessment with id {}", assessment.getId());
         return assessmentInformation;
     }
 
@@ -149,30 +167,38 @@ class AssessmentServiceImpl implements AssessmentService {
     @Transactional
     public AssessmentDto getAssessment(String id) {
 
-        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
-
+        Assessment assessment = assessmentRepository
+                .findById(id)
+                .orElseThrow(() -> {
+                    log.error("Assessment with id " + id + " was not found");
+                    return new AssessmentNotFoundException("Assessment with id " + id + " was not found");
+                });
+        log.info("Getting information about assessment with id {}", id);
         return AssessmentDto.fromAssessment(assessment);
     }
 
     /**
      * Method that returns all the assessments of a user if he exists
-     * @param id the id the user
+     * @param userId the userId the user
      * @throws UserNotFoundException if user doesn't exist
      * @return list of assessments if user present
      * @author Maxim Gribencicov
      * */
     @Override
     @Transactional
-    public List<AssessmentDto> getAllAssessmentsByUserId(String id) {
+    public List<AssessmentDto> getAllAssessmentsByUserId(String userId) {
 
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + " not found"));
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> {
+                    log.error("User with id " + userId + " not found");
+                    return new UserNotFoundException("User with id " + userId + " not found");
+                });
 
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
         assessmentRepository.findByUser(user)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
-
+        log.info("Getting all assessments for the user with id {}", userId);
         return assessmentDtos;
     }
 
@@ -189,8 +215,12 @@ class AssessmentServiceImpl implements AssessmentService {
     @Transactional
     public List<AssessmentDto> getAllAssessmentsByUserIdAndStatus(String id, String status) {
 
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + " not found"));
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(() -> {
+                    log.error("User with id " + id + " not found");
+                    return new UserNotFoundException("User with id " + id + " not found");
+                });
 
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
 
@@ -207,11 +237,12 @@ class AssessmentServiceImpl implements AssessmentService {
             assessmentRepository.findByUserAndStatus(user, Status.valueOf(status))
                     .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
         } catch (IllegalArgumentException e) {
+            log.error("Assessment status " + status + " was not found");
             throw new StatusNotFoundException("Assessment status " + status + " was not found");
         }
 
+        log.info("Getting all assessments for user with id {} and status {}", id, status);
         return assessmentDtos;
-
     }
 
     /**
@@ -226,7 +257,7 @@ class AssessmentServiceImpl implements AssessmentService {
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
         assessmentRepository.findAllByIsTemplate(false)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
-
+        log.info("Getting all assessments");
         return assessmentDtos;
     }
 
@@ -250,6 +281,7 @@ class AssessmentServiceImpl implements AssessmentService {
         } else if (status.equals("INACTIVE")) {
             statuses = List.of(Status.CANCELED, Status.FINISHED);
         } else {
+            log.error("Status not found. Should be ACTIVE or INACTIVE");
             throw new StatusNotFoundException("Status not found. Should be ACTIVE or INACTIVE");
         }
 
@@ -258,6 +290,7 @@ class AssessmentServiceImpl implements AssessmentService {
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
         assessmentRepository.findByUserInAndStatusIn(assignedUsers, statuses)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
+        log.info("Getting all assigned assessments for user with id {} and status {}", userId, status);
         return assessmentDtos;
     }
 
@@ -272,11 +305,19 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public FeedbackDto addFeedback(String userId, String assessmentId, FeedbackDto feedbackDto) {
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with id " + userId + " was not found"));
-        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with id " + assessmentId + " was not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            log.error("User with id " + userId + " was not found");
+            return new UserNotFoundException("User with id " + userId + " was not found");
+                }
+        );
+        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() -> {
+            log.error("Assessment with id " + assessmentId + " was not found");
+            return new AssessmentNotFoundException("Assessment with id " + assessmentId + " was not found");
+        });
         if (assessment.getUser() != user) {
+            log.error("Assessment " + assessment.getTitle()
+                    + " was not found for user " + user.getFirstname()
+                    + " " + user.getLastname());
             throw new AssessmentNotFoundException("Assessment " + assessment.getTitle()
                     + " was not found for user " + user.getFirstname()
                     + " " + user.getLastname());
@@ -288,7 +329,7 @@ class AssessmentServiceImpl implements AssessmentService {
         feedback.setContext(feedbackDto.getContext());
         feedback.setAssessment(assessment);
         assessment.getFeedbacks().add(feedback);
-
+        log.info("Added new feedback with id {}", feedback.getId());
         return FeedbackDto.fromFeedback(feedback);
     }
 
@@ -305,10 +346,14 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public AssessmentDto evaluateAssessment(String userId, String assessmentId, AssessmentDto assessmentDto) {
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with id " + userId + " was not found"));
-        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with id " + assessmentId + " was not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            log.error("User with id " + userId + " was not found");
+            return new UserNotFoundException("User with id " + userId + " was not found");
+        });
+        Assessment assessment = assessmentRepository.findById(assessmentId).orElseThrow(() -> {
+            log.error("Assessment with id " + assessmentId + " was not found");
+            return new AssessmentNotFoundException("Assessment with id " + assessmentId + " was not found");
+        });
 
         processEvaluationGroups(assessment, assessmentDto);
         processPersonalGoals(assessmentDto, assessment, assessment.getPersonalGoals());
@@ -330,6 +375,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         emailService.sendEmail(AssessmentDto.fromAssessment(assessment));
+        log.info("Evaluated assessment with id {}", assessmentId);
         return AssessmentDto.fromAssessment(assessment);
     }
 
@@ -348,7 +394,10 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformation.setStatus(assessment.getStatus());
         assessmentInformation.setEvaluatedUserId(assessment.getUser().getId());
         assessmentInformation.setEvaluatedUserFullName(assessment.getUser().getFirstname() + " " + assessment.getUser().getLastname());
-        User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(() -> {
+            log.error("Assessment started by user with id {} with id was not found", assessmentDto.getStartedById());
+            return new UserNotFoundException();
+        });
         assessmentInformation.setPerformedByUser(user);
         assessmentInformation.setPerformedOnUser(assessment.getUser());
         assessmentInformation.setPerformedTime(LocalDateTime.now());
@@ -558,14 +607,20 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public AssessmentDto updateAssessment(String id, AssessmentDto assessmentDto) {
-        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
+        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() -> {
+            log.error("Assessment with id " + id + " was not found");
+         return new AssessmentNotFoundException("Assessment with id " + id + " was not found");
+        });
 
-        Job job = jobRepository.findByJobTitle(assessmentDto.getJobTitle()).orElseThrow(() ->
-                new JobNotFoundException("Job with id " + assessmentDto.getJobTitle() + " was not found"));
+        Job job = jobRepository.findByJobTitle(assessmentDto.getJobTitle()).orElseThrow(() ->{
+            log.error("Job with id " + assessmentDto.getJobTitle() + " was not found");
+            return new JobNotFoundException("Job with id " + assessmentDto.getJobTitle() + " was not found");
+        });
 
-        User user = userRepository.findById(assessmentDto.getUserId()).orElseThrow(() ->
-                new UserNotFoundException("User with id " + assessmentDto.getUserId() + " was not found"));
+        User user = userRepository.findById(assessmentDto.getUserId()).orElseThrow(() -> {
+         log.error("User with id " + assessmentDto.getUserId() + " was not found");
+         return new UserNotFoundException("User with id " + assessmentDto.getUserId() + " was not found");
+        });
 
         if (!assessmentDto.getTitle().equals(assessment.getTitle())) {
 
@@ -573,6 +628,8 @@ class AssessmentServiceImpl implements AssessmentService {
                     assessmentRepository.findByTitleAndUser(assessment.getTitle(), user);
 
             if ((existingAssessment.isPresent()) && (existingAssessment.get().getStatus() != Status.FINISHED)) {
+                log.error("User " + user.getFirstname() + " " + user.getLastname() + " already has unfinished assessment "
+                        + "with title " + assessmentDto.getTitle());
                 throw new AssessmentExistsException
                         ("User " + user.getFirstname() + " " + user.getLastname() + " already has unfinished assessment "
                                 + "with title " + assessmentDto.getTitle());
@@ -676,6 +733,7 @@ class AssessmentServiceImpl implements AssessmentService {
                 assessment.getFeedbacks().add(feedback);
             }
         }
+        log.info("Updating user with id {}", assessment.getId());
         return AssessmentDto.fromAssessment(assessment);
     }
 
@@ -692,8 +750,10 @@ class AssessmentServiceImpl implements AssessmentService {
     @Transactional
     public AssessmentDto deleteAssessment(String id, AssessmentDto assessmentDto) {
 
-        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with id " + id + " was not found"));
+        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() -> {
+            log.error("Assessment with id " + id + " was not found");
+            return new AssessmentNotFoundException("Assessment with id " + id + " was not found");
+        });
 
         AssessmentInformation assessmentInformation = new AssessmentInformation();
         assessmentInformation.setAssessmentTitle(assessment.getTitle());
@@ -705,7 +765,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         assessmentRepository.removeById(id);
-
+        log.info("Deleted assessment with id ", assessment.getId());
         return AssessmentDto.fromAssessment(assessment);
     }
 
@@ -722,7 +782,7 @@ class AssessmentServiceImpl implements AssessmentService {
             LocalDateTime fromDate = LocalDateTime.of(LocalDateTime.now().getYear(), i + 1, 1, 0, 0);
             newAssessments.getMonths().add(i, assessmentRepository.countAllByStartDateBetween(fromDate, fromDate.plusMonths(1)));
         }
-
+        log.info("Gettin all assessments from this year");
         return newAssessments;
     }
 
@@ -733,6 +793,7 @@ class AssessmentServiceImpl implements AssessmentService {
     @Override
     @Transactional
     public CountDto countAll() {
+        log.info("Gettin the total number of assessments");
         return new CountDto(assessmentRepository.count());
     }
 
