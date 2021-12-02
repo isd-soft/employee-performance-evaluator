@@ -1,10 +1,13 @@
 package com.isdintership.epe.service;
 
-import com.isdintership.epe.dto.UserDto;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface ExportService {
-    UserDto exportToPdf(String id, HttpServletResponse response) throws IOException;
+    void exportUserToPdf(HttpServletResponse response, String id) throws IOException;
+    void exportAllUsersToPdf(HttpServletResponse response) throws IOException;
+    void exportAssessmentToPdf(HttpServletResponse response,String id) throws IOException;
+    void export(String id, HttpServletResponse response)throws IOException;
+    void exportAllUsersToExcel(HttpServletResponse response)throws IOException;
+    void exportAssessmentToExcel(HttpServletResponse response, String id)throws IOException;
 }

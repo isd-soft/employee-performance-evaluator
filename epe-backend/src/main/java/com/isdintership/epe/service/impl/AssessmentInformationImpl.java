@@ -14,6 +14,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implements the AssessmentInformationService interface.
+ * Service class that provides methods to work with the Assessment entity
+ * @author Adrian Girlea
+ * */
 @Service
 @RequiredArgsConstructor
  class AssessmentInformationImpl implements AssessmentInformationService {
@@ -21,6 +26,11 @@ import java.util.stream.Collectors;
     private final AssessmentInformationRepository assessmentInformationRepository;
     private final AssessmentRepository assessmentRepository;
 
+    /**
+     * Method that gets all the information about all the actions performed on the assessments
+     * @author Adrian Girlea
+     * @return List of Assessment Information
+     * */
     @Override
     @Transactional
     public List<AssessmentInformationDto> getAllAssessmentInformation() {
