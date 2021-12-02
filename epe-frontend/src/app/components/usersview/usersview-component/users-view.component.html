@@ -149,6 +149,8 @@
 
   <div *ngIf="teamMembers && teamMembers.length != 0">
   <mat-tab label="My team">
+
+    <div class="table">
     <mat-form-field appearance="standard" class="filter-field">
 
 
@@ -251,6 +253,7 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
     <h4 *ngIf="teamLeader != null && teamLeader.id != this.id">Team leader: <b>{{teamLeader.firstname}} {{teamLeader.lastname}}</b></h4>
+    </div>
   </mat-tab>
   </div>
 </mat-tab-group>

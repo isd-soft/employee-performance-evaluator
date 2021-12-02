@@ -123,7 +123,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
     @Transactional
     public List<AssessmentTemplateDto> getAllAssessmentTemplates() {
 
-        List<Assessment> assessmentTemplates = assessmentRepository.findAllByIsTemplate(true);
+        List<Assessment> assessmentTemplates = assessmentRepository.findByIsTemplate(true);
         List<AssessmentTemplateDto> assessmentTemplateDtos = new ArrayList<>();
 
         assessmentTemplates.forEach(assessmentTemplate ->

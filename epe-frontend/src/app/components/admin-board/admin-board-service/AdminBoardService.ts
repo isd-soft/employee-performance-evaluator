@@ -26,7 +26,7 @@ export class AdminBoardService {
               private jwtService: JwtService) {}
 
   getAllAssessments(){
-    return this.http.get(this.baseUrl + "assessments");
+    return this.http.get(this.baseUrl + "api/assessments");
   }
 
   deleteAssessment(assessmentId: string){

@@ -155,9 +155,13 @@ export class AdminStatsComponent implements AfterViewInit {
         if (measurement.statistic == 'COUNT') {
           this.count200 = measurement.value;
         }
+        this.setResponsesChartOptions1();
+        this.setResponsesChartOptions2();
       });
     }, error => {
       this.count200 = 0;
+      this.setResponsesChartOptions1();
+      this.setResponsesChartOptions2();
     });
 
     this.adminStatsService.getResponseStatusesCount404().subscribe(response => {
@@ -167,9 +171,13 @@ export class AdminStatsComponent implements AfterViewInit {
         if (measurement.statistic == 'COUNT') {
           this.count404 = measurement.value;
         }
+        this.setResponsesChartOptions1();
+        this.setResponsesChartOptions2();
       });
     }, error => {
       this.count404 = 0;
+      this.setResponsesChartOptions1();
+      this.setResponsesChartOptions2();
     });
 
     this.adminStatsService.getResponseStatusesCount400().subscribe(response => {
@@ -179,9 +187,13 @@ export class AdminStatsComponent implements AfterViewInit {
         if (measurement.statistic == 'COUNT') {
           this.count400 = measurement.value;
         }
+        this.setResponsesChartOptions1();
+        this.setResponsesChartOptions2();
       });
     }, error => {
       this.count400 = 0;
+      this.setResponsesChartOptions1();
+      this.setResponsesChartOptions2();
     });
 
     this.adminStatsService.getResponseStatusesCount500().subscribe(response => {
@@ -192,12 +204,23 @@ export class AdminStatsComponent implements AfterViewInit {
           this.count500 = measurement.value;
         }
       });
+      /*setTimeout(() => {
+        this.setResponsesChartOptions1();
+        this.setResponsesChartOptions2();
+      }, 2000);*/
       this.setResponsesChartOptions1();
       this.setResponsesChartOptions2();
+
+
     }, error => {
       this.count500 = 0;
+      /*setTimeout(() => {
+        this.setResponsesChartOptions1();
+        this.setResponsesChartOptions2();
+      }, 2000);*/
       this.setResponsesChartOptions1();
       this.setResponsesChartOptions2();
+
     });
 
 

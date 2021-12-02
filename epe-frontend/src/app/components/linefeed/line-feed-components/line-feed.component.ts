@@ -31,8 +31,8 @@ export class LineFeedComponent implements OnInit {
 
   openDialog(id: number) {
     this.dialog.open(LeaveFeedbackComponent, {
-      height: '50%',
-      width: '50%',
+      height: '85%',
+      width: '85%',
       data : this.assessmentsInformation[id],
       autoFocus: false
     });

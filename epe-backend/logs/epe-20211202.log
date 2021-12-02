@@ -1,0 +1,39 @@
+14:05:02.571 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+14:05:02.572 [main] INFO  com.isdintership.epe.EpeApplication - Starting EpeApplication using Java 15.0.1 on DESKTOP-98RMHLG with PID 18540 (D:\Projects\employee-performance-evaluator\epe-backend\target\classes started by Максим in D:\Projects\employee-performance-evaluator\epe-backend)
+14:05:02.573 [main] INFO  com.isdintership.epe.EpeApplication - The following profiles are active: local
+14:05:03.821 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+14:05:03.898 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 8 JPA repository interfaces.
+14:05:04.225 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@17222c11' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+14:05:04.230 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+14:05:04.473 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8075 (http)
+14:05:04.483 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8075"]
+14:05:04.483 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:05:04.483 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+14:05:04.580 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:05:04.581 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1973 ms
+14:05:04.873 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+14:05:05.058 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+14:05:05.125 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+14:05:05.171 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+14:05:05.268 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+14:05:05.347 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+14:05:06.118 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+14:05:06.123 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+14:05:07.482 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 15 endpoint(s) beneath base path '/api/actuator'
+14:05:08.139 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [com.isdintership.epe.security.ExceptionHandlerFilter@1934339, com.isdintership.epe.security.SimpleCORSFilter@2b098563, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7d6b0636, org.springframework.security.web.context.SecurityContextPersistenceFilter@2e3fdf30, org.springframework.security.web.header.HeaderWriterFilter@37b0a724, org.springframework.security.web.authentication.logout.LogoutFilter@3b8b1ba9, com.isdintership.epe.security.jwt.JwtTokenFilter@3c971473, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35427786, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c3762c7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@47b4fcd5, org.springframework.security.web.session.SessionManagementFilter@4235e01b, org.springframework.security.web.access.ExceptionTranslationFilter@12e5f7cb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5c4404dd]
+14:05:08.215 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8075"]
+14:05:08.230 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8075 (http) with context path ''
+14:05:08.853 [main] INFO  com.isdintership.epe.EpeApplication - Started EpeApplication in 6.545 seconds (JVM running for 7.608)
+14:05:09.284 [RMI TCP Connection(1)-172.17.44.60] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:05:09.284 [RMI TCP Connection(1)-172.17.44.60] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+14:05:09.286 [RMI TCP Connection(1)-172.17.44.60] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+14:06:14.129 [http-nio-8075-exec-9] INFO  c.i.e.s.impl.AssessmentServiceImpl - Getting all assessments
+14:06:14.129 [http-nio-8075-exec-6] INFO  c.i.e.s.impl.AssessmentServiceImpl - Getting all assessments
+14:06:14.152 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the total number of team leaders
+14:06:17.231 [http-nio-8075-exec-4] INFO  c.i.e.s.i.AssessmentTemplateServiceImpl - Returning all assessment templates
+14:06:17.893 [http-nio-8075-exec-10] INFO  c.i.e.s.impl.AssessmentServiceImpl - Getting all assessments
+14:06:17.893 [http-nio-8075-exec-6] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the total number of team leaders
+14:06:17.902 [http-nio-8075-exec-3] INFO  c.i.e.s.impl.AssessmentServiceImpl - Getting all assessments
+14:16:47.333 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+14:16:47.340 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+14:16:47.345 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

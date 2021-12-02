@@ -137,9 +137,12 @@ body{
 }
 
 .close-button {
+  display: inline-block;
+  position: relative;
+  right: -3%;
+  top: -10px;
   float: right;
   background: #e5e5e5;
-  margin-bottom: 0.5%;
 }
 
 .close-icon {
@@ -154,4 +157,8 @@ body{
 .title{
   align-content: center;
   text-align: center;
+}
+
+.assessments {
+  margin-top: 5%;
 }

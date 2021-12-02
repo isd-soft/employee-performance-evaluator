@@ -40,7 +40,7 @@ export class AssessmentsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.assessmentsService.getAllAssessmentsByUserIdAndStatus(this.jwtUser.id, 'ACTIVE').subscribe(
       data => {
-
+        console.log(data);
         this.assessments = data as AssessmentView[];
         this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);
         this.dataSource.paginator = this.paginator;

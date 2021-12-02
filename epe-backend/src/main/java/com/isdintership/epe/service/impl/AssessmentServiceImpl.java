@@ -257,7 +257,7 @@ class AssessmentServiceImpl implements AssessmentService {
     public List<AssessmentDto> getAllAssessments() {
 
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
-        assessmentRepository.findAllByIsTemplate(false)
+        assessmentRepository.findByIsTemplate(false)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
         log.info("Getting all assessments");
         return assessmentDtos;

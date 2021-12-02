@@ -509,3 +509,1014 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x16
 2021-12-02 12:29:14.226  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
 2021-12-02 12:30:10.343  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
 2021-12-02 12:31:21.452  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:34:16.646  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:34:21.315  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:34:30.450  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:34:43.687  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:35:04.302  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:35:12.832  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 12:35:12.846  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 12:35:13.426  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:35:17.012  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:35:18.040  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:35:18.052  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:35:18.067  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:35:18.073  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:35:27.198  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:37:09.335  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:37:36.580  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:37:36.699  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:41:02.318  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:41:02.398  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:41:14.787  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:41:26.724 ERROR 12916 --- [http-nio-8075-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 12:41:26.757  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 12:41:26.811  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 12:41:26.826  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:09:18.671  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:09:18.692  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:09:18.693  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:09:29.259  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:09:29.270  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:09:29.277  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:09:29.295  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:09:29.979  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:09:31.130  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:09:31.147  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:09:31.153  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:09:34.700  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:09:34.709  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:09:34.711  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:09:43.114  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:09:43.129  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:09:43.131  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:09:43.750  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:09:43.763  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:09:43.763  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:11:09.838  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:10.871  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:10.877  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:10.888  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:10.895  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:16.169  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:17.210  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:17.211  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:17.244  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:17.249  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:19.674  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 13:11:22.556  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:22.582  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:23.823  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:11:23.828  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:11:25.059  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:26.084  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:26.089  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:26.101  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:11:26.105  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:27.712  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:11:27.716  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:27.725  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:11:27.731  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:11:32.607  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:11:34.509  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:11:34.524  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:11:34.525  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:11:36.733  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:17:31.922 ERROR 12916 --- [http-nio-8075-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:17:47.870  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Logging user max7gri@gmail.com
+2021-12-02 13:17:48.394  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 13:18:15.084  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:18:15.115  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:18:16.326  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:18:16.331  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:18:17.903  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:18:17.912  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:18:17.919  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:18:18.361  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:18:29.870  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:18:31.503  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:18:33.657  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:18:33.670  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:18:33.673  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:18:34.562  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:18:36.488 ERROR 12916 --- [http-nio-8075-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:18:36.494 ERROR 12916 --- [http-nio-8075-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:711) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:385) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:313) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:403) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:249) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:344) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:18:36.495 ERROR 12916 --- [http-nio-8075-exec-5] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing ErrorPage[errorCode=0, location=/error]
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:711) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:385) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:313) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:403) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:249) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:344) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:18:36.499  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:18:36.505  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:18:36.510  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:18:38.248  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:18:38.259  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:18:38.260  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:20:12.194  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:20:12.208  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:20:12.210  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:20:15.635  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:20:16.678  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:20:16.683  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:20:16.698  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:20:16.703  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:20:20.766  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:20:23.416  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:20:23.426  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:20:23.430  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:20:24.540  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:36:13.130  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:36:14.609  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:15.646  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:15.652  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:15.663  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:15.672  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:25.937  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:25.943  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:25.949  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:25.962  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:26.980  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:26.987  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:31.333  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:31.366  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:35.244  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:35.252  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:35.277  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:35.284  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:36.114  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:36.121  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:38.564  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:38.589  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:39.156  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:36:39.161  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:36:39.824  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:40.907  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:40.912  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:40.913  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:40.930  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:41.682  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:41.690  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:41.693  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:41.709  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:43.177  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:43.192  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:43.194  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:43.213  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:44.278  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:44.290  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:44.309  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:44.314  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:45.444  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:45.447  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:45.451  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:45.461  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:46.298  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:47.325  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:47.329  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:47.344  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:47.347  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:48.309  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:49.346  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:49.351  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:49.366  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:36:49.372  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:50.375  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:50.381  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:50.387  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:50.393  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:51.334  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:51.338  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:51.352  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:51.355  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:52.349  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:52.352  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:52.368  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:52.371  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:53.150  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:53.153  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:53.506  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:53.510  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:53.845  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:53.854  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:54.162  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:54.174  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:36:54.428  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:36:54.436  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:03.785  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Team C++ DEveloepr was created successfully
+2021-12-02 13:37:03.856  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:03.862  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:05.578  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:06.602  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:06.606  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:06.621  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:06.623  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:10.199  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:11.243  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:11.248  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:11.281  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:11.282  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:17.729  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:17.730  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:17.742  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:17.745  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:19.424  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:19.429  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting team with id 0a259a52-0e6b-49fc-bae2-770d66bad9f6
+2021-12-02 13:37:22.918  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Updated team with id 0a259a52-0e6b-49fc-bae2-770d66bad9f6
+2021-12-02 13:37:22.937  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting team with id 0a259a52-0e6b-49fc-bae2-770d66bad9f6
+2021-12-02 13:37:23.052  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:26.574  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:27.594  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:27.597  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:27.607  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:27.607  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:31.840  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:31.841  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:31.848  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:31.851  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:33.664  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:33.667  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:33.718  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:33.719  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:34.980  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:34.981  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:35.014  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:35.015  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:40.332  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:41.365  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:41.365  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:41.380  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:37:41.381  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:42.659  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:37:42.667  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:37:44.075  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:44.077  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:44.084  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:44.085  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:47.117  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:47.122  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:47.149  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:37:47.150  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:37:56.123  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:37:56.141  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:37:56.142  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:38:01.955  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:38:02.977  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:38:02.979  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:38:02.994  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:38:02.996  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:38:05.059  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:38:05.062 ERROR 12916 --- [http-nio-8075-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:38:05.070  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:38:10.764 ERROR 12916 --- [http-nio-8075-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:38:10.767 ERROR 12916 --- [http-nio-8075-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:711) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:385) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:313) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:403) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:249) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:344) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:38:10.767 ERROR 12916 --- [http-nio-8075-exec-6] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing ErrorPage[errorCode=0, location=/error]
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:711) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:385) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:313) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:403) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:249) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:344) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:38:10.770  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:38:14.216  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:38:14.217  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:38:57.437  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:38:57.440  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:38:59.702  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:00.719  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:00.721  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:39:00.730  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:00.731  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:39:02.451  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:39:02.478  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:39:04.972  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:04.977  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Getting information about assessment with id b6bb85e8-3560-4bea-98f0-3f7923ddb310
+2021-12-02 13:39:04.983  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:39:04.984  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:04.986  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Started assessment with id b6bb85e8-3560-4bea-98f0-3f7923ddb310
+2021-12-02 13:39:04.993  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:39:06.570  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:06.598  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:07.646  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:39:07.646  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:39:43.065  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:39:44.021  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.impl.AssessmentServiceImpl       : Gettin the total number of assessments
+2021-12-02 13:39:44.026  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Gettin all assessments from this year
+2021-12-02 13:39:44.029  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the total number of team leaders
+2021-12-02 13:39:48.833  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:39:51.518  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:52.533  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:52.539  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:39:52.551  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:52.553  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:39:53.801  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:39:53.803  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:30.213  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:31.238  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:41:31.239  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:31.274  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:31.274  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:41:31.779  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:31.801  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:33.895  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:34.910  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:34.914  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:41:34.938  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:41:34.939  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:41:35.883 ERROR 12916 --- [http-nio-8075-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:41:35.884 ERROR 12916 --- [http-nio-8075-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:711) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:385) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:313) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:403) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:249) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:344) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:41:35.884 ERROR 12916 --- [http-nio-8075-exec-5] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing ErrorPage[errorCode=0, location=/error]
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:711) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:385) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:313) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:403) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:249) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.throwable(StandardHostValve.java:344) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:41:35.887  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id e8dd3e70-cfef-4b98-ab38-8f98cb58cf87
+2021-12-02 13:41:45.748  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:41:45.749  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:42:09.449  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:10.920  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:10.921  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:42:10.948  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:10.950  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:42:16.074  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:17.109  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:17.109  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:42:17.141  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:17.141  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:42:17.750  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:42:17.751  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+2021-12-02 13:42:22.398  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:42:22.401  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:07.595  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:08.644  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:08.644  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:08.677  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:08.678  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:09.483  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:09.488  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:15.841  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:16.875  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:16.878  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:16.906  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:16.907  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:17.416  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:17.418  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:37.825  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:38.843  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:38.843  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:38.865  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:38.865  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:40.471 ERROR 12916 --- [http-nio-8075-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.util.ConcurrentModificationException: null
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013) ~[na:na]
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967) ~[na:na]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:53) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-12-02 13:43:40.475  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:43:40.477  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:43:47.332  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:48.354  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:48.356  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:48.388  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:48.389  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:48.949  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:43:48.951  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:43:54.798  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:55.824  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:55.825  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:55.853  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:43:55.854  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:43:56.678  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:43:56.681  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:06.469  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:07.490  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:07.492  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:07.524  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:07.525  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:08.119  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:08.122  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:24.984  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:26.014  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:26.017  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:26.045  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:26.045  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:29.089  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:29.092  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:38.898  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:39.918  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:39.920  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:39.949  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:39.950  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:42.348  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:42.350  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:44:51.734  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:52.914  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:52.916  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:52.954  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:52.954  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:54.390  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:54.392  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:54.400  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:44:54.401  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:44:54.819  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:44:54.825  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:47:02.762  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:47:02.786  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:47:45.004  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:47:45.005  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:47:45.824  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:47:45.825  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:47:45.834  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 13:47:45.835  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:47:46.097  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:47:47.120  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:47:47.120  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:47:47.136  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:47:47.137  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:47:48.281  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:47:48.285  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:48:26.788  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:48:26.792  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:48:51.517  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:48:52.531  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:48:52.532  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:48:52.539  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:48:52.541  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 13:48:54.487  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:48:54.489  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id 510fd3fa-956f-4c86-9028-a64607890ce4
+2021-12-02 13:58:11.861  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:58:12.896  INFO 12916 --- [http-nio-8075-exec-6] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 13:58:52.649  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:58:52.651  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 13:59:00.034  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:59:01.438  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 13:59:26.250  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 13:59:26.633  WARN 12916 --- [http-nio-8075-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Failure in @ExceptionHandler com.isdintership.epe.controller.GlobalExceptionHandler#handleException(Exception, HttpServletRequest)
+
+org.apache.catalina.connector.ClientAbortException: java.io.IOException: An established connection was aborted by the software in your host machine
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:353) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.OutputBuffer.flushByteBuffer(OutputBuffer.java:783) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:688) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:388) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:366) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:96) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.security.web.util.OnCommittedResponseWrapper$SaveContextServletOutputStream.write(OnCommittedResponseWrapper.java:638) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.util.StreamUtils$NonClosingOutputStream.write(StreamUtils.java:287) ~[spring-core-5.3.12.jar:5.3.12]
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2177) ~[jackson-core-2.12.5.jar:2.12.5]
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1190) ~[jackson-core-2.12.5.jar:2.12.5]
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1008) ~[jackson-databind-2.12.5.jar:2.12.5]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:454) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:104) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:290) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:219) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:428) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:75) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:142) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1327) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1138) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655) ~[tomcat-embed-core-9.0.54.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.12.jar:5.3.12]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) ~[tomcat-embed-core-9.0.54.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:88) ~[spring-boot-actuator-2.5.6.jar:2.5.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at com.isdintership.epe.security.jwt.JwtTokenFilter.doFilter(JwtTokenFilter.java:33) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:71) ~[classes/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at com.isdintership.epe.security.ExceptionHandlerFilter.doFilterInternal(ExceptionHandlerFilter.java:21) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.5.3.jar:5.5.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.5.6.jar:2.5.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.3.12.jar:5.3.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at com.isdintership.epe.security.SimpleCORSFilter.doFilter(SimpleCORSFilter.java:71) ~[classes/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:113) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:79) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:50) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:506) ~[na:na]
+	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:135) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1363) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:766) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:586) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:530) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:547) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.filters.ChunkedOutputFilter.doWrite(ChunkedOutputFilter.java:110) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:194) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.coyote.Response.doWrite(Response.java:615) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:340) ~[tomcat-embed-core-9.0.54.jar:9.0.54]
+	... 118 common frames omitted
+
+2021-12-02 13:59:27.178  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 13:59:27.179  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 14:01:07.551  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 14:01:08.119  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 14:01:08.119  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 14:01:32.541  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 14:01:32.542  INFO 12916 --- [http-nio-8075-exec-3] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 14:04:48.157  INFO 12916 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-12-02 14:04:48.213  INFO 12916 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-12-02 14:04:48.242  INFO 12916 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
