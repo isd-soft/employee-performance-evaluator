@@ -1,15 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminStatsService{
+  baseUrl = environment.baseUrl;
 
-  actuatorUrl: string = 'http://localhost:8075/api/actuator/';
-  assessmentsUrl: string = 'http://localhost:8075/api/assessments';
-  usersUrl: string = 'http://localhost:8075/api/users';
-  teamsUrl: string = 'http://localhost:8075/api/teams';
+  actuatorUrl: string = this.baseUrl + 'api/actuator/';
+  assessmentsUrl: string = this.baseUrl + 'api/assessments';
+  usersUrl: string = this.baseUrl + 'api/users';
+  teamsUrl: string = this.baseUrl + 'api/teams';
   constructor(private httpClient: HttpClient) { }
 
   getResponseStatusesCount200(){ return this.httpClient.get(this.actuatorUrl + 'metrics/http.server.requests?tag=status:200');}

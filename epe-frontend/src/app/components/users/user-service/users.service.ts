@@ -3,13 +3,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  userUrl: string = 'api-server/api/users';
+  baseUrl = environment.baseUrl;
+  userUrl: string = this.baseUrl + 'api/users';
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +39,7 @@ export class UsersService {
     return this.http.delete(this.userUrl + '/' + id)
     .pipe(catchError(this.errorHandler));
   }
-  
+
   errorHandler(error: HttpErrorResponse){
     return observableThrowError(error);
   }

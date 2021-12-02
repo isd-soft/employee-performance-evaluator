@@ -11,6 +11,7 @@ import {JwtUser} from "../../../decoder/decoder-model/jwt-user.interface";
 import {saveAs} from 'file-saver/dist/FileSaver';
 import {NewUser} from "../userview-models/NewUser";
 import {DatePipe} from "@angular/common";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,13 @@ import {DatePipe} from "@angular/common";
 
 export class UserviewsServices {
 
-  url: string = 'api-server/api/users';
-  url2: string = 'api-server/api/teams';
-  url3: string = 'api-server/api/export';
-  url4: string = 'api-server/api/export/pdf/generate';
-  url5: string = 'api-server/api/export/pdf/users';
-  url6: string = 'api-server/api/export/excel/users';
+  baseUrl = environment.baseUrl;
+  url: string = this.baseUrl + 'api/users';
+  url2: string = this.baseUrl + 'api/teams';
+  url3: string = this.baseUrl + 'api/export';
+  url4: string = this.baseUrl + 'api/export/pdf/generate';
+  url5: string = this.baseUrl + 'api/export/pdf/users';
+  url6: string = this.baseUrl + 'api/export/excel/users';
 
   jwtUser?: JwtUser;
   role? : string;
@@ -42,7 +44,7 @@ export class UserviewsServices {
   }
 
   getAssignedUsers(){
-    return this.http.get("api-server/api/users/" + this.jwtUser?.id + "/assignedUsers");
+    return this.http.get(this.baseUrl + "api/users/" + this.jwtUser?.id + "/assignedUsers");
   }
 
   deleteUser(userId : string | undefined) {
@@ -67,7 +69,7 @@ export class UserviewsServices {
   }
 
   getAssessmentTemplates() {
-    return this.http.get("api-server/api/assessments-templates");
+    return this.http.get(this.baseUrl + "api/assessments-templates");
   }
 
   exportToPdf(user : NewUser | undefined) {

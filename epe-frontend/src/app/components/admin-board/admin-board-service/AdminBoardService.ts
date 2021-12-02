@@ -11,12 +11,14 @@ import {DatePipe} from "@angular/common";
 
 // @ts-ignore
 import {saveAs} from 'file-saver/dist/FileSaver';
+import {environment} from "../../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class AdminBoardService {
 
-  assessmentsUrl: string = 'api-server/api/';
+  baseUrl = environment.baseUrl;
+  assessmentsUrl: string = this.baseUrl + 'api/';
 
 
   constructor(private http: HttpClient,
@@ -24,17 +26,17 @@ export class AdminBoardService {
               private jwtService: JwtService) {}
 
   getAllAssessments(){
-    return this.http.get("api-server/api/assessments");
+    return this.http.get(this.baseUrl + "assessments");
   }
 
   deleteAssessment(assessmentId: string){
-    this.http.request('delete', "api-server/api/assessments/" + assessmentId ,
+    this.http.request('delete', this.baseUrl + "api/assessments/" + assessmentId ,
       {body: {"startedById": this.jwtService.getJwtUser().id}}).subscribe();
 
   }
 
   exportAssessmentToPdf(assessment: AssessmentView | undefined) {
-    return this.http.get('api-server/api/export/' + assessment?.id + '/assessment/pdf',{responseType: 'arraybuffer'}).subscribe(pdf => {
+    return this.http.get(this.baseUrl + 'api/export/' + assessment?.id + '/assessment/pdf',{responseType: 'arraybuffer'}).subscribe(pdf => {
       const blob = new Blob([pdf],{type: 'application/pdf'});
 
       let datePipe = new DatePipe('en-US');
@@ -46,7 +48,7 @@ export class AdminBoardService {
   }
 
   exportAssessmentToExcel(assessment: AssessmentView | undefined) {
-    return this.http.get('api-server/api/export/' + assessment?.id + '/assessment/excel',{responseType: 'arraybuffer'}).subscribe(xlsx => {
+    return this.http.get(this.baseUrl + 'api/export/' + assessment?.id + '/assessment/excel',{responseType: 'arraybuffer'}).subscribe(xlsx => {
       const blob = new Blob([xlsx], {type: 'application/octet-stream'});
       let datePipe = new DatePipe('en-US');
       // @ts-ignore

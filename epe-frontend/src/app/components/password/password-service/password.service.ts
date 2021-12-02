@@ -8,11 +8,13 @@ import {throwError as observableThrowError} from "rxjs/internal/observable/throw
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn : 'root'})
 export class PasswordService {
 
-  url: string = 'api-server/api/users';
+  baseUrl = environment.baseUrl;
+  url: string = this.baseUrl + 'api/users';
 
   jwtUser?: JwtUser;
   id? : string

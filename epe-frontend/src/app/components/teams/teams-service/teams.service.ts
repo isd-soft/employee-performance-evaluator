@@ -3,13 +3,15 @@ import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { CreateTeamRequest } from '../teams-model/create-team-request.interface';
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamsService {
 
-  teamUrl: string = 'api-server/api/teams';
+  baseUrl = environment.baseUrl;
+  teamUrl: string = this.baseUrl + 'api/teams';
 
   constructor(private http: HttpClient) { }
 

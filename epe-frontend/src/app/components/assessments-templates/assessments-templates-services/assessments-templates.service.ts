@@ -6,14 +6,15 @@ import {AssessmentTemplateView} from "../assessments-templates-models/assessment
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssessmentsTemplatesService {
 
-  // assessmentsTemplatesUrl: string = 'api-server/api/assessments-templates';
-  assessmentsTemplatesUrl: string = 'http://localhost:8075/api/assessments-templates';
+  baseUrl = environment.baseUrl;
+  assessmentsTemplatesUrl: string = this.baseUrl + 'api/assessments-templates';
 
   constructor(private http: HttpClient,
               private notificationService: ToastrService,

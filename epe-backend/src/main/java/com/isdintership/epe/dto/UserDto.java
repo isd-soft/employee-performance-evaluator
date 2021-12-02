@@ -50,7 +50,7 @@ public class UserDto {
                 .max(Comparator.comparing(Assessment::getStartDate));
 
         min.ifPresent(assessment -> {
-            var status = assessment.getStatus();
+            Status status = assessment.getStatus();
             if ((status.equals(Status.CANCELED) || status.equals(Status.FINISHED))){
                 userView.setStatus("");
             } else userView.setStatus(status.toString());
