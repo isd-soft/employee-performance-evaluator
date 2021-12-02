@@ -32,8 +32,16 @@ public class AssessmentInformationDto {
         this.assessmentId = assessmentInformation.getAssessmentId();
         this.evaluatedUserId = assessmentInformation.getEvaluatedUserId();
         this.evaluatedUserFullName = assessmentInformation.getEvaluatedUserFullName();
-        this.performedByUser = assessmentInformation.getPerformedByUser().getFirstname() + " " +assessmentInformation.getPerformedByUser().getLastname();
-        this.performedOnUser = assessmentInformation.getPerformedOnUser().getFirstname() + " " + assessmentInformation.getPerformedOnUser().getLastname();
+        if (assessmentInformation.getPerformedByUser() != null) {
+            this.performedByUser = assessmentInformation.getPerformedByUser().getFirstname() + " " +assessmentInformation.getPerformedByUser().getLastname();
+        } else {
+            this.performedByUser = "null";
+        }
+        if (assessmentInformation.getPerformedOnUser() != null) {
+            this.performedOnUser = assessmentInformation.getPerformedOnUser().getFirstname() + " " + assessmentInformation.getPerformedOnUser().getLastname();
+        } else {
+            this.performedOnUser = "null";
+        }
         this.status = assessmentInformation.getStatus();
         this.performedTime = assessmentInformation.getPerformedTime();
         this.reason = assessmentInformation.getReason();

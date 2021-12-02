@@ -1,8 +1,8 @@
-<div *ngIf="getTeam">    
+<div *ngIf="getTeam">
     <mat-card>
         <button mat-button class="close-icon" [mat-dialog-close]="true">
             <mat-icon>close</mat-icon>
-          </button>    
+          </button>
         <mat-card-title-group>
             <mat-card-title>
                 <mat-icon mat-list-icon>group</mat-icon>
@@ -13,12 +13,17 @@
         <mat-card-content>
             <p class="team-leader">
                 <mat-icon mat-list-icon>person</mat-icon>
-                Team Leader : {{getTeam.teamLeader.firstname}} {{getTeam.teamLeader.lastname}}
+              <span *ngIf="getTeam.teamLeader != null">
+                {{ getTeam.teamLeader.firstname }} {{ getTeam.teamLeader.lastname }}
+              </span>
+              <span *ngIf="getTeam.teamLeader == null">
+                No leader
+              </span>
             </p>
             <hr class="fifty-percent">
             <p class="team-member" *ngFor="let member of getTeam.members">
                 <mat-icon mat-list-icon>person_outline</mat-icon>
-                Team Member : {{member.firstname}} {{member.lastname}}
+                <span *ngIf="member != null">Team Member : {{member.firstname}} {{member.lastname}}</span>
             </p>
         </mat-card-content>
     </mat-card>

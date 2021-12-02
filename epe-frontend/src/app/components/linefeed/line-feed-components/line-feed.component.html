@@ -10,8 +10,9 @@
       </mat-card-subtitle>
     </mat-card-title-group>
       <mat-card-content class="text-size">
-        The assessment for the user <b>{{assessment.performedOnUser}}</b> with the title
-        <b>{{assessment.assessmentTitle}}</b> has been
+        The assessment for the user <span *ngIf="assessment.performedOnUser == 'null'"><b>*User was deleted*</b></span>
+        <span *ngIf="assessment.performedOnUser != 'null'"><b>{{assessment.performedOnUser}}</b></span>
+        with the title <b>{{assessment.assessmentTitle}}</b> has been
 
         <span [ngSwitch]="assessment.status">
           <span *ngSwitchCase="'FIRST_PHASE'"> initialized </span>
@@ -21,7 +22,10 @@
           <span *ngSwitchCase="'DELETED'"> deleted </span>
         </span>
 
-        by the user <b>{{assessment.performedByUser}}</b> and is set to
+        by the user
+        <span *ngIf="assessment.performedByUser == 'null'"><b>*User was deleted*</b></span>
+        <span *ngIf="assessment.performedByUser != 'null'"><b>{{assessment.performedByUser}}</b></span>
+        and is set to
         <span [ngSwitch]="assessment.status" >
             <span *ngSwitchCase="'FIRST_PHASE'" class="label label-info" > FIRST PHASE </span>
             <span *ngSwitchCase="'SECOND_PHASE'" class="label label-primary"> SECOND PHASE </span>

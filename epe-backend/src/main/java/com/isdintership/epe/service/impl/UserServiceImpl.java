@@ -67,6 +67,11 @@ class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     /**
+     * {@code JpaRepository} that handles the access to the assessment information table
+     */
+    private final AssessmentInformationRepository assessmentInformationRepository;
+
+    /**
      * instance of {@code PasswordEncoder} that uses the BCrypt strong hashing function
      */
     private final BCryptPasswordEncoder passwordEncoder;
@@ -393,20 +398,28 @@ class UserServiceImpl implements UserService {
     @Transactional
     public UserDto deleteUser(String id) {
 
-        UserDto userDto = UserDto.fromUser(userRepository.findById(id).orElseThrow(() ->{
+        User removedUser = userRepository.findById(id).orElseThrow(() ->{
             log.error("User with id " + id + " was not found");
             return new UserNotFoundException("User with id " + id + " was not found");
-        }));
-        userRepository.removeById(id);
+        });
+        UserDto userDto = UserDto.fromUser(removedUser);
 
         List<User> users = userRepository.findByBuddyId(id);
-
         for (User user : users) {
             user.setBuddyId(null);
         }
+        teamRepository.findByTeamLeaderId(id).forEach(team -> {
+            team.setTeamLeader(null);
+        });
+        assessmentInformationRepository.findByPerformedByUser(removedUser).forEach(assessmentInformation ->
+            assessmentInformation.setPerformedByUser(null));
+        assessmentInformationRepository.findByPerformedOnUser(removedUser).forEach(assessmentInformation ->
+            assessmentInformation.setPerformedOnUser(null));
+
+        userRepository.delete(removedUser);
         log.info("Deleted user with id "+ id);
         return userDto;
-    }
+    }   
 
     /**
      * returns a list of job names from the data source

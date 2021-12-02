@@ -39,7 +39,14 @@
             >
               Team Leader
             </th>
-            <td mat-cell class="table-column" *matCellDef="let team">{{ team.teamLeader.firstname }} {{ team.teamLeader.lastname }}</td>
+            <td mat-cell class="table-column" *matCellDef="let team">
+              <span *ngIf="team.teamLeader != null">
+                {{ team.teamLeader.firstname }} {{ team.teamLeader.lastname }}
+              </span>
+              <span *ngIf="team.teamLeader == null">
+                No leader
+              </span>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="buttons">

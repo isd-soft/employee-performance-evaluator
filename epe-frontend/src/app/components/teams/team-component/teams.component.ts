@@ -1,5 +1,5 @@
 import { TeamView } from './../teams-model/team-view.interface';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import {Component, ViewChild, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -18,7 +18,8 @@ import { MatTabGroup } from '@angular/material/tabs';
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.css']
+  styleUrls: ['./teams.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TeamsComponent implements OnInit {
 
@@ -43,8 +44,8 @@ export class TeamsComponent implements OnInit {
   // @ts-ignore
   @ViewChild('tabs') tabGroup: MatTabGroup;
 
-  constructor(private teamService: TeamsService, 
-              public dialog: MatDialog, 
+  constructor(private teamService: TeamsService,
+              public dialog: MatDialog,
               private userService: UserService,
               private toastr: ToastrService){
     this.reloadAll();
@@ -103,7 +104,7 @@ export class TeamsComponent implements OnInit {
           id: this.newTeamLeaderId || ''
         }
       }
-  
+
       this.teamService.createTeam(newTeam).subscribe(data => {
       }, error => {
          if(error.status == 201) {

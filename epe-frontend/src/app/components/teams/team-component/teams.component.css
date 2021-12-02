@@ -9,6 +9,12 @@
     padding: 0 2%;
   }
 
+.mat-tab-label{
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
   .mat-cell, .mat-header-cell, .mat-paginator {
     font-size: 15px;
   }

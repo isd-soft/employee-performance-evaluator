@@ -85,7 +85,7 @@
                 <mat-icon>add_box</mat-icon>
               </button>
             </div>
-            {{ row.status }}
+            {{ row.status | titlecase | replaceUnderscore }}
           </td>
         </ng-container>
 

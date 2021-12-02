@@ -1,7 +1,7 @@
 <mat-card class="edit-container" *ngIf="getTeam">
   <button mat-button class="close-icon" [mat-dialog-close]="true">
     <mat-icon>close</mat-icon>
-  </button>    
+  </button>
   <mat-card-title-group>
     <mat-card-title>
       Edit Team !
@@ -16,7 +16,7 @@
           Current Team Name : {{ getTeam.name }}
         </div>
       </div>
-      
+
       <mat-form-field class="full-size" appearance="fill">
         <mat-label>New Team Name</mat-label>
         <input matInput [formControl]="teamNameFormControl" [(ngModel)]="NewTeamName" placeholder="Ex. R Team">
@@ -27,7 +27,13 @@
 
       <div class="edit-element-header">
         <div class="edit-text">
-          Current Team Leader : {{ getTeam.teamLeader.firstname }} {{ getTeam.teamLeader.lastname }}
+          Current Team Leader :
+          <span *ngIf="getTeam.teamLeader != null">
+                {{ getTeam.teamLeader.firstname }} {{ getTeam.teamLeader.lastname }}
+              </span>
+          <span *ngIf="getTeam.teamLeader == null">
+                No leader
+              </span>
         </div>
       </div>
 
