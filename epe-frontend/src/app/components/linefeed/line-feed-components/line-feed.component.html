@@ -33,6 +33,8 @@
             <span *ngSwitchCase="'CANCELED'" class="label label-warning"> CANCELED </span>
             <span *ngSwitchCase="'DELETED'" class="label label-danger"> DELETED </span>
           </span>
+
+        <br/>
         <span *ngIf="assessment.status === 'CANCELED'">
           Cancellation reason: {{assessment.reason}}
         </span>

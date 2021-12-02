@@ -90,7 +90,7 @@ mat-paginator {
 }*/
 
 .title-column {
-  width: 30%;
+  width: 25%;
 }
 
 .title-position {
@@ -106,5 +106,5 @@ mat-paginator {
 }
 
 .buttons-column {
-  width: 15%;
+  width: 20%;
 }
