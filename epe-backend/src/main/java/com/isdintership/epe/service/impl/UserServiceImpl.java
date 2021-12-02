@@ -94,6 +94,7 @@ class UserServiceImpl implements UserService {
     public UserDto register(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail.isPresent()) {
+            log.error("User with email " + request.getEmail() + " already exists");
             throw new UserExistsException("User with email " + request.getEmail()
                     + " already exists");
         }
@@ -148,15 +149,17 @@ class UserServiceImpl implements UserService {
         String email = signInRequest.getEmail();
         String password = signInRequest.getPassword();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-        User user = userRepository.findByEmail(email).orElseThrow(() ->
-                new UserNotFoundException("User with email " + email + "was not found")
+        User user = userRepository.findByEmail(email).orElseThrow(() ->{
+                log.error("User with email " + email + "was not found");
+                return new UserNotFoundException("User with email " + email + "was not found");
+                }
         );
 
         String token = jwtTokenProvider.createToken(user);
 
         UserDto response = UserDto.fromUser(user);
         response.setToken(token);
-
+        log.info("Logging user {}", user.getEmail());
         return response;
     }
 
@@ -173,6 +176,8 @@ class UserServiceImpl implements UserService {
     public UserDto createUser(RegistrationRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.getEmail());
         if (byEmail.isPresent()) {
+            log.error("User with email " + request.getEmail()
+                    + " already exists");
             throw new UserExistsException("User with email " + request.getEmail()
                     + " already exists");
         }
@@ -191,8 +196,10 @@ class UserServiceImpl implements UserService {
         Role roleUser = roleRepository.findByRole(RoleEnum.ROLE_USER);
         user.setRole(roleUser);
 
-        Job jobUser = jobRepository.findByJobTitle(request.getJob()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + request.getJob() + " not found"));
+        Job jobUser = jobRepository.findByJobTitle(request.getJob()).orElseThrow(() ->{
+            log.error("Job with name " + request.getJob() + " not found");
+            return new JobNotFoundException("Job with name " + request.getJob() + " not found");
+        });
         user.setJob(jobUser);
 
         File imageSourceFile = new File("../epe-backend//userDefaultImage.png");
@@ -221,7 +228,7 @@ class UserServiceImpl implements UserService {
         for (User user : users) {
             userDtos.add(UserDto.fromUser(user));
         }
-
+        log.info("Getting all users");
         return userDtos;
     }
 
@@ -241,6 +248,7 @@ class UserServiceImpl implements UserService {
                 userDtos.add(UserDto.fromUser(user));
             }
         }
+        log.info("Getting {}'s buddies", userRepository.findById(id));
         return userDtos;
     }
 
@@ -255,7 +263,11 @@ class UserServiceImpl implements UserService {
     @Transactional
     public UserDto getUserById(String id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
+                .orElseThrow(() -> {
+                    log.error("The user with this {} does not exist", id);
+                    return new UserNotFoundException("The user with this id does not exist");
+                });
+        log.info("Getting user with id {}", id);
         return UserDto.fromUser(user);
     }
 
@@ -274,12 +286,16 @@ class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto updateUser(UserDto userDto, String id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + "was not found"));
+        User user = userRepository.findById(id).orElseThrow(() ->{
+            log.error("User with id " + id + "was not found");
+            return new UserNotFoundException("User with id " + id + "was not found");
+        });
 
         if (userDto.getBuddyId() != null) {
-            userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->
-                    new UserNotFoundException("Buddy with id " + id + " was not found"));
+            userRepository.findById(userDto.getBuddyId()).orElseThrow(() ->{
+                log.error("Buddy with id " + id + " was not found");
+                return  new UserNotFoundException("Buddy with id " + id + " was not found");
+            });
             user.setBuddyId(userDto.getBuddyId());
         }
 
@@ -302,9 +318,10 @@ class UserServiceImpl implements UserService {
             user.setPhoneNumber(userDto.getPhoneNumber());
         }
         if (userDto.getJob() != null) {
-            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->
-                    new JobNotFoundException("Job with name " + userDto.getJob() + " not found"));
-
+            Job job = jobRepository.findByJobTitle(userDto.getJob()).orElseThrow(() ->{
+                log.error("Job with name " + userDto.getJob() + " not found");
+                return new JobNotFoundException("Job with name " + userDto.getJob() + " not found");
+            });
             user.setJob(job);
         }
         if (userDto.getBio() != null) {
@@ -320,10 +337,13 @@ class UserServiceImpl implements UserService {
             roles.put("User",1);
             roles.put("Administrator",2);
             int roleId = roles.get(userDto.getRole());
-            Role role = roleRepository.findById(roleId).orElseThrow(() ->
-                    new RoleNotFoundException("Role with id " + roleId + " was not found"));
+            Role role = roleRepository.findById(roleId).orElseThrow(() ->{
+                log.error("Role with id " + roleId + " was not found");
+                return new RoleNotFoundException("Role with id " + roleId + " was not found");
+            });
             user.setRole(role);
         }
+        log.info("Updating user with the id {}", userDto.getId());
         return userDto;
     }
 
@@ -371,17 +391,18 @@ class UserServiceImpl implements UserService {
     @Transactional
     public UserDto deleteUser(String id) {
 
-        UserDto userDto = UserDto.fromUser(userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + " was not found")));
+        UserDto userDto = UserDto.fromUser(userRepository.findById(id).orElseThrow(() ->{
+            log.error("User with id " + id + " was not found");
+            return new UserNotFoundException("User with id " + id + " was not found");
+        }));
         userRepository.removeById(id);
-
 
         List<User> users = userRepository.findByBuddyId(id);
 
         for (User user : users) {
             user.setBuddyId(null);
         }
-
+        log.info("Deleted user with id {}", id);
         return userDto;
     }
 
@@ -432,7 +453,10 @@ class UserServiceImpl implements UserService {
     public List<TeamDto> getTeamByUserId(String id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("The user with this id does not exist"));
+                .orElseThrow(() -> {
+                    log.error("The user with this {} does not exist", id);
+                    return new UserNotFoundException("The user with this id does not exist");
+                });
 
         List<TeamDto> teamDtoList = new ArrayList();
 
@@ -442,12 +466,12 @@ class UserServiceImpl implements UserService {
         }
 
         if(user.getTeam() != null) {
-            Team team = teamRepository.findById(user.getTeam().getId()).orElseThrow(() ->
-                    new TeamNotFoundException("Team for user with id " + id + " was not found"));
-
+            Team team = teamRepository.findById(user.getTeam().getId()).orElseThrow(() ->{
+                log.error("Team for user with id " + id + " was not found");
+                return new TeamNotFoundException("Team for user with id " + id + " was not found");
+            });
             teamDtoList.add(TeamDto.fromTeam(team));
         }
-
         return teamDtoList;
     }
 
@@ -472,16 +496,18 @@ class UserServiceImpl implements UserService {
 
         if (isPasswordMatched) {
             if (!(passwordView.getNewPassword().equals(passwordView.getNewPasswordConfirmation()))) {
+                log.error("New password was not confirmed");
                 throw new BadCredentialsException("New password was not confirmed");
             } else if (passwordView.getNewPassword().equals(passwordView.getOldPassword())) {
+                log.error("Old and new passwords are the same");
                 throw new BadCredentialsException("Old and new passwords are the same");
             } else {
                 user.setPassword(passwordEncoder.encode(passwordView.getNewPassword()));
             }
         } else {
+            log.error("Old password doesn't match with the old inserted password");
             throw new BadCredentialsException("Old password doesn't match with the old inserted password");
         }
-
         return passwordView;
     }
 
@@ -497,15 +523,18 @@ class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public RoleView changeGroup(RoleView roleView, String id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with id " + id + " was not found"));
+        User user = userRepository.findById(id).orElseThrow(() ->{
+            log.error("User with id " + id + " was not found");
+            return new UserNotFoundException("User with id " + id + " was not found");
+        });
 
-
-        Role role = roleRepository.findById(roleView.getId()).orElseThrow(() ->
-                new RoleNotFoundException("Role with id " + roleView.getId() + " was not found"));
+        Role role = roleRepository.findById(roleView.getId()).orElseThrow(() ->{
+            log.error("Role with id " + roleView.getId() + " was not found");
+            return new RoleNotFoundException("Role with id " + roleView.getId() + " was not found");
+        });
 
         user.setRole(role);
-
+        log.info("Changed the user with id {} group", id);
         return roleView;
     }
 

@@ -11,4 +11,6 @@ public class UserNotFoundException  extends RuntimeException{
     public UserNotFoundException(){
         super("The following user doesn't exist");
     }
+
+
 }

@@ -4,6 +4,7 @@ import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.EmailService;
 import com.isdintership.epe.service.JobAnniversaryChecker;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @EnableAsync
+@Slf4j
 class JobAnniversaryCheckerImpl implements JobAnniversaryChecker {
 
     private final UserRepository userRepository;

@@ -11,6 +11,7 @@ import com.isdintership.epe.repository.AssessmentRepository;
 import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.service.AssessmentTemplateService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import java.util.Optional;
  * This class manages all the API requests related to AssessmentTemplates objects
  * */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
@@ -41,8 +43,11 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
     @Transactional
     public AssessmentTemplateDto createAssessmentTemplate(AssessmentTemplateDto assessmentTemplateDto) {
 
-        Job job = jobRepository.findByJobTitle(assessmentTemplateDto.getJobTitle()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + assessmentTemplateDto.getJobTitle() + " not found"));
+        Job job = jobRepository.findByJobTitle(assessmentTemplateDto.getJobTitle())
+                .orElseThrow(() -> {
+                    log.error("Job with name " + assessmentTemplateDto.getJobTitle() + " not found");
+                    return new JobNotFoundException("Job with name " + assessmentTemplateDto.getJobTitle() + " not found");
+                });
 
         Assessment assessmentTemplate = new Assessment();
 
@@ -83,7 +88,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         assessmentTemplate.setEvaluationGroups(evaluationGroups);
 
         assessmentRepository.save(assessmentTemplate);
-
+        log.info("Successfuly saved the assessment with id {}", assessmentTemplate.getId());
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
     }
 
@@ -98,9 +103,12 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
     @Transactional
     public AssessmentTemplateDto getAssessmentTemplate(String id) {
 
-        Assessment assessment = assessmentRepository.findById(id).orElseThrow(() ->
-                new AssessmentTemplateNotFoundException("Assessment template with id " + id + " was not found"));
-
+        Assessment assessment = assessmentRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("Assessment template with id " + id + " was not found");
+                    return new AssessmentTemplateNotFoundException("Assessment template with id " + id + " was not found");
+                });
+        log.info("Returning assessment with id {}", id);
         return AssessmentTemplateDto.fromAssessment(assessment);
     }
 
@@ -118,7 +126,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
 
         assessmentTemplates.forEach(assessmentTemplate ->
                 assessmentTemplateDtos.add(AssessmentTemplateDto.fromAssessment(assessmentTemplate)));
-
+        log.info("Returning all assessment templates");
         return assessmentTemplateDtos;
     }
 
@@ -137,23 +145,32 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
     public AssessmentTemplateDto updateAssessmentTemplate
             (String id, AssessmentTemplateDto assessmentTemplateDto) {
 
-        Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(id, true)
-                .orElseThrow(() -> new AssessmentTemplateNotFoundException
-                        ("Assessment template with id " + id + " was not found"));
+        Assessment assessmentTemplate = assessmentRepository
+                .findByIdAndIsTemplate(id, true)
+                .orElseThrow(() -> {
+                    log.error("Assessment template with id " + id + " was not found");
+                    return new AssessmentTemplateNotFoundException
+                            ("Assessment template with id " + id + " was not found");
+                });
 
         if (!assessmentTemplateDto.getTitle().equals(assessmentTemplate.getTitle())) {
 
             Optional<Assessment> existingAssessment =
                     assessmentRepository.findByTitleAndIsTemplate(assessmentTemplateDto.getTitle(), true);
             if (existingAssessment.isPresent()) {
+                log.error("Assessment template with name " + assessmentTemplateDto.getTitle() + " already exists");
                 throw new AssessmentTemplateExistsException
                         ("Assessment template with name " + assessmentTemplateDto.getTitle() + " already exists");
             }
         }
 
 
-        Job job = jobRepository.findByJobTitle(assessmentTemplateDto.getJobTitle()).orElseThrow(() ->
-                new JobNotFoundException("Job with name " + assessmentTemplateDto.getJobTitle() + " was not found"));
+        Job job = jobRepository
+                .findByJobTitle(assessmentTemplateDto.getJobTitle())
+                .orElseThrow(() -> {
+                    log.error("Job with name " + assessmentTemplateDto.getJobTitle() + " was not found");
+                    return new JobNotFoundException("Job with name " + assessmentTemplateDto.getJobTitle() + " was not found");
+                });
 
 
         assessmentTemplate.setTitle(assessmentTemplateDto.getTitle());
@@ -185,7 +202,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
             assessmentTemplate.getEvaluationGroups().add(group);
 
         }
-
+        log.info("Updated assessment template with id {}", assessmentTemplate.getId());
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
 
     }
@@ -201,11 +218,15 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
     @Transactional
     public AssessmentTemplateDto deleteAssessmentTemplate(String id) {
 
-        Assessment assessmentTemplate = assessmentRepository.findByIdAndIsTemplate(id, true).orElseThrow(() ->
-                new AssessmentTemplateNotFoundException("Assessment template with id " + id + " was not found"));
+        Assessment assessmentTemplate = assessmentRepository
+                .findByIdAndIsTemplate(id, true)
+                .orElseThrow(() -> {
+                    log.error("Assessment template with id " + id + " was not found");
+                    return new AssessmentTemplateNotFoundException("Assessment template with id " + id + " was not found");
+                });
 
         assessmentRepository.removeById(id);
-
+        log.info("Deleted assessment template with id {}", id);
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
     }
 

@@ -6,6 +6,7 @@ import com.isdintership.epe.repository.AssessmentInformationRepository;
 import com.isdintership.epe.repository.AssessmentRepository;
 import com.isdintership.epe.service.AssessmentInformationService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  * */
 @Service
 @RequiredArgsConstructor
+@Slf4j
  class AssessmentInformationImpl implements AssessmentInformationService {
 
     private final AssessmentInformationRepository assessmentInformationRepository;
@@ -47,7 +49,7 @@ import java.util.stream.Collectors;
             assessmentInformationDtos.add(assessmentInformationDto);
         }
 
-
+        log.info("Getting all the assessment information");
         return assessmentInformationDtos.stream()
                                         .sorted(Comparator
                                                 .comparing(AssessmentInformationDto::getPerformedTime)
