@@ -9,6 +9,6 @@ app.get('/*', function(req, res) {
 );
 });
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log('Connected to Port'); //Listening on port 8080
+app.listen(process.env.PORT || 4200, () => {
+  console.log('Connected to Port'); //Listening on port 4200
 });
