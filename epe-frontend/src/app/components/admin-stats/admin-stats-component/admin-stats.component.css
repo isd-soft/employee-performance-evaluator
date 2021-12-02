@@ -110,7 +110,7 @@
   background: #DC143C
 }
 
-.material-icons {
+.header-icon {
   position: relative;
   top: 5px;
   right: 5px;
@@ -144,7 +144,7 @@
 
 .refresh-icon:hover {
   transform: rotate(90deg);
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }
 
 .table, table, .filter-field{

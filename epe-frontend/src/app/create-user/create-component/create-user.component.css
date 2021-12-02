@@ -17,7 +17,7 @@
 
 .close-icon:hover {
   transform: rotate(90deg);
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }
 
 
@@ -63,7 +63,7 @@ form {
 }
 
 .submit-button {
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
   font-size: 20px;
   margin: 50px 0px 30px 35%;
 }
@@ -88,7 +88,7 @@ mat-form-field {
 
 .raise:hover {
   /*transform: translateY(-0.1em);*/
-  transform: scale(1.4);
+  transform: scale(1.1);
   cursor: pointer;
 }
 

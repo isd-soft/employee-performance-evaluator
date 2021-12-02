@@ -22,9 +22,8 @@
 }
 
 .raise:hover {
-  transition-duration: 0.4s;
-  transform: scale(1.4);
-  cursor: pointer;
+  transition-duration: 0.2s;
+  transform: scale(1.1);
 }
 
 .mat-button {
