@@ -49,10 +49,21 @@ mat-form-field {
   margin: 0;
 }
 
-.raise:hover {
-  /*transform: translateY(-0.1em);*/
+.raise:hover{
+  transition-duration: 0.2s;
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.add-raise:hover {
+  transition-duration: 0.4s;
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+.mat-button {
+  border: 2px solid black;
+  font-size: 16px;
 }
 
 .material-icons {

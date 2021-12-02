@@ -204,20 +204,12 @@ export class AdminStatsComponent implements AfterViewInit {
           this.count500 = measurement.value;
         }
       });
-      /*setTimeout(() => {
-        this.setResponsesChartOptions1();
-        this.setResponsesChartOptions2();
-      }, 2000);*/
       this.setResponsesChartOptions1();
       this.setResponsesChartOptions2();
 
 
     }, error => {
       this.count500 = 0;
-      /*setTimeout(() => {
-        this.setResponsesChartOptions1();
-        this.setResponsesChartOptions2();
-      }, 2000);*/
       this.setResponsesChartOptions1();
       this.setResponsesChartOptions2();
 

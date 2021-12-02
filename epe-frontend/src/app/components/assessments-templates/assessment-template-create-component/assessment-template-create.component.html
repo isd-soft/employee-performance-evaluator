@@ -35,7 +35,7 @@
         <mat-label>Evaluation group</mat-label>
         <input matInput required formControlName="title">
       </mat-form-field>
-      <i class="material-icons remove-button raise" (click)="removeEvaluationGroup(i)">remove_circle</i>
+      <i class="material-icons remove-button add-raise" (click)="removeEvaluationGroup(i)">remove_circle</i>
 
       <div class="evaluation-fields" formArrayName="evaluationFields">
         <div class="fields"
@@ -47,20 +47,20 @@
             <mat-label>Evaluation field</mat-label>
             <input matInput required formControlName="title">
           </mat-form-field>
-          <i class="material-icons remove-button raise" (click)="removeEvaluationField(group, j, i)">remove_circle</i>
+          <i class="material-icons remove-button add-raise" (click)="removeEvaluationField(group, j, i)">remove_circle</i>
 
           <mat-form-field  appearance="fill" class="evaluation-field">
             <mat-label>Comment</mat-label>
             <input matInput formControlName="comment">
           </mat-form-field>
         </div>
-        <i class="material-icons add-field-button raise" (click)="addNewEvaluationField(group)">add_circle</i>
+        <i class="material-icons add-field-button add-raise" (click)="addNewEvaluationField(group)">add_circle</i>
 
       </div>
 
     </div>
 
-    <i class="material-icons add-group-button raise" (click)="addNewEvaluationGroup()">playlist_add</i>
+    <i class="material-icons add-group-button add-raise" (click)="addNewEvaluationGroup()">playlist_add</i>
   </div>
 
   <button mat-button

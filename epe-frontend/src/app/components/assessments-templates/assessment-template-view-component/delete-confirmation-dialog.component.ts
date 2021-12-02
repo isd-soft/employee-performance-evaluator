@@ -3,7 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'delete-confirmation-dialog',
-  templateUrl: 'delete-confirmation-dialog.component.html'
+  templateUrl: 'delete-confirmation-dialog.component.html',
+  styleUrls: ['./delete-confirmation-dialog.component.css']
 })
 export class DeleteConfirmationDialogComponent {
   message: string = "Are you sure?"

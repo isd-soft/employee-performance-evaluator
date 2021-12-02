@@ -655,3 +655,36 @@ Caused by: org.postgresql.util.PSQLException: ВАЖНО: пользовател
 14:57:38.740 [RMI TCP Connection(1)-172.17.44.60] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 14:57:38.740 [RMI TCP Connection(1)-172.17.44.60] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 14:57:38.742 [RMI TCP Connection(1)-172.17.44.60] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+15:06:07.807 [http-nio-8075-exec-9] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin the total number of assessments
+15:06:07.839 [http-nio-8075-exec-4] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin all assessments from this year
+15:06:07.878 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the total number of team leaders
+15:06:10.828 [http-nio-8075-exec-4] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin the total number of assessments
+15:06:10.880 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the total number of team leaders
+15:06:10.900 [http-nio-8075-exec-8] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin all assessments from this year
+15:06:12.769 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:13.827 [http-nio-8075-exec-7] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:13.838 [http-nio-8075-exec-6] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
+15:06:13.850 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:13.861 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
+15:06:14.212 [http-nio-8075-exec-4] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin the total number of assessments
+15:06:14.249 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the total number of team leaders
+15:06:14.261 [http-nio-8075-exec-6] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin all assessments from this year
+15:06:20.932 [http-nio-8075-exec-8] INFO  c.i.e.s.i.AssessmentTemplateServiceImpl - Returning all assessment templates
+15:06:22.316 [http-nio-8075-exec-9] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin the total number of assessments
+15:06:22.336 [http-nio-8075-exec-2] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the total number of team leaders
+15:06:22.344 [http-nio-8075-exec-7] INFO  c.i.e.s.impl.AssessmentServiceImpl - Gettin all assessments from this year
+15:06:26.346 [http-nio-8075-exec-4] INFO  c.i.e.s.i.AssessmentTemplateServiceImpl - Returning all assessment templates
+15:06:27.947 [http-nio-8075-exec-9] INFO  c.i.e.s.impl.AssessmentServiceImpl - Getting all assessments
+15:06:28.510 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:29.537 [http-nio-8075-exec-5] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:29.546 [http-nio-8075-exec-8] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
+15:06:29.555 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:29.566 [http-nio-8075-exec-4] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
+15:06:33.319 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Deleted user with id 83d92390-c34a-489c-8bf1-42d11e3c589d
+15:06:33.373 [http-nio-8075-exec-7] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:33.385 [http-nio-8075-exec-3] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
+15:06:42.018 [http-nio-8075-exec-8] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:43.050 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:43.056 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
+15:06:43.087 [http-nio-8075-exec-2] INFO  c.i.epe.service.impl.TeamServiceImpl - Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+15:06:43.090 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Getting all users
