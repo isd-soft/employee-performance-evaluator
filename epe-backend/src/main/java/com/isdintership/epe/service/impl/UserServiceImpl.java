@@ -441,7 +441,7 @@ class UserServiceImpl implements UserService {
     }
 
     /**
-     * returns a list of teams where the user with the provided ID is team leader
+     * returns a list of teams where the user with the provided ID is team leader or team member
      * @param id {@code String} containing team leader's ID
      * @return a list of {@code TeamDto} containing each team details where the user with the provided ID is team leader
      * @throws {@code UserNotFoundException} if a user with the provided ID was not found
@@ -450,7 +450,7 @@ class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public List<TeamDto> getTeamByUserId(String id) {
+    public List<TeamDto> getTeamsByUserId(String id) {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> {

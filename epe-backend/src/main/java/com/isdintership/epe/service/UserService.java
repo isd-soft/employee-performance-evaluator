@@ -18,7 +18,7 @@ public interface UserService {
 
     UserDto getUserById(String id);
 
-    List<TeamDto> getTeamByUserId(String id);
+    List<TeamDto> getTeamsByUserId(String id);
 
     UserDto deleteUser(String id);
 

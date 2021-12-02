@@ -1,17 +1,19 @@
 <body class="home" >
 <mat-sidenav-container class="example-container" style="position: absolute" >
   <mat-sidenav class="container-sidenav" *ngIf="jwtUser" mode="side" opened style="min-width: 150px">
-    <img src="./assets/epe-logo-isd.png" class="img-logo" style="cursor: pointer;" routerLink="/feed">
+    <img src="./assets/epe-logo-isd-2.png" class="img-logo" style="cursor: pointer;" routerLink="/feed">
     <mat-nav-list>
       <mat-divider></mat-divider>
 
-      <mat-list-item routerLink="/feed">
-        <mat-icon mat-list-icon >feed</mat-icon>&nbsp;Home
-      </mat-list-item>
+      <a href="/feed">
+        <mat-list-item>
+          <mat-icon mat-list-icon>feed</mat-icon>&nbsp;Home
+        </mat-list-item>
+      </a>
 
 
-      <mat-list-item (click)="redirectTo('/my-profile')">
-        <mat-icon mat-list-icon >person</mat-icon>&nbsp;My Profile
+      <mat-list-item>
+        <mat-icon mat-list-icon >person</mat-icon>&nbsp; <a href="/my-profile"> My Profile </a>
       </mat-list-item>
 
       <mat-list-item routerLink="/assessments">
