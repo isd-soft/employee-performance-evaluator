@@ -5,6 +5,7 @@ import com.isdintership.epe.dto.JobDto;
 import com.isdintership.epe.entity.Job;
 import com.isdintership.epe.repository.JobRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Service
+@Slf4j
 class JobServiceImpl implements JobService {
 
     /**
@@ -37,6 +39,7 @@ class JobServiceImpl implements JobService {
      */
     @Override
     public List<JobDto> getAllJobs() {
+        log.info("Getting the job list");
         return jobRepository.findAll()
                 .stream()
                     .map(job -> new JobDto(job.getJobTitle()))
@@ -52,6 +55,7 @@ class JobServiceImpl implements JobService {
     @Override
     public String addJob(JobDto jobDto) {
         jobRepository.save(new Job(jobDto.getTitle()));
+        log.info("Successfully added new job");
         return "Job successfully added";
     }
 }

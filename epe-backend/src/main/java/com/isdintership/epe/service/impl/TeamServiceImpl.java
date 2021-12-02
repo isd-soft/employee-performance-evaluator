@@ -14,6 +14,7 @@ import com.isdintership.epe.exception.UserNotFoundException;
 import com.isdintership.epe.repository.TeamRepository;
 import com.isdintership.epe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,7 @@ import java.util.*;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class TeamServiceImpl implements TeamService {
 
     /**
@@ -56,14 +58,20 @@ class TeamServiceImpl implements TeamService {
     public String createTeam(TeamDto teamDto) {
         Optional<Team> existingTeam = teamRepository.findByName(teamDto.getName());
         if (existingTeam.isPresent()) {
-                throw new TeamExistException("Team with " + teamDto.getName() + " already exists");
+            log.error("Team with " + teamDto.getName() + " already exists");
+            throw new TeamExistException("Team with " + teamDto.getName() + " already exists");
         }
 
         Team team = new Team();
 
         if (teamDto.getTeamLeader() != null) {
-            User teamLeader = userRepository.findById(teamDto.getTeamLeader().getId()).orElseThrow(
-                    () -> new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found"));
+            User teamLeader = userRepository
+                    .findById(teamDto.getTeamLeader().getId())
+                    .orElseThrow(
+                        () -> {
+                            log.error("User with id " + teamDto.getTeamLeader().getId() + "was not found");
+                            return new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found");
+                        });
             team.setTeamLeader(teamLeader);
         }
 
@@ -74,7 +82,10 @@ class TeamServiceImpl implements TeamService {
 
             for (UserDto memberView : membersViews) {
                 User user = userRepository.findById(memberView.getId()).orElseThrow(
-                        () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
+                        () -> {
+                            log.error("User with id " + memberView.getId() + "was not found");
+                            return new UserNotFoundException("User with id " + memberView.getId() + "was not found");
+                        } );
                 members.add(user);
             }
 
@@ -83,7 +94,7 @@ class TeamServiceImpl implements TeamService {
 
         team.setName(teamDto.getName());
         teamRepository.save(team);
-
+        log.info("Team " + teamDto.getName() + " was created successfully");
         return "Team " + teamDto.getName() + " was created successfully";
     }
 
@@ -98,11 +109,13 @@ class TeamServiceImpl implements TeamService {
     @Transactional
     public TeamDto getTeam(String id) {
 
-        Team team = teamRepository.findById(id).orElseThrow(() ->
-                new TeamNotFoundException("Team with id " + id + " was not found"));
+        Team team = teamRepository.findById(id).orElseThrow(() ->{
+            log.error("Team with id " + id + " was not found");
+            return new TeamNotFoundException("Team with id " + id + " was not found");
+        });
 
+        log.info("Getting team with id {}", id);
         return TeamDto.fromTeam(team);
-
     }
 
     /**
@@ -120,6 +133,7 @@ class TeamServiceImpl implements TeamService {
             teamDtos.add(TeamDto.fromTeam(team));
         }
 
+        log.info("Getting all teams");
         return teamDtos;
     }
 
@@ -140,14 +154,20 @@ class TeamServiceImpl implements TeamService {
     public TeamDto updateTeam(TeamDto teamDto, String id) {
 
         if (teamDto.getName() == null || teamDto.getName().equals("")) {
+            log.error("Team name is empty");
             throw new InvalidTeamNameException("Team name cannot be null or empty");
         }
-        Team team = teamRepository.findById(id).orElseThrow(() ->
-                new TeamNotFoundException("Team with id " + id + " was not found"));
+        Team team = teamRepository
+                .findById(id)
+                .orElseThrow(() ->{
+                    log.error("Team with id " + id + " was not found");
+                    return new TeamNotFoundException("Team with id " + id + " was not found");
+        });
 
         if (!team.getName().equals(teamDto.getName())) {
             Optional<Team> existingTeam = teamRepository.findByName(teamDto.getName());
             if (existingTeam.isPresent()) {
+                log.error("Team with " + teamDto.getName() + " already exists");
                 throw new TeamExistException("Team with " + teamDto.getName() + " already exists");
             }
         }
@@ -155,8 +175,13 @@ class TeamServiceImpl implements TeamService {
         team.setName(teamDto.getName());
 
         if (teamDto.getTeamLeader() != null) {
-            User teamLeader = userRepository.findById(teamDto.getTeamLeader().getId()).orElseThrow(
-                    () -> new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found"));
+            User teamLeader = userRepository
+                    .findById(teamDto.getTeamLeader().getId())
+                    .orElseThrow(
+                        () -> {
+                            log.error("User with id " + teamDto.getTeamLeader().getId() + "was not found");
+                            return new UserNotFoundException("User with id " + teamDto.getTeamLeader().getId() + "was not found");
+                        });
             team.setTeamLeader(teamLeader);
         } else {
             team.setTeamLeader(null);
@@ -167,15 +192,20 @@ class TeamServiceImpl implements TeamService {
             List<UserDto> membersViews = teamDto.getMembers();
 
             for (UserDto memberView : membersViews) {
-                User user = userRepository.findById(memberView.getId()).orElseThrow(
-                        () -> new UserNotFoundException("User with id " + memberView.getId() + "was not found"));
+                User user = userRepository
+                        .findById(memberView.getId())
+                        .orElseThrow(
+                            () -> {
+                                log.error("User with id " + memberView.getId() + "was not found");
+                                return new UserNotFoundException("User with id " + memberView.getId() + "was not found");
+                            });
                 team.getMembers().add(user);
             }
         } else {
             teamDto.setMembers(new ArrayList<>());
         }
 
-
+        log.info("Updated team with id {}", id);
         return TeamDto.fromTeam(team);
 
     }
@@ -191,13 +221,14 @@ class TeamServiceImpl implements TeamService {
     @Transactional
     public String deleteTeam(String id) {
 
-        teamRepository.findById(id).orElseThrow(() ->
-                new TeamNotFoundException("Team with id " + id + " was not found"));
+        teamRepository.findById(id).orElseThrow(() ->{
+            log.error("Team with id " + id + " was not found");
+            return new TeamNotFoundException("Team with id " + id + " was not found");
+        });
 
         teamRepository.deleteById(id);
-
+        log.info("Team with id {} was deleted", id);
         return "Team with id " + id + " was deleted successfully";
-
     }
 
     /**
@@ -238,6 +269,7 @@ class TeamServiceImpl implements TeamService {
                 }
             }
         }
+        log.info("Getting all the team members of team with id {}", id);
         return listToReturn;
     }
 
@@ -262,6 +294,7 @@ class TeamServiceImpl implements TeamService {
                 }
             }
         }
+        log.info("Getting the team leader of the user {}", id);
         if (flag) {
             return teamLeader;
         } else {
@@ -277,7 +310,7 @@ class TeamServiceImpl implements TeamService {
         for (Team team : allTeams) {
             teamLeaders.add(team.getTeamLeader());
         }
-
+        log.info("Getting the total number of team leaders");
         return new CountDto((long) teamLeaders.size());
     }
 }
