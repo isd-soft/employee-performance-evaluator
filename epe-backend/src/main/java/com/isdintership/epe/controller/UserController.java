@@ -51,8 +51,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}/team")
-    public ResponseEntity<List<TeamDto>> getTeam(@PathVariable(name = "id") String id) {
-        return ResponseEntity.ok(userService.getTeamByUserId(id));
+    public ResponseEntity<List<TeamDto>> getTeams(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(userService.getTeamsByUserId(id));
     }
 
     @PostMapping

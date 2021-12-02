@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {JwtService} from "./decoder/decoder-service/jwt.service";
 import {JwtUser} from "./decoder/decoder-model/jwt-user.interface";
 import { interval } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,17 @@ export class AppComponent {
   isSysAdmin?: boolean = false;
 
   constructor(private jwtService: JwtService, private router: Router) {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+   }
+
+   this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+         this.router.navigated = false;
+         window.scrollTo(0, 0);
+      }
+   });
 
     interval(100).subscribe(x => {
       this.jwtUser = this.jwtService.getJwtUser();
@@ -41,9 +52,4 @@ export class AppComponent {
       }
     });
   }
-
-  redirectTo(uri:string){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri]));
- }
 }
