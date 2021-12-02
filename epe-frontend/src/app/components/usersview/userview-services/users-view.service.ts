@@ -12,6 +12,7 @@ import {saveAs} from 'file-saver/dist/FileSaver';
 import {NewUser} from "../userview-models/NewUser";
 import {DatePipe} from "@angular/common";
 import {environment} from "../../../../environments/environment";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class UserviewsServices {
   role? : string;
   id? : string;
 
-  constructor(private http: HttpClient, private jwtService: JwtService) {
+  constructor(private http: HttpClient, private jwtService: JwtService, private notificationService: ToastrService) {
     this.jwtUser = this.jwtService.getJwtUser();
     if(this.jwtUser) {
       this.role = this.jwtUser.role;
@@ -49,7 +50,33 @@ export class UserviewsServices {
 
   deleteUser(userId : string | undefined) {
     //return this.http.delete(this.url + '/' + userId)
-    return this.http.delete(this.url + '/' + userId).subscribe();
+    return this.http.delete(this.url + '/' + userId).subscribe( response => {
+      this.notificationService.success('User was edited successfully',
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    }, error => {
+      let message: string;
+      switch (error.status) {
+        case 400:
+          message = "Bad request. " + error.error.title;
+          break;
+        case 401:
+          message = "Unauthorized"
+          break;
+        case 500:
+          message = "Internal server error"
+          break;
+        default:
+          message = "Unknown error"
+      }
+      this.notificationService.error(message,
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    });
   }
 
   getTeams() {
