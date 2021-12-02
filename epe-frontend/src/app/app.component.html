@@ -1,7 +1,7 @@
 <body class="home" >
 <mat-sidenav-container class="example-container" style="position: absolute" >
   <mat-sidenav class="container-sidenav" *ngIf="jwtUser" mode="side" opened style="min-width: 150px">
-    <img src="./assets/epe-logo-isd-2.png" class="img-logo" style="cursor: pointer;" routerLink="/feed">
+    <img src="./assets/logo.png" class="img-logo" style="cursor: pointer;" routerLink="/feed">
     <mat-nav-list>
       <mat-divider></mat-divider>
 
@@ -12,9 +12,11 @@
       </a>
 
 
-      <mat-list-item>
-        <mat-icon mat-list-icon >person</mat-icon>&nbsp; <a href="/my-profile"> My Profile </a>
-      </mat-list-item>
+      <a href="/my-profile">
+        <mat-list-item>
+          <mat-icon mat-list-icon >person</mat-icon>&nbsp;My Profile
+        </mat-list-item>
+      </a>
 
       <mat-list-item routerLink="/assessments">
         <mat-icon>assessment</mat-icon>&nbsp;&nbsp;&nbsp;My Assessments

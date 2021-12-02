@@ -5,6 +5,7 @@ import { LoginRequest } from '../home-models/login-request.interface';
 import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
+import {environment} from "../../../../environments/environment";
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import { catchError } from 'rxjs/operators';
 })
 export class HomeService {
 
-  url: string = 'api-server/api/auth/';
+  baseUrl = environment.baseUrl;
+  url: string = this.baseUrl + 'api/auth/';
 
   constructor(private http: HttpClient) { }
 

@@ -3,6 +3,7 @@ import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import {User} from '../user-model/User'
+import {environment} from "../../../../environments/environment";
 
 
 @Injectable({
@@ -10,7 +11,8 @@ import {User} from '../user-model/User'
 })
 export class UserService {
 
-  url: string = 'api-server/api/users';
+  baseUrl = environment.baseUrl;
+  url: string = this.baseUrl + 'api/users';
 
 
   constructor(private http: HttpClient) {
