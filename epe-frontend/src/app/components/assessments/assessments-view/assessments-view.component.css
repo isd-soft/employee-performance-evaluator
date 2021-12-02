@@ -93,7 +93,7 @@ p {
 }
 
 .raise:hover{
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -312,5 +312,5 @@ mat-form-field, mat-form-field label {
 
 .close-icon:hover {
   transform: rotate(90deg);
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }

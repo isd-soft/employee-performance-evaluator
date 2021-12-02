@@ -10,6 +10,8 @@ import com.isdintership.epe.security.jwt.JwtTokenProvider;
 import com.isdintership.epe.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,10 +37,10 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 @Service
-@Slf4j
 @RequiredArgsConstructor
 class UserServiceImpl implements UserService {
-
+    private static final Logger log
+            = LoggerFactory.getLogger(UserServiceImpl.class);
     /**
      * {@code JpaRepository} that handles the access to the user table
      */
@@ -127,7 +129,7 @@ class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        log.info("Saving user {}", request.getEmail());
+        log.info("Saving user "+ request.getEmail());
         userRepository.save(user);
 
         return UserDto.fromUser(user);
@@ -159,7 +161,7 @@ class UserServiceImpl implements UserService {
 
         UserDto response = UserDto.fromUser(user);
         response.setToken(token);
-        log.info("Logging user {}", user.getEmail());
+        log.info("Logging user "+ user.getEmail());
         return response;
     }
 
@@ -210,7 +212,7 @@ class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        log.info("Saving user {}", request.getEmail());
+        log.info("Saving user "+ request.getEmail());
 
         return (UserDto.fromUser(userRepository.save(user)));
     }
@@ -248,7 +250,7 @@ class UserServiceImpl implements UserService {
                 userDtos.add(UserDto.fromUser(user));
             }
         }
-        log.info("Getting {}'s buddies", userRepository.findById(id));
+        log.info("Getting "+userRepository.findById(id)+"'s buddies");
         return userDtos;
     }
 
@@ -264,10 +266,10 @@ class UserServiceImpl implements UserService {
     public UserDto getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("The user with this {} does not exist", id);
+                    log.error("The user with this "+id+" does not exist");
                     return new UserNotFoundException("The user with this id does not exist");
                 });
-        log.info("Getting user with id {}", id);
+        log.info("Getting user with id "+ id);
         return UserDto.fromUser(user);
     }
 
@@ -343,7 +345,7 @@ class UserServiceImpl implements UserService {
             });
             user.setRole(role);
         }
-        log.info("Updating user with the id {}", userDto.getId());
+        log.info("Updating user with the id "+ userDto.getId());
         return userDto;
     }
 
@@ -402,7 +404,7 @@ class UserServiceImpl implements UserService {
         for (User user : users) {
             user.setBuddyId(null);
         }
-        log.info("Deleted user with id {}", id);
+        log.info("Deleted user with id "+ id);
         return userDto;
     }
 
@@ -454,7 +456,7 @@ class UserServiceImpl implements UserService {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("The user with this {} does not exist", id);
+                    log.error("The user with this "+id+" does not exist");
                     return new UserNotFoundException("The user with this id does not exist");
                 });
 
@@ -534,7 +536,7 @@ class UserServiceImpl implements UserService {
         });
 
         user.setRole(role);
-        log.info("Changed the user with id {} group", id);
+        log.info("Changed the user with id "+id+" group" );
         return roleView;
     }
 

@@ -19,6 +19,8 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +40,11 @@ import java.util.List;
  *  @since 1.0
  */
 @RequiredArgsConstructor
-@Slf4j
 @Service
 class ExportServiceImpl implements ExportService {
 
+    private static final Logger log
+            = LoggerFactory.getLogger(ExportServiceImpl.class);
     /**
      * {@code JpaRepository} that handles the access to the user table
      */
@@ -70,7 +73,8 @@ class ExportServiceImpl implements ExportService {
     public void exportUserToPdf(HttpServletResponse response, String id) throws IOException {
 
         User userDto = userRepository.findById(id).orElseThrow(() -> {
-            log.error("User with id {} was not found" , id);
+            log.error("User with id " +id+" was not found");
+
             return new UserNotFoundException("User with " + id + "was not found");
         });
         response.setContentType("application/pdf");
@@ -149,7 +153,7 @@ class ExportServiceImpl implements ExportService {
         document.add(bioParagraphKey);
         document.add(emptyRow);
 
-        log.info("File with .pdf extension was successfully generated for user with id = {}", id);
+        log.info("File with .pdf extension was successfully generated for user with id = "+ id);
 
         document.close();
     }
@@ -251,11 +255,11 @@ class ExportServiceImpl implements ExportService {
                                       String id) throws IOException {
 
         AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() -> {
-            log.error("Assessment with id {} was not found", id);
+            log.error("Assessment with id "+id+" was not found");
             return new AssessmentNotFoundException("Assessment with " + id + " was not found");
         }));
         UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessmentDto.getUserId()).orElseThrow(() -> {
-            log.error("User with id {} was not found", assessmentDto.getUserId());
+            log.error("User with id "+assessmentDto.getUserId() +" was not found");
             return new UserNotFoundException("Evaluated user with " + assessmentDto.getUserId() + " was not found");
         }));
         response.setContentType("application/pdf");
@@ -666,7 +670,7 @@ class ExportServiceImpl implements ExportService {
 
         document.add(feedbacksTable);
 
-        log.info("File with .pdf extension was successfully generated for assessment with id = {}", id);
+        log.info("File with .pdf extension was successfully generated for assessment with id = "+ id);
         document.close();
     }
 
@@ -689,7 +693,7 @@ class ExportServiceImpl implements ExportService {
         response.setHeader(headerKey, headerValue);
 
         User user = userRepository.findById(id).orElseThrow(() -> {
-            log.error("User with id {} was not found", id);
+            log.error("User with id "+id+" was not found");
             return new UserNotFoundException("User with " + id + " was not found");
         });
 //        List<User> userList = userRepository.findAll();
@@ -702,7 +706,7 @@ class ExportServiceImpl implements ExportService {
         workbook.write(outputStream);
         workbook.close();
 
-        log.info("File with extension with .xlsx was successfully generated for user with id = {}", id);
+        log.info("File with extension with .xlsx was successfully generated for user with id = {}"+ id);
 
         outputStream.close();
 
@@ -751,11 +755,11 @@ class ExportServiceImpl implements ExportService {
     public void exportAssessmentToExcel(HttpServletResponse response, String id) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
         AssessmentDto assessment = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() -> {
-            log.error("Assessment with id {} was not found", id);
+            log.error("Assessment with id "+id+" was not found");
             return new AssessmentNotFoundException("Assessment with id " + id + " was not found");
         }));
         UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessment.getUserId()).orElseThrow(() -> {
-            log.error("User with id {} was not found", assessment.getUserId());
+            log.error("User with id "+assessment.getUserId()+" was not found");
             return new UserNotFoundException("User with " + id + " was not found");
         }));
         response.setContentType("application/octet-stream");
@@ -928,7 +932,7 @@ class ExportServiceImpl implements ExportService {
         workbook.write(outputStream);
         workbook.close();
 
-        log.info("File with extension with .xlsx was successfully generated for assessment with id = {}", id);
+        log.info("File with extension with .xlsx was successfully generated for assessment with id = "+ id);
 
         outputStream.close();
     }

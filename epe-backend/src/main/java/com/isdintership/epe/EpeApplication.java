@@ -12,5 +12,4 @@ public class EpeApplication {
 		SpringApplication.run(EpeApplication.class, args);
 	}
 
-
 }

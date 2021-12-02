@@ -15,6 +15,8 @@ import com.isdintership.epe.repository.TeamRepository;
 import com.isdintership.epe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,9 +32,10 @@ import java.util.*;
  */
 @Service
 @RequiredArgsConstructor
-@Slf4j
 class TeamServiceImpl implements TeamService {
 
+    private static final Logger log
+            = LoggerFactory.getLogger(TeamServiceImpl.class);
     /**
      * {@code JpaRepository} that handles the access to the user table
      */
@@ -113,8 +116,7 @@ class TeamServiceImpl implements TeamService {
             log.error("Team with id " + id + " was not found");
             return new TeamNotFoundException("Team with id " + id + " was not found");
         });
-
-        log.info("Getting team with id {}", id);
+        log.info("Getting team with id " + id);
         return TeamDto.fromTeam(team);
     }
 
@@ -205,7 +207,7 @@ class TeamServiceImpl implements TeamService {
             teamDto.setMembers(new ArrayList<>());
         }
 
-        log.info("Updated team with id {}", id);
+        log.info("Updated team with id "+ id);
         return TeamDto.fromTeam(team);
 
     }
@@ -227,7 +229,7 @@ class TeamServiceImpl implements TeamService {
         });
 
         teamRepository.deleteById(id);
-        log.info("Team with id {} was deleted", id);
+        log.info("Team with id "+  id + " was deleted");
         return "Team with id " + id + " was deleted successfully";
     }
 
@@ -269,7 +271,7 @@ class TeamServiceImpl implements TeamService {
                 }
             }
         }
-        log.info("Getting all the team members of team with id {}", id);
+        log.info("Getting all the team members of team with id "+ id);
         return listToReturn;
     }
 
@@ -294,7 +296,7 @@ class TeamServiceImpl implements TeamService {
                 }
             }
         }
-        log.info("Getting the team leader of the user {}", id);
+        log.info("Getting the team leader of the user "+ id);
         if (flag) {
             return teamLeader;
         } else {

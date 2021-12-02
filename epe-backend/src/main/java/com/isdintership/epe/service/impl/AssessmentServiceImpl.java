@@ -10,6 +10,8 @@ import com.isdintership.epe.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.jni.Local;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +25,10 @@ import java.util.*;
  * @author Maxim Gribencicov, Adrian Girlea, Nicolai Morari
  * */
 @Service
-@Slf4j
 @RequiredArgsConstructor
 class AssessmentServiceImpl implements AssessmentService {
-
+    private static final Logger log
+            = LoggerFactory.getLogger(AssessmentServiceImpl.class);
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
@@ -121,7 +123,7 @@ class AssessmentServiceImpl implements AssessmentService {
 
         AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessment);
 //        emailService.sendEmail(assessmentDto);
-        log.info("Started assessment with id {}", assessment.getId());
+        log.info("Started assessment with id "+ assessment.getId());
         return assessmentDto;
     }
 
@@ -146,13 +148,13 @@ class AssessmentServiceImpl implements AssessmentService {
         User creationUser = userRepository
                 .findById(assessmentTemplateDto.getCreatedUserById())
                 .orElseThrow(() -> {
-                    log.error("User with id {} does not exist", assessmentTemplateDto.getCreatedUserById());
+                    log.error("User with id "+assessmentTemplateDto.getCreatedUserById()+" does not exist");
                     return new UserNotFoundException("User with id" +  assessmentTemplateDto.getCreatedUserById() +" does not exist");
 
                 });
         assessmentInformation.setPerformedByUser(creationUser);
         assessmentInformation.setPerformedTime(assessment.getStartDate());
-        log.info("Getting information about assessment with id {}", assessment.getId());
+        log.info("Getting information about assessment with id "+ assessment.getId());
         return assessmentInformation;
     }
 
@@ -173,7 +175,7 @@ class AssessmentServiceImpl implements AssessmentService {
                     log.error("Assessment with id " + id + " was not found");
                     return new AssessmentNotFoundException("Assessment with id " + id + " was not found");
                 });
-        log.info("Getting information about assessment with id {}", id);
+        log.info("Getting information about assessment with id "+ id);
         return AssessmentDto.fromAssessment(assessment);
     }
 
@@ -198,7 +200,7 @@ class AssessmentServiceImpl implements AssessmentService {
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
         assessmentRepository.findByUser(user)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
-        log.info("Getting all assessments for the user with id {}", userId);
+        log.info("Getting all assessments for the user with id "+ userId);
         return assessmentDtos;
     }
 
@@ -241,7 +243,7 @@ class AssessmentServiceImpl implements AssessmentService {
             throw new StatusNotFoundException("Assessment status " + status + " was not found");
         }
 
-        log.info("Getting all assessments for user with id {} and status {}", id, status);
+        log.info("Getting all assessments for user with id "+id+" and status "+status );
         return assessmentDtos;
     }
 
@@ -290,7 +292,7 @@ class AssessmentServiceImpl implements AssessmentService {
         List<AssessmentDto> assessmentDtos = new ArrayList<>();
         assessmentRepository.findByUserInAndStatusIn(assignedUsers, statuses)
                 .forEach(assessment -> assessmentDtos.add(AssessmentDto.fromAssessment(assessment)));
-        log.info("Getting all assigned assessments for user with id {} and status {}", userId, status);
+        log.info("Getting all assigned assessments for user with id "+userId+" and status " + status);
         return assessmentDtos;
     }
 
@@ -329,7 +331,7 @@ class AssessmentServiceImpl implements AssessmentService {
         feedback.setContext(feedbackDto.getContext());
         feedback.setAssessment(assessment);
         assessment.getFeedbacks().add(feedback);
-        log.info("Added new feedback with id {}", feedback.getId());
+        log.info("Added new feedback with id "+ feedback.getId());
         return FeedbackDto.fromFeedback(feedback);
     }
 
@@ -375,7 +377,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         emailService.sendEmail(AssessmentDto.fromAssessment(assessment));
-        log.info("Evaluated assessment with id {}", assessmentId);
+        log.info("Evaluated assessment with id "+ assessmentId);
         return AssessmentDto.fromAssessment(assessment);
     }
 
@@ -395,7 +397,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformation.setEvaluatedUserId(assessment.getUser().getId());
         assessmentInformation.setEvaluatedUserFullName(assessment.getUser().getFirstname() + " " + assessment.getUser().getLastname());
         User user = userRepository.findById(assessmentDto.getStartedById()).orElseThrow(() -> {
-            log.error("Assessment started by user with id {} with id was not found", assessmentDto.getStartedById());
+            log.error("Assessment started by user with id "+assessmentDto.getStartedById()+" with id was not found" );
             return new UserNotFoundException();
         });
         assessmentInformation.setPerformedByUser(user);
@@ -733,7 +735,7 @@ class AssessmentServiceImpl implements AssessmentService {
                 assessment.getFeedbacks().add(feedback);
             }
         }
-        log.info("Updating user with id {}", assessment.getId());
+        log.info("Updating user with id "+ assessment.getId());
         return AssessmentDto.fromAssessment(assessment);
     }
 
@@ -765,7 +767,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         assessmentRepository.removeById(id);
-        log.info("Deleted assessment with id ", assessment.getId());
+        log.info("Deleted assessment with id " + assessment.getId());
         return AssessmentDto.fromAssessment(assessment);
     }
 

@@ -148,7 +148,7 @@ body{
 
 .close-icon:hover {
   transform: rotate(90deg);
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }
 
 .title{

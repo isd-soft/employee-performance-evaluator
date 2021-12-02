@@ -5,6 +5,8 @@ import com.isdintership.epe.service.EmailService;
 import com.isdintership.epe.service.JobAnniversaryChecker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,12 +29,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @EnableAsync
-@Slf4j
 class JobAnniversaryCheckerImpl implements JobAnniversaryChecker {
 
     private final UserRepository userRepository;
     private final EmailService emailService;
-
+    private static final Logger log
+            = LoggerFactory.getLogger(JobAnniversaryCheckerImpl.class);
     /**
      * Method executed asynchronous every Sunday on 00:00 that checks if there are any
      * employees that have a employment date anniversary in the next month and sends a

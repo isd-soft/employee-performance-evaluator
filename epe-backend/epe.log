@@ -449,3 +449,63 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x16
 2021-12-02 12:14:25.363  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting Optional[User{email='user@mail.ru', firstname='John', lastname='Doe', birthDate=2000-12-31, employmentDate=2001-02-13, phoneNumber='069213232', job=com.isdintership.epe.entity.Job@32, bio='new user', password='$2a$10$x4Rn71pVXOAI2hbQk.6GNuZeKiD.SNQ5ns.qbTU831f1HixcltCSu', role=com.isdintership.epe.entity.Role@7060c05a, team=null, buddyId=692de74b-caf5-46b5-b5a5-37621c36e4fc}]'s buddies
 2021-12-02 12:14:29.768  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
 2021-12-02 12:14:29.781  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:17:36.660  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:17:37.919  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:17:37.922  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:17:37.955  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:17:37.962  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:12.158  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:13.226  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:13.227  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:13.273  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:13.280  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:13.721  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:28:15.376  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:28:17.412  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:28:18.246  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:18.272  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:19.459  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status ACTIVE
+2021-12-02 12:28:19.460  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assigned assessments for user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc and status INACTIVE
+2021-12-02 12:28:21.645  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:22.667  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:22.673  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:22.685  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:22.693  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:22.965  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 12:28:22.977  INFO 12916 --- [http-nio-8075-exec-1] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:22.980  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting all teams
+2021-12-02 12:28:22.992  INFO 12916 --- [http-nio-8075-exec-5] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:23.658  INFO 12916 --- [http-nio-8075-exec-9] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:24.678  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:24.688  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:24.692  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:24.708  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:26.199  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting Optional[User{email='asdsadsadsad@mail.ru', firstname='Ssdsad', lastname='Sdasdsad', birthDate=2021-11-17, employmentDate=2021-11-18, phoneNumber='069770125', job=com.isdintership.epe.entity.Job@33, bio='here goes your bio', password='$2a$10$ZwhF.KkKCjU.jzD/eSCATOjWjHJPG7RIOTWIidNdrFCGRO0aKOKgS', role=com.isdintership.epe.entity.Role@2727b30c, team=null, buddyId=null}]'s buddies
+2021-12-02 12:28:28.103  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:28:28.116  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:28:28.881  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting user with id e8dd3e70-cfef-4b98-ab38-8f98cb58cf87
+2021-12-02 12:28:28.899  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentServiceImpl       : Getting all assessments for the user with id e8dd3e70-cfef-4b98-ab38-8f98cb58cf87
+2021-12-02 12:28:32.370  INFO 12916 --- [http-nio-8075-exec-9] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:28:32.382  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:28:35.908  INFO 12916 --- [http-nio-8075-exec-10] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:28:54.514  INFO 12916 --- [http-nio-8075-exec-8] c.i.e.s.i.AssessmentTemplateServiceImpl  : Successfuly saved the assessment with id 3247f3be-7c42-4c85-9807-1d523b5183b0
+2021-12-02 12:28:54.618  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:29:05.080  INFO 12916 --- [http-nio-8075-exec-4] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:29:07.661  INFO 12916 --- [http-nio-8075-exec-10] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:07.691  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.UserServiceImpl     : Getting user with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:08.667  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.TeamServiceImpl     : Getting all the team members of team with id 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:09.700  INFO 12916 --- [http-nio-8075-exec-2] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:09.702  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:29:09.731  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:09.735  INFO 12916 --- [http-nio-8075-exec-4] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:29:11.185  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:29:11.207  INFO 12916 --- [http-nio-8075-exec-7] c.i.e.s.i.AssessmentTemplateServiceImpl  : Returning all assessment templates
+2021-12-02 12:29:12.890  INFO 12916 --- [http-nio-8075-exec-8] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:12.893  INFO 12916 --- [http-nio-8075-exec-6] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:29:12.909  INFO 12916 --- [http-nio-8075-exec-3] c.i.epe.service.impl.TeamServiceImpl     : Getting the team leader of the user 692de74b-caf5-46b5-b5a5-37621c36e4fc
+2021-12-02 12:29:12.917  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Getting information about assessment with id 50c6b7d6-c518-4623-a9fb-86680237f559
+2021-12-02 12:29:12.920  INFO 12916 --- [http-nio-8075-exec-7] c.i.epe.service.impl.UserServiceImpl     : Getting all users
+2021-12-02 12:29:12.933  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentServiceImpl       : Started assessment with id 50c6b7d6-c518-4623-a9fb-86680237f559
+2021-12-02 12:29:14.226  INFO 12916 --- [http-nio-8075-exec-5] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:30:10.343  INFO 12916 --- [http-nio-8075-exec-1] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information
+2021-12-02 12:31:21.452  INFO 12916 --- [http-nio-8075-exec-2] c.i.e.s.impl.AssessmentInformationImpl   : Getting all the assessment information

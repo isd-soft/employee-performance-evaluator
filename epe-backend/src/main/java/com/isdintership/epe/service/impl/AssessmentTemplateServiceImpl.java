@@ -12,6 +12,8 @@ import com.isdintership.epe.repository.JobRepository;
 import com.isdintership.epe.service.AssessmentTemplateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +27,10 @@ import java.util.Optional;
  * This class manages all the API requests related to AssessmentTemplates objects
  * */
 @Service
-@Slf4j
 @RequiredArgsConstructor
 class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
-
+    private static final Logger log
+            = LoggerFactory.getLogger(AssessmentTemplateServiceImpl.class);
     private final JobRepository jobRepository;
     private final AssessmentRepository assessmentRepository;
 
@@ -88,7 +90,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
         assessmentTemplate.setEvaluationGroups(evaluationGroups);
 
         assessmentRepository.save(assessmentTemplate);
-        log.info("Successfuly saved the assessment with id {}", assessmentTemplate.getId());
+        log.info("Successfully saved the assessment with id "+ assessmentTemplate.getId());
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
     }
 
@@ -108,7 +110,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
                     log.error("Assessment template with id " + id + " was not found");
                     return new AssessmentTemplateNotFoundException("Assessment template with id " + id + " was not found");
                 });
-        log.info("Returning assessment with id {}", id);
+        log.info("Returning assessment with id "+ id);
         return AssessmentTemplateDto.fromAssessment(assessment);
     }
 
@@ -202,7 +204,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
             assessmentTemplate.getEvaluationGroups().add(group);
 
         }
-        log.info("Updated assessment template with id {}", assessmentTemplate.getId());
+        log.info("Updated assessment template with id "+ assessmentTemplate.getId());
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
 
     }
@@ -226,7 +228,7 @@ class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
                 });
 
         assessmentRepository.removeById(id);
-        log.info("Deleted assessment template with id {}", id);
+        log.info("Deleted assessment template with id "+ id);
         return AssessmentTemplateDto.fromAssessment(assessmentTemplate);
     }
 
