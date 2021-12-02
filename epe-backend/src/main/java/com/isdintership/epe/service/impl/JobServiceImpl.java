@@ -6,6 +6,8 @@ import com.isdintership.epe.entity.Job;
 import com.isdintership.epe.repository.JobRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,9 +24,10 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Service
-@Slf4j
 class JobServiceImpl implements JobService {
 
+    private static final Logger log
+            = LoggerFactory.getLogger(JobServiceImpl.class);
     /**
      * instance of {@code JobRepository},
      * which is a {@code JpaRepository} and controls access to the database

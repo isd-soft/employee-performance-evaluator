@@ -8,6 +8,8 @@ import com.isdintership.epe.service.EmailService;
 import com.isdintership.epe.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -26,9 +28,10 @@ import java.util.Set;
  * */
 @Service
 @RequiredArgsConstructor
-@Slf4j
 class EmailServiceImpl implements EmailService {
 
+    private static final Logger log
+            = LoggerFactory.getLogger(EmailServiceImpl.class);
     private final JavaMailSender javaMailSender;
     private final UserRepository userRepository;
 
@@ -63,7 +66,7 @@ class EmailServiceImpl implements EmailService {
                     "May the force be with you!");
 //            javaMailSender.send(mailMessage);
         });
-        log.info("Sending email assessment notification email to user {}", userId);
+        log.info("Sending email assessment notification email to user "+ userId);
     }
 
     /**
@@ -84,7 +87,7 @@ class EmailServiceImpl implements EmailService {
                     "The assessment on the user " + user.getFirstname() + " " + user.getLastname() +
                     "will start soon \n" +
                     "Have a good day!");
-            log.info("Sending email assessment notification email to user {}", person.getId());
+            log.info("Sending email assessment notification email to user "+ person.getId());
 //            javaMailSender.send(mailMessage);
         });
 
