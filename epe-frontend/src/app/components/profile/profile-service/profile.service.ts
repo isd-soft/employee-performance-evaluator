@@ -4,19 +4,21 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  profileUrl = 'api-server/api/users';
+  baseUrl = environment.baseUrl;
+  profileUrl = this.baseUrl + 'api/users';
 
   jwtUser: JwtUser
 
   constructor(private http: HttpClient,
-              private jwtService: JwtService) { 
-  
+              private jwtService: JwtService) {
+
     this.jwtUser = this.jwtService.getJwtUser();
   }
 

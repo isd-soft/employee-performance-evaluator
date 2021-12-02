@@ -5,13 +5,15 @@ import {AssessmentInformation} from "../line-feed-models/AssessmentInformation";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
 
-  usersUrl: string = 'api-server/api/users/'
+  baseUrl = environment.baseUrl;
+  usersUrl: string = this.baseUrl + 'api/users/';
 
   constructor(private httpClient: HttpClient,
               private router: Router,

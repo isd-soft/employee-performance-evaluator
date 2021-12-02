@@ -7,13 +7,15 @@ import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssessmentsService {
 
-  assessmentsUrl: string = 'api-server/api/';
+  baseUrl = environment.baseUrl;
+  assessmentsUrl: string = this.baseUrl + 'api/';
 
 
   constructor(private http: HttpClient,
@@ -85,7 +87,7 @@ export class AssessmentsService {
   }
 
   getAllAssessments(){
-    return this.http.get("api-server/api/assessments");
+    return this.http.get(this.assessmentsUrl + "assessments");
   }
 
   errorHandler(error: HttpErrorResponse){

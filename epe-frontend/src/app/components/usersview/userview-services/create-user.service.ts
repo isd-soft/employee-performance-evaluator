@@ -7,12 +7,15 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {NewUser} from "../userview-models/NewUser";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({providedIn : 'root'})
 export class CreateUserService {
 
-  url: string = 'api-server/api/users';
-  url2: string = 'api-server/api/auth/';
+  baseUrl = environment.baseUrl;
+
+  url: string = this.baseUrl + 'api/users';
+  url2: string = this.baseUrl + 'api/auth/';
 
 
   jwtUser?: JwtUser;

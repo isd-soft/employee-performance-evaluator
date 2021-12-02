@@ -9,15 +9,17 @@ import { JwtUser } from 'src/app/decoder/decoder-model/jwt-user.interface';
 import { JwtService } from 'src/app/decoder/decoder-service/jwt.service';
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 
 @Injectable({providedIn : 'root'})
 export class EditService {
 
-  url: string = 'api-server/api/auth/';
-  url2: string = 'api-server/api/users';
+  baseUrl = environment.baseUrl;
 
-  url3: string = 'api-server/api/roles';
+  url: string = this.baseUrl + 'api/auth/';
+  url2: string = this.baseUrl + 'api/users';
+  url3: string = this.baseUrl + 'api/roles';
 
   jwtUser?: JwtUser;
   id? : string
