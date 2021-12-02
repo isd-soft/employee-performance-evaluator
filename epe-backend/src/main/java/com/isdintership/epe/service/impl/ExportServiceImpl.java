@@ -13,6 +13,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -28,20 +29,50 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * {@code ExportServiceImpl} is a service class that implements the {@code ExportService} interface.
+ *
+ *  <p> This class manages all the requests related to generation of files with .xlsx or .pdf .
+ *
+ *  @author Andrei Chetrean
+ *  @since 1.0
+ */
 @RequiredArgsConstructor
+@Slf4j
 @Service
-public class ExportServiceImpl implements ExportService {
+class ExportServiceImpl implements ExportService {
 
+    /**
+     * {@code JpaRepository} that handles the access to the user table
+     */
     private final UserRepository userRepository;
+
+    /**
+     * {@code JpaRepository} that handles the assessment to the user table
+     */
     private final AssessmentRepository assessmentRepository;
+
+    /**
+     * {@code XSSFSheet} that handles the creation of new page and each row in a .xlsx file.
+     */
     private XSSFSheet sheet;
 
+    /**
+     * generates a .pdf file with the data of the user whose id was passed as the second parameter
+     * @param response {@code HttpServletResponse} object that will return the generated file
+     * @param id {@code String} id of the user to be exported to .pdf file
+     * @return a generated .pdf file
+     * @throws {@code UserNotFoundException} if a user with the provided id was not found
+     * @since 1.0
+     */
     @Override
     @Transactional
     public void exportUserToPdf(HttpServletResponse response, String id) throws IOException {
 
-        User userDto = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with " + id + "was not found"));
+        User userDto = userRepository.findById(id).orElseThrow(() -> {
+            log.error("User with id {} was not found" , id);
+            return new UserNotFoundException("User with " + id + "was not found");
+        });
         response.setContentType("application/pdf");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=test.pdf";
@@ -117,9 +148,18 @@ public class ExportServiceImpl implements ExportService {
         document.add(emptyRow);
         document.add(bioParagraphKey);
         document.add(emptyRow);
+
+        log.info("File with .pdf extension was successfully generated for user with id = {}", id);
+
         document.close();
     }
 
+    /**
+     * generates a .pdf file with the data of all users stored in a table
+     * @param response {@code HttpServletResponse} object that will return the generated file
+     * @return a generated .pdf file
+     * @since 1.0
+     */
     @Override
     @Transactional
     public void exportAllUsersToPdf(HttpServletResponse response) throws IOException {
@@ -191,18 +231,33 @@ public class ExportServiceImpl implements ExportService {
 
         document.add(table);
 
+        log.info("File with .pdf extension was successfully generated for all users");
+
         document.close();
     }
 
+    /**
+     * generates a .pdf file with the data of the assessment whose id was passed as the second parameter
+     * @param response {@code HttpServletResponse} object that will return the generated file
+     * @param id {@code String} id of the assessment to be exported to .pdf file
+     * @return a generated .pdf file
+     * @throws {@code AssessmentNotFoundException} if an assessment with the provided id was not found
+     * @throws {@code UserNotFoundException} if a user with the id stored in assessment dto was not found
+     * @since 1.0
+     */
     @Override
     @Transactional
     public void exportAssessmentToPdf(HttpServletResponse response,
                                       String id) throws IOException {
 
-        AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with " + id + " was not founed")));
-        UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessmentDto.getUserId()).orElseThrow(() ->
-                new UserNotFoundException("Evaluated user with " + id + " was not founed")));
+        AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() -> {
+            log.error("Assessment with id {} was not found", id);
+            return new AssessmentNotFoundException("Assessment with " + id + " was not found");
+        }));
+        UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessmentDto.getUserId()).orElseThrow(() -> {
+            log.error("User with id {} was not found", assessmentDto.getUserId());
+            return new UserNotFoundException("Evaluated user with " + assessmentDto.getUserId() + " was not found");
+        }));
         response.setContentType("application/pdf");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=users.pdf";
@@ -611,9 +666,18 @@ public class ExportServiceImpl implements ExportService {
 
         document.add(feedbacksTable);
 
+        log.info("File with .pdf extension was successfully generated for assessment with id = {}", id);
         document.close();
     }
 
+    /**
+     * generates a .xlsx file with the data of the user whose id was passed as the first parameter
+     * @param id {@code String} id of the user to be exported to .xlsx file
+     * @param response {@code HttpServletResponse} object that will return the generated file
+     * @return a generated .xlsxfile
+     * @throws {@code UserNotFoundException} if a user with the provided id was not found
+     * @since 1.0
+     */
     @Override
     @Transactional
     public void export(String id, HttpServletResponse response) throws IOException {
@@ -624,8 +688,10 @@ public class ExportServiceImpl implements ExportService {
         String headerValue = "attachment; filename=users.xlsx";
         response.setHeader(headerKey, headerValue);
 
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User with " + id + " was not found"));
+        User user = userRepository.findById(id).orElseThrow(() -> {
+            log.error("User with id {} was not found", id);
+            return new UserNotFoundException("User with " + id + " was not found");
+        });
 //        List<User> userList = userRepository.findAll();
 //        writeHeaderLine(workbook);
 //        writeDataLines(userList, workbook);
@@ -636,10 +702,18 @@ public class ExportServiceImpl implements ExportService {
         workbook.write(outputStream);
         workbook.close();
 
+        log.info("File with extension with .xlsx was successfully generated for user with id = {}", id);
+
         outputStream.close();
 
     }
 
+    /**
+     * generates a .xlsx file with the data of all users
+     * @param response {@code HttpServletResponse} object that will return the generated file
+     * @return a generated .xlsx file
+     * @since 1.0
+     */
     @Override
     @Transactional
     public void exportAllUsersToExcel(HttpServletResponse response) throws IOException {
@@ -657,18 +731,33 @@ public class ExportServiceImpl implements ExportService {
         workbook.write(outputStream);
         workbook.close();
 
+        log.info("File with extension with .xlsx was successfully generated for all users");
+
         outputStream.close();
 
     }
 
+    /**
+     * generates a .xlsx file with the data of the assessment whose id was passed as the second parameter
+     * @param response {@code HttpServletResponse} object that will return the generated file
+     * @param id {@code String} id of the assessment to be exported to .xlsx file
+     * @return a generated .xlsx file
+     * @throws {@code AssessmentNotFoundException} if an assessment with the provided id was not found
+     * @throws {@code UserNotFoundException} if a user with the id stored in assessment dto was not found
+     * @since 1.0
+     */
     @Override
     @Transactional
     public void exportAssessmentToExcel(HttpServletResponse response, String id) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
-        AssessmentDto assessment = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() ->
-                new AssessmentNotFoundException("Assessment with " + id + " was not founed")));
-        UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessment.getUserId()).orElseThrow(() ->
-                new UserNotFoundException("User with " + id + " was not found")));
+        AssessmentDto assessment = AssessmentDto.fromAssessment(assessmentRepository.findById(id).orElseThrow(() -> {
+            log.error("Assessment with id {} was not found", id);
+            return new AssessmentNotFoundException("Assessment with id " + id + " was not found");
+        }));
+        UserDto evaluatedUser = UserDto.fromUser(userRepository.findById(assessment.getUserId()).orElseThrow(() -> {
+            log.error("User with id {} was not found", assessment.getUserId());
+            return new UserNotFoundException("User with " + id + " was not found");
+        }));
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=users.xlsx";
@@ -839,9 +928,18 @@ public class ExportServiceImpl implements ExportService {
         workbook.write(outputStream);
         workbook.close();
 
+        log.info("File with extension with .xlsx was successfully generated for assessment with id = {}", id);
+
         outputStream.close();
     }
 
+    /**
+     * populates the .xlsx file with the data of user who was passed as the second parameter
+     * @param workbook {@code XSSFWorkbook} object that will return populated .xlsx file
+     * @param user {@code User} to be inserted to .xlsx file
+     * @return populated .xlsx file
+     * @since 1.0
+     */
     private void writeData(XSSFWorkbook workbook, User user) {
         sheet = workbook.createSheet("Users");
 
@@ -889,8 +987,18 @@ public class ExportServiceImpl implements ExportService {
 
         createCell(row,0, "Bio", styleKey);
         createCell(row,1, user.getBio(),styleValue);
+
+        log.info("XXSFWorkbook was successfully populated");
     }
 
+    /**
+     * creates a cell template which will be used for each cell in .xlsx files.
+     * @param row {@code Row} object that will set the row of cell in .xlsx file
+     * @param columnCount {@code int} object that will set the row of cell in .xlsx file
+     * @param style {@code CellStyle} object that will set the style of cell in .xlsx file
+     * @return cell template
+     * @since 1.0
+     */
     private void createCell(org.apache.poi.ss.usermodel.Row row, int columnCount, Object value, CellStyle style) {
         sheet.autoSizeColumn(columnCount);
         org.apache.poi.ss.usermodel.Cell cell = row.createCell(columnCount);
@@ -902,8 +1010,16 @@ public class ExportServiceImpl implements ExportService {
             cell.setCellValue((String) value);
         }
         cell.setCellStyle(style);
+
+        log.info("Cell template was successfully accessed");
     }
 
+    /**
+     * populates the header line for a .xlsx file for all users' data
+     * @param workbook {@code XSSFWorkbook} object that will return populated .xlsx file
+     * @return populated .xlsx file
+     * @since 1.0
+     */
     private void writeHeaderLine(XSSFWorkbook workbook) {
         sheet = workbook.createSheet("Users");
 
@@ -924,9 +1040,16 @@ public class ExportServiceImpl implements ExportService {
         createCell(row, 6, "Role", style);
         createCell(row, 7, "Bio", style);
 
-
+        log.info("XXSFWorkbook was successfully populated");
     }
 
+    /**
+     * populates a .xlsx file if data of all users
+     * @param workbook {@code XSSFWorkbook} object that will return populated .xlsx file
+     * @param users {@code List<User>} object that provides data of all user to be populated in .xlsx file
+     * @return populated .xlsx file
+     * @since 1.0
+     */
     private void writeDataLines(List<User> users, XSSFWorkbook workbook) {
         int rowCount = 1;
 
@@ -948,5 +1071,6 @@ public class ExportServiceImpl implements ExportService {
             createCell(row, columnCount++, user.getJob().getJobTitle(), style);
             createCell(row, columnCount++, user.getBio(), style);
         }
+        log.info("XXSFWorkbook was successfully populated");
     }
 }
