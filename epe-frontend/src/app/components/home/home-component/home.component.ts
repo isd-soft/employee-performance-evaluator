@@ -88,7 +88,7 @@ export class HomeComponent {
           setTimeout(()=> {
             this.jwtService.storeJWT(response.token);
             window.location.href = '/dashboard';
-           }, 500);
+           }, 100);
         }
        }, error => {
          this.toastr.error('Something went wrong .. </br> Please check your credentials','', {
