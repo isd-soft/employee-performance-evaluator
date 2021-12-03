@@ -2,28 +2,28 @@
 
   <mat-tab label="System monitoring">
     <ng-template matTabContent>
-      <div class="header">
+      <div class="stats-header">
         <div class="title">
           Monitoring Dashboard
         </div>
         <div class="specifications">
           <div class="specification">
-            <i class="material-icons header-icon">laptop_chromebook</i> Server: <span class="bold">{{serverStatus}}</span>
+            <i class="material-icons stats-header-icon">laptop_chromebook</i> Server: <span class="bold">{{serverStatus}}</span>
           </div>
           <div class="specification">
-            <i class="material-icons header-icon">storage</i>DB: <span class="bold">{{DBName}}</span> -
+            <i class="material-icons stats-header-icon">storage</i>DB: <span class="bold">{{DBName}}</span> -
             <span class="bold">{{DBStatus}}</span>
           </div>
           <div class="specification">
-            <i class="material-icons header-icon">album</i>Disk usage:
+            <i class="material-icons stats-header-icon">album</i>Disk usage:
             <span class="bold">{{diskUsage | number:'3.0-2'}}</span>
             of <span class="bold">{{diskTotalSpace | number:'3.0-2'}}</span> Gb
           </div>
           <div class="specification">
-            <i class="material-icons header-icon">memory</i>Processors: <span class="bold">{{processorsCount}}</span>
+            <i class="material-icons stats-header-icon">memory</i>Processors: <span class="bold">{{processorsCount}}</span>
           </div>
           <div class="specification">
-            <i class="material-icons header-icon">watch_later</i>Up Time: <span class="bold">{{uptime * 1000 | date:'H:mm:ss' : 'UTC'}}</span>
+            <i class="material-icons stats-header-icon">watch_later</i>Up Time: <span class="bold">{{uptime * 1000 | date:'H:mm:ss' : 'UTC'}}</span>
           </div>
 
         </div>

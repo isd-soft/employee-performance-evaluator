@@ -56,11 +56,13 @@ export class CreateUserComponent implements OnInit {
 
   createUser() {
     let datePipe = new DatePipe('en-US');
-    // @ts-ignore
-    this.newUser?.value.birthDate = datePipe.transform(this.newUser?.value.birthDate, 'dd-MM-yyyy') as string;
-    // @ts-ignore
-    this.newUser?.value.employmentDate = datePipe.transform(this.newUser?.value.employmentDate, 'dd-MM-yyyy') as string;
-    this.createService.createUser(this.newUser?.value);
+    if (this.newUser?.valid) {
+      // @ts-ignore
+      this.newUser?.value.birthDate = datePipe.transform(this.newUser?.value.birthDate, 'dd-MM-yyyy') as string;
+      // @ts-ignore
+      this.newUser?.value.employmentDate = datePipe.transform(this.newUser?.value.employmentDate, 'dd-MM-yyyy') as string;
+      this.createService.createUser(this.newUser?.value);
+    }
   }
 
 }

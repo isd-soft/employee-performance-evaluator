@@ -419,7 +419,7 @@ class UserServiceImpl implements UserService {
         userRepository.delete(removedUser);
         log.info("Deleted user with id "+ id);
         return userDto;
-    }   
+    }
 
     /**
      * returns a list of job names from the data source
