@@ -3,6 +3,7 @@ import {CancelAssessmentServices} from "../cancel-assessment-services/cancel-ass
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {AssessmentView} from "../../assessments/assessments-models/assessment-view.interface";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-cancel-assessment',
@@ -14,6 +15,7 @@ export class CancelAssessmentComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CancelAssessmentComponent>,
               @Inject(MAT_DIALOG_DATA) public assessmentView: AssessmentView,
+
               public cancelAssessmentService: CancelAssessmentServices,
   ) { }
 

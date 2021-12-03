@@ -14,7 +14,7 @@ import {environment} from "../../../../environments/environment";
 export class CancelAssessmentServices{
   baseUrl = environment.baseUrl;
   assessment!: AssessmentView
-  constructor(private http: HttpClient, private jwtService: JwtService) {
+  constructor(private http: HttpClient, private jwtService: JwtService, private notificationService: ToastrService) {
 
   }
 
@@ -25,7 +25,30 @@ export class CancelAssessmentServices{
     assessmentView.startedById = this.jwtService.getJwtUser().id;
     // console.log(this.http.get<AssessmentView>("api-server/api/assessments/" + assessmentView));
     // console.log(this.assessment)
-    this.http.put(this.baseUrl + "api/assessments/" + assessmentView.id, assessmentView ).subscribe()
+    this.http.put(this.baseUrl + "api/assessments/" + assessmentView.id, assessmentView ).subscribe(response => {
+      this.notificationService.success('Assessment was evaluated canceled',
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    }, error => {
+      let message: string;
+      switch (error.status) {
+        case 400:
+          message = "Bad request. " + error.error.title;
+          break;
+        case 401:
+          message = "Unauthorized. " + error.error.title;
+          break;
+        default:
+          message = "Error! " + error.message;
+      }
+      this.notificationService.error(message,
+        '', {
+          timeOut: 3000,
+          progressBar: true
+        });
+    });
     // console.log(assessmentView)
   }
 }

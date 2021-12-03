@@ -7,6 +7,7 @@ import com.isdintership.epe.repository.*;
 import com.isdintership.epe.repository.UserRepository;
 import com.isdintership.epe.service.AssessmentService;
 
+import com.isdintership.epe.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.jni.Local;
@@ -33,7 +34,7 @@ class AssessmentServiceImpl implements AssessmentService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
-    private final EmailServiceImpl emailService;
+    private final EmailService emailService;
     private final AssessmentInformationRepository assessmentInformationRepository;
 
     /**

@@ -41,7 +41,6 @@ export class AdminBoardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.adminBoardService.getAllAssessments().subscribe(
       data => {
-        console.log(data);
         this.assessments = data as AssessmentView[];
         this.dataSource = new MatTableDataSource<AssessmentView>(this.assessments);
         this.dataSource.paginator = this.paginator;
