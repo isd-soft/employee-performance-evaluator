@@ -34,3 +34,11 @@
 09:50:22.849 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Updating user with the id null
 09:50:22.922 [http-nio-8075-exec-6] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
 09:50:22.941 [http-nio-8075-exec-7] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:56:08.060 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:56:08.085 [http-nio-8075-exec-4] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:56:19.361 [http-nio-8075-exec-5] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:56:19.388 [http-nio-8075-exec-8] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:57:11.474 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:57:11.496 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+10:01:54.759 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Saving user rocket@me.com
+10:01:55.906 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user rocket@me.com

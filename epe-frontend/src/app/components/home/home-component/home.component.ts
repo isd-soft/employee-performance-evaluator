@@ -87,7 +87,7 @@ export class HomeComponent {
           });
           setTimeout(()=> {
             this.jwtService.storeJWT(response.token);
-            this.router.navigate(['/dashboard']);
+            window.location.href = '/dashboard';
            }, 500);
         }
        }, error => {
