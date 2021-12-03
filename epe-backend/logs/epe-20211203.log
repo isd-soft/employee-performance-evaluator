@@ -42,3 +42,14 @@
 09:57:11.496 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
 10:01:54.759 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Saving user rocket@me.com
 10:01:55.906 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user rocket@me.com
+10:04:48.805 [http-nio-8075-exec-2] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:05:03.154 [http-nio-8075-exec-4] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:05:35.779 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:05:45.939 [http-nio-8075-exec-7] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:08:50.910 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:09:05.965 [http-nio-8075-exec-7] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:09:16.263 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+10:25:10.584 [http-nio-8075-exec-5] INFO  c.i.epe.service.impl.UserServiceImpl - Saving user daimler@me.com
+10:25:11.685 [http-nio-8075-exec-3] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user daimler@me.com
+10:25:54.974 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.UserServiceImpl - Saving user sting@me.com
+10:25:56.070 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user sting@me.com
