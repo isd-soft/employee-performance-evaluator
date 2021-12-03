@@ -31,21 +31,21 @@ public class SimpleCORSFilter implements Filter {
         final HttpServletResponse res = (HttpServletResponse) response;
 
         AllowedOrigins.add(appConfig.getFrontendUrl());
+        AllowedOrigins.add(appConfig.getFrontendHttpUrl());
         AllowedMethods.addAll(Arrays.asList("POST", "PUT", "GET", "DELETE", "OPTIONS"));
 
-        res.setHeader("Access-Control-Allow-Origin", appConfig.getFrontendUrl());
-//        res.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        String reqOrigin;
+        reqOrigin = req.getHeader("Origin");
+
+        for (String origin : AllowedOrigins) {
+            if (origin.equals(reqOrigin)) {
+                res.setHeader("Access-Control-Allow-Origin", reqOrigin);
+                break;
+            }
+        }
 
         if (req.getMethod().equals("OPTIONS")) {
-            String reqOrigin;
-            reqOrigin = req.getHeader("Origin");
 
-            for (String origin : AllowedOrigins) {
-                if (origin.equals(reqOrigin)) {
-                    res.setHeader("Access-Control-Allow-Origin", reqOrigin);
-                    break;
-                }
-            }
 
             String reqMethod;
             reqMethod = req.getHeader("Access-Control-Request-Method");
