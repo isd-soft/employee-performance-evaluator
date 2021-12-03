@@ -33,7 +33,7 @@ public class SimpleCORSFilter implements Filter {
         AllowedOrigins.add(appConfig.getFrontendUrl());
         AllowedMethods.addAll(Arrays.asList("POST", "PUT", "GET", "DELETE", "OPTIONS"));
 
-        res.setHeader("Access-Control-Allow-Origin", appConfig.getFrontendUrl() + ", " + appConfig.getFrontendHttpUrl());
+        res.setHeader("Access-Control-Allow-Origin", appConfig.getFrontendUrl());
 //        res.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
         if (req.getMethod().equals("OPTIONS")) {

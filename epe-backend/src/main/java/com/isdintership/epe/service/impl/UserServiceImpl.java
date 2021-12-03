@@ -38,9 +38,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class UserServiceImpl implements UserService {
-    private static final Logger log
-            = LoggerFactory.getLogger(UserServiceImpl.class);
     /**
      * {@code JpaRepository} that handles the access to the user table
      */
