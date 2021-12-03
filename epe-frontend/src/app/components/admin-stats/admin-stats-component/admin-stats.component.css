@@ -30,7 +30,7 @@
   flex-direction: column;
 }
 
-.header {
+.stats-header {
   display: inline-flex;
   margin-bottom: 30px;
   margin-top: 15px;
@@ -41,7 +41,7 @@
   width: 100%;
 }
 
-.header .title {
+.stats-header .title {
   margin: auto 0;
   font-size: 20px;
   font-weight: bold;
@@ -67,7 +67,7 @@
   text-align: right;
 }
 
-.header-icon {
+.stats-header-icon {
   display: inline-block;
   margin-left: 25px;
 }
@@ -110,7 +110,7 @@
   background: #DC143C
 }
 
-.header-icon {
+.stats-header-icon {
   position: relative;
   top: 5px;
   right: 5px;
