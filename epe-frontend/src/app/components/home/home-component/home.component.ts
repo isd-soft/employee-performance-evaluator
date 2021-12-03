@@ -104,7 +104,7 @@ export class HomeComponent {
 
   register() {
 
-    if(this.registerUser.password == this.confirmPassword) {
+    if(this.validateNewUser()) {
       let datePipe = new DatePipe('en-US');
       this.registerUser.birthDate = datePipe.transform(this.registerUser.birthDate, 'dd-MM-yyyy') as string,
       this.registerUser.employmentDate = datePipe.transform(this.registerUser.employmentDate, 'dd-MM-yyyy') as string,
@@ -133,7 +133,7 @@ export class HomeComponent {
            });
          });
     } else {
-      this.toastr.error('Passwords do not match !','', {
+      this.toastr.error('Please complete all fields and make sure the passwords match!','', {
         timeOut: 3000,
         progressBar: true,
         enableHtml: true
@@ -141,4 +141,18 @@ export class HomeComponent {
     }
   }
 
+  validateNewUser() {
+    
+    if(this.registerUser.password == this.confirmPassword)
+      if(this.registerUser.email && this.emailFormControl.valid)
+        if(this.registerUser.firstname && this.firstnameFormControl.valid)
+          if(this.registerUser.lastname && this.lastnameFormControl.valid)
+            if(this.registerUser.birthDate && this.birthdateFormControl.valid)
+              if(this.registerUser.employmentDate && this.employmentdateFormControl.valid)
+                if(this.registerUser.phoneNumber && this.phoneFormControl.valid)
+                  if(this.registerUser.job && this.jobFormControl.valid)
+                    return true;
+
+    return false;
+  }
 }

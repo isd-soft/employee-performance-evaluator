@@ -1,0 +1,36 @@
+09:44:52.667 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+09:44:52.667 [main] INFO  com.isdintership.epe.EpeApplication - Starting EpeApplication using Java 16.0.1 on DESKTOP-5UAV7PC with PID 16128 (W:\Projects\ISD-Internship\EPE v1.0.0\employee-performance-evaluator\epe-backend\target\classes started by Timofei in W:\Projects\ISD-Internship\EPE v1.0.0\employee-performance-evaluator\epe-backend)
+09:44:52.673 [main] INFO  com.isdintership.epe.EpeApplication - The following profiles are active: local
+09:44:55.120 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:44:55.319 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 183 ms. Found 8 JPA repository interfaces.
+09:44:56.246 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5c931134' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09:44:56.266 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09:44:56.979 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8075 (http)
+09:44:57.006 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8075"]
+09:44:57.007 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:44:57.008 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+09:44:57.380 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:44:57.380 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4638 ms
+09:44:58.185 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:44:58.526 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:44:58.691 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:44:58.811 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+09:44:59.132 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:44:59.318 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+09:45:01.394 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:45:01.405 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:45:03.996 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 15 endpoint(s) beneath base path '/api/actuator'
+09:45:05.446 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [com.isdintership.epe.security.ExceptionHandlerFilter@7ef41ca2, com.isdintership.epe.security.SimpleCORSFilter@4eeb14e0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@446dea16, org.springframework.security.web.context.SecurityContextPersistenceFilter@4ec25389, org.springframework.security.web.header.HeaderWriterFilter@9124278, org.springframework.security.web.authentication.logout.LogoutFilter@3f04847e, com.isdintership.epe.security.jwt.JwtTokenFilter@28817763, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b5f91a5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@515a897c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c22a99a, org.springframework.security.web.session.SessionManagementFilter@4f9e32f2, org.springframework.security.web.access.ExceptionTranslationFilter@7ae2f5b6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@53b42a0d]
+09:45:05.641 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8075"]
+09:45:05.678 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8075 (http) with context path ''
+09:45:06.770 [main] INFO  com.isdintership.epe.EpeApplication - Started EpeApplication in 14.77 seconds (JVM running for 16.17)
+09:49:47.556 [http-nio-8075-exec-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:49:47.557 [http-nio-8075-exec-5] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:49:47.560 [http-nio-8075-exec-5] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+09:49:53.769 [http-nio-8075-exec-5] INFO  c.i.epe.service.impl.UserServiceImpl - Logging user me@me.com
+09:50:10.394 [http-nio-8075-exec-10] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:50:10.428 [http-nio-8075-exec-6] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:50:12.871 [http-nio-8075-exec-1] INFO  c.i.epe.service.impl.UserServiceImpl - Getting Optional[User{email='me@me.com', firstname='Timofei', lastname='Colin', birthDate=1995-01-11, employmentDate=2020-01-01, phoneNumber='1234567890', job=com.isdintership.epe.entity.Job@33, bio='bio edited by me', password='$2a$10$FpygBKVKu4Xe05NOt1fQFuwYQFqpochfeviEvuDFgR9aHy3nVXqlK', role=com.isdintership.epe.entity.Role@5831f1ed, team=null, buddyId=null}]'s buddies
+09:50:22.849 [http-nio-8075-exec-9] INFO  c.i.epe.service.impl.UserServiceImpl - Updating user with the id null
+09:50:22.922 [http-nio-8075-exec-6] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
+09:50:22.941 [http-nio-8075-exec-7] INFO  c.i.epe.service.impl.UserServiceImpl - Getting user with id b90a7ac7-069e-41be-8b1f-4d9ff10f62e3
