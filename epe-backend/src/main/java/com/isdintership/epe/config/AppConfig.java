@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 public class AppConfig {
     @NotNull
     private String frontendUrl;
+    @NotNull
+    private String frontendHttpUrl;
 
     public String getFrontendUrl() {
         return frontendUrl;
@@ -19,5 +21,13 @@ public class AppConfig {
 
     public void setFrontendUrl(String frontendUrl) {
         this.frontendUrl = frontendUrl;
+    }
+
+    public String getFrontendHttpUrl() {
+        return frontendHttpUrl;
+    }
+
+    public void setFrontendHttpUrl(String frontendHttpUrl) {
+        this.frontendHttpUrl = frontendHttpUrl;
     }
 }
