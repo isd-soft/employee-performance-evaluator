@@ -32,10 +32,8 @@ import java.util.*;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class TeamServiceImpl implements TeamService {
-
-    private static final Logger log
-            = LoggerFactory.getLogger(TeamServiceImpl.class);
     /**
      * {@code JpaRepository} that handles the access to the user table
      */

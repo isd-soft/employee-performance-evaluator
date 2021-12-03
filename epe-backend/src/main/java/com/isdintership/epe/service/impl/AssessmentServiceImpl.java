@@ -27,9 +27,8 @@ import java.util.*;
  * */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class AssessmentServiceImpl implements AssessmentService {
-    private static final Logger log
-            = LoggerFactory.getLogger(AssessmentServiceImpl.class);
     private final AssessmentRepository assessmentRepository;
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
@@ -123,7 +122,7 @@ class AssessmentServiceImpl implements AssessmentService {
         assessmentInformationRepository.save(assessmentInformation);
 
         AssessmentDto assessmentDto = AssessmentDto.fromAssessment(assessment);
-//        emailService.sendEmail(assessmentDto);
+        emailService.sendEmail(assessmentDto);
         log.info("Started assessment with id "+ assessment.getId());
         return assessmentDto;
     }

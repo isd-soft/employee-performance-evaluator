@@ -28,9 +28,8 @@ import java.util.Optional;
  * */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class AssessmentTemplateServiceImpl implements AssessmentTemplateService {
-    private static final Logger log
-            = LoggerFactory.getLogger(AssessmentTemplateServiceImpl.class);
     private final JobRepository jobRepository;
     private final AssessmentRepository assessmentRepository;
 

@@ -41,10 +41,8 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Service
+@Slf4j
 class ExportServiceImpl implements ExportService {
-
-    private static final Logger log
-            = LoggerFactory.getLogger(ExportServiceImpl.class);
     /**
      * {@code JpaRepository} that handles the access to the user table
      */

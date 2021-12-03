@@ -28,10 +28,9 @@ import java.util.Set;
  * */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 class EmailServiceImpl implements EmailService {
 
-    private static final Logger log
-            = LoggerFactory.getLogger(EmailServiceImpl.class);
     private final JavaMailSender javaMailSender;
     private final UserRepository userRepository;
 
@@ -64,7 +63,7 @@ class EmailServiceImpl implements EmailService {
                     "Assessment: " + assessmentDto.getTitle() + "\n" +
                     "Description: " + assessmentDto.getDescription() + "\n\n" +
                     "May the force be with you!");
-//            javaMailSender.send(mailMessage);
+            javaMailSender.send(mailMessage);
         });
         log.info("Sending email assessment notification email to user "+ userId);
     }
@@ -88,7 +87,7 @@ class EmailServiceImpl implements EmailService {
                     "will start soon \n" +
                     "Have a good day!");
             log.info("Sending email assessment notification email to user "+ person.getId());
-//            javaMailSender.send(mailMessage);
+            javaMailSender.send(mailMessage);
         });
 
     }

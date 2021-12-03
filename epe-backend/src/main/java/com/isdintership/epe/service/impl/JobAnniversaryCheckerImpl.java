@@ -29,12 +29,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @EnableAsync
+@Slf4j
 class JobAnniversaryCheckerImpl implements JobAnniversaryChecker {
 
     private final UserRepository userRepository;
     private final EmailService emailService;
-    private static final Logger log
-            = LoggerFactory.getLogger(JobAnniversaryCheckerImpl.class);
     /**
      * Method executed asynchronous every Sunday on 00:00 that checks if there are any
      * employees that have a employment date anniversary in the next month and sends a

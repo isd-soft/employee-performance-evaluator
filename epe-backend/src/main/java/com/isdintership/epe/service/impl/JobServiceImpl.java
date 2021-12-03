@@ -24,10 +24,8 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Service
+@Slf4j
 class JobServiceImpl implements JobService {
-
-    private static final Logger log
-            = LoggerFactory.getLogger(JobServiceImpl.class);
     /**
      * instance of {@code JobRepository},
      * which is a {@code JpaRepository} and controls access to the database

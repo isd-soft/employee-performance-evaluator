@@ -7,6 +7,7 @@ import com.isdintership.epe.repository.AssessmentRepository;
 import com.isdintership.epe.security.JwtUserDetailsService;
 import com.isdintership.epe.service.AssessmentInformationService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,11 @@ import java.util.stream.Collectors;
  * */
 @Service
 @RequiredArgsConstructor
+@Slf4j
  class AssessmentInformationImpl implements AssessmentInformationService {
 
     private final AssessmentInformationRepository assessmentInformationRepository;
     private final AssessmentRepository assessmentRepository;
-    private static final Logger log
-            = LoggerFactory.getLogger(AssessmentInformationImpl.class);
     /**
      * Method that gets all the information about all the actions performed on the assessments
      * @author Adrian Girlea
