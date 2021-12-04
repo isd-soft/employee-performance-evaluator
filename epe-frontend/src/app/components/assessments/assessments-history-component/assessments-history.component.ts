@@ -8,6 +8,7 @@ import {AssessmentsService} from "../assessments-services/assessments.service";
 import {JwtService} from "../../../decoder/decoder-service/jwt.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AssessmentsViewComponent} from "../assessments-view/assessments-view.component";
+import {AdminBoardService} from "../../admin-board/admin-board-service/AdminBoardService";
 
 @Component({
   selector: 'app-assessments-history',
@@ -27,7 +28,8 @@ export class AssessmentsHistoryComponent implements OnInit, AfterViewInit {
 
   constructor(private assessmentsService: AssessmentsService,
               private jwtService: JwtService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private adminBoardService: AdminBoardService) {
 
     this.jwtUser = jwtService.getJwtUser();
   }
@@ -63,6 +65,14 @@ export class AssessmentsHistoryComponent implements OnInit, AfterViewInit {
       data : this.assessments[id],
       autoFocus: false
     });
+  }
+
+  exportAssessmentToPdf(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToPdf(assessment);
+  }
+
+  exportAssessmentToExcel(assessment: AssessmentView | undefined) {
+    this.adminBoardService.exportAssessmentToExcel(assessment);
   }
 
 }

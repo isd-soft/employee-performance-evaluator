@@ -430,7 +430,7 @@ class ExportServiceImpl implements ExportService {
         finalScoreTable.addCell(finalScoreCell);
         finalScoreCell.setPhrase(new Phrase());
         finalScoreTable.addCell(finalScoreCell);
-        finalScoreCell.setPhrase(new Phrase("Total assessmentDto score",titleFont));
+        finalScoreCell.setPhrase(new Phrase("Total assessment score",titleFont));
         finalScoreTable.addCell(finalScoreCell);
         finalScoreValueCell.setPhrase(new Phrase(String.valueOf(assessmentDto.getOverallScore()),valueFont));
         finalScoreTable.addCell(finalScoreValueCell);

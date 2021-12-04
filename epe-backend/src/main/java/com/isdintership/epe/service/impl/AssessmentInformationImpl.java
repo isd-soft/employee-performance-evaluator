@@ -42,12 +42,14 @@ import java.util.stream.Collectors;
         List<AssessmentInformationDto> assessmentInformationDtos = new ArrayList<>();
         for (AssessmentInformation assessmentInformation : assessmentInformationRepository.findAll()) {
             AssessmentInformationDto assessmentInformationDto = new AssessmentInformationDto(assessmentInformation);
-            assessmentRepository.findById(assessmentInformation.getAssessmentId())
-                    .ifPresent(assessment -> {
-                        assessment.getFeedbacks()
-                                .forEach(feedback -> assessmentInformationDto.getFeedbackAuthorsIds().add(feedback.getAuthorId()));
-                        assessmentInformationDto.setCurrentStatus(assessment.getStatus());
-                    });
+            if (assessmentInformation.getAssessmentId() != null) {
+                assessmentRepository.findById(assessmentInformation.getAssessmentId())
+                        .ifPresent(assessment -> {
+                            assessment.getFeedbacks()
+                                    .forEach(feedback -> assessmentInformationDto.getFeedbackAuthorsIds().add(feedback.getAuthorId()));
+                            assessmentInformationDto.setCurrentStatus(assessment.getStatus());
+                        });
+            }
             assessmentInformationDtos.add(assessmentInformationDto);
         }
 

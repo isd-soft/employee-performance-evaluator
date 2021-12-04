@@ -59,10 +59,10 @@ class EmailServiceImpl implements EmailService {
             mailMessage.setText(
                     "Hello, " + person.getFirstname() + ",\n" +
                     "The assessment associated with the user " + user.getFirstname() + " " + user.getLastname() + "\n" +
-                    "has changed its status changed to " + assessmentDto.getStatus().toString() + "\n\n" +
+                    "has changed its status to " + assessmentDto.getStatus().toString() + "\n\n" +
                     "Assessment: " + assessmentDto.getTitle() + "\n" +
                     "Description: " + assessmentDto.getDescription() + "\n\n" +
-                    "May the force be with you!");
+                    "Have a good day :)");
             javaMailSender.send(mailMessage);
         });
         log.info("Sending email assessment notification email to user "+ userId);
@@ -85,7 +85,7 @@ class EmailServiceImpl implements EmailService {
                     "Hello, " + person.getFirstname() + ",\n" +
                     "The assessment on the user " + user.getFirstname() + " " + user.getLastname() +
                     "will start soon \n" +
-                    "Have a good day!");
+                    "Have a good day :)");
             log.info("Sending email assessment notification email to user "+ person.getId());
             javaMailSender.send(mailMessage);
         });

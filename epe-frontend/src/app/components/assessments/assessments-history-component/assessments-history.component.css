@@ -17,11 +17,11 @@ table {
 }
 
 .end-date-column, .start-date-column, .status-column {
-  width: 17%;
+  width: 16%;
 }
 
 .buttons-column {
-  width: 12%;
+  width: 15%;
 }
 
 .mat-form-field {
